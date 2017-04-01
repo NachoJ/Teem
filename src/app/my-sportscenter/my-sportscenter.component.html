@@ -1,0 +1,16 @@
+<p>
+    my-sportscenter works!
+</p>
+<div class="main">
+    <a md-raised-button routerLink="/add-new-sportscenter">Add Sports Center</a>
+    <div class="sports-centers">
+        <ul>
+            <li *ngFor="let sportCenter of sportCenters">
+                <span class="badge">{{sportCenter.name}}</span>
+                <a md-button [routerLink]="['/add-new-sportscenter',sportCenter.id]">edit</a>
+                <a md-button (click)="deleteSportsCenter(sportCenter.id)">delete</a>
+                <a md-button [routerLink]="['/pitch',sportCenter.id]">Pitches</a>
+            </li>
+        </ul>
+    </div>
+</div>

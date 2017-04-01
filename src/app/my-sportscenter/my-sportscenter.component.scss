@@ -1,0 +1,15 @@
+:host {
+        display: block;
+        height: 100%;
+        width: 100%;
+        background-color: lightpink;
+        margin-top: 110px;
+
+        .main {
+                text-align: center;
+                align-content: center;
+        }
+        ul {
+                list-style-type: none;
+        }
+}

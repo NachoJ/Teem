@@ -1,0 +1,93 @@
+:host {
+    display: block;
+    //   background-color: lightgreen;
+    height: 100%;
+    width: 100%;
+}
+
+.login-box {
+    background-color: lightcyan;
+}
+
+.fb-button {
+    text-transform: capitalize !important;
+    background-color: transparent;
+    color: #fff;
+    width: 360px;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: none;
+    border: none;
+    padding: 29px 0px;
+    line-height: 0px;
+}
+
+.fb-button:hover,
+.fb-button:active,
+.fb-button:focus {
+    box-shadow: none;
+}
+
+.register-div {
+    height: 80% !important;
+    padding: 0 !important;
+    display: block;
+}
+
+.register-div.home_main {
+    margin-top: 0px !important;
+}
+
+.login-home-button {
+    text-transform: capitalize !important;
+    color: #ffffff;
+    margin: 40px 0 0px;
+    padding: 5px 30px;
+}
+
+.li-full-width {
+    width: 360px;
+}
+
+.facebook-home-button {
+    text-transform: capitalize !important;
+    background-color: #415e9b;
+    color: #fff;
+    width: 360px;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: none;
+    padding: 2px 0px;
+    height: 60px;
+}
+
+@media screen and (max-width: 960px) {
+    .register-div.home_main {
+        position: relative;
+        width: 67%;
+        float: right;
+        margin-top: 110px;
+        margin-left: 0;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .register-div.home_main {
+        position: absolute;
+        width: 100%;
+        top: 150px;
+        bottom: 0;
+        margin: auto;
+    }
+}
+
+@media screen and (max-width: 414px) {
+    .logo {
+        margin-top: 20%;
+        padding-top: 100px;
+    }
+    .md-facebook-button,
+    .li-full-width {
+        width: 300px;
+    }
+}

@@ -1,0 +1,78 @@
+<div class="main">
+    <div>{{message}}</div>
+    <button md-raised-button (click)="addMore()">Add</button>
+    <!--<form>-->
+    <div class="single-form" *ngFor="let p of pitches;let i = index">
+
+        <!-- Name -->
+        <button md-mini-fab (click)="removePitch(i)"><md-icon>close</md-icon></button>
+        <md-input-container class="md-block register-form-text-area" md-no-float>
+            <input mdInput class="user-text-label" [(ngModel)]="p.name" placeholder="Name" required>
+        </md-input-container>
+        <!--<div *ngIf="pitchFormGroup.controls.name.invalid && pitchFormGroup.controls.name.touched">
+                <div ng-message="required" fxLayoutAlign="start start">
+                    <p class="error-message">Name is invalid</p>
+                </div>
+            </div>-->
+
+        <!-- Covering -->
+        <md-radio-group class="md-block register-form-text-area" [(ngModel)]="p.covering" required>
+            <md-radio-button value="Outdoor">Outdoor</md-radio-button>
+            <md-radio-button value="Indoor">Indoor</md-radio-button>
+            <md-radio-button value="Outdoor/Indoor">Outdoor/Indoor</md-radio-button>
+        </md-radio-group>
+        <!--<div *ngIf="pitchFormGroup.controls.covering.invalid && pitchFormGroup.controls.covering.touched">
+                <div ng-message="required" fxLayoutAlign="start start">
+                    <p class="error-message">Covering is invalid</p>
+                </div>
+            </div>-->
+
+        <!-- Lights -->
+        <md-radio-group class="md-block register-form-text-area" [(ngModel)]="p.lights" required>
+            <md-radio-button value="Yes">Yes</md-radio-button>
+            <md-radio-button value="No">No</md-radio-button>
+        </md-radio-group>
+        <!--<div *ngIf="pitchFormGroup.controls.lights.invalid && pitchFormGroup.controls.lights.touched">
+                <div ng-message="required" fxLayoutAlign="start start">
+                    <p class="error-message">Lights is invalid</p>
+                </div>
+            </div>-->
+
+        <!-- Surface -->
+        <md-select class="md-block register-form-text-area" [(ngModel)]="p.surface" placeholder="Surface" required>
+            <md-option *ngFor="let so of surfaceOptions" [value]="so.value">
+                {{ so.viewValue }}
+            </md-option>
+        </md-select>
+        <!--<div *ngIf="pitchFormGroup.controls.surface.invalid && pitchFormGroup.controls.surface.touched">
+                <div ng-message="required" fxLayoutAlign="start start">
+                    <p class="error-message">Surface is invalid</p>
+                </div>
+            </div>-->
+
+        <!-- Sports -->
+        <md-select class="md-block register-form-text-area" [(ngModel)]="p.sports" placeholder="Sports" required>
+            <md-option *ngFor="let sport of sportsOptions" [value]="sport.value">
+                {{ sport.viewValue }}
+            </md-option>
+        </md-select>
+        <!--<div *ngIf="pitchFormGroup.controls.sports.invalid && pitchFormGroup.controls.sports.touched">
+                <div ng-message="required" fxLayoutAlign="start start">
+                    <p class="error-message">Sports is invalid</p>
+                </div>
+            </div>-->
+
+        <!-- Price -->
+        <md-input-container class="md-block register-form-text-area" md-no-float>
+            <input mdInput class="user-text-label" [(ngModel)]="p.price" placeholder="Price" required>
+        </md-input-container>
+        <!--<div *ngIf="pitchFormGroup.controls.price.invalid && pitchFormGroup.controls.price.touched">
+                <div ng-message="required" fxLayoutAlign="start start">
+                    <p class="error-message">Price is invalid</p>
+                </div>
+            </div>-->
+    </div>
+    <button md-raised-button (click)="SavePitch()">Save</button>
+    <!--</form>-->
+    <!--{{covering}} {{lights}}{{surface}}{{sports}}{{price}}-->
+</div>

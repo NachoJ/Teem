@@ -1,0 +1,22 @@
+<div fxLayout="row" fxHide.gt-xs fxFlex.xs="50" class="teem-logo-home" fxLayoutAlign="center center" fxHide.xs>
+    <img src="assets/img/logo.png" class="logo" alt="">
+</div>
+
+<div fxLayout="column" fxFlex.xs="50" fxLayoutAlign="center center" class="register-div home_main">
+    <button md-raised-button class="md-facebook-button facebook-home-button" ng-click="authController.callOauthProvider('/api/auth/facebook')">
+
+<div fxLayout="column" fxFlex.xs="50" fxLayoutAlign="center center" class="register-div">
+    <div *ngIf="error">{{error}}</div>
+    <!--<button md-raised-button class="md-facebook-button facebook-home-button" (click)="callFbLogin()">
+             
+    </button>-->
+    <button class="fb-button" (click)="callFbLogin()">  Login with Facebook</button>
+    <div fxLayout="row" fxLayoutAlign="space-between " class="li-full-width">
+        <div>
+            <button md-button class="login-home-button" routerLink="register"> Register </button>
+        </div>
+        <div>
+            <button md-button class="login-home-button" routerLink="login"> Log in </button>
+        </div>
+    </div>
+</div>

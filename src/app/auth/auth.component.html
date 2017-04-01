@@ -1,0 +1,56 @@
+<section fxLayout="row" fxLayoutAlign="start start" fxLayoutWrap="" class="main-login" fxFlex="100" fxFlex.xs="100">
+
+    <div 
+       fxFlexOffset="15" fxFlex="30"
+       fxFlexOffset.md="15" fxFlex.md="30"
+       fxFlexOffset.sm="15" fxFlex.sm="30"
+       fxFlexOffset.xs="0" fxFlex.xs="100"
+       
+       class="teem-logo" fxLayoutAlign="center start">
+        <img src="/assets/img/logo.png" class="logo" alt="">
+    </div>
+
+    <div fxLayout="row" fxLayout.xs="column"
+       fxFlex="30"     fxFlexOffset="15"
+       fxFlex.md="30"  fxFlexOffset.md="15" 
+       fxFlex.sm="30"  fxFlexOffset.sm="15" 
+       fxFlex.xs="100" fxFlexOffset.xs="0"
+       class="facebook-div-button">
+        <!--this is testing-->
+        <router-outlet></router-outlet>
+    </div>
+</section>
+
+<!--
+  <section layout="row" layout-wrap="" class="home-section-view" flex=100
+flex-xs=100>
+    <div layout="row" hide-xs flex=30 flex-offset-lg=15 flex-md=50 flex-sm=50
+    flex-xs=100 class="teem-logo-home" layout-align="center start">
+        <img src="modules/core/client/img/brand/logo.png" class="logo" alt="">
+    </div>
+    <div ui-view layout-xs="column" flex=30 flex-offset-lg=15 flex-md=30 flex-sm=50
+    flex-xs=100 class="facebook-div-button">
+        <div layout="row" hide-gt-xs flex-xs=50 class="teem-logo-home" layout-align="center center">
+            <img src="modules/core/client/img/brand/logo.png" class="logo" alt="">
+        </div>
+        <div layout="column" flex-xs=50 layout-align="start center" class="register-div">
+            <md-button class="md-facebook-button facebook-home-button" ng-click="authController.callOauthProvider('/api/auth/facebook')">
+                <p>Login with Facebook</p>
+            </md-button>
+            <div layout="row">
+                <div flex=50 layout-align="start start">
+                    <md-button class="login-home-button" ui-sref="home.register">
+                        <p class="login-home-button-text">Register</p>
+                    </md-button>
+                </div>
+                <div class="divider" flex=none></div>
+                <div flex=50 layout-align="start start">
+                    <md-button class="login-home-button" ui-sref="home.signin">
+                        <p class="login-home-button-text">Log in</p>
+                    </md-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+-->

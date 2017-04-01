@@ -1,0 +1,24 @@
+<te-nav-bar></te-nav-bar>
+<div fxLayoutAlign="start start" fxLayoutWrap="" class="main_box" fxFlex="100">
+    <div class="container">
+        <div class="side_bar_inner" fxFlex="20">
+            <div class="side_bar_box"> <img src="/assets/img/sidebar_photo.png">
+                <h4>Miguel Martinez</h4>
+                <p> <i class="material-icons user-place-icon">place</i> Madrid, Spain</p>
+                <div class="ball_box">
+                    <a href="#"><img src="/assets/img/b01.png"></a>
+                    <a href="#"><img src="/assets/img/b02.png"></a>
+                    <a href="#"><img src="/assets/img/b03.png"></a>
+                </div>
+                <div class="link_box">
+                    <button md-button>nuevo partido <i class="material-icons">keyboard_arrow_right</i></button>
+                    <button md-button class="search">nuevo partido <i class="material-icons">search</i></button>
+                </div>
+                <div class="link_box"> </div>
+            </div>
+        </div>
+        <div class="main-contain" fxFlex="80">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

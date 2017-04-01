@@ -1,0 +1,137 @@
+
+.main_box {
+    width: 100%;
+    overflow: auto;
+    padding-top: 150px;
+    background: #fafafa;
+}
+
+.side_bar_inner {
+    float:left;
+}
+
+.side_bar_box {
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+}
+
+.side_bar_box img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+}
+
+.side_bar_box h4{
+    margin: 10px 0 5px;
+    padding: 0;
+    color: #c61315;
+    font-size: 16px;
+    text-align: right;
+}
+
+.side_bar_box p {
+    color: #6b6868;
+    font-size: 13px;
+    vertical-align: middle;
+    text-align: right;
+}
+
+.side_bar_box p i {
+    font-size: 18px;
+    vertical-align: middle;
+}
+
+.side_bar_box span {
+    margin-right: 10px;
+    padding-top: 5px;
+}
+
+.ball_box {
+    margin: 10px 0 40px;
+    text-align: right;
+}
+
+.ball_box a {
+    width: 35px;
+    height: 35px;
+    padding: 5px;
+    display: inline-block;
+    text-align: center;
+    background: #fff;
+    line-height: 39px;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    margin-right: 5px;
+
+}
+.ball_box a:last-child {
+    margin-right:0px;    
+}
+
+.ball_box a img {
+   width: 25px;
+    height: 25px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: center center;
+    object-position: center center;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+}
+
+.link_box {
+    text-align:right;
+    margin-bottom: 20px;
+}
+ 
+.link_box button {
+    text-decoration: none;
+    background: #c61315;
+    text-align: left;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    vertical-align: middle;
+    display: inline-block;
+    font-style: italic;
+    text-transform: uppercase;
+    transition: 0.3s;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    display: block;
+    padding: 0 30px 0 20px;
+}
+
+.link_box button:hover {
+    background: #f30000;
+}
+
+.link_box button i {
+    display:inline-block;
+    vertical-align: middle;
+    margin-left:15px;
+}
+
+.link_box button.search {
+    background: #cecccc;
+    color: #7f7f7f;
+}
+
+.link_box button.search:hover {
+    background: rgba(158,158,158,0.2);
+}
+
+
+.main-contain {
+    width:100%;
+    float:left;
+    padding-left:30px;
+}

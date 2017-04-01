@@ -1,0 +1,123 @@
+:host {
+  display: block;
+  background: #fff url(/assets/img/bg-main.jpg) no-repeat 50% fixed;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  background-position: bottom center;
+}
+
+.mat-button-ripple {
+  z-index: -1;
+}
+
+.main-login {
+  height: 100%;
+  .teem-logo {
+    // background-color: lightcoral;
+    margin-top: 20%;
+    text-align: center;
+  }
+  .facebook-div-button {
+    height: 100%;
+  }
+  //     .login-box {
+  //         background-color: lightcyan;
+  //     }
+  //     .register-div {
+  //         margin-top: 50%;
+  //     }
+  //     .md-facebook-button {
+  //             text-transform: capitalize !important;
+  //             background-color: #415e9b;
+  //             color: #fff;
+  //             width: 360px;
+  //             height: 60px;
+  //             font-weight: bold;
+  //             font-size: 16px;
+  //     }
+  //     .login-home-button {
+  //             text-transform: capitalize !important;
+  //             color: #ffffff;
+  //     }
+  //     .li-full-width{
+  //         width: 360px;
+  //     }
+}
+
+@media screen and (max-width: 960px) {
+  .main-login[_ngcontent-c1] .facebook-div-button[_ngcontent-c1] {
+    position: absolute;
+    z-index: 1000;
+    margin-top: 0;
+    margin-left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    top: 0;
+    bottom: 0;
+    padding-top: 0;
+  }
+  .error-message[_ngcontent-c2] {
+    margin-left: 30px;
+    width: 100%;
+    text-align: right;
+    margin-top: -18px;
+  }
+  .main-login[_ngcontent-c1] .teem-logo[_ngcontent-c1] {
+    margin-left: 5% !important;
+  }
+  .main-login[_ngcontent-c1] {
+    padding-top: 200px;
+  }
+  .main-login {
+    height: auto;
+    .teem-logo {
+      // background-color: lightcoral;
+      margin-top: 0;
+      padding-top: 60px;
+      text-align: center;
+      height: auto;
+    }
+    .facebook-div-button {
+      margin-top: 20%;
+      height: auto;
+      padding-top: 60px;
+    }
+  }
+}
+
+@media screen and (max-width: 769px) {}
+
+@media screen and (max-width: 600px) {
+  .main-login[_ngcontent-c1] {
+    padding-top: 10px;
+  }
+  .main-login {
+    height: auto;
+    .teem-logo {
+      // background-color: lightcoral; 
+      padding-top: 180px;
+      img {
+        max-width: 50%;
+      }
+    }
+    .facebook-div-button {
+      margin-top: 20%;
+      height: auto;
+      padding-top: 100px;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .main-login {
+    height: auto;
+    .teem-logo {
+      // background-color: lightcoral; 
+      padding-top: 100px;
+    }
+    .facebook-div-button {
+      padding-top: 60px;
+    }
+  }
+}
