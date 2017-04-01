@@ -1,2 +1,2 @@
 # Teem
-Teem Players Web Repo
+Teem Players Web Client
