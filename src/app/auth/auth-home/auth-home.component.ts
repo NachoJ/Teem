@@ -23,7 +23,7 @@ export class AuthHomeComponent implements OnInit {
   error: string;
   constructor(private authService: AuthService, private router: Router) {
     FB.init({
-      appId: '785727668257883',
+      appId: '785727668257883', //main id 785727668257883  test app id 793209790843004
       cookie: true,  // enable cookies to allow the server to access the session
       xfbml: true,  // parse social plugins on this page
       version: 'v2.8' // use graph api version 2.8
@@ -59,6 +59,7 @@ export class AuthHomeComponent implements OnInit {
                   this.router.navigate(['']);
                 },
                 (error: any) => {
+					console.log("fb error",error)
                   this.error = error;
                   // this._router.navigate(['/login']);
                 });

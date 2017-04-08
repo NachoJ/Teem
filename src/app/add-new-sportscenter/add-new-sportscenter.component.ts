@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef,OnInit, NgZone, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -7,174 +7,206 @@ import { CoreService } from '../core/core.service';
 declare var google: any;
 
 @Component({
-  selector: 'te-add-new-sportscenter',
-  templateUrl: './add-new-sportscenter.component.html',
-  styleUrls: ['./add-new-sportscenter.component.scss']
+	selector: 'te-add-new-sportscenter',
+	templateUrl: './add-new-sportscenter.component.html',
+	styleUrls: ['./add-new-sportscenter.component.scss']
 })
 export class AddNewSportscenterComponent implements OnInit {
 
-  map: any;
-  public address: string;
-  public name: string;
-  public phone: string;
-  public description: string;
+	map: any;
+	address: string;
+	name: string;
+	phone: string;
+	description: string;
 
-  public message: string;
+	lat: string;
+	long: string;
 
-  public sportsCenterFormGroup: FormGroup;
+	success: string;
+	error: string;
 
-  public sub: any;
+	public sportsCenterFormGroup: FormGroup;
 
-  constructor(private coreService: CoreService, private formBuilder: FormBuilder, private route: ActivatedRoute) {
+	sub: any;
 
-    this.sub = this.route.snapshot.params.updateId;
-    if (this.sub) {
+	@ViewChild('myaddress') 
+	el:ElementRef;
 
-      console.log(this.sub);
-      if (this.sub) {
-        this.coreService.getSportsCenter(this.sub)
-          .subscribe((response) => {
-            console.log(response)
-            this.name = response.data[0].name;
-            this.address = response.data[0].address;
-            this.phone = response.data[0].phone;
-            this.description = response.data[0].description;
-          },
-          (error: any) => {
-            this.message = error;
-          });
-      }
-    }
+	constructor(private coreService: CoreService, private formBuilder: FormBuilder,
+		private route: ActivatedRoute, private zone: NgZone) {
 
-    navigator.geolocation.getCurrentPosition(this.showPosition);
-    
-    this.sportsCenterFormGroup = this.formBuilder.group({
-      address: ['', [Validators.required]],
-      name: ['', [Validators.required]],
-      phone: ['', [Validators.required,Validators.pattern('^(0|[1-9][0-9]*)$')]],
-      description: ['', [Validators.required]]
-      /*email: ['', [Validators.required, Validators.pattern('[a-zA-Z\-0-9.]+@[a-zA-Z\-0-9]+.[a-zA-Z]{2,}')]],
-      payment_address: ['', Validators.required],
-      address: ['', Validators.required]*/
-    });
-  }
-  showPosition(position) {
-    console.log('lat = ' + position.coords.latitude);
-    console.log('lon = ' + position.coords.longitude);
-}
+		this.sub = this.route.snapshot.params.updateId;
+		if (this.sub) {
 
-  ngOnInit() {
-    this.initAutocomplete();
-  }
+			console.log(this.sub);
+			if (this.sub) {
+				this.coreService.getSportsCenter(this.sub)
+					.subscribe((response) => {
+						// console.log(response)
+						this.name = response.data[0].name;
+						this.address = response.data[0].address;
+						this.phone = response.data[0].phone;
+						this.description = response.data[0].description;
+						this.lat = response.data[0].lat;
+						this.long = response.data[0].long;
 
-  addSportsCenter() {
-    let data = {
-      name: this.name,
-      address: this.address,
-      phone: this.phone,
-      description: this.description
-      // description: ''
-    };
-    this.coreService.addNewSportsCenter(data)
-      .subscribe((response) => {
-        console.log(response)
-        this.message = response.message;
-      },
-      (error: any) => {
-        console.log(error);
-        this.message = error;
-        // this._router.navigate(['/login']);
-      });
-  }
+					},
+					(error: any) => {
+						this.error = error;
+					});
+			}
+		}
 
-  updateSportsCenter() {
-    console.log("update record");
-    let data = {
-      id: this.sub,
-      name: this.name,
-      address: this.address,
-      phone: this.phone,
-      description: this.description
-      // description: ''
-    };
-    this.coreService.updateSportsCenter(data)
-      .subscribe((response) => {
-        console.log(response)
-        this.message = response.message;
-      },
-      (error: any) => {
-        console.log(error);
-        this.message = error;
-        // this._router.navigate(['/login']);
-      });
-  }
+		navigator.geolocation.getCurrentPosition(this.showPosition);
+
+		this.sportsCenterFormGroup = this.formBuilder.group({
+			address: ['', [Validators.required]],
+			name: ['', [Validators.required]],
+			phone: ['', [Validators.required, Validators.pattern('^(0|[1-9][0-9]*)$')]],
+			description: ['', [Validators.required]]
+			/*email: ['', [Validators.required, Validators.pattern('[a-zA-Z\-0-9.]+@[a-zA-Z\-0-9]+.[a-zA-Z]{2,}')]],
+			payment_address: ['', Validators.required],
+			address: ['', Validators.required]*/
+		});
+	}
+	showPosition(position) {
+		this.lat = position.coords.latitude;
+		this.long = position.coords.longitude;
+		console.log('lat = ' + position.coords.latitude);
+		console.log('long = ' + position.coords.longitude);
+	}
+
+	ngOnInit() {
+		this.initAutocomplete();
+	}
+
+	addSportsCenter() {
+		// console.log("address",this.el.nativeElement.value);
+		let data = {
+			name: this.name,
+			address: this.el.nativeElement.value,
+			phone: this.phone,
+			description: this.description,
+			lat: this.lat,
+			long: this.long
+			// description: ''
+		};
+		this.coreService.addNewSportsCenter(data)
+			.subscribe((response) => {
+				console.log(response)
+				this.error='';
+				this.success = response;
+				this.sportsCenterFormGroup.reset();
+			},
+			(error: any) => {
+				console.log(error);
+				this.success='';
+				this.error = error;
+				// this._router.navigate(['/login']);
+			});
+	}
+
+	updateSportsCenter() {
+		// console.log("update record");
+		let data = {
+			id: this.sub,
+			name: this.name,
+			address: this.el.nativeElement.value,
+			phone: this.phone,
+			description: this.description,
+			lat: this.lat,
+			long: this.long
+			// description: ''
+		};
+		console.log("data",data);
+		this.coreService.updateSportsCenter(data)
+			.subscribe((response) => {
+				console.log(response)
+				this.error='';
+				this.success = response;
+			},
+			(error: any) => {
+				console.log(error);
+				this.success='';
+				this.error = error;
+				// this._router.navigate(['/login']);
+			});
+	}
 
 
-  initAutocomplete() {
-    var map = new google.maps.Map(document.getElementById('map'), {
-      center: { lat: -33.8688, lng: 151.2195 },
-      zoom: 13,
-      mapTypeId: 'roadmap'
-    });
+	initAutocomplete() {
+		var self = this;
+		var map = new google.maps.Map(document.getElementById('map'), {
+			center: { lat: -33.8688, lng: 151.2195 },
+			zoom: 13,
+			mapTypeId: 'roadmap'
+		});
 
-    // Create the search box and link it to the UI element.
-    var input = document.getElementById('pac-input');
-    var searchBox = new google.maps.places.SearchBox(input);
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+		// Create the search box and link it to the UI element.
+		var input = document.getElementById('pac-input');
+		var searchBox = new google.maps.places.SearchBox(input);
+		map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-    // Bias the SearchBox results towards current map's viewport.
-    map.addListener('bounds_changed', function () {
-      searchBox.setBounds(map.getBounds());
-    });
+		// Bias the SearchBox results towards current map's viewport.
+		map.addListener('bounds_changed', function () {
+			searchBox.setBounds(map.getBounds());
+		});
 
-    var markers = [];
-    // Listen for the event fired when the user selects a prediction and retrieve
-    // more details for that place.
-    searchBox.addListener('places_changed', function () {
-      var places = searchBox.getPlaces();
+		var markers = [];
+		// Listen for the event fired when the user selects a prediction and retrieve
+		// more details for that place.
+		searchBox.addListener('places_changed', function () {
+			var places = searchBox.getPlaces();
 
-      if (places.length == 0) {
-        return;
-      }
+			if (places.length == 0) {
+				return;
+			}
 
-      // Clear out the old markers.
-      markers.forEach(function (marker) {
-        marker.setMap(null);
-      });
-      markers = [];
+			// Clear out the old markers.
+			markers.forEach(function (marker) {
+				marker.setMap(null);
+			});
+			markers = [];
 
-      // For each place, get the icon, name and location.
-      var bounds = new google.maps.LatLngBounds();
-      places.forEach(function (place) {
-        if (!place.geometry) {
-          console.log("Returned place contains no geometry");
-          return;
-        }
-        var icon = {
-          url: place.icon,
-          size: new google.maps.Size(71, 71),
-          origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(17, 34),
-          scaledSize: new google.maps.Size(25, 25)
-        };
+			// For each place, get the icon, name and location.
+			var bounds = new google.maps.LatLngBounds();
+			places.forEach(function (place) {
+				if (!place.geometry) {
+					console.log("Returned place contains no geometry");
+					return;
+				}
+				var icon = {
+					url: place.icon,
+					size: new google.maps.Size(71, 71),
+					origin: new google.maps.Point(0, 0),
+					anchor: new google.maps.Point(17, 34),
+					scaledSize: new google.maps.Size(25, 25)
+				};
 
-        // Create a marker for each place.
-        markers.push(new google.maps.Marker({
-          map: map,
-          icon: icon,
-          title: place.name,
-          position: place.geometry.location
-        }));
+				// Create a marker for each place.
+				markers.push(new google.maps.Marker({
+					map: map,
+					icon: icon,
+					title: place.name,
+					position: place.geometry.location
+				}));
+				var location = place.geometry.location;
+				var lat = location.lat();
+				var long = location.lng();
+				// console.log("lat & lon = ",lat +"-"+long);
+				self.lat = lat;
+				self.long = long;
+				console.log("lat&long called");
 
-        if (place.geometry.viewport) {
-          // Only geocodes have viewport.
-          bounds.union(place.geometry.viewport);
-        } else {
-          bounds.extend(place.geometry.location);
-        }
-      });
-      map.fitBounds(bounds);
-    });
-  }
+				if (place.geometry.viewport) {
+					// Only geocodes have viewport.
+					bounds.union(place.geometry.viewport);
+				} else {
+					bounds.extend(place.geometry.location);
+				}
+			});
+			map.fitBounds(bounds);
+		});
 
+	}
 }

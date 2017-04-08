@@ -1,47 +1,178 @@
-<div class="detail-box">
-    <div class="title-list-items layout-row" layout="row">
+<div fxLayout="column" fxLayoutAlign="start start" class="detail-box">
+    <div class="title-list-items">
         <p class="title-list-items-text"> <i class="material-icons">flag</i> FIND MATCH</p>
     </div>
-    <div class="md-list-item-text odd" ng-class-odd="'odd'" ng-class-even="'even'">
-        <div layout="row" layout-wrap="" hide-gt-xs="" class="hide-gt-xs layout-wrap layout-row">
-            <!--
-                <div flex-xs="60" class="match-time layout-align-xs-center-start layout-column flex-xs-60" layout="column" layout-align-xs="center start">
-                    <p class="md-list-event-hour">01:03 </p>
-                    <p class="list-sport-item">Futbol </p>
-                    <p class="item-sportCenter">ESTADIO SANTIAGO BERNABÉU</p>
-                </div>
---> 
-            <md-list class="nopadding">
-                <div class="md-toolbar-tools" layout-align="start start" class="md-list-header">
-                    <p class="md-list-event-date"> <em> <span>Mar 9, 2017</span> </em> </p>
-                </div>
-                <md-list-item class="md-3-line">
-                    <div class="md-list-item-text" ng-class-odd="'odd'" ng-class-even="'even'">
-                        <div layout="row" layout-wrap="">
-                            <div flex="20" class="flex20 match-time center" layout="column" layout-align-xs="center start">
-                                <p class="md-list-event-hour"><b>09:30</b> </p>
-                            </div>
-                            <div flex="15" layout-xs="column" layout-align-xs="end start" class="flex15 match-time left">
-                                <p class="md-list-event-hour"><b>Futbol</b> </p>
-                                <p style="font-size:10px !important; margin:2px 0px;"><b>Created by</b> </p>
-                                <p style="font-size:10px !important"><b>Nacho Jorrin</b> </p>
-                            </div>
-                            <div flex="15" class="flex15 match-time center">
-                                <a href="#"><img src="../../assets/img/sidebar_photo.png" alt="" class="user-img-icon"></a>
-                            </div>
-                             <div flex="25" class="flex25 match-time left">    
-                                <p><b style="margin:2px 0px; display: block;">ESTADIO SANTIAGO </b> <b style="margin:2px 0px; display: block;">BERNABÉU </b> </p>
-                            </div>
-                             <div flex="10" class="flex10 match-time left">
-                                <p><b style="margin:2px 0px; display: block;">3 DE 6 </b> <b style="margin:2px 0px; display: block;">€0.00 </b> </p>
-                            </div>
-                             <div flex="15" class="flex10 match-time center">
-                                <button md-button>Info</button>
-                            </div>
+    <div fxLayout="column" class="detail-listing">
+        <md-list class="nopadding ng-scope">
+            <div class="md-toolbar-tools" layout-align="start start" class="md-list-header">
+                <p class="md-list-event-date"> <em> <span>Mar 9, 2017</span> </em> </p>
+            </div>
+            <md-list-item class="md-3-line odd">
+                <div class="md-list-item-text" ng-class-odd="'odd'" ng-class-even="'odd'">
+                   <div  fxHide.gt-xs fxLayout="row" fxFlex="100">
+                       <div fxLayoutAlign="center center" fxFlex="20" class="match-time center">
+                            <a href="#"><img src="../../assets/img/sidebar_photo.png" alt="" class="user-img-icon"></a>
+                        </div>
+                        <div fxLayout="column" fxFlexOffset="2" fxLayoutAlign="center start" fxFlex="58">
+                            <p class="md-list-event-hour datetime"><b>09:30</b> </p>
+                            <p class="md-list-event-hour"><b>Futbol</b> </p>
+                            <p><b style="margin:2px 0px;">ESTADIO SANTIAGO BERNABÉU </b></p>
+                        </div>
+                        <div fxLayoutAlign="center center" fxFlex="20" class="match-time left">
+                            <p><b style="margin:2px 0px; display: block;">3 DE 6 </b> <b style="margin:2px 0px; display: block;">€0.00 </b> </p>
                         </div>
                     </div>
-                </md-list-item>
-            </md-list>
-        </div>
+                    <div fxHide.xs fxLayout="row" fxFlex="100">
+                        <div fxLayout="row" fxFlex="20" fxLayoutAlign="center center" class="datetime"> 
+                            <i class="material-icons play-arrow-icon">play_arrow</i>
+                            <p class="md-list-event-hour"><b>09:30</b> </p>
+                        </div>
+                        <div fxLayout="column" fxFlex="15">
+                            <p class="md-list-event-hour"><b>Futbol</b> </p>
+                            <p style="font-size:10px !important; margin:2px 0px;"><b>Created by</b> </p>
+                            <p style="font-size:10px !important"><b>Nacho Jorrin</b> </p>
+                        </div>
+                        <div fxFlex="15" class="match-time center">
+                            <a href="#"><img src="../../assets/img/sidebar_photo.png" alt="" class="user-img-icon"></a>
+                        </div>
+                        <div fxFlex="25" class="match-time left">
+                            <p><b style="margin:2px 0px; display: block;">ESTADIO SANTIAGO </b> <b style="margin:2px 0px; display: block;">BERNABÉU </b> </p>
+                        </div>
+                        <div fxFlex="10" class="match-time left">
+                            <p><b style="margin:2px 0px; display: block;">3 DE 6 </b> <b style="margin:2px 0px; display: block;">€0.00 </b> </p>
+                        </div>
+                        <div fxFlex="15" class="match-time center">
+                            <button md-button>Info</button>
+                        </div>
+                    </div>
+                </div>
+            </md-list-item>
+            <md-list-item class="md-3-line even">
+                <div class="md-list-item-text" ng-class-odd="'odd'" ng-class-even="'odd'">
+                   <div  fxHide.gt-xs fxLayout="row" fxFlex="100">
+                       <div fxLayoutAlign="center center" fxFlex="20" class="match-time center">
+                            <a href="#"><img src="../../assets/img/sidebar_photo.png" alt="" class="user-img-icon"></a>
+                        </div>
+                        <div fxLayout="column" fxFlexOffset="2" fxLayoutAlign="center start" fxFlex="58">
+                            <p class="md-list-event-hour datetime"><b>09:30</b> </p>
+                            <p class="md-list-event-hour"><b>Futbol</b> </p>
+                            <p><b style="margin:2px 0px;">ESTADIO SANTIAGO BERNABÉU </b></p>
+                        </div>
+                        <div fxLayoutAlign="center center" fxFlex="20" class="match-time left">
+                            <p><b style="margin:2px 0px; display: block;">3 DE 6 </b> <b style="margin:2px 0px; display: block;">€0.00 </b> </p>
+                        </div>
+                    </div>
+                    <div fxHide.xs fxLayout="row" fxFlex="100">
+                        <div fxLayout="row" fxFlex="20" fxLayoutAlign="center center" class="datetime"> 
+                            <i class="material-icons play-arrow-icon">play_arrow</i>
+                            <p class="md-list-event-hour"><b>09:30</b> </p>
+                        </div>
+                        <div fxLayout="column" fxFlex="15">
+                            <p class="md-list-event-hour"><b>Futbol</b> </p>
+                            <p style="font-size:10px !important; margin:2px 0px;"><b>Created by</b> </p>
+                            <p style="font-size:10px !important"><b>Nacho Jorrin</b> </p>
+                        </div>
+                        <div fxFlex="15" class="match-time center">
+                            <a href="#"><img src="../../assets/img/sidebar_photo.png" alt="" class="user-img-icon"></a>
+                        </div>
+                        <div fxFlex="25" class="match-time left">
+                            <p><b style="margin:2px 0px; display: block;">ESTADIO SANTIAGO </b> <b style="margin:2px 0px; display: block;">BERNABÉU </b> </p>
+                        </div>
+                        <div fxFlex="10" class="match-time left">
+                            <p><b style="margin:2px 0px; display: block;">3 DE 6 </b> <b style="margin:2px 0px; display: block;">€0.00 </b> </p>
+                        </div>
+                        <div fxFlex="15" class="match-time center">
+                            <button md-button>Info</button>
+                        </div>
+                    </div>
+                </div>
+            </md-list-item>
+            <md-list-item class="md-3-line odd">
+                <div class="md-list-item-text" ng-class-odd="'odd'" ng-class-even="'odd'">
+                   <div  fxHide.gt-xs fxLayout="row" fxFlex="100">
+                       <div fxLayoutAlign="center center" fxFlex="20" class="match-time center">
+                            <a href="#"><img src="../../assets/img/sidebar_photo.png" alt="" class="user-img-icon"></a>
+                        </div>
+                        <div fxLayout="column" fxFlexOffset="2" fxLayoutAlign="center start" fxFlex="58">
+                            <p class="md-list-event-hour datetime"><b>09:30</b> </p>
+                            <p class="md-list-event-hour"><b>Futbol</b> </p>
+                            <p><b style="margin:2px 0px;">ESTADIO SANTIAGO BERNABÉU </b></p>
+                        </div>
+                        <div fxLayoutAlign="center center" fxFlex="20" class="match-time left">
+                            <p><b style="margin:2px 0px; display: block;">3 DE 6 </b> <b style="margin:2px 0px; display: block;">€0.00 </b> </p>
+                        </div>
+                    </div>
+                    <div fxHide.xs fxLayout="row" fxFlex="100">
+                        <div fxLayout="row" fxFlex="20" fxLayoutAlign="center center" class="datetime"> 
+                            <i class="material-icons play-arrow-icon">play_arrow</i>
+                            <p class="md-list-event-hour"><b>09:30</b> </p>
+                        </div>
+                        <div fxLayout="column" fxFlex="15">
+                            <p class="md-list-event-hour"><b>Futbol</b> </p>
+                            <p style="font-size:10px !important; margin:2px 0px;"><b>Created by</b> </p>
+                            <p style="font-size:10px !important"><b>Nacho Jorrin</b> </p>
+                        </div>
+                        <div fxFlex="15" class="match-time center">
+                            <a href="#"><img src="../../assets/img/sidebar_photo.png" alt="" class="user-img-icon"></a>
+                        </div>
+                        <div fxFlex="25" class="match-time left">
+                            <p><b style="margin:2px 0px; display: block;">ESTADIO SANTIAGO </b> <b style="margin:2px 0px; display: block;">BERNABÉU </b> </p>
+                        </div>
+                        <div fxFlex="10" class="match-time left">
+                            <p><b style="margin:2px 0px; display: block;">3 DE 6 </b> <b style="margin:2px 0px; display: block;">€0.00 </b> </p>
+                        </div>
+                        <div fxFlex="15" class="match-time center">
+                            <button md-button>Info</button>
+                        </div>
+                    </div>
+                </div>
+            </md-list-item>
+
+
+        </md-list>
     </div>
+</div>
+
+
+
+<div fxLayout="column" fxLayoutAlign="start start" class="detail-box">
+    <div class="title-list-items">
+        <p class="title-list-items-text"> <i class="material-icons">chat_bubble</i> INVITATIONS</p>
+    </div>
+<!--
+    <div fxLayout="column" class="detail-listing">
+        <md-list class="nopadding ng-scope">
+            <div class="md-toolbar-tools" layout-align="start start" class="md-list-header">
+                <p class="md-list-event-date"> <em> <span>Mar 9, 2017</span> </em> </p>
+            </div>
+            <md-list-item class="md-3-line">
+                <div class="md-list-item-text" ng-class-odd="'odd'" ng-class-even="'odd'">
+                    <div fxLayout="row" fxFlex="100">
+                        <div fxLayout="row" fxFlex="20" fxLayoutAlign="center center" class="datetime"> 
+                            <i class="material-icons play-arrow-icon">play_arrow</i>
+                            <p class="md-list-event-hour"><b>09:30</b> </p>
+                        </div>
+                        <div fxLayout="column" fxFlex="15">
+                            <p class="md-list-event-hour"><b>Futbol</b> </p>
+                            <p style="font-size:10px !important; margin:2px 0px;"><b>Created by</b> </p>
+                            <p style="font-size:10px !important"><b>Nacho Jorrin</b> </p>
+                        </div>
+                        <div fxFlex="15" class="match-time center">
+                            <a href="#"><img src="../../assets/img/sidebar_photo.png" alt="" class="user-img-icon"></a>
+                        </div>
+                        <div fxFlex="25" class="match-time left">
+                            <p><b style="margin:2px 0px; display: block;">ESTADIO SANTIAGO </b> <b style="margin:2px 0px; display: block;">BERNABÉU </b> </p>
+                        </div>
+                        <div fxFlex="10" class="match-time left">
+                            <p><b style="margin:2px 0px; display: block;">3 DE 6 </b> <b style="margin:2px 0px; display: block;">€0.00 </b> </p>
+                        </div>
+                        <div fxFlex="15" class="match-time center">
+                            <button md-button>Info</button>
+                        </div>
+                    </div>
+                </div>
+            </md-list-item>
+        </md-list>
+    </div>
+-->
 </div>

@@ -1,7 +1,38 @@
-<p>
-    my-sportscenter works!
-</p>
+<div fxLayout.xs="column" fxLayout="row" class="sportcenterblock">
+    <div *ngIf="error" class="error"> {{error}} </div>
+    <div *ngIf="success" class="success"> {{success}} </div>
+    <h2 fxFlex.xs="100" fxFlex="70" fxLayoutAling="start start"> my-sportscenter </h2>
+    <button fxFlex.xs="100" fxFlex="30" md-raised-button routerLink="/add-new-sportscenter">Add Sports Center</button>
+</div>
+<div class="sports-centers">
+    <ul>
+        <li *ngFor="let sportCenter of sportCenters" fxLayout="row"> 
+           <div fxLayoutAlign="start center" fxFlex="55">
+                <span class="badge">{{sportCenter.name}}</span> 
+            </div>
+            <div fxLayoutAlign="center center" fxFlex="15">
+                <a md-raised-button [routerLink]="['/add-new-sportscenter',sportCenter.id]">edit</a> 
+            </div>
+            <div fxLayoutAlign="center center" fxFlex="15">
+                <a md-raised-button (click)="deleteSportsCenter(sportCenter.id)">delete</a> 
+            </div>
+            <div fxLayoutAlign="center center" fxFlex="15">
+                <a md-raised-button [routerLink]="['/pitch',sportCenter.id]">Pitches</a> 
+            </div>
+        </li>
+    </ul>
+</div>
+
+
+
+<!--
 <div class="main">
+    <div *ngIf="error" class="error">
+        {{error}}
+    </div>
+    <div *ngIf="success" class="success">
+        {{success}}
+    </div>
     <a md-raised-button routerLink="/add-new-sportscenter">Add Sports Center</a>
     <div class="sports-centers">
         <ul>
@@ -13,4 +44,4 @@
             </li>
         </ul>
     </div>
-</div>
+</div>-->

@@ -1,43 +1,26 @@
-<div layout="column" class="register-form" layout-align="center center" fxLayoutAlign="center center">
-    <div class="register-form-div">
-        <div fxLayout="row" fxLayoutAlign="end center">
+<div fxLayout="column" class="register-formbox" layout-align="center center" fxLayoutAlign="center center">
+    <div fxLayout="column" class="form-block" >
+        <div class="title-block">
+            <h3 class="title-list-items-text">Log in</h3>
             <a class="md-icon-button md-accent register-form-button-close" routerLink="/auth">
                 <md-icon class="register-form-close-icon">close</md-icon>
             </a>
         </div>
-        <div>
-            <form [formGroup]="userFormGroup" (ngSubmit)="userLogin()">
-                <div fxLayout="row" fxLayoutAlign="center start">
-                    <p class="title-list-items-text">Log in</p>
-                </div>
-
-                <!-- error -->
-                <div *ngIf="error" class="error">
-                    {{error}}
-                </div>
-                <div *ngIf="success" class="success">
-                    {{success}}
-                </div>
-                <!-- username -->
-                <!--<div fxLayout="row" fxLayoutAlign="start start">
-              <p class="register-form-text-label">Username</p>
-            </div>-->
+        <form [formGroup]="userFormGroup" (ngSubmit)="userLogin()" fxLayout="column">
+            <div *ngIf="error" class="error"> {{error}} </div>
+            <div *ngIf="success" class="success"> {{success}} </div>
+            <div class="form-group">
                 <md-input-container class="md-block register-form-text-area" md-no-float>
-                    <input mdInput class="user-text-label" formControlName="email" [(ngModel)]="email" placeholder="Email" required>
-                </md-input-container>
+                    <input mdInput class="user-text-label" formControlName="email" [(ngModel)]="email" placeholder="Email" required> </md-input-container>
                 <div *ngIf="userFormGroup.controls.email.invalid && userFormGroup.controls.email.touched">
                     <div ng-message="required" fxLayoutAlign="end start">
                         <p class="error-message">Email is invalid</p>
                     </div>
                 </div>
-
-                <!-- passowrd -->
-                <!--<div fxLayout="row" fxLayoutAlign="start start">
-              <p class="register-form-text-label">Password</p>
-            </div>-->
+            </div>
+            <div class="form-group">
                 <md-input-container class="md-block register-form-text-area" md-no-float>
-                    <input mdInput type="password" name="password" class="user-text-label" placeholder="Password" formControlName="password" [(ngModel)]="password">
-                </md-input-container>
+                    <input mdInput type="password" name="password" class="user-text-label" placeholder="Password" formControlName="password" [(ngModel)]="password"> </md-input-container>
                 <div *ngIf="userFormGroup.controls.password.invalid && userFormGroup.controls.password.touched" role="alert">
                     <div ng-message="required" fxLayoutAlign="end start">
                         <p class="error-message">Enter your password.</p>
@@ -46,24 +29,11 @@
                         <p class="help-block error-text">{{passwordError}}</p>
                     </div>
                 </div>
-
-                <!-- login button -->
-                <div class="info-container-button-reg-form" fxLayout="row" fxLayoutAlign="center center" fxFlex>
-                    <button md-button class="md-button-register-form" [disabled]="!userFormGroup.valid" type="submit">
-                <div fxLayout="row" fxLayoutAlign="center center">
-                  <p class="md-button-register-form-text"><em>LOG IN</em>
-                  </p>
-                </div>
-              </button>
-                </div>
-            </form>
-            <!-- forgot pasword -->
-            <div fxLayout="row" fxLayoutAlign="center end">
-                <button md-button class="md-button-forgotten-pass" routerLink="/auth/forgot-password">
-              <p class="register-form-text-label-pass">Forgotten Password?</p>
-            </button>
             </div>
-        </div>
-
+            <button md-raised-button class="md-button-register-form" [disabled]="!userFormGroup.valid" type="submit"> LOG IN </button>
+            <button md-raised-button class="md-button-forgotten-pass" routerLink="/auth/forgot-password">
+                <p class="register-form-text-label-pass">Forgotten Password?</p>
+            </button>
+        </form>
     </div>
 </div>

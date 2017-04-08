@@ -19,6 +19,7 @@ import { TournamentsComponent } from './tournaments/tournaments.component';
 import { MySportscenterComponent } from './my-sportscenter/my-sportscenter.component';
 import { AddNewSportscenterComponent } from './add-new-sportscenter/add-new-sportscenter.component';
 import { PitchComponent } from './pitch/pitch.component';
+import { MatchCreateComponent } from './match-create/match-create.component';
 
 @NgModule({
     imports: [
@@ -46,6 +47,7 @@ import { PitchComponent } from './pitch/pitch.component';
                     { path: 'add-new-sportscenter', component: AddNewSportscenterComponent },
                     { path: 'add-new-sportscenter/:updateId', component: AddNewSportscenterComponent },
                     { path: 'pitch/:scId', component: PitchComponent },
+                    { path: 'match-create', component: MatchCreateComponent },
                 ],
             }
         ])

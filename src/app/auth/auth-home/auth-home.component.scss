@@ -1,27 +1,13 @@
-:host {
-    display: block;
-    //   background-color: lightgreen;
-    height: 100%;
-    width: 100%;
+:host{ width: 100%; }
+.mat-raised-button {
+    background: transparent;
+    box-shadow: none;
 }
 
 .login-box {
     background-color: lightcyan;
 }
-
-.fb-button {
-    text-transform: capitalize !important;
-    background-color: transparent;
-    color: #fff;
-    width: 360px;
-    font-weight: bold;
-    font-size: 16px;
-    box-shadow: none;
-    border: none;
-    padding: 29px 0px;
-    line-height: 0px;
-}
-
+ 
 .fb-button:hover,
 .fb-button:active,
 .fb-button:focus {
@@ -29,65 +15,47 @@
 }
 
 .register-div {
-    height: 80% !important;
-    padding: 0 !important;
-    display: block;
+    margin-top:180px;
 }
 
-.register-div.home_main {
-    margin-top: 0px !important;
-}
-
-.login-home-button {
-    text-transform: capitalize !important;
-    color: #ffffff;
-    margin: 40px 0 0px;
-    padding: 5px 30px;
-}
-
-.li-full-width {
-    width: 360px;
-}
-
-.facebook-home-button {
-    text-transform: capitalize !important;
+.register-div .fb-button {
     background-color: #415e9b;
-    color: #fff;
-    width: 360px;
-    font-weight: bold;
-    font-size: 16px;
-    box-shadow: none;
-    padding: 2px 0px;
+    color: white;
     height: 60px;
+    font-weight: 400;
+    font-size: 16px;
+    text-transform: capitalize;
+    letter-spacing: 0.50px;
+    margin-bottom: 20px;
+    width:100%;
 }
 
-@media screen and (max-width: 960px) {
-    .register-div.home_main {
-        position: relative;
-        width: 67%;
-        float: right;
-        margin-top: 110px;
-        margin-left: 0;
-    }
+.li-full-width { width: 100%; }
+
+
+.register-div .registerbtn {
+    color:#fff;
+    float:left;
+}
+.register-div .loginbtn {
+    color:#fff;
+    float:right;
 }
 
-@media screen and (max-width: 600px) {
-    .register-div.home_main {
-        position: absolute;
-        width: 100%;
-        top: 150px;
-        bottom: 0;
-        margin: auto;
-    }
+.register-div .error {
+    color:#fff;
+    margin-bottom: 10px;
 }
 
-@media screen and (max-width: 414px) {
-    .logo {
-        margin-top: 20%;
-        padding-top: 100px;
-    }
-    .md-facebook-button,
-    .li-full-width {
-        width: 300px;
-    }
+@media screen and (max-width:991px) {
+    .register-div {padding-right:50px;}
+    .register-div .fb-button { font-size:14px; height:55px; width:100%; }
+    
+}
+
+@media screen and (max-width:599px) {
+    .register-div { margin-top:50px; width:100%; padding-right: 0px; }
+    .register-div .fb-button { width:80%; }
+    .li-full-width { width: 80%; }
+ 
 }

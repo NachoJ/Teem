@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { FormArray, FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CoreService } from '../core/core.service';
@@ -11,33 +11,53 @@ import { Pitch } from '../shared/interface/pitch';
 })
 export class PitchComponent implements OnInit {
 
-	message: string;
+	error: string;
+	success: string;
+
 	name: string;
 	covering: string;
 	lights: string;
 	surface: string;
+	sport: string;
 	surfaceOptions = [
 		{ value: 'option1', viewValue: 'option1' },
 		{ value: 'option2', viewValue: 'option2' },
 		{ value: 'option3', viewValue: 'option3' }
 	];
-	sports: string;
-	sportsOptions = [
-		{ value: 'option1', viewValue: 'option1' },
-		{ value: 'option2', viewValue: 'option2' },
-		{ value: 'option3', viewValue: 'option3' }
-	];
+	sportOptions =[];
+	// sportOptions = [
+	// 	{ value: 'option1', viewValue: 'option1' },
+	// 	{ value: 'option2', viewValue: 'option2' },
+	// 	{ value: 'option3', viewValue: 'option3' }
+	// ];
 	price: string;
 
 	pitches: Pitch[] = [];
+	deleteData = [];
 
-	private sub: any;
+	// nameCtrl = FormControl[];
 
-	public pitchFormGroup: FormGroup;
+	sub: any;
 
-	constructor(private coreService: CoreService, private formBuilder: FormBuilder, private route: ActivatedRoute) {
+	// public pitchFormGroup: FormGroup;
+	public pitchFormGroupArray: FormGroup[] = [];
+	isFormValid: boolean = false;
+
+	constructor(private coreService: CoreService, private formBuilder: FormBuilder, private route: ActivatedRoute, ) {
 		this.sub = this.route.snapshot.params.scId;
-		console.log("sub",this.sub);
+		console.log("sub", this.sub);
+		// this.pitchFormGroup = this.formBuilder.group({
+		// 	some: ['', [Validators.required]],
+		// 	pt: this.formBuilder.array([])
+		// });
+		// const control = <FormArray>this.pitchFormGroup.controls['pt'];
+		// const addrCtrl = this.formBuilder.group({
+		//     name: ['', Validators.required],
+		// });
+		// control.push(addrCtrl);
+		// console.log("some",this.pitchFormGroup.controls.pt['controls'][0]['controls']['name'])
+
+
 		//  this.pitchFormGroup = this.formBuilder.group({
 		// 	name: ['', [Validators.required]],
 		// covering: ['', [Validators.required]],
@@ -50,39 +70,110 @@ export class PitchComponent implements OnInit {
 		address: ['', Validators.required]*/
 
 		// });
-		this.addMore();
+		this.coreService.getAllSports()
+			.subscribe((response) => {
+				this.sportOptions = response;
+			},
+			(error: any) => {
+				this.error = error;
+			});
+
+		this.loadPitch();
+		// this.addMore();
 
 	}
 
 	ngOnInit() {
+
+	}
+	initNames() {
+		// return this.formBuilder.group({
+		// 	name: ['', Validators.required]
+		// });
 	}
 
+	formChanged() {
+		setTimeout(() => {
+
+			console.log("pitchFormGroupArray length", this.pitchFormGroupArray.length);
+			console.log("deleteData length", this.deleteData.length);
+			this.isFormValid = true;
+			for (let fm of this.pitchFormGroupArray) {
+				if (!fm.valid) {
+					this.isFormValid = false;
+					break;
+				}
+			}
+		}, 100);
+	}
+
+	addValidationControls() {
+		this.pitchFormGroupArray.push(this.formBuilder.group({
+			name: ['', Validators.required],
+			covering: ['', [Validators.required]],
+			lights: ['', [Validators.required]],
+			surface: ['', [Validators.required]],
+			sports: ['', [Validators.required]],
+			price: ['', [Validators.required]]
+		}));
+	}
 	addMore() {
+
+
+		console.log('add', this.pitches);
+		// const control = <FormArray>this.pitchFormGroup.controls['names'];
+		// control.push(this.initNames());
+
+		this.addValidationControls();
 		let tempPitch = <Pitch>{};
 		tempPitch.scid = this.sub;
 		this.pitches.push(tempPitch);
 	}
 
+	loadPitch() {
+		this.coreService.loadPitches(this.sub)
+			.subscribe((response) => {
+				for (let res of response)
+					this.addValidationControls();
+				this.pitches = response;
+				this.formChanged();
+			},
+			(error: any) => {
+				this.success = '';
+				this.error = error;
+				// this._router.navigate(['/login']);
+			});
+	}
+
+
 	removePitch(index) {
+
+		if (this.pitches[index].id != null)
+			this.deleteData.push(this.pitches[index].id)
 		this.pitches.splice(index, 1);
+
+		this.pitchFormGroupArray.splice(index, 1);
+		console.log("pitchFormGroupArray lenght", this.pitchFormGroupArray.length);
 	}
 
 	SavePitch() {
-		let deleteData = {};
+
 		let dataPitches = JSON.stringify(this.pitches);
-		console.log('dataPitches', JSON.stringify(dataPitches));
 		let data = {
 			"fields": this.pitches,
-			"deleteids": deleteData
+			"deleteids": this.deleteData
 		};
-		console.log("data",JSON.stringify(data));
+		console.log("data", JSON.stringify(data));
 		this.coreService.savePitches(JSON.stringify(data))
 			.subscribe((response) => {
-				console.log(response)
-				this.message = response;
+				console.log(response);
+				this.error = '';
+				this.success = response;
+				this.loadPitch();
 			},
 			(error: any) => {
-				this.message = error;
+				this.success = '';
+				this.error = error;
 				// this._router.navigate(['/login']);
 			});
 	}

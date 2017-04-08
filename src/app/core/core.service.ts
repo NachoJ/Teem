@@ -26,7 +26,7 @@ export class CoreService {
     console.log(data);
     return this.http.post(environment.BASEAPI + environment.ADD_SPORTS_CENTER, data, this.options)
       .map((res: Response) => {
-        return res.json();
+        return res.json().message;
 
       }).catch(this.handleError);
     // .do(data => console.log('server data:', data))  // debug
@@ -35,9 +35,9 @@ export class CoreService {
   updateSportsCenter(user) {
     let data = JSON.stringify(user);
     console.log(data);
-    return this.http.put(environment.BASEAPI + environment.ADD_SPORTS_CENTER, data, this.options)
+    return this.http.put(environment.BASEAPI + environment.ADD_SPORTS_CENTER, data)
       .map((res: Response) => {
-        return res.json();
+        return res.json().message;
 
       }).catch(this.handleError);
     // .do(data => console.log('server data:', data))  // debug
@@ -64,15 +64,16 @@ export class CoreService {
   deleteSportsCenter(id) {
     return this.http.delete(environment.BASEAPI + environment.DELETE_SPORTS_CENTER + id, this.options)
       .map((res: Response) => {
-        return res.json();
+        return res.json().message;
 
       }).catch(this.handleError);
   }
 
-  loadPitches() {
-	  return this.http.get(environment.BASEAPI + environment.GET_FEILDS, this.options)
+  loadPitches(id) {
+	  return this.http.get(environment.BASEAPI + environment.GET_FEILDS + id, this.options)
       .map((res: Response) => {
-        return res.json();
+		//   console.log("pitches = ",res.json().data)
+        return res.json().data;
 
       }).catch(this.handleError);
   }
@@ -80,7 +81,55 @@ export class CoreService {
   savePitches(data){
 	return this.http.post(environment.BASEAPI + environment.ADD_FEILDS, data, this.options)
       .map((res: Response) => {
+        return res.json().message;
+
+      }).catch(this.handleError);
+  }
+
+  loadSportCentreAutoComplete(input) {
+	  return this.http.get(environment.BASEAPI + environment.AUTOCOMPLETE_SPORTSCENTRE + input, this.options)
+      .map((res: Response) => {
         return res.json();
+
+      }).catch(this.handleError);
+  }
+
+  getAllCurrency(){
+	  return this.http.get(environment.BASEAPI + environment.GET_ALL_CURRENCY, this.options)
+      .map((res: Response) => {
+        return res.json().data;
+
+      }).catch(this.handleError);
+  }
+
+  getAllSports(){
+	  return this.http.get(environment.BASEAPI + environment.GET_ALL_SPORTS, this.options)
+      .map((res: Response) => {
+        return res.json().data;
+
+      }).catch(this.handleError);
+  }
+
+  createMatch(data) {
+	return this.http.post(environment.BASEAPI + environment.CREATE_MATCH, data, this.options)
+      .map((res: Response) => {
+        return res.json().message;
+
+      }).catch(this.handleError);
+  }
+
+  getLatLongByCityName(cityName) {
+	return this.http.get("https://maps.googleapis.com/maps/api/geocode/json?address="+cityName+"&key=AIzaSyDD7oo0yCjyp2pIBLbRr_h3b0_NiMXXu3g")
+      .map((res: Response) => {
+        return res.json().results[0].geometry.location;
+
+      }).catch(this.handleError);
+  }
+
+  getNearByMatch(data){
+	return this.http.post(environment.BASEAPI + environment.NEARBY_MATCH, data, this.options)
+      .map((res: Response) => {
+        return res.json().data;
 
       }).catch(this.handleError);
   }

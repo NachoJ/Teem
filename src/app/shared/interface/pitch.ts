@@ -4,6 +4,7 @@ export interface Pitch {
 	covering: string;
 	lights: string;
 	surface: string;
+	sport: string;
 	price: string;
 	scid: string;
 

@@ -9,10 +9,11 @@ html {
     line-height: normal;
     background: #fafafa;
     font-family: Roboto, Helvetica Neue, sans-serif;
-    p {
-        margin: 0;
-        padding: 0;
-    }
+}
+
+p {
+    margin: 0;
+    padding: 0;
 }
 
 * {
@@ -34,6 +35,8 @@ p {
 .container {
     width: 932px;
     margin: auto;
+    height: 100%;
+    max-width: 100%;
 }
 
 .center {
@@ -44,34 +47,14 @@ p {
     text-align: left;
 }
 
-.flex10 {
-    width: 10%;
-    display: inline-block;
-}
-
-.flex15 {
-    width: 15%;
-    display: inline-block;
-}
-
-.flex20 {
-    width: 20%;
-    display: inline-block;
-}
-
-.flex25 {
-    width: 25%;
-    display: inline-block;
+.mat-raised-button {
+    box-shadow: none;
 }
 
 input:-webkit-autofill,
 textarea:-webkit-autofill,
 select:-webkit-autofill {
     background-color: #fff !important;
-}
-
-.cdk-overlay-pane {
-    top: 115px !important;
 }
 
 .mat-button-focus-overlay,
@@ -82,6 +65,39 @@ select:-webkit-autofill {
 button:disabled {
     opacity: 0.7;
 }
+
+.mat-ink-bar {
+    background-color: #fff !important;
+    bottom:10px !important;
+}
+
+.mat-sidenav-focus-trap>.cdk-focus-trap-content {
+    width:250px;
+}
+
+
+
+
+@media screen and (max-width:991px) {
+    .container {
+        width:100%;
+    }
+    
+    
+}
+
+@media screen and (max-width:959px) {
+      .mobilemenu .mat-list-item-content { font-size: 14px !important; cursor:pointer; }
+    
+}
+
+@media screen and (max-width:599px) {
+    .detail-listing .mat-list-item-content { height:auto !important; padding:5px !important; }
+     
+    
+} 
+
+
 
 @import '~@angular/material/core/theming/all-theme';
 // Plus imports for other components in your app.

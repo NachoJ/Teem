@@ -1,3 +1,62 @@
-<p>
-  find-match works!
-</p>
+<div fxLayout="column" fxLayoutAlign="start start" class="detail-box">
+    <div class="title-list-items">
+        <p class="title-list-items-text"> <i class="material-icons">search</i> FIND MATCH</p>
+    </div>
+    <div class="find-match-main" fxLayout="row" fxLayoutAlign="start start">
+        <div class="my-from" fxFlex="40%">
+            <!--<form>-->
+            <div *ngIf="error" class="error"> {{error}} </div>
+            <div *ngIf="success" class="success"> {{success}} </div>
+            <div class="form-group">
+                <span class="next-line">CITY</span>
+                <md-input-container class="md-block register-form-text-area" md-no-float>
+                    <input mdInput class="user-text-label" placeholder="Enter your City Name" (keyup.enter)="getLatLongByCityName()" [ngModelOptions]="{standalone: true}" [(ngModel)]="cityName" required>
+                </md-input-container>
+                <div class="span-white">
+                    <i class="material-icons" (click)="getAndSetLocation()">gps_fixed</i>
+                </div>
+                <!--<div *ngIf="sportsCenterFormGroup.controls.name.invalid && sportsCenterFormGroup.controls.name.touched">
+                    <div ng-message="required" fxLayoutAlign="start start">
+                        <p class="error-message">Email is invalid</p>
+                    </div>
+                </div>-->
+            </div>
+            <div class="form-group">
+                <div class="next-line">SPORT</div>
+                <div class='sports-icon'>
+                    <md-radio-group [(ngModel)]="sport">
+                        <md-radio-button value="all">
+                            <div class="span-white">
+                                <md-icon class="material-icons md-48" svgIcon="all"></md-icon>
+                            </div>
+                        </md-radio-button>
+                        <md-radio-button value="soccer">
+                            <div class="span-white">
+                                <md-icon class="material-icons md-48" svgIcon="football"></md-icon>
+                            </div>
+                        </md-radio-button>
+                        <md-radio-button value="basketball">
+                            <div class="span-white">
+                                <md-icon class="material-icons md-48" svgIcon="basketball"></md-icon>
+                            </div>
+                        </md-radio-button>
+                        <md-radio-button value="padel">
+                            <div class="span-white">
+                                <md-icon class="material-icons md-48" svgIcon="padel"></md-icon>
+                            </div>
+                        </md-radio-button>
+                    </md-radio-group>
+                </div>
+                <!--<div *ngIf="sportsCenterFormGroup.controls.name.invalid && sportsCenterFormGroup.controls.name.touched">
+                    <div ng-message="required" fxLayoutAlign="start start">
+                        <p class="error-message">Email is invalid</p>
+                    </div>
+                </div>-->
+            </div>
+            <!--</form>-->
+        </div>
+        <div class="my-map" fxFlex="60%" style="background-color:lightpink;height:230px">
+            <div id="nearByMap"></div>
+        </div>
+    </div>
+</div>

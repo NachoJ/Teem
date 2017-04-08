@@ -1,0 +1,140 @@
+<div fxFlexOffset="column" fxFlex="100" class="creatmach-wrapper">
+    <!--<form [formGroup]="sportsCenterFormGroup" *ngIf="sub" (ngSubmit)="updateSportsCenter()">-->
+    <div *ngIf="error" class="error"> {{error}} </div>
+    <div *ngIf="success" class="success"> {{success}} </div>
+    <div fxFlex="100" class="title-list-items">
+        <p class="title-list-items-text"> <i class="material-icons">thumb_up</i> Match Creation</p>
+    </div>
+    <form [formGroup]="matchFormGroup" fxLayout="column" fxFlex="100">
+        <div fxFlex="100" [ngStyle]="{'display': displayPitch}">
+            <!-- auto complete -->
+            <div fxFlex="50" class="select-center">
+                <md-input-container>
+                    <input type="text" mdInput placeholder="Select Sports Centre" formControlName="sportCentreCtrl" (keyup.enter)="itemSelected()" (blur)="itemSelected()" [(ngModel)]="selectedSportsCenterName" [mdAutocomplete]="auto" (input)="loadAutoComplete()">                    </md-input-container>
+                <div *ngIf="matchFormGroup.controls.sportCentreCtrl.invalid && matchFormGroup.controls.sportCentreCtrl.touched">
+                    <p class="error-message">Sport Center not Selected</p>
+                </div>
+            </div>
+            <md-autocomplete #auto="mdAutocomplete">
+                <md-option name="auto" *ngFor="let option of sportsCenterOptions" (click)="itemSelected()" (keyup.enter)="itemSelected()" [value]="option.id"> {{ option.name +' ,'+ option.address}} </md-option>
+            </md-autocomplete>
+            <div fxLayout.xs="column" fxLayoutAlign="center center" fxLayout="row" fxFlex="100" class="info">
+                <p>Can't find find Sports Centre you are looking for? </p>
+                <button md-raised-button>Click to add a new one.</button>
+            </div>
+            <!-- pitches -->
+            <div fxLayout="column" class="pitch" *ngIf="pitches">
+                <h3>In Your Area</h3>
+                <p>Click on pitch to select it</p>
+                <div fxLayout="row" class="selectbadges">
+                    <div *ngFor="let pitch of pitches" class="pitch-display" (click)="pitchSelected(pitch.id)">
+                        <h4 class="badge">{{pitch.name}}</h4>
+                        <p class="badge">{{pitch.covering}}</p>
+                        <p class="badge">{{pitch.sport}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div fxFlex="100" [ngStyle]="{'display': displayFormDetails}" style="width:100%;">
+            <!-- display sports center -->
+            <div fxLayoutAlign="center center" fxLayout="row" fxFlex="100" class="address">
+                <md-input-container fxFlex="60">
+                    <input type="text" name="displaySc" [ngModelOptions]="{standalone: true}" mdInput [disabled]="true" [(ngModel)]="selectedSportsCenterName"> </md-input-container>
+                <button md-raised-button (click)="changeSportCentre()" fxFlex="20">Change</button>
+            </div>
+            <div fxLayoutAlign="center center" fxLayout="column" class="benchplayers">
+                <h2>Select Bench Players</h2>
+                <div class="form-group">
+                    <md-input-container class="md-block">
+                        <input type="number" formControlName="benchCtrl" mdInput class="user-text-label" [(ngModel)]="bench" placeholder="Bench Players" required> </md-input-container>
+                    <div *ngIf="matchFormGroup.controls.benchCtrl.invalid && matchFormGroup.controls.benchCtrl.touched">
+                        <div ng-message="required">
+                            <p class="error-message">Bench player not assigned</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="column" class="box-info">
+                <p class="info">Make Sure you have booked the field before continuing! </p>
+                <button md-raised-button>
+                    <md-icon>phone</md-icon> {{selectedSportsCenterPhone}}</button>
+            </div>
+            <div fxLayout="column" class="matchtime">
+                <h2>When?</h2>
+                <!-- date -->
+                <div class="selecttime" fxLayout="row">
+                    <div fxFlex="40" class="form-group date">
+                        <md-input-container>
+                            <input type="date" formControlName="dateCtrl" mdInput class="user-text-label" [(ngModel)]="date" placeholder="Start Date" required> </md-input-container>
+                        <div *ngIf="matchFormGroup.controls.dateCtrl.invalid && matchFormGroup.controls.dateCtrl.touched">
+                            <div ng-message="required">
+                                <p class="error-message">Date not selected</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- time -->
+                    <div fxFlex="30" class="form-group hour">
+                        <md-select formControlName="hourCtrl" [(ngModel)]="hour" placeholder="Hour" required>
+                            <md-option *ngFor="let h of hourOptions" [value]="h.value"> {{ h.viewValue }} </md-option>
+                        </md-select>
+                        <div *ngIf="matchFormGroup.controls.hourCtrl.invalid && matchFormGroup.controls.hourCtrl.touched">
+                            <div ng-message="required">
+                                <p class="error-message">Hour not selected</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- minite -->
+                    <div fxFlex="30" class="form-group minute">
+                        <md-select formControlName="minuteCtrl" [(ngModel)]="minute" placeholder="Minute" required>
+                            <md-option *ngFor="let m of minuteOptions" [value]="m.value"> {{ m.viewValue }} </md-option>
+                        </md-select>
+                        <div *ngIf="matchFormGroup.controls.minuteCtrl.invalid && matchFormGroup.controls.minuteCtrl.touched">
+                            <div ng-message="required">
+                                <p class="error-message">Minute not selected</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="column" class="currencyblock">
+                <h4>How will you collect Money?</h4>
+                <div fxLayout="column" class="currencyoption">
+                    <div fxLayout="row" class="form-group">
+                        <md-radio-group class="" formControlName="paymentCtrl" [(ngModel)]="payment" required>
+                            <md-radio-button value="free">Free</md-radio-button>
+                            <md-radio-button value="atthepitch">At the pitch</md-radio-button>
+                            <md-radio-button value="online">Online</md-radio-button>
+                        </md-radio-group>
+                        <div *ngIf="matchFormGroup.controls.paymentCtrl.invalid && matchFormGroup.controls.paymentCtrl.touched">
+                            <div ng-message="required">
+                                <p class="error-message">Select a payment option</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div fxLayout="row">
+                        <div fxFlex="30" class="form-group currency">
+                            <md-select formControlName="currencyCtrl" class="md-block" [(ngModel)]="currency" placeholder="Curreny" required>
+                                <md-option *ngFor="let c of currencyOption" [value]="c.currencykey"> {{ c.currencytitle }} </md-option>
+                            </md-select>
+                            <div *ngIf="matchFormGroup.controls.currencyCtrl.invalid && matchFormGroup.controls.currencyCtrl.touched">
+                                <div ng-message="required">
+                                    <p class="error-message">Select a currency</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div fxFlex="70" class="form-group">
+                            <md-input-container>
+                                <input type="cost" formControlName="costCtrl" mdInput [(ngModel)]="cost" placeholder="Cost of hiring the pitch" required> </md-input-container>
+                            <div *ngIf="matchFormGroup.controls.currencyCtrl.invalid && matchFormGroup.controls.currencyCtrl.touched">
+                                <div ng-message="required">
+                                    <p class="error-message">Enter cost</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button md-raised-button [disabled]="!matchFormGroup.valid" (click)="createMatch()" type="submit" class="creatematch"> Create Match </button>
+        </div>
+    </form>
+</div>

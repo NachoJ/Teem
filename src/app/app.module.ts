@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MaterialModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,7 @@ import { TournamentsComponent } from './tournaments/tournaments.component';
 import { AddNewSportscenterComponent } from './add-new-sportscenter/add-new-sportscenter.component';
 import { MySportscenterComponent } from './my-sportscenter/my-sportscenter.component';
 import { PitchComponent } from './pitch/pitch.component';
+import { MatchCreateComponent } from './match-create/match-create.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { PitchComponent } from './pitch/pitch.component';
     AddNewSportscenterComponent,
     MySportscenterComponent,
     PitchComponent,
+    MatchCreateComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +38,7 @@ import { PitchComponent } from './pitch/pitch.component';
     HttpModule,
     BrowserAnimationsModule,
     MaterialModule.forRoot(),
+    FlexLayoutModule,
 
     AppRoutingModule,
 
