@@ -1,0 +1,68 @@
+<div class="main-padding">
+    <div class="example-section example-margin">
+        <p class="user-text-label-account">Change and confirmation of email address
+            <br>If the email address is changed, a confirmation email will be sent and it will be valid during next 24 hours.</p>
+    </div>
+    <form [formGroup]="accountFormGroup" (ngSubmit)="emailSave()" novalidate>
+        <div class="example-section example-margin">
+            <div fxLayout="column" class="form-group" fxFlex="100">
+                <div fxLayout="row" fxLayout.xs="column">
+                    <label for="" fxLayoutAlign="left center" fxFlex="25">Email</label>
+                    <md-input-container class="md-block register-form-text-area" [class.red-border]="!accountFormGroup.valid" fxFlex="50" md-no-float>
+                        <input mdInput formControlName="email" class="user-text-label"  > </md-input-container>
+                    <button md-raised-button color="primary" fxFlex="25" [disabled]="!accountFormGroup.valid"  class="save-btn">Save</button>
+                    <!--<div class="text-danger" *ngIf="accountFormGroup.controls.email.touched"> <span *ngIf="accountFormGroup.controls.email.invalid">Enter your email</span> </div>-->
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="example-section example-margin">
+        <p class="user-text-label-account">Write your current password and then introduce and confirm the new password.</p>
+    </div>
+    <form [formGroup]="accountPasswordGroup" (ngSubmit)="passwordSave()" novalidate>
+        <div class="example-section example-margin">
+            <div fxLayout="column" class="form-group" fxFlex="100">
+                <div fxLayout="row" fxLayout.xs="column">
+                    <label for="" fxLayoutAlign="left center" fxFlex="25">Old password</label>
+                    <md-input-container class="md-block register-form-text-area" fxFlex="75" md-no-float>
+                        <input mdInput type="password" formControlName="oldpassword" class="user-text-label"> </md-input-container>
+                </div>
+                <div *ngIf="accountPasswordGroup.controls.oldpassword.touched">
+                    <div ng-message="required" fxFlex="100" fxLayoutAlign="right start">
+                        <p *ngIf="accountPasswordGroup.controls.oldpassword.invalid" class="error-message">Enter your old password (Must be 8 characters)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="example-section example-margin">
+            <div fxLayout="column" class="form-group" fxFlex="100">
+                <div fxLayout="row" fxLayout.xs="column">
+                    <label for="" fxLayoutAlign="left center" fxFlex="25">New password</label>
+                    <md-input-container class="md-block register-form-text-area" fxFlex="75" md-no-float>
+                        <input mdInput type="password" formControlName="encryptedpassword" class="user-text-label"> </md-input-container>
+                </div>
+                <div *ngIf="accountPasswordGroup.controls.encryptedpassword.touched">
+                    <div ng-message="required" fxFlex="100" fxLayoutAlign="right start">
+                        <p *ngIf="accountPasswordGroup.controls.encryptedpassword.invalid" class="error-message">Enter your new password (Must be 8 characters)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="example-section example-margin">
+           <div fxLayout="column" class="form-group" fxFlex="100">
+                <div fxLayout="row" fxLayout.xs="column">
+                    <label for="" fxLayoutAlign="left center" fxFlex="25">Confirm password</label>
+            <md-input-container class="md-block register-form-text-area" fxFlex="75" md-no-float>
+                <input mdInput type="password" formControlName="confirmpassword" class="user-text-label" validateEqual="encryptedpassword"> </md-input-container>
+               </div>
+            <div *ngIf="accountPasswordGroup.controls.confirmpassword.touched">
+               <div ng-message="required" fxFlex="100" fxLayoutAlign="right start">
+                <p *ngIf="accountPasswordGroup.hasError('mismatchedPasswords')" class="error-message">Passwords do not match (Must be 8 characters)</p>
+                </div>
+               </div></div>
+        </div>
+        <div class="example-section example-margin" fxFlex="100" fxLayoutAlign="center center"> 
+            <button md-raised-button color="primary" class="creatematch" [disabled]="!accountPasswordGroup.valid">UPDATE PASSWORD</button>
+        </div>
+    </form>
+</div>

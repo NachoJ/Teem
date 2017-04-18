@@ -1,3 +1,5 @@
+import { NotificationComponent } from './settings/notification/notification.component';
+import { SettingsComponent } from './settings/settings.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Routes } from '@angular/router';
@@ -20,39 +22,57 @@ import { MySportscenterComponent } from './my-sportscenter/my-sportscenter.compo
 import { AddNewSportscenterComponent } from './add-new-sportscenter/add-new-sportscenter.component';
 import { PitchComponent } from './pitch/pitch.component';
 import { MatchCreateComponent } from './match-create/match-create.component';
+import { MatchDetailsComponent } from './match-details/match-details.component';
+import { AccountComponent } from './settings/account/account.component';
+import { ProfileComponent } from './settings/profile/profile.component';
+
+// import { AU } form '/auth/authguard.service';
+import { AuthGuard } from "./auth/authguard.service";
 
 @NgModule({
-    imports: [
-        RouterModule.forRoot([
-            {   path: 'auth',
-                component: AuthComponent,
-                children: [
-                    { path: '', component: AuthHomeComponent },
-                    { path: 'register', component: RegisterComponent },
-                    { path: 'login', component: SigninComponent },
-                    { path: 'login/:activationid', component: SigninComponent },
-                    { path: 'forgot-password', component: ForgotPasswordComponent },
-                    { path: 'resetpassword/:resetid', component: ResetPasswordComponent },
-                ],
-            },
-            {
-                path: '',
-                component: CoreComponent,
-                children: [
-                    { path: '', component: HomeComponent },
-                    { path: 'home', component: HomeComponent },
-                    { path: 'find-match', component: FindMatchComponent },
-                    { path: 'tournaments', component: TournamentsComponent },
-                    { path: 'my-sportscenter', component: MySportscenterComponent },
-                    { path: 'add-new-sportscenter', component: AddNewSportscenterComponent },
-                    { path: 'add-new-sportscenter/:updateId', component: AddNewSportscenterComponent },
-                    { path: 'pitch/:scId', component: PitchComponent },
-                    { path: 'match-create', component: MatchCreateComponent },
-                ],
-            }
-        ])
-    ],
-    exports: [RouterModule]
+	imports: [
+		RouterModule.forRoot([
+			{
+				path: 'auth',
+				component: AuthComponent,
+				children: [
+					{ path: '', component: AuthHomeComponent },
+					{ path: 'register', component: RegisterComponent },
+					{ path: 'login', component: SigninComponent },
+					{ path: 'login/:activationid', component: SigninComponent },
+					{ path: 'forgot-password', component: ForgotPasswordComponent },
+					{ path: 'resetpassword/:resetid', component: ResetPasswordComponent },
+				],
+			},
+			{
+				path: '',
+				component: CoreComponent,
+				children: [
+					{ path: '', component: HomeComponent, canActivate: [AuthGuard] },
+					{ path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+					{ path: 'find-match', component: FindMatchComponent },
+					{ path: 'tournaments', component: TournamentsComponent },
+					{ path: 'my-sportscenter', component: MySportscenterComponent },
+					{ path: 'add-new-sportscenter', component: AddNewSportscenterComponent },
+					{ path: 'add-new-sportscenter/:updateId', component: AddNewSportscenterComponent },
+					{ path: 'pitch/:scId', component: PitchComponent },
+					{ path: 'match-create', component: MatchCreateComponent },
+					 {path: 'match-details/:matchId', component: MatchDetailsComponent },
+					{ path: 'settings', 
+					  component: SettingsComponent,
+						children:[
+							{ path: '', component: ProfileComponent},
+							{ path: 'profile', component: ProfileComponent},
+							{ path: 'account', component: AccountComponent },
+							{ path: 'notification', component: NotificationComponent },
+							{ path: 'email/:activationid', component: AccountComponent },		
+						]		 
+					},
+				],
+			}
+		])
+	],
+	exports: [RouterModule]
 })
 export class AppRoutingModule {
 

@@ -1,4 +1,4 @@
-import { Component, ElementRef,OnInit, NgZone, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, NgZone, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -9,7 +9,8 @@ declare var google: any;
 @Component({
 	selector: 'te-add-new-sportscenter',
 	templateUrl: './add-new-sportscenter.component.html',
-	styleUrls: ['./add-new-sportscenter.component.scss']
+	styleUrls: ['./add-new-sportscenter.component.scss'],
+	encapsulation: ViewEncapsulation.None
 })
 export class AddNewSportscenterComponent implements OnInit {
 
@@ -29,11 +30,11 @@ export class AddNewSportscenterComponent implements OnInit {
 
 	sub: any;
 
-	@ViewChild('myaddress') 
-	el:ElementRef;
+	@ViewChild('myaddress')
+	el: ElementRef;
 
 	constructor(private coreService: CoreService, private formBuilder: FormBuilder,
-		private route: ActivatedRoute, private zone: NgZone) {
+		private route: ActivatedRoute, private zone: NgZone, private router: Router) {
 
 		this.sub = this.route.snapshot.params.updateId;
 		if (this.sub) {
@@ -49,10 +50,12 @@ export class AddNewSportscenterComponent implements OnInit {
 						this.description = response.data[0].description;
 						this.lat = response.data[0].lat;
 						this.long = response.data[0].long;
+						this.initAutocomplete();
 
 					},
 					(error: any) => {
-						this.error = error;
+						// this.error = error;
+
 					});
 			}
 		}
@@ -94,20 +97,23 @@ export class AddNewSportscenterComponent implements OnInit {
 		this.coreService.addNewSportsCenter(data)
 			.subscribe((response) => {
 				console.log(response)
-				this.error='';
-				this.success = response;
+				// this.error='';
+				// this.success = response;
+				this.coreService.emitSuccessMessage(response);
 				this.sportsCenterFormGroup.reset();
+				this.router.navigate(['/my-sportscenter']);
 			},
 			(error: any) => {
-				console.log(error);
-				this.success='';
-				this.error = error;
+				this.coreService.emitErrorMessage(error);
+				// console.log(error);
+				// this.success='';
+				// this.error = error;
 				// this._router.navigate(['/login']);
 			});
 	}
 
 	updateSportsCenter() {
-		// console.log("update record");
+		console.log("update record");
 		let data = {
 			id: this.sub,
 			name: this.name,
@@ -118,17 +124,20 @@ export class AddNewSportscenterComponent implements OnInit {
 			long: this.long
 			// description: ''
 		};
-		console.log("data",data);
+		console.log("data", data);
 		this.coreService.updateSportsCenter(data)
 			.subscribe((response) => {
-				console.log(response)
-				this.error='';
-				this.success = response;
+				this.coreService.emitSuccessMessage(response);
+				this.router.navigate(['/my-sportscenter']);
+				// console.log(response)
+				// this.error='';
+				// this.success = response;
 			},
 			(error: any) => {
-				console.log(error);
-				this.success='';
-				this.error = error;
+				this.coreService.emitErrorMessage(error);
+				// console.log(error);
+				// this.success='';
+				// this.error = error;
 				// this._router.navigate(['/login']);
 			});
 	}
@@ -136,8 +145,17 @@ export class AddNewSportscenterComponent implements OnInit {
 
 	initAutocomplete() {
 		var self = this;
+
+		var initlat = -33.8688;
+		var initlng = 151.2195;
+
+		if (self.lat && self.long && self.sub) {
+			initlat = parseFloat(self.lat);
+			initlng = parseFloat(self.long);
+		}
+		// setting map from here
 		var map = new google.maps.Map(document.getElementById('map'), {
-			center: { lat: -33.8688, lng: 151.2195 },
+			center: { lat: initlat, lng: initlng },
 			zoom: 13,
 			mapTypeId: 'roadmap'
 		});
@@ -145,12 +163,12 @@ export class AddNewSportscenterComponent implements OnInit {
 		// Create the search box and link it to the UI element.
 		var input = document.getElementById('pac-input');
 		var searchBox = new google.maps.places.SearchBox(input);
-		map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+		// map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
 		// Bias the SearchBox results towards current map's viewport.
-		map.addListener('bounds_changed', function () {
-			searchBox.setBounds(map.getBounds());
-		});
+		// map.addListener('bounds_changed', function () {
+		// searchBox.setBounds(map.getBounds());
+		// });
 
 		var markers = [];
 		// Listen for the event fired when the user selects a prediction and retrieve
@@ -206,6 +224,12 @@ export class AddNewSportscenterComponent implements OnInit {
 				}
 			});
 			map.fitBounds(bounds);
+		});
+		google.maps.event.addDomListener(input, 'keydown', function (e) {
+			if (e.keyCode == 13) {
+				e.preventDefault();
+				console.log("prevented default");
+			}
 		});
 
 	}

@@ -32,6 +32,10 @@ p {
     padding: 0px;
 }
 
+a {
+    text-decoration: none;
+}
+
 .container {
     width: 932px;
     margin: auto;
@@ -66,40 +70,83 @@ button:disabled {
     opacity: 0.7;
 }
 
+button {
+    border-radius: 4px !important;
+    -webkit-border-radius: 4px !important;
+    -moz-border-radius: 4px !important;
+    box-shadow: none !important;
+}
+
+md-option img.thumb-circle {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin: 0 10px 0 0;
+}
+
 .mat-ink-bar {
     background-color: #fff !important;
-    bottom:10px !important;
+    bottom: 5px !important;
 }
 
 .mat-sidenav-focus-trap>.cdk-focus-trap-content {
-    width:250px;
+    width: 250px;
+}
+
+.register-formbox .mat-input-wrapper {
+    margin: 1em 0 0px;
+}
+
+.clearfix:after {
+    visibility: hidden !important;
+    display: block !important;
+    font-size: 0 !important;
+    content: " " !important;
+    clear: both !important;
+    height: 0 !important;
+}
+
+.clearfix {
+    display: inline-block !important;
 }
 
 
+/* start commented backslash hack \*/
 
+.clearfix {
+    display: block !important;
+}
+
+
+/****  Popup CSS  *****/
+
+.mat-menu-content {
+    padding: 10px 20px;
+}
 
 @media screen and (max-width:991px) {
     .container {
-        width:100%;
+        width: 100%;
     }
-    
-    
 }
 
 @media screen and (max-width:959px) {
-      .mobilemenu .mat-list-item-content { font-size: 14px !important; cursor:pointer; }
-    
+    .mobilemenu .mat-list-item-content {
+        font-size: 14px !important;
+        cursor: pointer;
+        color: #9a9a9a;
+    }
 }
 
 @media screen and (max-width:599px) {
-    .detail-listing .mat-list-item-content { height:auto !important; padding:5px !important; }
-     
-    
-} 
+    .detail-listing .mat-list-item-content {
+        height: auto !important;
+        padding: 5px !important;
+    }
+}
 
-
-
-@import '~@angular/material/core/theming/all-theme';
+@import '~@angular/material/theming';
 // Plus imports for other components in your app.
 // Include the base styles for Angular Material core. We include this here so that you only
 // have to load a single css file for Angular Material in your app.

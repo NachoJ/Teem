@@ -4,233 +4,138 @@
     width: 100%;
 }
 
-.addsportcenter {
-    align-content: center;
-    text-align: left;
-    margin-bottom: 20px;
-    background-color: #f4f4f4;
-    padding: 15px 25px;
-}
-
-/****  Title CSS  *****/
-.title-list-items-text {
-    color: #c61315;
-    font-weight: bold;
-    margin-bottom: 2px;
-    display: block;
-    vertical-align: middle;
-    padding:5px 0px 10px;
-    position: relative;
-    font-style:italic;
-    text-transform: uppercase;
-    margin-bottom:15px;
-}
-.title-list-items-text:after {
-    position: absolute;
-    content: "";
-    left:0;
-    right:0;
-    bottom:0;
-    background: #c61315;
-    height:2px;
-    width:100%;
-    display: block;
-}
-.title-list-items-text i {
-    display: inline-block;
-    vertical-align: middle;
-}
-/**************/
-
-.mat-input-container {
-    width:100%;
-}
-.form-group {
-    position: relative;
-}
-p.error-message {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-}
-
-
-
-
-
-
-
-
-
-
-/****  Google AutoComplteete CSS  *****/
-
-form {
-    align-content: center;
-    text-align: center;
-    padding-right: 15px;
-}
-
-#map {
-    padding-left: 15px;
-    height: 300px;
-    width: 100%;
-    align-content: center;
-    text-align: center;
-}
-
-#description {
-    font-family: Roboto;
-    font-size: 15px;
-    font-weight: 300;
-}
-
-#infowindow-content .title {
-    font-weight: bold;
-}
-
-#infowindow-content {
-    display: none;
-}
-
-#map #infowindow-content {
-    display: inline;
-}
-
-.pac-card {
-    margin: 10px 10px 0 0;
-    border-radius: 2px 0 0 2px;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    outline: none;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    background-color: #fff;
-    font-family: Roboto;
-}
-
-#pac-container {
-    padding-bottom: 12px;
-    margin-right: 12px;
-}
-
-.pac-controls {
-    display: inline-block;
-    padding: 5px 11px;
-}
-
-.pac-controls label {
-    font-family: Roboto;
-    font-size: 13px;
-    font-weight: 300;
-}
-
-#pac-input {
-        background-color: #fff;
-    font-family: Roboto;
-    font-size: 12px;
-    font-weight: 300;
-    margin-left: 12px;
-    padding: 0 11px 0 13px;
-    text-overflow: ellipsis;
-    height: 30px;
-    top: 10px !important;
-    left:auto !important;
-    right: 10px !important;
-}
-
-
-#pac-input:focus {
-    border-color: #4d90fe;
-}
-
-#title {
-    color: #fff;
-    background-color: #4d90fe;
-    font-size: 25px;
-    font-weight: 500;
-    padding: 6px 12px;
-}
-
-#target {
-    width: 345px;
-}
-
-.register-form {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.5);
-    -webkit-transition: all linear 0.5s;
-    transition: all linear 0.5s;
-    text-align: center;
-}
- 
-.error-message {
-    font-size: 11px;
-    margin-left: 30px;
-    color: #c61315;
-    font-weight: bold;
-}
-
-.md-button-register-form {
-    width: auto;
-    background-color: #c61315;
-    color: #fff;
-    margin-bottom: 0px;
-    text-align: center;
-    padding:0px 60px;
-    margin-top:15px;
-    box-shadow: none;
-    text-transform: uppercase;
-    font-weight: normal;
-}
-
-.mat-fab:not([disabled]):active, .mat-mini-fab:not([disabled]):active, .mat-raised-button:not([disabled]):active {
-    box-shadow: none;
-}
-
-.md-button-register-form-text {
-    width: auto;
-    font-size: 12px;
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
-
-.info-container-button-reg-form {
-    margin-top: 40px;
-    margin-bottom: 20px;
-}
-
-.md-button-forgotten-pass {
-    text-transform: capitalize !important;
-    margin: 6px 8px;
-}
-
-.md-input-container .md-input {
-    border-width: 0px;
-}
-
-.mat-fab,
-.mat-mini-fab {
-    background-color: transparent;
-    color: transparent;
-}
-
-.md-icon-button {
-    margin: 0 6px;
-    height: 40px;
-    min-width: 0;
-    line-height: 24px;
-    padding: 8px;
-    width: 40px;
-    border-radius: 50%;
-}
-
-
-@media screen and (max-width:599px) {
-    .addsportcenter {padding:15px;}
-    form { padding-right: 0; margin-bottom: 30px; }    
+te-add-new-sportscenter {
+    .addsportcenter {
+        align-content: center;
+        text-align: left;
+        margin-bottom: 20px;
+        background-color: #f4f4f4;
+        padding: 10px 30px 20px;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+    }
+    /****  Title CSS  *****/
+    .title-list-items {
+        padding:0px;    
+    }
+    .title-list-items-text {
+        color: #c61315;
+        font-weight: bold;
+        margin-bottom: 2px;
+        display: block;
+        vertical-align: middle;
+        padding: 5px 0px 10px;
+        position: relative;
+        font-style: italic;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+    }
+    .title-list-items-text:after {
+        position: absolute;
+        content: "";
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #c61315;
+        height: 2px;
+        width: 100%;
+        display: block;
+    }
+    .title-list-items-text i {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    /**************/
+    form {
+        align-content: center;
+        text-align: center;
+    }
+    .mat-input-underline {
+        display: none;
+    }
+    .mat-input-wrapper {
+        margin: 0px !important;
+        padding: 0px !important;
+    }
+    .mat-input-container {
+        width: 100%;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        padding: 8px 15px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: #333;
+        height: 35px;
+    }
+    .mat-input-container:focus {
+        outline: none;
+        border-color: #c61315;
+    }
+    .form-group {
+        position: relative;
+        margin-bottom: 15px;
+    }
+    .form-group label {
+        font-size: 14px;
+        color: #666;
+    }
+    .md-button-register-form {
+        width: auto;
+        background-color: #c61315;
+        color: #fff !important;
+        margin-bottom: 0px;
+        text-align: center;
+        padding: 3px 60px;
+        box-shadow: none;
+        text-transform: uppercase;
+        font-weight: normal;
+    }
+    .error-message {
+        font-size: 11px;
+        margin-top: 5px;
+        color: #c61315;
+        font-weight: bold;
+        width: 100%;
+        text-align: right;
+    }
+    /****  Google AutoComplteete CSS  *****/
+    .mapblock {
+        margin-top: 30px;
+    }
+    #map {
+        width: 100%;
+        height: 300px;
+        align-content: center;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    .form-group.address label {
+        position: absolute;
+        top: 9px;
+        left: 15px;
+    }
+    .form-group.address label:after {
+        display: block;
+        content: "";
+        width: 1px;
+        height: 15px;
+        background: grey;
+        position: absolute;
+        right: -15px;
+        top: 0;
+    }
+    .form-group.address .mat-input-container {
+        padding: 8px 15px 8px 95px;
+    }
     
+    
+    @media screen and (max-width:599px) {
+       form {
+        padding-right: 0;
+        margin-bottom: 30px;
+    }
+   .addsportcenter {padding: 10px 15px 20px;}
+    label{margin: 0  0 10px 0;}
 }
-
-
+}
 

@@ -6,39 +6,64 @@
     <div class="title-list-items">
         <p class="title-list-items-text"> <i class="material-icons">control_point</i> add-new-sportscenter works!</p>
     </div>
-    <div fxLayout.xs="column" fxLayout="row">
+    <div fxLayout.xs="column" fxLayout="column">
         <form fxFlex.xs="100" fxFlex="40" [formGroup]="sportsCenterFormGroup">
             <div *ngIf="error" class="error"> {{error}} </div>
             <div *ngIf="success" class="success"> {{success}} </div>
-            <input #myaddress id="pac-input" class="controls" formControlName="address" type="text" placeholder="Search Box" [(ngModel)]="address">
-            <div class="form-group">
-                <md-input-container class="md-block register-form-text-area" md-no-float>
-                    <input mdInput class="user-text-label" formControlName="name" [(ngModel)]="name" placeholder="Name" required> </md-input-container>
+            <div fxLayout="column" class="form-group">
+                <div fxLayout="row" fxLayout.xs="column">
+                    <label for="" fxLayoutAlign="left center" fxFlex="15">Name</label>
+                    <md-input-container fxFlex="85" class="md-block register-form-text-area" md-no-float>
+                        <input mdInput class="user-text-label" formControlName="name" [(ngModel)]="name" required> </md-input-container>
+                </div>
                 <div *ngIf="sportsCenterFormGroup.controls.name.invalid && sportsCenterFormGroup.controls.name.touched">
-                    <div ng-message="required" fxLayoutAlign="start start">
+                    <div ng-message="required" fxFlex="100" fxLayoutAlign="right start">
                         <p class="error-message">Email is invalid</p>
                     </div>
                 </div>
             </div>
-            <div class="form-group">
-                <md-input-container class="md-block register-form-text-area" md-no-float>
-                    <input mdInput class="user-text-label" formControlName="phone" [(ngModel)]="phone" placeholder="Phone" required> </md-input-container>
+            <div fxLayout="column" class="form-group">
+                <div fxLayout="row" fxLayout.xs="column">
+                    <label for="" fxLayoutAlign="left center" fxFlex="15">Phone</label>
+                    <md-input-container fxFlex="85" class="md-block register-form-text-area" md-no-float>
+                        <input mdInput class="user-text-label" formControlName="phone" [(ngModel)]="phone" required> </md-input-container>
+                </div>
                 <div *ngIf="sportsCenterFormGroup.controls.phone.invalid && sportsCenterFormGroup.controls.phone.touched">
-                    <div ng-message="required" fxLayoutAlign="start start">
+                    <div ng-message="required" fxFlex="100" fxLayoutAlign="right start">
                         <p class="error-message">Phone is invalid</p>
                     </div>
                 </div>
             </div>
-            <div class="form-group">
-                <md-input-container class="md-block register-form-text-area" md-no-float>
-                    <input mdInput class="user-text-label" formControlName="description" [(ngModel)]="description" placeholder="Description" required> </md-input-container>
+            <div fxLayout="column" class="form-group">
+                <div fxLayout="row" fxLayout.xs="column">
+                    <label for="" fxLayoutAlign="left center" fxFlex="15">Description</label>
+                    <md-input-container fxFlex="85" class="md-block register-form-text-area" md-no-float>
+                        <input mdInput class="user-text-label" formControlName="description" [(ngModel)]="description" required> </md-input-container>
+                </div>
                 <div *ngIf="sportsCenterFormGroup.controls.description.invalid && sportsCenterFormGroup.controls.description.touched">
-                    <div ng-message="required" fxLayoutAlign="start start">
+                    <div ng-message="required" fxFlex="100" fxLayoutAlign="right start">
                         <p class="error-message">Description is invalid</p>
                     </div>
                 </div>
             </div>
-            <div *ngIf="message"> {{message}} </div>
+            <div fxLayout="row" class="form-group" fxLayout.xs="column">
+                <label for="" fxLayoutAlign="left center" fxFlex="15">Search Area</label>
+                <md-input-container fxFlex="85">
+                    <input mdInput #myaddress id="pac-input" class="controls" formControlName="address" type="text" [(ngModel)]="address"> </md-input-container>
+            </div>
+            <!--
+            <div fxLayout="column" class="form-group address">
+                <div fxLayout="row" fxFlex="100">
+                   <label for="">Address</label>
+                    <md-input-container fxFlex="100" class="md-block" md-no-float>
+                        <input mdInput class="user-text-label">  
+                    </md-input-container>
+                </div>
+                
+            </div>
+-->
+            <div fxFlex="100" id="map"></div>
+            <!--<div *ngIf="message"> {{message}} </div>-->
             <!-- submit button -->
             <button *ngIf="!sub" md-raised-button class="md-button-register-form" [disabled]="!sportsCenterFormGroup.valid" (click)="addSportsCenter()" type="submit">
                 <p class="md-button-register-form-text"><em>Submit</em> </p>
@@ -52,6 +77,5 @@
                 </button>
             </div>
         </form>
-        <div fxFlex.xs="100" fxFlex="60" id="map"></div>
     </div>
 </div>

@@ -1,0 +1,155 @@
+app-settings {
+    .example-section {
+        display: flex;
+        align-content: center;
+        align-items: center;
+    }
+    .text-danger {
+        color: red;
+    }
+    .success {
+        text-align: center;
+        color: green;
+        font-weight: bold
+    }
+    .error {
+        text-align: center;
+        color: red;
+        font-weight: bold
+    }
+    .main {
+        margin-bottom: 20px;
+        background-color: #f4f4f4;
+        padding: 10px 30px 20px;
+        position: relative;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+		height: 100%;
+    }
+    .error {
+        position: absolute;
+        bottom: 10px;
+        font-size: 13px;
+        text-align: center;
+        left: 20px;
+        right: 20px;
+        color: #c61315;
+    }
+    .success {
+        position: absolute;
+        bottom: 10px;
+        font-size: 13px;
+        text-align: center;
+        left: 20px;
+        right: 20px;
+        color: green;
+    }
+    /****  Title CSS  *****/
+    .title-list-items-text {
+        color: #c61315;
+        font-weight: bold;
+        margin-bottom: 2px;
+        display: block;
+        vertical-align: middle;
+        padding: 5px 0px 10px;
+        position: relative;
+        font-style: italic;
+        text-transform: uppercase;
+        text-align: left;
+    }
+    .title-list-items-text:after {
+        position: absolute;
+        content: "";
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #c61315;
+        height: 2px;
+        width: 100%;
+        display: block;
+    }
+    .title-list-items-text i {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 3px;
+        font-size: 22px;
+    }
+    .title-list-items {
+        position: relative;
+        margin-bottom: 20px;
+    }
+    .title-list-items button {
+        background: #c61315;
+        color: #fff;
+        padding: 0px 30px;
+        box-shadow: none;
+        font-weight: normal;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+    /****  Form CSS  *****/
+    form {
+        align-content: center;
+        text-align: center;
+    }
+    .mat-input-underline {
+        display: none;
+    }
+    .mat-input-wrapper {
+        margin: 0px !important;
+        padding: 0px !important;
+    }
+    .mat-input-container,
+    .mat-select {
+        width: 100%;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        padding: 8px 15px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: #333;
+        height: 35px;
+    }
+    .mat-select-trigger {
+        height: 34px;
+        font-size: 14px;
+        color: #333;
+    }
+    .mat-select {
+        padding: 0px 15px;
+    }
+    .mat-input-container:focus {
+        outline: none;
+        border-color: #c61315;
+    }
+    .form-group {
+        position: relative;
+        margin-bottom: 15px;
+        text-align: left;
+    }
+    label {
+        font-size: 14px;
+        color: #666;
+    }
+    .form-group.date .mat-input-container {
+        padding: 0px 15px;
+    }
+    .mat-ink-bar {
+        background-color: #c62828 !important;
+        bottom: 0px !important;
+    }
+    .main-padding {
+        padding: 20px 0 0;
+    }
+    // media query start ------------------------------------------------------------
+    @media screen and (max-width:599px) {
+        .mat-tab-link {
+            padding: 0 5px;
+            font-size: 13px;
+        }
+        .main {
+            padding: 10px 15px 20px;
+        }
+    }
+}

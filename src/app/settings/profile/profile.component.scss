@@ -1,0 +1,271 @@
+app-profile {
+    .main {
+        height: 600px;
+        background-color: none;
+    }
+    .example-section {
+        display: flex;
+        align-content: center;
+        align-items: center;
+    }
+    .example-margin {}
+    .text-danger {
+        color: red;
+    }
+    .title-list-items {}
+    .title-list-items-text {
+        color: #c61315;
+        font-weight: bold;
+    }
+    .success {
+        text-align: center;
+        color: green;
+        font-weight: bold
+    }
+    .error {
+        text-align: center;
+        color: red;
+        font-weight: bold
+    }
+    .creatmach-wrapper {
+        margin-bottom: 20px;
+        background-color: #f4f4f4;
+        padding: 20px 30px;
+        position: relative;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+    }
+    .error {
+        position: absolute;
+        bottom: 10px;
+        font-size: 13px;
+        text-align: center;
+        left: 20px;
+        right: 20px;
+        color: #c61315;
+    }
+    .error-message {
+        font-size: 11px;
+        margin-top: 5px;
+        color: #c61315;
+        font-weight: bold;
+        width: 100%;
+        text-align: right;
+    }
+    .success {
+        position: absolute;
+        bottom: 10px;
+        font-size: 13px;
+        text-align: center;
+        left: 20px;
+        right: 20px;
+        color: green;
+    }
+    .title-list-items {
+        position: relative;
+    }
+    .title-list-items button {
+        background: #c61315;
+        color: #fff;
+        padding: 0px 30px;
+        box-shadow: none;
+        font-weight: normal;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+    /****  Title CSS  *****/
+    .title-list-items-text {
+        color: #c61315;
+        font-weight: bold;
+        margin-bottom: 2px;
+        display: block;
+        vertical-align: middle;
+        padding: 5px 0px 10px;
+        position: relative;
+        font-style: italic;
+        text-transform: uppercase;
+        text-align: left;
+    }
+    .title-list-items-text:after {
+        position: absolute;
+        content: "";
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #c61315;
+        height: 2px;
+        width: 100%;
+        display: block;
+    }
+    .title-list-items-text i {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 3px;
+        font-size: 22px;
+    }
+    /****  Form CSS  *****/
+    form {
+        align-content: center;
+        text-align: center;
+    }
+    .mat-input-underline {
+        display: none;
+    }
+    .mat-input-wrapper {
+        margin: 0px !important;
+        padding: 0px !important;
+    }
+    .description .mat-input-container {
+        height: auto;
+        padding: 0px;
+    }
+    .description .mat-input-container textarea {
+        height: 80px;
+        padding: 8px 15px;
+    }
+    .clearfix:after {
+        visibility: hidden !important;
+        display: block !important;
+        font-size: 0 !important;
+        content: " " !important;
+        clear: both !important;
+        height: 0 !important;
+    }
+    .clearfix {
+        display: inline-block !important;
+    }
+    /* start commented backslash hack \*/
+    .clearfix {
+        display: block !important;
+    }
+    .mat-input-container,
+    .mat-select {
+        width: 100%;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        padding: 8px 15px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: #333;
+        height: 35px;
+    }
+    .mat-select-trigger {
+        height: 34px;
+        font-size: 14px;
+        color: #333;
+    }
+    .mat-select {
+        padding: 0px 15px;
+    }
+    .mat-input-container:focus {
+        outline: none;
+        border-color: #c61315;
+    }
+    .mat-checkbox-btn {
+        margin: 0 15px 0 0;
+    }
+    .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+    .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+        background-color: #666;
+    }
+    .form-group {
+        position: relative;
+        margin-bottom: 15px;
+        text-align: left;
+    }
+    label {
+        font-size: 14px;
+        color: #666;
+    }
+    .form-group.date .mat-input-container {
+        padding: 0px 15px;
+    }
+    .creatematch {
+        background: #72d572;
+        color: #fff;
+        padding: 3px 50px;
+        box-shadow: none;
+        font-size: 14px;
+        width: 210px;
+        margin: 20px auto 0;
+        text-transform: uppercase;
+        font-style: italic;
+    }
+    .user-pic-btn {
+        height: 130px;
+        width: 130px;
+        background: transparent;
+        padding: 0;
+        border-radius: 50% !important;
+        margin: 0 auto;
+        position: relative;
+        transition: 0.3s;
+        -webkit-transition: 0.3s;
+        -moz-transition: 0.3s;
+    }
+    .edit-img {
+        // aa file missing che
+        //hamna sudhi aavti ti
+        background: url('../../../assets/img/edit.png') no-repeat;
+        width: 30px;
+        height: 30px;
+        background-size: contain;
+        position: absolute;
+        left: 50%;
+        z-index: 9999;
+        top: 50%;
+        background-position: center center;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+    }
+    .overlay {
+        opacity: 0;
+        ;
+        transition: 0.3s;
+        -webkit-transition: 0.3s;
+        -moz-transition: 0.3s;
+        border-radius: 50%;
+    }
+    .user-pic-btn:hover .overlay {
+        opacity: 1;
+        background: rgba(0, 0, 0, 0.5);
+        overflow: auto;
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        border-radius: 50%;
+    }
+    .user-img {
+        height: 130px;
+        width: 130px;
+        background: #999;
+        padding: 0;
+        border-radius: 50% !important;
+        margin: 0 auto;
+        object-fit: contain;
+        object-position: center center;
+    }
+    .text-center {
+        text-align: center;
+    }
+    .mat-button-ripple {
+        border-radius: 50%;
+    }
+    
+    
+// media query start ------------------------------------------------------------
+    
+    
+    @media screen and (max-width:599px) {
+        
+        .form-fileds{margin-top:15px;}
+        label {margin: 0 0 12px 0;}
+        .example-section{display: block;}
+        
+    }
+    
+}

@@ -3,12 +3,61 @@
     height: 100%;
     width: 100%;
     background-color: #f5f5f5;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
 }
+
+/****  Title CSS  *****/
+.title-block {
+    width:100%;
+    overflow: auto;
+    position: relative;
+    text-align: left;
+}
+.title-block .title-list-items-text {
+    color: #c61315;
+    font-weight: bold;
+    margin-bottom: 2px;
+    display: block;
+    vertical-align: middle;
+    padding:5px 0px 10px;
+    position: relative;
+    font-style:italic;
+    text-transform: uppercase;
+}
+.title-block .title-list-items-text:after {
+    position: absolute;
+    content: "";
+    left:0;
+    right:0;
+    bottom:0;
+    background: #c61315;
+    height:2px;
+    width:100%;
+    display: block;
+}
+.title-block .title-list-items-text i {
+    display: inline-block;
+    vertical-align: middle;
+}
+.title-block button.mat-raised-button {
+    background: #c61315;
+    color: #fff;
+    padding: 0px 30px;
+    box-shadow: none;
+    font-weight: normal;
+    position: absolute;
+    bottom: 2px;
+    right: 0;
+}
+/********/
+
 
 .sportcenterblock {
     text-align: center;
     align-content: center;
-    padding:50px 30px;
+    padding:10px 30px;
 }
 
 .sportcenterblock h2 {
@@ -19,13 +68,7 @@
     line-height: 45px;
 }
 
-button.mat-raised-button {
-    background: #72d572;
-    color: #fff;
-    padding: 5px 0px;
-    box-shadow: none;
-    font-weight: normal;
-}
+
 .mat-fab:not([disabled]):active, .mat-mini-fab:not([disabled]):active, .mat-raised-button:not([disabled]):active {
     box-shadow: none;
 }
@@ -34,31 +77,41 @@ button.mat-raised-button {
 .sports-centers {
     width:100%;
     overflow: auto;
+    margin-top: 10px;
 }
 
 .sports-centers ul li {
-    padding:5px 0px 5px 20px;
-    border-bottom:1px solid #eae8e8;
+    padding:6px 0px 6px 20px;
 }
-.sports-centers ul li:first-child {
-    border-top:1px solid #eae8e8;
-}
-.sports-centers ul li:last-child {
-    border:none;
+.sports-centers ul li:nth-child(2n + 1) {
+    background: #e9e9e9;
 }
 
 .sports-centers ul li a {
+    color: #848484;
+    font-style: italic;
+    font-weight: 100;
+    min-width: auto;
     box-shadow: none;
-    background: #e8e8e8;
-    text-transform: capitalize;
-    color: #666;
-    font-weight: normal;
+    background: rgba(0,0,0,0.05);
+    text-transform: uppercase;
+    font-size: 13px;
+    border-radius:4px;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+}
+
+.sports-centers ul li a .material-icons {
+    font-size:20px;
 }
 
 
 @media screen and (max-width:599px) {
     .sportcenterblock { padding: 25px 20px; }
     .sportcenterblock h2 { font-size: 21px; text-align: center; margin-bottom: 20px; }
+    .title-block button.mat-raised-button{position: relative; bottom: 0;}
+    .sports-centers ul li a{padding: 0;background: transparent;}
+
     
     
 }

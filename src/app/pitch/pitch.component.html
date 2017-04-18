@@ -1,9 +1,14 @@
 <div fxLayout="column" class="addpitchwrapper">
     <!-- error -->
-    <div *ngIf="error" class="error"> {{error}} </div>
-    <div *ngIf="success" class="success"> {{success}} </div>
-    <div fxFlex="100" class="add-btn">
-        <button md-raised-button (click)="addMore()">Add more pitches</button>
+    <div *ngIf="error" class="error">
+        <p>{{error}}</p>
+    </div>
+    <div *ngIf="success" class="success">
+        <p>{{success}}</p>
+    </div>
+    <div fxFlex="100" class="title-list-items">
+        <p class="title-list-items-text"> <i class="material-icons">flag</i> Fields</p>
+        <button md-raised-button (click)="addMore()">Add Field</button>
     </div>
     <div *ngFor="let p of pitches;let i = index" class="single-form">
         <form [formGroup]="pitchFormGroupArray[i]" (click)="formChanged()" (keyup)="formChanged()" (change)="formChanged()" fxLayout="column">
@@ -12,73 +17,87 @@
                 <md-icon>close</md-icon>
             </button>
             <div fxLayout="column" class="form-group">
-                <md-input-container class="md-block">
-                    <input mdInput class="user-text-label" formControlName="name" [(ngModel)]="p.name" placeholder="Name" required> </md-input-container>
-                <div *ngIf="pitchFormGroupArray[i].controls.name.invalid && pitchFormGroupArray[i].controls.name.touched" fxFlex="100" fxLayoutAlign="right center">
-                    <div ng-message="required">
+                <div fxLayout="row" fxFlex="100" fxLayout.xs="column">
+                    <label for="" fxLayoutAlign="left center" fxFlex="15" fxFlex.xs="20">Name</label>
+                    <md-input-container class="md-block" fxFlex.xs="80">
+                        <input mdInput class="user-text-label" formControlName="name" [(ngModel)]="p.name" required> </md-input-container>
+                </div>
+                <div *ngIf="pitchFormGroupArray[i].controls.name.invalid && pitchFormGroupArray[i].controls.name.touched">
+                    <div ng-message="required" fxFlex="100" fxLayoutAlign="right start">
                         <p class="error-message">Name is invalid</p>
                     </div>
                 </div>
             </div>
             <!-- Covering -->
-            <div fxLayout="column" fxFlex="100" class="groundoption">
-                <h2>Covering</h2>
-                <md-radio-group class="md-block" formControlName="covering" [(ngModel)]="p.covering" aria-label="Covering" required>
-                    <md-radio-button value="Outdoor">Outdoor</md-radio-button>
-                    <md-radio-button value="Indoor">Indoor</md-radio-button>
-                    <md-radio-button value="Outdoor/Indoor">Outdoor/Indoor</md-radio-button>
-                </md-radio-group>
-                <div *ngIf="pitchFormGroupArray[i].controls.covering.invalid">
-                    <div ng-message="required">
+            <div fxLayout="column" class="form-group covering">
+                <div fxLayout="row" fxFlex="100" fxLayout.xs="column">
+                    <label for="" fxLayoutAlign="left center" fxFlex="15" fxFlex.xs="20">Covering</label>
+                    <md-radio-group fxLayoutAling="left center" fxFlex="85" fxFlex.xs="80" class="md-block" formControlName="covering" [(ngModel)]="p.covering" aria-label="Covering" required>
+                        <md-radio-button value="Outdoor">Outdoor</md-radio-button>
+                        <md-radio-button value="Indoor">Indoor</md-radio-button>
+                        <md-radio-button value="Outdoor/Indoor">Outdoor/Indoor</md-radio-button>
+                    </md-radio-group>
+                </div>
+                <div *ngIf="pitchFormGroupArray[i].controls.covering.invalid && pitchFormGroupArray[i].controls.covering.touched">
+                    <div ng-message="required" fxFlex="100" fxLayoutAlign="right start">
                         <p class="error-message">Covering is invalid</p>
                     </div>
                 </div>
             </div>
             <!-- Lights -->
-            <div fxLayout="column" fxFlex="100" class="groundoption">
-                <h2>Lights</h2>
-                <md-radio-group class="md-block" formControlName="lights" [(ngModel)]="p.lights" required>
-                    <md-radio-button [value]="true">Yes</md-radio-button>
-                    <md-radio-button [value]="false">No</md-radio-button>
-                </md-radio-group>
-                <div *ngIf="pitchFormGroupArray[i].controls.lights.invalid ">
-                    <div ng-message="required" fxLayoutAlign="start start">
+            <div fxLayout="column" class="form-group lights">
+                <div fxLayout="row" fxFlex="100" fxLayout.xs="column">
+                    <label for="" fxLayoutAlign="left center" fxFlex="15" fxFlex.xs="20">Lights</label>
+                    <md-radio-group fxFlex="85" fxFlex.xs="80" class="md-block" formControlName="lights" [(ngModel)]="p.lights" required>
+                        <md-radio-button [value]="'yes'">Yes</md-radio-button>
+                        <md-radio-button [value]="'no'">No</md-radio-button>
+                    </md-radio-group>
+                </div>
+                <div *ngIf="pitchFormGroupArray[i].controls.lights.invalid && pitchFormGroupArray[i].controls.lights.touched">
+                    <div ng-message="required" fxFlex="100" fxLayoutAlign="right start">
                         <p class="error-message">Lights is invalid</p>
                     </div>
                 </div>
             </div>
-            <div fxLayout="row" class="choosesurface">
-                <!-- Surface -->
-                <div fxFlex="33" class="form-group">
-                    <md-select class="md-block" formControlName="surface" [(ngModel)]="p.surface" placeholder="Surface" required>
+            <!-- Surface -->
+            <div fxLayout="column" class="form-group">
+                <div fxLayout="row" fxFlex="100" fxLayout.xs="column">
+                    <label for="" fxLayoutAlign="left center" fxFlex="15" fxFlex.xs="20">Surface</label>
+                    <md-select fxFlex="100" fxFlex.xs="80" class="md-block" formControlName="surface" [(ngModel)]="p.surface" required>
                         <md-option *ngFor="let so of surfaceOptions" [value]="so.value"> {{ so.viewValue }} </md-option>
                     </md-select>
-                    <div *ngIf="pitchFormGroupArray[i].controls.surface.invalid ">
-                        <div ng-message="required" fxLayoutAlign="start start">
-                            <p class="error-message">Surface is invalid</p>
-                        </div>
+                </div>
+                <div *ngIf="pitchFormGroupArray[i].controls.surface.invalid && pitchFormGroupArray[i].controls.surface.touched">
+                    <div ng-message="required" fxFlex="100" fxLayoutAlign="right start">
+                        <p class="error-message">Surface is invalid</p>
                     </div>
                 </div>
-                <!-- Sports -->
-                <div fxLayoutAlign="start start" fxFlex="33" class="form-group">
-                    <md-select class="md-block" formControlName="sports" [(ngModel)]="p.sport" placeholder="Sport" required>
+            </div>
+            <!-- Sports -->
+            <div fxLayout="column" class="form-group">
+                <div fxLayout="row" fxFlex="100" fxLayout.xs="column">
+                    <label for="" fxLayoutAlign="left center" fxFlex="15" fxFlex.xs="20">Sports</label>
+                    <md-select fxFlex="100" fxFlex.xs="80" class="md-block" formControlName="sports" [(ngModel)]="p.sport" required>
                         <md-option *ngFor="let sport of sportOptions" [value]="sport.sportkey"> {{ sport.sporttitle }} </md-option>
                     </md-select>
-                    <div *ngIf="pitchFormGroupArray[i].controls.sports.invalid">
-                        <div ng-message="required" fxLayoutAlign="start start">
-                            <p class="error-message">Sports is invalid</p>
-                        </div>
+                </div>
+                <div *ngIf="pitchFormGroupArray[i].controls.sports.invalid && pitchFormGroupArray[i].controls.sports.touched" style="width:100%;">
+                    <div ng-message="required" fxFlex="100" fxLayoutAlign="right start">
+                        <p class="error-message">Sports is invalid</p>
                     </div>
                 </div>
-
-                <!-- Price -->
-                <div fxFlex="33" class="form-group price">
-                    <md-input-container class="md-block">
-                        <input mdInput class="user-text-label" formControlName="price" [(ngModel)]="p.price" placeholder="Price" required> </md-input-container>
-                    <div *ngIf="pitchFormGroupArray[i].controls.price.invalid && pitchFormGroupArray[i].controls.price.touched">
-                        <div ng-message="required" fxLayoutAlign="start start">
-                            <p class="error-message">Price is invalid</p>
-                        </div>
+            </div>
+            <!-- Price -->
+            <div fxLayout="column" class="form-group price">
+                <div fxLayout="row" fxFlex="100" fxLayout.xs="column">
+                    <label for="" fxLayoutAlign="left center" fxFlex="15" fxFlex.xs="20">Price</label>
+                    <md-input-container fxFlex="100" fxFlex.xs="80" class="md-block">
+                        <span></span>
+                        <input mdInput class="user-text-label" formControlName="price" [(ngModel)]="p.price" required> </md-input-container>
+                </div>
+                <div *ngIf="pitchFormGroupArray[i].controls.price.invalid && pitchFormGroupArray[i].controls.price.touched">
+                    <div ng-message="required" fxFlex="100" fxLayoutAlign="right start">
+                        <p class="error-message">Price is invalid</p>
                     </div>
                 </div>
             </div>

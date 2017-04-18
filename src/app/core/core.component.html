@@ -1,28 +1,26 @@
 <md-sidenav-container class="example-container" fxLayout="column">
     <md-sidenav #sidenav>
-        <div fxLayout="column" fxFlex="100" class="side_bar_inner"> <img src="/assets/img/sidebar_photo.png">
-            <h4>Miguel Martinez</h4>
-            <p> <i class="material-icons user-place-icon">place</i> Madrid, Spain</p>
+        <div fxLayout="column" fxFlex="100" class="side_bar_inner">
+            <div class="header_mobile"> <img src="{{ profileImage }}">
+                <h4>{{ user.firstname}} {{ user.lastname }}</h4>
+                <p> <i class="material-icons user-place-icon">place</i> {{ user.city }}</p>
+            </div>
             <div class="ball_box">
-                <a href="#"><img src="/assets/img/b01.png"></a>
-                <a href="#"><img src="/assets/img/b02.png"></a>
-                <a href="#"><img src="/assets/img/b03.png"></a>
+                <a href="#" *ngIf="soccer"><img src="/assets/img/b01.png"></a>
+                <a href="#" *ngIf="basketball"><img src="/assets/img/b02.png"></a>
+                <a href="#" *ngIf="paddle"><img src="/assets/img/b03.png"></a>
             </div>
-            <div class="link_box">
-                <button md-button routerLink="/match-create">New Match<i class="material-icons">keyboard_arrow_right</i></button>
-                <button md-button class="search">Find Match<i class="material-icons">search</i></button>
-            </div>
-            <md-list class="mobilemenu" *ngFor="let nl of navLinks">
-                <md-list-item>{{nl.title}}</md-list-item>
-            </md-list>
             <!--
-            <div class="mobilemenu">
-                <a md-tab-link> Home</a>
-                <a md-tab-link> Find match</a>
-                <a md-tab-link> Tournments</a>
-                <a md-tab-link> My sport center</a>
-            </div>
---></div>
+         <div class="link_box">
+    <button md-raised-button routerLink="/match-create" routerLinkActive="active">New Match<i class="material-icons">keyboard_arrow_right</i></button>
+    <button md-raised-button routerLink="/find-match" routerLinkActive="active" class="search">Find Match<i class="material-icons">search</i></button>
+</div>
+-->
+            <md-list class="mobilemenu" *ngFor="let nl of navMobileLinks">
+                <md-list-item (click)="sidenav.toggle()" routerLink="{{ nl.link }}"><i class="material-icons">{{nl.icon}}</i>{{nl.title}}</md-list-item>
+            </md-list>
+            <!--          <div class="mobilemenu"> <a md-tab-link> Home</a> <a md-tab-link> Find match</a> <a md-tab-link> Tournments</a> <a md-tab-link> My sport center</a> </div>-->
+        </div>
     </md-sidenav>
     <div class="example-sidenav-content">
         <md-toolbar fxFlex="100%" class="header-toolbar">
@@ -44,27 +42,29 @@
                         <div class="dropdown">
                             <a md-tab-link [mdMenuTriggerFor]="menu" class="userprofile"><img src="/assets/img/player-boy.png"></a>
                             <md-menu class="user-menu" #menu="mdMenu">
-                                <button md-menu-item disabled> <span>Profile</span> </button>
+                                <button md-menu-item routerLink="/settings/profile"> <span>Profile</span> </button>
                                 <button md-menu-item (click)="logout()"> <span>Logout</span> </button>
                             </md-menu>
                         </div>
                     </nav>
                 </div>
+                <div id="successmsg" [class.show]='successShow'>{{successmsg}}</div>
+                <div id="errormsg" [class.show]='erroShow'>{{errormsg}}</div>
             </section>
         </md-toolbar>
         <!--<te-nav-bar></te-nav-bar>-->
         <div fxLayout="row" fxLayoutAlign="start start" fxLayoutWrap="" fxFlex="100" fxFlex.xs="100" class="container homecontentwrapper">
-            <div fxLayout="column" fxFlex="20" class="side_bar_inner" fxHide.xs fxHide.sm> <img src="/assets/img/sidebar_photo.png">
-                <h4>Miguel Martinez</h4>
-                <p> <i class="material-icons user-place-icon">place</i> Madrid, Spain</p>
+            <div fxLayout="column" fxFlex="20" class="side_bar_inner" fxHide.xs fxHide.sm> <img src="{{ profileImage }}">
+                <h4>{{ user.firstname}} {{ user.lastname }}</h4>
+                <p> <i class="material-icons user-place-icon">place</i> {{ user.city }}</p>
                 <div class="ball_box">
-                    <a href="#"><img src="/assets/img/b01.png"></a>
-                    <a href="#"><img src="/assets/img/b02.png"></a>
-                    <a href="#"><img src="/assets/img/b03.png"></a>
+                    <a href="#" *ngIf="soccer"><img src="/assets/img/b01.png"></a>
+                    <a href="#" *ngIf="basketball"><img src="/assets/img/b02.png"></a>
+                    <a href="#" *ngIf="paddle"><img src="/assets/img/b03.png"></a>
                 </div>
                 <div class="link_box">
-                    <button md-button routerLink="/match-create">New Match<i class="material-icons">keyboard_arrow_right</i></button>
-                    <button md-button class="search">Find Match<i class="material-icons">search</i></button>
+                    <button md-button routerLinkActive="active" routerLink="/match-create">New Match<i class="material-icons">keyboard_arrow_right</i></button>
+                    <button md-button routerLinkActive="active" routerLink="/find-match" class="search">Find Match<i class="material-icons">search</i></button>
                 </div>
                 <div class="link_box"> </div>
             </div>

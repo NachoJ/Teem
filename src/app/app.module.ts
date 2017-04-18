@@ -1,3 +1,8 @@
+import { SettingsComponent } from './settings/settings.component';
+import { DatePickerDirective } from './shared/directive/datepicker.directive';
+import { AccountComponent } from './settings/account/account.component';
+import { UserProfileImageComponent } from './settings/user-profile-image/user-profile-image.component';
+import { ProfileComponent } from './settings/profile/profile.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -13,43 +18,63 @@ import { CoreModule } from './core/core.module';
 import { AuthModule } from './auth/auth.module';
 
 import { SharedModule } from './shared/shared.module';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent,HomeDialogResult,HomeDialogCancel } from './home/home.component';
 import { FindMatchComponent } from './find-match/find-match.component';
 import { TournamentsComponent } from './tournaments/tournaments.component';
 import { AddNewSportscenterComponent } from './add-new-sportscenter/add-new-sportscenter.component';
-import { MySportscenterComponent } from './my-sportscenter/my-sportscenter.component';
+import { MySportscenterComponent, DialogResult } from './my-sportscenter/my-sportscenter.component';
 import { PitchComponent } from './pitch/pitch.component';
 import { MatchCreateComponent } from './match-create/match-create.component';
+import { MatchDetailsComponent } from './match-details/match-details.component';
+import { NotificationComponent } from './settings/notification/notification.component';
+// import { DialogResult } from './my-sportscenter/DialogResult';
+
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    FindMatchComponent,
-    TournamentsComponent,
-    AddNewSportscenterComponent,
-    MySportscenterComponent,
-    PitchComponent,
-    MatchCreateComponent,
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    BrowserAnimationsModule,
-    MaterialModule.forRoot(),
-    FlexLayoutModule,
+	declarations: [
+		AppComponent,
+		HomeComponent,
+		FindMatchComponent,
+		TournamentsComponent,
+		AddNewSportscenterComponent,
+		MySportscenterComponent,
+		PitchComponent,
+		MatchCreateComponent,
+		ProfileComponent,
+		UserProfileImageComponent,
+		AccountComponent,
+		DatePickerDirective,
+		DialogResult,
+		MatchDetailsComponent,
+		SettingsComponent,
+		NotificationComponent,
+		HomeDialogResult,
+		HomeDialogCancel
+	],
+	entryComponents: [
+		UserProfileImageComponent,
+		DialogResult,
+		HomeDialogResult,
+		HomeDialogCancel,
+	],
+	imports: [
+		BrowserModule,
+		FormsModule,
+		HttpModule,
+		BrowserAnimationsModule,
+		MaterialModule.forRoot(),
+		FlexLayoutModule,
 
-    AppRoutingModule,
+		AppRoutingModule,
 
-    SharedModule.forRoot(),
+		SharedModule.forRoot(),
 
-    CoreModule,
-    AuthModule,
-  ],
-  exports: [
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+		CoreModule,
+		AuthModule,
+	],
+	exports: [
+	],
+	providers: [],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -91,14 +91,15 @@
 .datetime i {
     color: rgba(0,0,0,0.54);
 }
-.mat-button {
+.match-time button {
     color: #848484;
     font-style:italic;
     font-weight: 100;
     text-transform:uppercase;
+    background: rgba(0,0,0,0.05);
 }
-.mat-button:hover {
-    background: #dbdbdb;
+.match-time button :hover {
+    background: rgba(0,0,0,0.2);
 }
 
 .datetime i {

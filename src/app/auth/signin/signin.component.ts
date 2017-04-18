@@ -11,12 +11,12 @@ import { AuthService } from '../auth.service';
 })
 export class SigninComponent implements OnInit {
 
-  public email: string;
-  public password: string;
-  public error: string;
-  public success: string;
+  email: string;
+  password: string;
+  error: string;
+  success: string;
 
-  private sub: any;
+  sub: any;
 
   public userFormGroup: FormGroup;
 
@@ -62,7 +62,7 @@ export class SigninComponent implements OnInit {
     // console.log("password = " + this.password);
     let user = {
       'email': this.email,
-      'password': this.password
+      'encryptedpassword': this.password
     };
     this.authService.login(user)
       .subscribe(

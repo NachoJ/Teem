@@ -1,89 +1,272 @@
-.detail-box {
-    margin-bottom: 20px;
-    background-color: #f4f4f4;
-    padding: 10px 0px 0px;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-}
-
-.title-list-items {
-    width: 100%;
-    overflow: visible;
-    padding: 0px 30px;
-}
-
-
-/****  Title CSS  *****/
-
-.title-list-items-text {
-    color: #c61315;
-    font-weight: bold;
-    margin-bottom: 2px;
-    display: block;
-    vertical-align: middle;
-    padding: 5px 0px 10px;
-    position: relative;
-    font-style: italic;
-    text-transform: uppercase;
-}
-
-.title-list-items-text:after {
-    position: absolute;
-    content: "";
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: #c61315;
-    height: 2px;
-    width: 100%;
-    display: block;
-}
-
-.title-list-items-text i {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-
-/**************/
-
-.find-match-main {
-    width: 100%;
-    padding: 0px 30px;
-}
-
-.next-line {
-    display: block;
-}
-
-.btn-white {
-    background-color: #fff;
-    border-radius: 10px;
-    vertical-align: middle;
-}
-
-.span-white {
-    display: inline-block;
-    height: 48px;
-    width: 48px;
-    background-color: #fff;
-    border-radius: 10px;
-    text-align: center;
-}
-
-.material-icons.md-48 {
-    display: inline-block;
-    height: 36px;
-    width: 36px;
-    vertical-align: middle;
-    // margin: 0 auto;
-}
-
-
-/* google map */
-
-#nearByMap {
-    height: 100%;
-    // width: 100%;
+app-find-match {
+    .detail-box {
+        margin-bottom: 20px;
+        background-color: #f4f4f4;
+        padding: 10px 0px 20px;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+    }
+    .title-list-items {
+        width: 100%;
+        overflow: visible;
+        padding: 0 30px;
+    }
+    /****  Title CSS  *****/
+    .title-list-items-text {
+        color: #c61315;
+        font-weight: bold;
+        margin-bottom: 2px;
+        display: block;
+        vertical-align: middle;
+        padding: 5px 0px 10px;
+        position: relative;
+        font-style: italic;
+        text-transform: uppercase;
+    }
+    .title-list-items-text:after {
+        position: absolute;
+        content: "";
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #c61315;
+        height: 2px;
+        width: 100%;
+        display: block;
+    }
+    .title-list-items-text i {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    /****  Form CSS  *****/
+    form {
+        align-content: center;
+        text-align: center;
+        padding-right: 15px;
+        margin-top: 10px;
+    }
+    .mat-input-underline {
+        display: none;
+    }
+    .mat-input-wrapper {
+        margin: 0px !important;
+        padding: 0px !important;
+    }
+    .mat-input-wrapper .material-icons {
+        position: absolute;
+        top: -8px;
+        left: -48px;
+        font-size: 18px;
+        width: 35px;
+        height: 33px;
+        line-height: 32px;
+        text-align: center;
+        border-right: 1px solid rgba(0, 0, 0, 0.3);
+    }
+    .mat-input-wrapper .material-icons:after {
+        position: absolute;
+        top: -8px;
+        left: 0;
+        font-size: 18px;
+        width: 35px;
+        height: 33px;
+        border-right: 1px solid;
+        text-align: center;
+        line-height: 33px;
+    }
+    .mat-input-container,
+    .mat-select {
+        width: 100%;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        padding: 8px 15px 8px 50px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: #333;
+        height: 35px;
+    }
+    .mat-select-trigger {
+        height: 34px;
+        font-size: 14px;
+        color: #333;
+    }
+    .mat-select {
+        padding: 0px 15px;
+    }
+    .mat-input-container:focus {
+        outline: none;
+        border-color: #c61315;
+    }
+    .form-group {
+        position: relative;
+        margin-bottom: 15px;
+        text-align: left;
+    }
+    label {
+        font-size: 14px;
+        color: #666;
+    }
+    /****  Popup CSS  *****/
+    .mat-menu-content {
+        padding: 10px 20px;
+    }
+    /**************/
+    .detail-listing {
+        width: 100%;
+    }
+    .detail-listing .md-list-item-text p {
+        color: rgba(0, 0, 0, 0.54);
+        font-size: 14px;
+    }
+    .md-list-event-date {
+        color: #716f6f;
+        font-size: 14px;
+        font-weight: bold;
+        margin-left: 15px;
+        margin-top: 0px;
+        margin-bottom: 15px;
+        padding: 0 15px;
+    }
+    .md-list-item-inner {
+        height: 50px;
+        min-height: 50px;
+        background-color: white;
+    }
+    .mat-list-item.odd {
+        background: #e9e9e9;
+    }
+    .mat-list-item:hover {
+        background: #dcdbdb;
+    }
+    .md-list-item-text {
+        width: 100%;
+    }
+    .user-img-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 40px;
+    }
+    .datetime i {
+        color: rgba(0, 0, 0, 0.54);
+    }
+    .mat-button {
+        color: #848484;
+        font-style: italic;
+        font-weight: 100;
+        text-transform: uppercase;
+    }
+    .mat-button:hover {
+        background: #dbdbdb;
+    }
+    .datetime i {
+        opacity: 0;
+    }
+    .mat-list-item:hover .datetime i {
+        opacity: 1;
+    }
+    /**************/
+    .find-match-main {
+        width: 100%;
+        padding: 0 30px;
+    }
+    .next-line {
+        display: block;
+    }
+    .btn-white {
+        background-color: #fff;
+        border-radius: 10px;
+        vertical-align: middle;
+    }
+    .span-white {
+        display: inline-block;
+        height: 40px;
+        width: 40px;
+        background-color: #fff;
+        border-radius: 10px;
+        text-align: center;
+        line-height: 38px;
+        text-align: center;
+    }
+    .material-icons.md-48 {
+        display: inline-block;
+        height: 25px;
+        width: 25px;
+        vertical-align: middle;
+        // margin: 0 auto;
+    }
+    .mat-radio-button {
+        position: relative;
+        margin-right: 8px;
+    }
+    .mat-radio-container {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        margin: auto;
+        opacity: 0;
+    }
+    .mat-radio-label-content {
+        padding: 0px;
+    }
+    .mat-radio-checked .mat-radio-outer-circle {
+        border-color: #c61315;
+    }
+    .mat-radio-inner-circle {
+        background-color: #c61315;
+    }
+    .mat-radio-checked .span-white svg path {
+        fill: #c61315;
+    }
+    .detail-listing .mat-list {
+        border-bottom: 1px solid grey;
+        padding-bottom: 10px;
+    }
+    button.mat-raised-button {
+        background: rgba(0, 0, 0, 0.05);
+        text-transform: uppercase;
+        font-weight: normal;
+        font-size: 13px;
+        font-style: italic;
+        color: #848484;
+    }
+    /* google map */
+    .my-map {
+        background-color: lightpink;
+        height: 230px;
+        width: 100%;
+    }
+    #nearByMap {
+        height: 100%;
+        // width: 100%;
+    }
+    .my-from {
+        width: 100%;
+        margin-top: 15px;
+    }
+//    Media query start----------------------------------------------------------------------------------------
+    @media screen and (max-width:599px) {
+        .detail-listing .mat-list-item-content {
+            height: auto !important;
+            padding: 0 5px !important;
+        }
+        .user-img-icon {
+            width: 60px;
+            height: 60px;
+        }
+        .detail-listing .md-list-item-text p.datetime {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .detail-listing .md-list-item-text p {
+            font-size: 12px;
+        }
+        .detail-box .title-list-items {
+            padding: 0px 10px;
+        }
+        .find-match-main {
+            padding: 0 15px;
+        }
+    }
 }

@@ -16,6 +16,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AuthHomeComponent } from './auth-home/auth-home.component';
 
+import { AuthGuard } from "../auth/authguard.service";
+
 @NgModule({
         imports: [
                 BrowserModule,
@@ -37,7 +39,8 @@ import { AuthHomeComponent } from './auth-home/auth-home.component';
 
         ],
         providers: [
-                AuthService
+                AuthService,
+				AuthGuard
         ]
 })
 export class AuthModule { }

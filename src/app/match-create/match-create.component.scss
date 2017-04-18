@@ -4,302 +4,297 @@
     width: 100%;
 }
 
-.creatmach-wrapper {
-    margin-bottom: 20px;
-    background-color: #f4f4f4;
-    padding: 10px 20px 30px;
-    position: relative;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
+app-match-create {
+    .note {
+        margin-top: 10px;
+    }
+    .note p {
+        color: #c61315;
+        padding: 10px 50px;
+        font-size: 14px;
+    }
+    .creatmach-wrapper {
+        margin-bottom: 20px;
+        background-color: #f4f4f4;
+        padding: 20px 30px;
+        position: relative;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+    }
+    .error {
+        position: absolute;
+        bottom: -17px;
+        font-size: 13px;
+        text-align: right;
+        left: 20px;
+        right: 0;
+        color: #c61315;
+    }
+    .success {
+        position: absolute;
+        bottom: 10px;
+        font-size: 13px;
+        text-align: center;
+        left: 20px;
+        right: 20px;
+        color: green;
+    }
+    .title-list-items {
+        position: relative;
+    }
+    .title-list-items button {
+        background: #c61315;
+        color: #fff;
+        padding: 0px 30px;
+        box-shadow: none;
+        font-weight: normal;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+    /****  Title CSS  *****/
+    .title-list-items-text {
+        color: #c61315;
+        font-weight: bold;
+        margin-bottom: 2px;
+        display: block;
+        vertical-align: middle;
+        padding: 5px 0px 10px;
+        position: relative;
+        font-style: italic;
+        text-transform: uppercase;
+        text-align: left;
+    }
+    .title-list-items-text:after {
+        position: absolute;
+        content: "";
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #c61315;
+        height: 2px;
+        width: 100%;
+        display: block;
+    }
+    .title-list-items-text i {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 3px;
+        font-size: 22px;
+    }
+    /****  Form CSS  *****/
+    form {
+        align-content: center;
+        text-align: center;
+        padding-right: 15px;
+        margin-top: 10px;
+    }
+    .mat-input-underline {
+        display: none;
+    }
+    .mat-input-wrapper {
+        margin: 0px !important;
+        padding: 0px !important;
+    }
+    .mat-input-container,
+    .mat-select {
+        width: 100%;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        padding: 8px 15px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: #333;
+        height: 35px;
+    }
+    .mat-select-trigger {
+        height: 34px;
+        font-size: 14px;
+        color: #333;
+    }
+    .mat-select {
+        padding: 0px 15px;
+    }
+    .mat-input-container:focus {
+        outline: none;
+        border-color: #c61315;
+    }
+    .form-group {
+        position: relative;
+        margin-bottom: 15px;
+        text-align: left;
+    }
+    label {
+        font-size: 14px;
+        color: #666;
+    }
+    .form-group.date .mat-input-container {
+        padding: 0px 15px;
+    }
+    .form-group.date .mat-input-container .mat-input-table {
+        height: 33px;
+    }
+    .form-group.date .mat-input-infix {
+        line-height: 31px;
+    }
+    .md-button-register-form {
+        width: auto;
+        background-color: #c61315;
+        color: #fff !important;
+        margin-bottom: 0px;
+        text-align: center;
+        padding: 0px 60px;
+        box-shadow: none;
+        text-transform: uppercase;
+        font-weight: normal;
+    }
+    .error-message {
+        font-size: 11px;
+        margin-top: 5px;
+        color: #c61315;
+        font-weight: bold;
+        width: 100%;
+        text-align: right;
+    }
+    .mat-select-underline {
+        display: none;
+    }
+    /****  Select sport center CSS  *****/
+    .pitch {
+        margin: 20px 0px;
+    }
+    .pitch .note {
+        font-size: 30px;
+        padding: 30px 20px;
+        background: rgba(0, 0, 0, 0.02);
+        margin: 0px;
+        color: #c61315;
+    }
+    .pitch p {
+        font-size: 12px;
+    }
+    .selectbadges .pitch-display {
+        background: rgba(0, 0, 0, 0.03);
+        cursor: pointer;
+        display: inline-block !important;
+        position: relative;
+        margin: 0 5px;
+    }
+    .selectbadges md-radio-group {
+        display: block;
+    }
+    .selectbadges .pitch-display .mat-radio-container {
+        position: absolute;
+        opacity: 0;
+    }
+    .selectbadges p.badge {
+        color: #666;
+        margin: 0;
+        display: inline-block;
+        font-size: 12px;
+    }
+    .selectbadges p:last-child {
+        border: none;
+    }
+    .selectbadges .mat-radio-label-content {
+        padding: 0px;
+        margin: auto;
+    }
+    .selectbadges .mat-radio-label {
+        width: 100%;
+        padding: 11px 10px 9px;
+        width: 118px;
+    }
+    .selectbadges .mat-radio-checked .mat-radio-label {
+        box-shadow: inset 0px 0px 0px 2px #c61315;
+    }
+    .selectbadges .mat-radio-button {
+        margin: 0px;
+    }
+    .selectbadges .mat-icon {
+        height: 30px;
+        width: 30px;
+    }
+    .selectbadges h4.badge {
+        font-size: 18px;
+        font-weight: normal;
+        margin: 5px 0px 0px;
+    }
+    .mat-radio-checked svg path {
+        fill: #c61315;
+    }
+    /****  Match Details CSS  *****/
+    .mat-select-placeholder {
+        transform-origin: left center !important;
+    }
+    .mat-select-placeholder::after {
+        display: none;
+    }
+    .payoption {
+        margin-top: 25px;
+    }
+    .creatematch {
+        background: #72d572;
+        color: #fff;
+        padding: 3px 50px;
+        box-shadow: none;
+        font-size: 14px;
+        width: 210px;
+        margin: 20px auto 0;
+        text-transform: uppercase;
+        font-style: italic;
+    }
+    .mat-radio-button {
+        margin-right: 20px;
+        font-size: 15px;
+        color: #666;
+    }
+    .mat-radio-container,
+    .mat-radio-inner-circle,
+    .mat-radio-outer-circle {
+        width: 17px !important;
+        height: 17px !important;
+    }
+    .mat-radio-inner-circle {
+        background: #666;
+    }
+    .mat-radio-checked .mat-radio-outer-circle {
+        border-color: #666;
+    }
+    .clearfix:after {
+        visibility: hidden !important;
+        display: block !important;
+        font-size: 0 !important;
+        content: " " !important;
+        clear: both !important;
+        height: 0 !important;
+    }
+    .clearfix {
+        display: inline-block !important;
+    }
+    /* start commented backslash hack \*/
+    .clearfix {
+     display: block !important;
+ }
+    // media query start ---------------------------------------------------------------------------------------------------
+    @media screen and (max-width:599px) {
+        .title-list-items button {
+            position: relative;
+        }
+        .note p {
+            padding: 10px 0px;
+        }
+        label {
+            margin: 0 0 12px 0;
+        }
+        form {
+            padding-right: 0px;
+        }
+        .creatmach-wrapper {
+            padding: 15px;
+        }
+        .selectbadges .mat-radio-label {
+            margin: 0px;
+        }
+    }
 }
-
-.error {
-    position: absolute;
-    bottom: 10px;
-    font-size: 13px;
-    text-align: center;
-    left: 20px;
-    right: 20px;
-    color: #c61315;
-}
-
-.success {
-    position: absolute;
-    bottom: 10px;
-    font-size: 13px;
-    text-align: center;
-    left: 20px;
-    right: 20px;
-    color: green;
-}
- 
-/****  Title CSS  *****/
-
-.title-list-items-text {
-    color: #c61315;
-    font-weight: bold;
-    margin-bottom: 2px;
-    display: block;
-    vertical-align: middle;
-    padding: 5px 0px 10px;
-    position: relative;
-    font-style: italic;
-    text-transform: uppercase;
-    text-align: left;
-}
-
-.title-list-items-text:after {
-    position: absolute;
-    content: "";
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: #c61315;
-    height: 2px;
-    width: 100%;
-    display: block;
-}
-
-.title-list-items-text i {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-/****  Form CSS  *****/
-
-form {
-    width:100%;
-    overflow: auto;
-    text-align: center;
-    align-items: center;
-    margin-top: 20px;
-}
-
-/****  Select sport center CSS  *****/
-.select-center {
-    position: relative;
-}
-.select-center .mat-input-container {
-    display: block;
-    min-height: 40px;
-}
-.select-center p.error-message {
-    font-size: 11px;
-    margin-left: 30px;
-    color: #c61315;
-    font-weight: bold;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-}
-.info p {
-    margin-right:20px;
-    font-size: 14px;
-    color: #333;
-    line-height: 24px;
-}
-
-.info button {
-    box-shadow: none;    
-    background: transparent;
-}
-
-.pitch {
-    margin-top: 25px;
-}
-
-.pitch h3 {
-    color: #c61315;
-    font-weight: 500;
-    margin-bottom: 5px;
-    font-size: 20px;
-}
-.pitch p {
-    font-size:14px;
-}
-
-.pitch-display {
-    float: left;
-    background-color: #dfdfdf;
-    width: 45%;
-    margin: 20px 10px 0px;
-    padding: 20px 10px;
-    cursor: pointer;
-}
-
-.selectbadges h4 {
-    font-size: 20px;
-    color: #333;
-    text-transform: capitalize;
-}
-.selectbadges p.badge {
-    color: #666;
-    margin: 10px 0;
-    display: inline-block;
-    border-right: 2px solid #bfbfbf;
-    padding: 0 10px;
-}
-
-.selectbadges p:last-child {
-    border: none;
-}
-
-.info {
-    color: #428bca;
-}
-
-.address .mat-input-element:disabled {
-    color: #333;
-}
-.mat-input-underline.mat-disabled {
-    display: none;
-}
-
-/****  Match Details CSS  *****/
- 
-.address .mat-input-wrapper {
-    margin: 1rem 0px;
-    padding-bottom: 0;
-}
-.address .mat-input-container {
-    padding-right:15px;
-}
-.address .mat-input-underline {
-    display: none;
-}
-.address button.mat-raised-button {
-    background: #333;
-    color: #fff;
-    box-shadow: none;
-    font-weight: normal;
-}
-
-.benchplayers {
-    margin: 10px 0px 20px;
-}
-.benchplayers h2 {
-    font-size: 18px;
-    color: #333;
-    font-weight: 500;
-    margin-right: 15px;
-}
-.form-group {
-    position: relative;
-}
-.benchplayers p.error-message {
-    font-size: 11px;
-    margin-left: 30px;
-    color: #c61315;
-    font-weight: bold;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-}
-
-.box-info {
-    padding: 30px 10px;
-    background: #e3e3e3;
-    margin-bottom: 15px;
-}
-
-.box-info p {
-    color:#333;
-    margin-bottom:15px;
-}
-
-.box-info button {
-    background: #72d572;
-    color: #fff;
-    padding: 5px 50px;
-    box-shadow: none;
-    font-weight: normal;
-    font-size: 16px;
-    width: 210px;
-    margin: auto;
-}
-
-.box-info button .material-icons {
-    font-size:22px;
-}
-
-.matchtime {
-    background: #e3e3e3;
-    text-align: left;
-    padding: 20px 30px;
-}
-.matchtime h2 {
-    font-size: 18px;
-    color: #333;
-    font-weight: 500;
-}
-.matchtime .form-group {
-    padding: 15px 20px 0 0px;
-    text-align: left;
-}
-.selecttime .form-group.hour {
-    margin-top:15px;
-}
-.selecttime .form-group.minute {
-    margin-top:15px;
-}
-.selecttime .form-group .mat-select {
-    width:100%;
-}
-.selecttime .form-group .error-message {
-    position: absolute;
-    bottom: 0;
-    font-size: 13px;
-    right: 20px;
-    color: #c61315;
-}
-.selecttime .mat-input-container {
-    width:100%;
-}
-
-.currencyblock {
-    background: #e3e3e3;
-    text-align: left;
-    padding: 20px 30px;
-    margin: 15px 0px;
-}
-.currencyblock h2 {
-    font-size: 18px;
-    color: #333;
-    font-weight: 500;
-}
-.currencyoption .form-group {
-    padding: 15px 20px 0 0px;
-    text-align: left;
-}
-.currencyoption .form-group.currency {
-    margin-top:10px;
-}
-.currencyoption .mat-radio-label-content {
-    position: relative;
-    top: -3px;
-}
-.currencyoption .form-group .mat-radio-button {
-    margin-right:15px;
-}
-.currencyoption .mat-select, .currencyoption .mat-input-container{
-    width: 100%;
-}
-
-.creatematch {
-    background: #72d572 !important;
-    color: #fff !important;
-    padding: 5px 50px;
-    box-shadow: none;
-    font-weight: normal;
-    font-size: 16px;
-    width: 210px;
-    margin: auto;
-}
-
-@media screen and (max-width:599px) {
-    .info p { margin:0px 0px 15px; }
-    
-}
-
-
