@@ -40,18 +40,18 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 	soccerVal: any = false;
 	padelVal: any = false;
 
-
-
+	birthdate: any;
 	user: any;
 	sport: any;
 	checked: any = false;
 
 	selectedCity = "";
 
-	@ViewChild(DatePickerDirective) dtpicker: DatePickerDirective;
+	//@ViewChild(DatePickerDirective) dtpicker: DatePickerDirective;
 
 	constructor(private coreService: CoreService, private fb: FormBuilder,
 		private route: ActivatedRoute, private zone: NgZone, public dialog: MdDialog, private router: Router) {
+
 
 		this.user = JSON.parse(window.localStorage['teem_user']);
 		this.createForm();
@@ -60,6 +60,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 			this.imgSrc = environment.PROFILE_IMAGE_PATH + resultImg;
 		});
 	}
+
 
 	ngOnInit() {
 
@@ -87,10 +88,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 			console.log("jQuery is ready");
 			self.initAutoComplete();
 		});
-
+		this.ngAfterViewInit();
 	}
 
 	ngAfterViewInit() {
+
 		if (JSON.parse(window.localStorage.teem_user).profileimage != '') {
 			console.log('gone in after view init ------------');
 
@@ -103,16 +105,17 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 			this.checked = false;
 		}
 
-
-		let startDate = new Date(this.user.dob);
-		let startDateAdd = startDate.getFullYear() + '-' + (startDate.getMonth() + 1) + '-' + startDate.getDate();
-		this.dtpicker.changeDate(startDateAdd, 'fromDate');
+		if (!this.user.dob)
+			this.birthdate = new Date();
+		else
+			this.birthdate = new Date(this.user.dob);
 
 		this.profile.patchValue({
 			firstname: this.user.firstname,
 			lastname: this.user.lastname,
 			city: this.user.city,
-			description: this.user.description
+			description: this.user.description,
+
 		});
 	}
 
@@ -145,7 +148,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 	formSubmit() {
 		let self = this;
 		let formVal = this.profile.value;
-		console.log("formVal", formVal);
+		//console.log("formVal", formVal);
 
 		let user = JSON.parse(window.localStorage['teem_user']);
 		let sport = [];
@@ -214,50 +217,16 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 			this.coreService.sportIconDisplay({ key: name, val: this.padelVal });
 
 	}
-	// fileChange(event) {
-	// 	/*var files = event.srcElement.files;
-	// 	this.coreService.makeFileRequest(environment.BASEAPI + environment.PROFILE_IMAGE_UPDATE, [], files).subscribe(() => {
-	// 		console.log('sent');
-	// 	});*/
-	// 	let fileList: FileList = event.target.files;
-	// 	console.log('fileList', fileList);
 
-	// 			this.coreService.profileImageUpload(fileList)
-	// 			.subscribe((result) => {
-	// 				console.log('result', result);
-	// 			},
-	// 			(error) => {
-	// 				console.log('err', error);
-	// 			}
-	// 			)
-
-
-	// 	// if (fileList.length > 0) {
-
-	// 	// 	let file: File = fileList[0];
-	// 	// 	console.log('formData', file);
-	// 	// 	let formData: FormData = new FormData();
-
-	// 	// 	formData.append('userid', this.user.id);
-	// 	// 	formData.append('image', file);
-	// 	// 	console.log('formData', formData); 
-	// 	// 	this.coreService.profileImageUpload(formData)
-	// 	// 		.subscribe((result) => {
-	// 	// 			console.log('result', result);
-	// 	// 		},
-	// 	// 		(error) => {
-	// 	// 			console.log('err', error);
-	// 	// 		}
-	// 	// 		)
-	// 	// }
-	// }
 	profileDialog() {
+		let width = '75%';
+		if (window.innerWidth <= 480) {
+			width = '100%';
+		}
 		let dialogRef = this.dialog.open(UserProfileImageComponent, {
-			width: '70%',
-			height: '75%'
+			width: width
+			// height: '75%'
 		});
-
-		//$("#avatar-modal").modal("show");
 	}
 
 	userDetailEmit(user: any) {
@@ -276,13 +245,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 			if (e.keyCode == 13) {
 				e.preventDefault();
 				self.assignValuetoCity(e.target.value);
-				console.log("prevented default");
+				//console.log("prevented default");
 			}
 		});
 	}
 
 	assignValuetoCity(v) {
-		console.log("city = ", v);
+		//console.log("city = ", v);
 		this.selectedCity = v;
 	}
 }

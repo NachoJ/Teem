@@ -1,78 +1,37 @@
-<div fxLayout="column" fxLayoutAlign="start start" class="detail-box">
+<div class="detail-box">
     <div class="title-list-items">
         <p class="title-list-items-text"> <i class="material-icons">search</i> FIND MATCH</p>
     </div>
-    <div class="find-match-main" fxFlex="100" fxLayout="column" fxLayoutAlign="start start">
+    <div class="find-match-main">
         <div class="my-from" fxFlex="100">
-            <!--<form>-->
             <div *ngIf="error" class="error"> {{error}} </div>
             <div *ngIf="success" class="success"> {{success}} </div>
             <div fxLayout="column" fxFlex="100" class="form-group date">
                 <div fxLayout="row">
                     <label fxLayoutAlign="left center" fxFlex="15">City</label>
-                    <md-input-container class="md-block register-form-text-area" md-no-float fxFlex="85">
-                        <i class="material-icons" (click)="getAndSetLocation()">gps_fixed</i>
-                        <input id="pac-input" mdInput class="controls user-text-label" (keyup.enter)="getLatLongByCityName()" [ngModelOptions]="{standalone: true}" [(ngModel)]="cityName" required> </md-input-container>
+                    <md-input-container class="md-block register-form-text-area" md-no-float fxFlex="85"> <i class="material-icons" (click)="getAndSetLocation()">gps_fixed</i>
+                        <input id="pac-input" mdInput class="controls user-text-label" [ngModelOptions]="{standalone: true}"
+                            [(ngModel)]="cityName" required>
+							<!--(keyup.enter)="getLatLongByCityName()"-->
+                    </md-input-container>
                 </div>
             </div>
             <div fxLayout="column" fxFlex="100" class="form-group date">
                 <div fxLayout="row">
                     <label fxLayoutAlign="left center" fxFlex="15">Sport</label>
-                    <md-radio-group [(ngModel)]="sport">
-                        <md-radio-button value="all">
+                    <md-radio-group [(ngModel)]="sport" (change)="onSportChange()">
+                        <md-radio-button *ngFor="let sp of sportOptions" [value]="sp.id">
                             <div class="span-white">
-                                <md-icon class="material-icons md-48" svgIcon="all"></md-icon>
-                            </div>
-                        </md-radio-button>
-                        <md-radio-button value="soccer">
-                            <div class="span-white">
-                                <md-icon class="material-icons md-48" svgIcon="football"></md-icon>
-                            </div>
-                        </md-radio-button>
-                        <md-radio-button value="basketball">
-                            <div class="span-white">
-                                <md-icon class="material-icons md-48" svgIcon="basketball"></md-icon>
-                            </div>
-                        </md-radio-button>
-                        <md-radio-button value="padel">
-                            <div class="span-white">
-                                <md-icon class="material-icons md-48" svgIcon="padel"></md-icon>
+                                <md-icon class="material-icons md-48" svgIcon= {{sp.title}}></md-icon>
                             </div>
                         </md-radio-button>
                     </md-radio-group>
                 </div>
             </div>
-            <!--</form>-->
-            <!--
-                <div *ngIf="matchFormGroup.controls.dateCtrl.invalid && matchFormGroup.controls.dateCtrl.touched">
-                    <div ng-message="required">
-                        <p class="error-message">Date not selected</p>
-                    </div>
-                </div>
--->
-            <!--
-            <div class="form-group">
-                <span class="next-line">CITY</span>
-                <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-                <md-input-container class="md-block register-form-text-area" md-no-float>
-                    <input id="pac-input" mdInput class="controls user-text-label" placeholder="Enter your City Name" (keyup.enter)="getLatLongByCityName()" [ngModelOptions]="{standalone: true}" [(ngModel)]="cityName" required>
-                </md-input-container>
-                <div class="span-white">
-                    
-                </div>
-                <div *ngIf="sportsCenterFormGroup.controls.name.invalid && sportsCenterFormGroup.controls.name.touched">
-                    <div ng-message="required" fxLayoutAlign="start start">
-                        <p class="error-message">Email is invalid</p>
-                    </div>
-                </div>
-            </div>
---></div>
-        <div class="my-map" fxFlex="100" style="background-color: lightpink;
-        height: 230px;
-        width: 100%;">
-            <!--<input id="pac-input" class="controls" type="text" placeholder="Search Box">-->
+        </div>
+        <div class="my-map" fxFlex="100" style="height: 230px; width: 100%;">
             <div id="nearByMap"></div>
-            <!--<div id="nearByMap"></div>--></div>
+        </div>
     </div>
 </div>
 <div fxLayout="column" fxLayoutAlign="start start" class="detail-box">
@@ -92,11 +51,11 @@
                         </div>
                         <div fxLayout="column" fxFlexOffset="2" fxLayoutAlign="center start" fxFlex="58">
                             <p class="md-list-event-hour datetime"><b>{{match.filteredMatchTime}}</b> </p>
-                            <p class="md-list-event-hour"><b>{{match.sport}}</b> </p>
+                            <p class="md-list-event-hour"><b>{{match.sportdetail[0].title}}</b> </p>
                             <p *ngIf="match.sportcenterdetail[0]"><b style="margin:2px 0px;">{{match.sportcenterdetail[0].address}}</b></p>
                         </div>
                         <div fxLayoutAlign="center center" fxFlex="20" class="match-time left">
-                            <p><b style="margin:2px 0px; display: block;">3 DE {{match.benchplayers*2}} </b> <b style="margin:2px 0px; display: block;">€{{match.price}} </b> </p>
+                            <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{match.subsportdetail[0].value*2}} </b>                                <b style="margin:2px 0px; display: block;">€{{match.price}} </b> </p>
                         </div>
                     </div>
                     <div fxHide.xs fxLayout="row" fxFlex="100">
@@ -104,7 +63,7 @@
                             <p class="md-list-event-hour"><b>{{match.filteredMatchTime}}</b> </p>
                         </div>
                         <div fxLayout="column" fxFlex="15">
-                            <p class="md-list-event-hour"><b>{{match.sport}}</b> </p>
+                            <p class="md-list-event-hour"><b>{{match.sportdetail[0].title}}</b> </p>
                             <p style="font-size:10px !important; margin:2px 0px;"><b>Created by</b> </p>
                             <p *ngIf="match.userdetail[0]" style="font-size:10px !important"><b>{{match.userdetail[0].username}}</b> </p>
                         </div>
@@ -112,10 +71,10 @@
                             <a *ngIf="match.userdetail[0]" [mdMenuTriggerFor]="profilePopupMenu"><img src="{{PROFILE_IMAGE_PATH+match.userdetail[0].profileimage}}" alt="" class="user-img-icon"></a>
                         </div>
                         <div fxFlex="25" class="match-time left">
-                            <p *ngIf="match.sportcenterdetail[0]"><b style="margin:2px 0px; display: block;">{{match.sportcenterdetail[0].address}} </b> <b style="margin:2px 0px; display: block;"><!-- some addr --> </b> </p>
+                            <p *ngIf="match.sportcenterdetail[0]"><b style="margin:2px 0px; display: block;">{{match.sportcenterdetail[0].address}} </b> <b style="margin:2px 0px; display: block;"><!-- some addr --> </b>                                </p>
                         </div>
                         <div fxFlex="10" class="match-time left">
-                            <p><b style="margin:2px 0px; display: block;">3 DE {{match.benchplayers*2}} </b> <b style="margin:2px 0px; display: block;">€{{match.price}} </b> </p>
+                            <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{match.subsportdetail[0].value*2}} </b>                                <b style="margin:2px 0px; display: block;">€{{match.price}} </b> </p>
                         </div>
                         <div fxLayoutAlign="center center" fxFlex="15" class="match-time center">
                             <button md-raised-button [routerLink]="['/match-details',match._id]">Info</button>

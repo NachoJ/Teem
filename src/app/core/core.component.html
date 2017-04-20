@@ -17,10 +17,9 @@
 </div>
 -->
             <md-list class="mobilemenu" *ngFor="let nl of navMobileLinks">
-                <md-list-item (click)="sidenav.toggle()" routerLink="{{ nl.link }}"><i class="material-icons">{{nl.icon}}</i>{{nl.title}}</md-list-item>
+                <md-list-item (click)="sidenav.toggle()" routerLink="{{ nl.link }}" class="menu-item"><i class="material-icons">{{nl.icon}}</i>{{nl.title}}</md-list-item>
             </md-list>
-            <!--          <div class="mobilemenu"> <a md-tab-link> Home</a> <a md-tab-link> Find match</a> <a md-tab-link> Tournments</a> <a md-tab-link> My sport center</a> </div>-->
-        </div>
+            <!--          <div class="mobilemenu"> <a md-tab-link> Home</a> <a md-tab-link> Find match</a> <a md-tab-link> Tournments</a> <a md-tab-link> My sport center</a> </div>--></div>
     </md-sidenav>
     <div class="example-sidenav-content">
         <md-toolbar fxFlex="100%" class="header-toolbar">

@@ -112,7 +112,7 @@ md-option img.thumb-circle {
 }
 
 
-/* start commented backslash hack \*/
+/* start commented backslash hack */
 
 .clearfix {
     display: block !important;
@@ -164,3 +164,11 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($candy-app-theme);
+
+
+.mat-dialog-container {
+    // width: 900px !important;
+    max-width: 96% !important;
+    // margin: auto;
+    // padding:0px !important;
+}

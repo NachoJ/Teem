@@ -63,7 +63,7 @@ export class MatchDetailsComponent implements OnInit {
 		var marker = new google.maps.Marker({
 			position: myLatLng,
 			map: map,
-			title: self.match.sport
+			title: self.match.sport.title
 		});
 	}
 	initTeam() {

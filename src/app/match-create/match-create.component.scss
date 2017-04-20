@@ -6,12 +6,24 @@
 
 app-match-create {
     .note {
-        margin-top: 10px;
-    }
-    .note p {
-        color: #c61315;
-        padding: 10px 50px;
-        font-size: 14px;
+        margin-bottom: 15px;
+        p {
+            color: #c61315;
+            padding: 0px 50px 5px;
+            font-size: 14px;
+            vertical-align: middle;
+            span {
+                vertical-align: middle;
+                margin-left: 10px;
+                .mat-icon {
+                    height: 20px;
+                    width: 20px;
+                    font-size: 20px;
+                    position: relative;
+                    top: 5px;
+                }
+            }
+        }
     }
     .creatmach-wrapper {
         margin-bottom: 20px;
@@ -111,6 +123,7 @@ app-match-create {
         height: 34px;
         font-size: 14px;
         color: #333;
+        min-width: inherit;
     }
     .mat-select {
         padding: 0px 15px;
@@ -159,12 +172,18 @@ app-match-create {
     .mat-select-underline {
         display: none;
     }
+    .address {
+        margin-top: 5px;
+        label {
+            font-size: 12px;
+        }
+    }
     /****  Select sport center CSS  *****/
     .pitch {
         margin: 20px 0px;
     }
     .pitch .note {
-        font-size: 30px;
+        font-size: 24px;
         padding: 30px 20px;
         background: rgba(0, 0, 0, 0.02);
         margin: 0px;
@@ -174,11 +193,11 @@ app-match-create {
         font-size: 12px;
     }
     .selectbadges .pitch-display {
-        background: rgba(0, 0, 0, 0.03);
+        background: rgba(0, 0, 0, 0.05);
         cursor: pointer;
         display: inline-block !important;
         position: relative;
-        margin: 0 5px;
+        margin: 0 2px 5px 3px;
     }
     .selectbadges md-radio-group {
         display: block;
@@ -202,7 +221,7 @@ app-match-create {
     }
     .selectbadges .mat-radio-label {
         width: 100%;
-        padding: 11px 10px 9px;
+        padding: 10px;
         width: 118px;
     }
     .selectbadges .mat-radio-checked .mat-radio-label {
@@ -212,13 +231,13 @@ app-match-create {
         margin: 0px;
     }
     .selectbadges .mat-icon {
-        height: 30px;
-        width: 30px;
+        height: 28px;
+        width: 28px;
     }
     .selectbadges h4.badge {
         font-size: 18px;
         font-weight: normal;
-        margin: 5px 0px 0px;
+        margin: 1px 0px;
     }
     .mat-radio-checked svg path {
         fill: #c61315;
@@ -274,9 +293,9 @@ app-match-create {
     }
     /* start commented backslash hack \*/
     .clearfix {
-     display: block !important;
- }
-    // media query start ---------------------------------------------------------------------------------------------------
+        display: block !important;
+    }
+    // media query start ----------
     @media screen and (max-width:599px) {
         .title-list-items button {
             position: relative;
@@ -295,6 +314,12 @@ app-match-create {
         }
         .selectbadges .mat-radio-label {
             margin: 0px;
+        }
+        .pitch .note {
+            font-size: 24px;
+        }
+        .date .mat-select {
+            margin-top: 10px;
         }
     }
 }

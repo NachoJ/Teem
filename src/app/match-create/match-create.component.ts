@@ -25,6 +25,7 @@ export class MatchCreateComponent implements OnInit {
 	selectedSportsCenterName: string = '';
 	selectedSportsCenterId: string = '';
 	selectedSportsCenterPhone: string;
+	selectedSportsCenterAddress = "";
 	sportsCenterOptions = [];
 	pitches: Pitch[];
 	selectedPitchId: string;
@@ -47,7 +48,16 @@ export class MatchCreateComponent implements OnInit {
 	cost: string;
 
 	bench: string;
-	benchPlayerOption = [];
+	benchOpt = [];
+
+	subSport: string;
+	subSportOption = [];
+
+	selectedPitchSport: any;
+
+	someradio = "";
+
+	isCost: boolean = false;
 
 	// filteredOptions: Observable<any[]>;
 
@@ -56,26 +66,27 @@ export class MatchCreateComponent implements OnInit {
 	// displayFormDetails: string = 'none';
 
 	constructor(private coreService: CoreService, iconRegistry: MdIconRegistry, sanitizer: DomSanitizer, private formBuilder: FormBuilder, private router: Router) {
-    
-    iconRegistry.addSvgIcon(
+
+		iconRegistry.addSvgIcon(
 			'all',
 			sanitizer.bypassSecurityTrustResourceUrl('assets/svg/all-sports_off.svg'));
 		iconRegistry.addSvgIcon(
-			'soccer',
+			'Soccer',
 			sanitizer.bypassSecurityTrustResourceUrl('assets/svg/futbol_off.svg'));
 		iconRegistry.addSvgIcon(
-			'basketball',
+			'Basketball',
 			sanitizer.bypassSecurityTrustResourceUrl('assets/svg/baloncesto_off.svg'));
 		iconRegistry.addSvgIcon(
-			'paddle',
+			'Padel',
 			sanitizer.bypassSecurityTrustResourceUrl('assets/svg/padel_off.svg'));
-    
-    
+
+
 
 		this.matchFormGroup = this.formBuilder.group({
 			sportCentreCtrl: ['', [Validators.required]],
 			pitchRadioGroupCtrl: ['', [Validators.required]],
 			benchCtrl: ['', [Validators.required]],
+			subSportCtrl: ['', [Validators.required]],
 			dateCtrl: ['', [Validators.required]],
 			hourCtrl: ['', [Validators.required]],
 			minuteCtrl: ['', [Validators.required]],
@@ -93,13 +104,17 @@ export class MatchCreateComponent implements OnInit {
 				this.error = error;
 			});
 
-
 		for (let i = 0; i <= 23; i++) {
 			this.hourOptions.push({ value: i, viewValue: i });
 		}
-		for (let i = 0; i <= 59; i++) {
+		for (let i = 0; i <= 59; i += 15) {
 			this.minuteOptions.push({ value: i, viewValue: i });
 		}
+
+		for (let j = 0; j <= 10; j++) {
+			this.benchOpt.push({ value: j, viewValue: j });
+		}
+
 	}
 
 	ngOnInit() {
@@ -120,8 +135,8 @@ export class MatchCreateComponent implements OnInit {
 	}
 
 	displayFn(sp): string {
-		console.log("sports center set", sp);
-		console.log("selectedSportsCenter from display", this.selectedSportsCenterId);
+		// console.log("sports center set", sp);
+		// console.log("selectedSportsCenter from display", this.selectedSportsCenterId);
 		// console.log("selectedSportsCenterName", this.selectedSportsCenter);
 		return sp ? sp.name : "";
 	}
@@ -137,14 +152,21 @@ export class MatchCreateComponent implements OnInit {
 			// 		console.log("if", sc.name)
 			// 	}
 			// }
+			this.someradio = "";
 			this.selectedSportsCenterId = this.selectedSportsCenter.id;
 			this.selectedSportsCenterName = this.selectedSportsCenter.name;
+			this.selectedSportsCenterAddress = this.selectedSportsCenter.address;
 			console.log("selectedSportsCenterId", this.selectedSportsCenterId);
 
 			this.coreService.loadPitches(this.selectedSportsCenterId)
 				.subscribe((response) => {
-					console.log(response);
+					console.log("pitches = ", response);
 					// this.error = '';
+					// for (let res of response){
+					// 	console.log("pitch image = ", res.sportdetail.sportid.title);
+					// 	res.imageurl = res.sportdetail.sportid.title;
+					// 	this.pitches = response;
+					// }
 					this.pitches = response;
 				},
 				(error: any) => {
@@ -156,12 +178,29 @@ export class MatchCreateComponent implements OnInit {
 	}
 
 	pitchSelected(pitchid, pitchSport) {
-		this.coreService.getBenchPlayers(pitchSport)
+		let data = {
+			sportid: pitchSport
+		}
+		console.log("selected pitchSport = ", JSON.stringify(data));
+		this.coreService.getSubSports(JSON.stringify(data))
 			.subscribe((response) => {
-				this.benchPlayerOption.length = 0;
-				for (let key in response[0]) {
-					this.benchPlayerOption.push({ value: key, viewValue: response[0][key] });
-					// console.log("some = "+key,response[0][key])
+				this.subSportOption.length = 0;
+				console.log("pitch sub sport response", response);
+				// tslint:disable-next-line:forin
+				let tempsport = "";
+				for (var res of response) {
+					// console.log("res = ",res);
+					if (tempsport != res.title) {
+						tempsport = res.title;
+						console.log("sport = ", res.title + " " + res.id);
+						this.subSportOption.push({ value: res.id, viewValue: res.title, isDisabled: true });
+					}
+					for (var r of res.subsport) {
+						console.log("r id = " + r.title + " " + r.id)
+						this.subSportOption.push({ value: r.id, viewValue: res.title + " " + r.title, sportid: res.id, isDisabled: false });
+					}
+					// console.log("res title " + res.title + " res value " + res.value);
+					// this.subSportOption.push({ value: res.id, viewValue: res.sportid.title + " " + res.title, isDisabled: false });
 				}
 			},
 			(error: any) => {
@@ -174,10 +213,7 @@ export class MatchCreateComponent implements OnInit {
 			if (sc.id == this.selectedSportsCenterId)
 				this.selectedSportsCenterPhone = sc.phone;
 		}
-		// console.log("selected sc option phone",this.selectedSportsCenterPhone);
-		// this.isPitchSelected = true;
-		// this.displayPitch = 'none';
-		// this.displayFormDetails = 'block';
+
 
 	}
 
@@ -192,11 +228,20 @@ export class MatchCreateComponent implements OnInit {
 		let userId = user.id;
 		let filteredDate = this.date.replace(/-/gi, '/');
 		let finalDate = filteredDate + ' ' + this.hour + ":" + this.minute;
+		let sportid: any;
+		for (let i of this.subSportOption) {
+			if (i.value == this.subSport) {
+				sportid = i.sportid;
+				// console.log("sport id found= ", i);
+			}
+		}
 		console.log("date", filteredDate);
 		let data = {
 			"userid": userId,
 			"scid": this.selectedSportsCenterId,
 			"fieldid": this.selectedPitchId,
+			"sport": sportid,
+			"subsportid": this.subSport,
 			"benchplayers": this.bench,
 			"matchtime": finalDate,
 			"paymenttype": this.payment,
@@ -209,21 +254,27 @@ export class MatchCreateComponent implements OnInit {
 		this.coreService.createMatch(JSON.stringify(data))
 			.subscribe((response) => {
 				console.log(response);
-				// this.error = '';
-				// this.success = response;
-				// console.log("match res msg", response.data.message);
 				this.coreService.emitSuccessMessage(response.data.message);
 				this.router.navigate(['/match-details/' + response.data.data.id]);
 				this.matchFormGroup.reset();
 				this.pitches = [];
-				// this.displayFormDetails = 'none';
-				// this.displayPitch = 'block';
 			},
 			(error: any) => {
-				// this.success = '';
-				// this.error = error;
 				this.coreService.emitErrorMessage(error);
 			});
+	}
+
+	moneyMethodSelected() {
+		console.log("money method = ", this.payment)
+		if (this.payment == 'free') {
+			this.matchFormGroup.get("currencyCtrl").disable();
+			this.matchFormGroup.get("costCtrl").disable();
+			this.currency = "";
+			this.cost = "";
+		} else {
+			this.matchFormGroup.get("currencyCtrl").enable();
+			this.matchFormGroup.get("costCtrl").enable();
+		}
 	}
 
 }

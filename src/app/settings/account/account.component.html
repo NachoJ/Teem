@@ -6,13 +6,12 @@
     <form [formGroup]="accountFormGroup" (ngSubmit)="emailSave()" novalidate>
         <div class="example-section example-margin">
             <div fxLayout="column" class="form-group" fxFlex="100">
-                <div fxLayout="row" fxLayout.xs="column">
-                    <label for="" fxLayoutAlign="left center" fxFlex="25">Email</label>
-                    <md-input-container class="md-block register-form-text-area" [class.red-border]="!accountFormGroup.valid" fxFlex="50" md-no-float>
-                        <input mdInput formControlName="email" class="user-text-label"  > </md-input-container>
-                    <button md-raised-button color="primary" fxFlex="25" [disabled]="!accountFormGroup.valid"  class="save-btn">Save</button>
-                    <!--<div class="text-danger" *ngIf="accountFormGroup.controls.email.touched"> <span *ngIf="accountFormGroup.controls.email.invalid">Enter your email</span> </div>-->
-                </div>
+                <div fxLayout="row" fxLayoutAlign="top left">
+                    <label for="" fxLayoutAlign="left center" fxFlex.xs="20" fxFlex="25" class="no-margin">Email</label>
+                    <md-input-container class="md-block register-form-text-area" [class.red-border]="!accountFormGroup.valid" fxFlex.xs="55" fxFlex="50" md-no-float>
+                        <input mdInput formControlName="email" class="user-text-label"> </md-input-container>
+                    <button md-raised-button color="primary" fxFlexOffset="2" fxFlex="23" [disabled]="!accountFormGroup.valid" class="save-btn no-margin">Save</button>
+                    <!--<div class="text-danger" *ngIf="accountFormGroup.controls.email.touched"> <span *ngIf="accountFormGroup.controls.email.invalid">Enter your email</span> </div>--></div>
             </div>
         </div>
     </form>
@@ -49,19 +48,20 @@
             </div>
         </div>
         <div class="example-section example-margin">
-           <div fxLayout="column" class="form-group" fxFlex="100">
+            <div fxLayout="column" class="form-group" fxFlex="100">
                 <div fxLayout="row" fxLayout.xs="column">
                     <label for="" fxLayoutAlign="left center" fxFlex="25">Confirm password</label>
-            <md-input-container class="md-block register-form-text-area" fxFlex="75" md-no-float>
-                <input mdInput type="password" formControlName="confirmpassword" class="user-text-label" validateEqual="encryptedpassword"> </md-input-container>
-               </div>
-            <div *ngIf="accountPasswordGroup.controls.confirmpassword.touched">
-               <div ng-message="required" fxFlex="100" fxLayoutAlign="right start">
-                <p *ngIf="accountPasswordGroup.hasError('mismatchedPasswords')" class="error-message">Passwords do not match (Must be 8 characters)</p>
+                    <md-input-container class="md-block register-form-text-area" fxFlex="75" md-no-float>
+                        <input mdInput type="password" formControlName="confirmpassword" class="user-text-label" validateEqual="encryptedpassword"> </md-input-container>
                 </div>
-               </div></div>
+                <div *ngIf="accountPasswordGroup.controls.confirmpassword.touched">
+                    <div ng-message="required" fxFlex="100" fxLayoutAlign="right start">
+                        <p *ngIf="accountPasswordGroup.hasError('mismatchedPasswords')" class="error-message">Passwords do not match (Must be 8 characters)</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="example-section example-margin" fxFlex="100" fxLayoutAlign="center center"> 
+        <div class="example-section example-margin" fxFlex="100" fxLayoutAlign="center center">
             <button md-raised-button color="primary" class="creatematch" [disabled]="!accountPasswordGroup.valid">UPDATE PASSWORD</button>
         </div>
     </form>

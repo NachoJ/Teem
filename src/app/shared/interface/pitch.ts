@@ -4,9 +4,10 @@ export interface Pitch {
 	covering: string;
 	lights: string;
 	surface: string;
-	sport: string;
+	sport: string[];
 	price: string;
 	scid: string;
+	parth: boolean;
 
 	// constructor() {
 	// 	this.id = null;

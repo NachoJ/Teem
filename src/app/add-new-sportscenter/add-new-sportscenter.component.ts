@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CoreService } from '../core/core.service';
 
 declare var google: any;
+declare var $: any;
 
 @Component({
 	selector: 'te-add-new-sportscenter',
@@ -80,7 +81,12 @@ export class AddNewSportscenterComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.initAutocomplete();
+		let self = this;
+		$(document).ready(function () {
+			console.log("jQuery is ready");
+			// self.initMap();
+			self.initAutocomplete();
+		});
 	}
 
 	addSportsCenter() {
@@ -96,12 +102,12 @@ export class AddNewSportscenterComponent implements OnInit {
 		};
 		this.coreService.addNewSportsCenter(data)
 			.subscribe((response) => {
-				console.log(response)
+				console.log(response.data)
 				// this.error='';
 				// this.success = response;
-				this.coreService.emitSuccessMessage(response);
+				this.coreService.emitSuccessMessage(response.message);
 				this.sportsCenterFormGroup.reset();
-				this.router.navigate(['/my-sportscenter']);
+				this.router.navigate(['/pitch/' + response.data.id + "/new"]);
 			},
 			(error: any) => {
 				this.coreService.emitErrorMessage(error);

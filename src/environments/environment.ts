@@ -27,7 +27,9 @@ export const environment = {
 	AUTOCOMPLETE_SPORTSCENTRE: '/sportcenter/autocomplete/',
 	GET_ALL_CURRENCY: '/currency',
 	GET_CURRENCY: '/currency/',
+	GET_ALL_MAIN_SPORTS: 'sport/all',
 	GET_ALL_SPORTS: '/sport',
+	GET_ALL_SPORTS_WITH_SUB: '/subsport',
 	GET_SPORT: '/sport/',
 	PROFILE_UPDATE: '/profile',
 	PROFILE_IMAGE_UPDATE: '/profile/image/',
@@ -35,6 +37,7 @@ export const environment = {
 	GET_MATCH: '/match/',
 	NEARBY_MATCH: '/match/nearby',
 	GET_BENCH_PLAYERS: '/sportplayer/',
+	GET_SUB_SPORTS: '/subsport/list',
 	UPDATE_PASSWORD: '/auth/updatepassword',
 	CHANGE_EMAIL: '/changeemail',
 	INVITATION_SEARCH_PLAYER: '/invitation/usersearch/',
@@ -42,5 +45,7 @@ export const environment = {
 	SEND_INVITATIONS: '/invitation',
 	GET_MATCH_USER: '/match/user/',
 	INVITATION_ACCEPT: '/invitation/accept/',
-	INITATION_DELETE: '/invitation/'
+	INITATION_DELETE: '/invitation/',
+
+	GoogleKey: "&key=AIzaSyDD7oo0yCjyp2pIBLbRr_h3b0_NiMXXu3g"
 };

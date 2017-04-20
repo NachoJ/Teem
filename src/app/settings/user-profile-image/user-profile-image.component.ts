@@ -26,7 +26,10 @@ export class UserProfileImageComponent implements OnInit {
     imgSrc = '';
     cropper;
     previews = <any>{};
-    constructor(private sanitizer: DomSanitizer, private builder: FormBuilder, private coreservice: CoreService, public dialogRef: MdDialogRef<ProfileComponent>) {
+
+	isMobile: boolean = false;
+
+    constructor(public sanitizer: DomSanitizer, private builder: FormBuilder, private coreservice: CoreService, public dialogRef: MdDialogRef<ProfileComponent>) {
         //    this.loginUser = this.authService.getUserFromLocalStorage();
         this.flogoform = builder.group({
             'logoname': this.logoname
@@ -41,7 +44,10 @@ export class UserProfileImageComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.cropperInit();
+        this.cropperInit();		
+		if(window.innerWidth <= 480) {
+			this.isMobile = true;
+		}
     }
    
     onCropperPopupDone() {

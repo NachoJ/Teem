@@ -56,6 +56,7 @@ import { AuthGuard } from "./auth/authguard.service";
 					{ path: 'add-new-sportscenter', component: AddNewSportscenterComponent },
 					{ path: 'add-new-sportscenter/:updateId', component: AddNewSportscenterComponent },
 					{ path: 'pitch/:scId', component: PitchComponent },
+					{ path: 'pitch/:scId/:new', component: PitchComponent },
 					{ path: 'match-create', component: MatchCreateComponent },
 					 {path: 'match-details/:matchId', component: MatchDetailsComponent },
 					{ path: 'settings', 

@@ -1,115 +1,124 @@
-<div fxLayout="column" fxLayoutAlign="start start" class="detail-box">
-    <div class="title-list-items">
-        <p class="title-list-items-text"> <i class="material-icons">control_point</i> MATCH DETAILS</p>
-    </div>
-    <div class="find-match-main" fxLayoutAlign="start start">
-        <div class="my-from" fxLayout="row" style="width:100%;">
-            <!--<form>-->
-            <div *ngIf="match" fxFlex="30" class="form-group">
-                <p class="matchtitle">{{match.sport}}</p> <span class="sample-label italic">Organized by</span> <span class="sample-label italic">{{match.userid.username}}</span>
-                <div fxLayout="column">
-                    <div fxLayout="row" class="matchdetails"> <i class="material-icons">person</i>
-                        <label class="sample-label">{{match.benchplayers+ ' x ' + match.benchplayers}}</label>
-                    </div>
-                    <div fxLayout="row" class="matchdetails"> <i class="material-icons">perm_contact_calendar</i>
-                        <label class="sample-label">{{match.filteredDate}}</label>
-                    </div>
-                    <div fxLayout="row" class="matchdetails"> <i class="material-icons">location_on</i>
-                        <label class="sample-label">{{match.scid.address}}</label>
-                    </div>
-                    <div fxLayout="row" class="matchdetails"> <i class="material-icons">public</i>
-                        <label class="sample-label">Public</label>
-                    </div>
-                    <div fxLayout="row" class="matchdetails">
-                        <div fxLayout="row"> <i class="material-icons">attach_money</i>
-                            <label class="sample-label">{{match.price}}</label>
+<div fxLayout="column">
+    <div fxLayout="column" fxLayoutAlign="start start" class="detail-box">
+        <div class="title-list-items">
+            <p class="title-list-items-text"> <i class="material-icons">control_point</i> MATCH DETAILS</p>
+        </div>
+        <div class="find-match-main" fxLayoutAlign="start start">
+            <div class="my-from" fxLayout.xs="column" fxLayout="row" style="width:100%;">
+                <!--<form>-->
+                <div *ngIf="match" fxFlex.xs="100" fxFlex="30" class="form-group">
+                    <p class="matchtitle">{{match.sport.title}}</p> <span class="sample-label italic">Organized by</span> <span class="sample-label italic">{{match.userid.username}}</span>
+                    <div fxLayout="column">
+                        <div fxLayout="row" class="matchdetails"> <i class="material-icons">person</i>
+                            <label class="sample-label">{{match.benchplayers+ ' x ' + match.benchplayers}}</label>
+                        </div>
+                        <div fxLayout="row" class="matchdetails"> <i class="material-icons">perm_contact_calendar</i>
+                            <label class="sample-label">{{match.filteredDate}}</label>
+                        </div>
+                        <div fxLayout="row" class="matchdetails"> <i class="material-icons">location_on</i>
+                            <label class="sample-label">{{match.scid.address}}</label>
+                        </div>
+                        <div fxLayout="row" class="matchdetails"> <i class="material-icons">public</i>
+                            <label class="sample-label">Public</label>
+                        </div>
+                        <div fxLayout="row" class="matchdetails">
+                            <div fxLayout="row"> <i class="material-icons">attach_money</i>
+                                <label class="sample-label">{{match.price}}</label>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="my-map" fxFlex="70" style="background-color:lightpink;height:230px">
-                <div id="nearByMap"></div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--- players -->
-<div fxLayout="column" fxLayoutAlign="start start" class="detail-box">
-    <div class="title-list-items">
-        <p class="title-list-items-text"> <i class="material-icons">person_pin</i> PLAYERS</p>
-        <button md-raised-button> Leave</button>
-    </div>
-    <div fxLayoutAilgn="center center" style="margin: 10px 0px 15px; width: 100%; text-align: center;">
-        <p style="font-size:14px; color:#c61315; font-weight:normal;">Choose your team by clicking on avtar</p>
-    </div>
-    <div fxLayout="row" style="width:100%;">
-        <div fxFlex="50" fxLayoutAlign="center center" fxLayout="column" class="teems border">
-            <h4>Red Arrows</h4>
-            <div fxLayout="row">
-                <a href=""><img src="assets/img/avatar.png" alt="Team Member"></a>
-                <a href=""><img src="assets/img/logo.png" alt="Team Member"></a>
-                <a href=""><img src="assets/img/logo.png" alt="Team Member"></a>
-                <a href=""><img src="assets/img/logo.png" alt="Team Member"></a>
-            </div>
-        </div>
-        <div fxFlex="50" fxLayoutAlign="center center" fxLayout="column" class="teems">
-            <h4>Blue Hammers</h4>
-            <div fxLayout="row">
-                <a href=""><img src="assets/img/logo.png" alt="Team Member"></a>
-                <a href=""><img src="assets/img/logo.png" alt="Team Member"></a>
-                <a href=""><img src="assets/img/logo.png" alt="Team Member"></a>
+                <div class="my-map" fxFlex.xs="100" fxFlex="70" style="background-color:lightpink;height:230px">
+                    <div id="nearByMap"></div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div fxLayout="row">
-    <!-- chat -->
-    <div fxLayout="column" fxFlex="48" fxLayoutAlign="start start" class="detail-box chat-box">
+    <!--- players -->
+    <div fxLayout="column" class="detail-box">
+		<!--fxLayoutAlign="start start"-->
         <div class="title-list-items">
-            <p class="title-list-items-text"> <i class="material-icons">chat_bubble_outline</i> CHAT</p>
+            <p class="title-list-items-text"> <i class="material-icons">person_pin</i> PLAYERS</p>
+            <button md-raised-button> Leave</button>
         </div>
-        <div fxLayout="column" style="width:100%;">
-            <div class="form-group" style="width:100%;">
-                <md-input-container class="md-block register-form-text-area" fxFlex="100" md-no-float>
-                    <textarea mdInput class="user-text-label"> </textarea>
-                </md-input-container>
+        <div fxLayoutAilgn="center center">
+			<!--style="margin: 10px 0px 15px; width: 100%; text-align: center;"-->
+            <p style="font-size:14px; color:#c61315; font-weight:normal;text-align:center;margin: 10px 0px 15px;">Choose your team by clicking on avtar</p>
+        </div>
+        <div fxLayout.xs="column" fxLayout="row" >
+            <div fxFlex="50" class="teems border" >
+				<!--fxLayoutAlign="center center" fxLayout="column" -->
+                <h4>Red Arrows</h4>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <a href=""><img src="assets/img/avatar.png" alt="Team Member"></a>
+                    <a href=""><img src="assets/img/logo.png" alt="Team Member"></a>
+                    <a href=""><img src="assets/img/logo.png" alt="Team Member"></a>
+                    <a href=""><img src="assets/img/logo.png" alt="Team Member"></a>
+                </div>
             </div>
-            <div class="form-group" style="width:100%;">
-                <md-input-container class="md-block register-form-text-area" fxFlex="100" md-no-float>
-                    <input mdInput class="user-text-label"> <a href="#"><i class="material-icons ng-scope">send</i></a> </md-input-container>
+            <div fxFlex="50" class="teems" >
+				<!--fxLayoutAlign="center center" fxLayout="column" -->
+                <h4>Blue Hammers</h4>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <a href=""><img src="assets/img/logo.png" alt="Team Member"></a>
+                    <a href=""><img src="assets/img/logo.png" alt="Team Member"></a>
+                    <a href=""><img src="assets/img/logo.png" alt="Team Member"></a>
+                </div>
             </div>
         </div>
     </div>
-    <!-- Invitation -->
-    <div fxLayout="column" fxFlexOffset="4" fxFlex="48" fxLayoutAlign="center start" class="detail-box chat-box">
-        <div class="title-list-items">
-            <p class="title-list-items-text"> <i class="material-icons">chat</i> Invitation</p>
-        </div>
-        <div fxLayout="column" style="width:100%;">
-            <div class="form-group" style="width:100%;">
-                <md-input-container>
-                    <input type="text" mdInput [(ngModel)]="searchPlayer" [mdAutocomplete]="auto" (input)="loadAutoComplete()" (keyup.enter)="itemSelected()"> </md-input-container>
-                <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
-                    <md-option *ngFor="let p of players" [value]="p" (change)="itemSelected()" (click)="itemSelected()" (keyup.enter)="itemSelected()">
-                        <div> <img class="thumb-circle" src="{{PROFILE_IMAGE_PATH+p.profileimage}}"><span>{{ p.firstname +' ' + p.lastname }}</span> </div>
-                    </md-option>
-                </md-autocomplete>
+    <div fxLayout.xs="column" fxLayout="row">
+        <!-- chat -->
+        <div fxFlex="48" class="detail-box chat-box">
+            <div class="title-list-items">
+                <p class="title-list-items-text"> <i class="material-icons">chat_bubble_outline</i> CHAT</p>
             </div>
-            <div fxLayout="row" class="chipbox">
-                <md-chip-list color="primary" *ngFor="let p of selectedPlayer; let i = index">
-                    <md-chip (click)="removeInvites(i)">{{p.firstname}}</md-chip>
-                </md-chip-list>
+            <div>
+                <div class="form-group">
+                    <md-input-container class="md-block register-form-text-area" fxFlex="100" md-no-float>
+                        <textarea mdInput class="user-text-label"> </textarea>
+                    </md-input-container>
+                </div>
+                <div class="form-group">
+                    <md-input-container class="md-block register-form-text-area" fxFlex="100" md-no-float>
+                        <input mdInput class="user-text-label">
+                        <a href="#"><i class="material-icons ng-scope">send</i></a>
+                    </md-input-container>
+                </div>
             </div>
         </div>
-        <div class="form-group" style="width:100%; text-align:center;">
-            <button md-raised-button (click)="sendInvitations()">SEND INVITATIONS</button>
-        </div>
-        <div fxLayoutAlign="center center" fxLayout="column" class="invite">
-            <p>Your friend are not on Teem yet? Invite them to play!</p>
-            <div fxLayoutAlign="center center" fxLayout="row" style="width:100%;">
-                <a href="#"><i class="material-icons">email</i> </a>
-                <a href="#"><i class="material-icons">email</i> </a>
-                <a href="#"><i class="material-icons">email</i> </a>
+        <!-- Invitation -->
+        <div fxFlexOffset.xs="0"  fxFlexOffset="4" fxFlex="48"  class="detail-box chat-box">
+            <div class="title-list-items">
+                <p class="title-list-items-text"> <i class="material-icons">chat</i> Invitation</p>
+            </div>
+            <div>
+                <div class="form-group">
+                    <md-input-container>
+                        <input type="text" mdInput [(ngModel)]="searchPlayer" [mdAutocomplete]="auto" (input)="loadAutoComplete()" (keyup.enter)="itemSelected()"> </md-input-container>
+                    <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
+                        <md-option *ngFor="let p of players" [value]="p" (change)="itemSelected()" (click)="itemSelected()" (keyup.enter)="itemSelected()">
+                            <div> <img class="thumb-circle" src="{{PROFILE_IMAGE_PATH+p.profileimage}}"><span>{{ p.firstname +' ' + p.lastname }}</span>                                </div>
+                        </md-option>
+                    </md-autocomplete>
+                </div>
+                <div fxLayout="row" class="chipbox">
+                    <md-chip-list color="primary" *ngFor="let p of selectedPlayer; let i = index">
+                        <md-chip (click)="removeInvites(i)">{{p.firstname}}</md-chip>
+                        <a href="#">×</a>
+                    </md-chip-list>
+                </div>
+            </div>
+            <div class="form-group" style="text-align: center;">
+                <button md-raised-button (click)="sendInvitations()">SEND INVITATIONS</button>
+            </div>
+            <div class="invite">
+                <p>Your friend are not on Teem yet? Invite them to play!</p>
+                <div fxLayoutAlign="center center" fxLayout="row" style="width:100%;">
+                    <a href="#"><i class="material-icons">email</i> </a>
+                    <a href="#"><i class="material-icons">email</i> </a>
+                    <a href="#"><i class="material-icons">email</i> </a>
+                </div>
             </div>
         </div>
     </div>

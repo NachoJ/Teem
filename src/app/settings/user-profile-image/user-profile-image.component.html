@@ -1,20 +1,28 @@
-<input #inputFil type="file" name="" value="" id="file" (change)="getImage($event)" style="display: none;">
-<button md-raised-button class="btn-choose-file" (click)="inputFil.click()">Choose File</button>
-<div class="containerr">
+<div class="modal-header">
     <h5>Upload Your Photo here</h5>
-    <div class="row">
-        <div class="col col-6">
-            <img id="image" [src]="sanitizer.bypassSecurityTrustResourceUrl(imgSrc)" alt="Picture">
+    <button md-raised-button md-dialog-close>×</button>
+</div>
+<div class="containerr">
+    <div class="uploadbtn">
+        <input #inputFil type="file" name="" value="" id="file" (change)="getImage($event)" style="display: none;">
+        <button md-raised-button class="btn-choose-file" (click)="inputFil.click()">Choose File</button>
+    </div>
+    <!--    <div fxLayout.xs="column" fxLayout="row" class="previewblock">-->
+    <div class="previewblock">
+        <!--        <div fxFlex="70" class="profile-wrapper col"> <img id="image" [src]="sanitizer.bypassSecurityTrustResourceUrl(imgSrc)" alt="Picture"> </div>-->
+        <div class="profile-wrapper col"> <img id="image" [src]="sanitizer.bypassSecurityTrustResourceUrl(imgSrc)" alt="Picture"> </div>
+        <!--        <div fxFlexOffset="5" fxFlex="25" fxLayout="column">-->
+        <div class="cropper">
+            <div class="col preview-lg" *ngIf="!this.isMobile">
+                <div class="preview"></div>
+            </div>
+            <div class="col preview-md" *ngIf="!this.isMobile">
+                <div class="preview"></div>
+            </div>
+            <div class="col preview-sm" *ngIf="!this.isMobile">
+                <div class="preview"></div>
+            </div>
+            <button md-raised-button class="done-btn" type="button" (click)="onCropperPopupDone()">Done</button>
         </div>
-        <div class="col col-3">
-            <div class="preview"></div>
-        </div>
-        <div class="col col-2">
-            <div class="preview"></div>
-        </div>
-        <div class="col col-1">
-            <div class="preview"></div>
-        </div>
-        <button md-raised-button class="butn" type="button" (click)="onCropperPopupDone()">Done</button>
     </div>
 </div>

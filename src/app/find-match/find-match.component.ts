@@ -25,6 +25,7 @@ export class FindMatchComponent implements OnInit {
 	cityName: string = "";
 
 	sport: string = "all";
+	sportOptions = [];
 
 	latitudeMap: any;
 	longitudeMap: string;
@@ -35,65 +36,105 @@ export class FindMatchComponent implements OnInit {
 
 	PROFILE_IMAGE_PATH: string;
 
-	constructor(private coreService: CoreService, iconRegistry: MdIconRegistry, sanitizer: DomSanitizer, private ngZone: NgZone, private router: Router) {
+	map: any;
+	markers = [];
+
+	user: any;
+
+	constructor(private coreService: CoreService, iconRegistry: MdIconRegistry, sanitizer: DomSanitizer,
+		private ngZone: NgZone, private router: Router) {
 		this.PROFILE_IMAGE_PATH = environment.PROFILE_IMAGE_PATH;
+
+		this.user = JSON.parse(window.localStorage['teem_user'] || '' );
 
 		iconRegistry.addSvgIcon(
 			'all',
 			sanitizer.bypassSecurityTrustResourceUrl('assets/svg/all-sports_off.svg'));
 		iconRegistry.addSvgIcon(
-			'football',
+			'Soccer',
 			sanitizer.bypassSecurityTrustResourceUrl('assets/svg/futbol_off.svg'));
 		iconRegistry.addSvgIcon(
-			'basketball',
+			'Padel',
 			sanitizer.bypassSecurityTrustResourceUrl('assets/svg/baloncesto_off.svg'));
 		iconRegistry.addSvgIcon(
-			'padel',
+			'Basketball',
 			sanitizer.bypassSecurityTrustResourceUrl('assets/svg/padel_off.svg'));
 
 		window["FindMatchComponent"] = this;
 
+		this.loadSports();
+
+		this.getAndSetLocation();
 
 	}
 
 	ngOnInit() {
-		let self = this;
-		// document.addEventListener("DOMContentLoaded", function (event) {
-		// 	console.log("DOMContentLoaded");
-		// 	self.initMap();
-		// });
+		var self = this;
 		$(document).ready(function () {
 			console.log("jQuery is ready");
 			self.initMap();
 		});
 	}
 
+	ngAfterViewInit() {
+	}
+
+	loadSports() {
+		this.coreService.getMainSports()
+			.subscribe((response) => {
+				console.log("get Main Sport", response);
+				let allOption = {
+					id: "all",
+					imagurl: "all",
+					title: "all"
+				};
+				this.sportOptions.push(allOption);
+				for (let res of response) {
+					this.sportOptions.push(res);
+				}
+			},
+			(error: any) => {
+				this.coreService.emitErrorMessage(error);
+			});
+	}
+
 	initMap() {
 		let self = this;
-		var markers = [];
-		if (self.latitudeMap != null && self.longitudeMap) {
+		if (this.latitudeMap != null && this.longitudeMap) {
 			var myLatLng = {
-				lat: parseFloat(self.latitudeMap),
-				lng: parseFloat(self.longitudeMap)
+				lat: parseFloat(this.latitudeMap),
+				lng: parseFloat(this.longitudeMap)
 			};
 		} else {
 			console.log("latitude not found");
 			var myLatLng = { lat: 22.278323, lng: 70.798889 };
 		}
 
-		var map = new google.maps.Map(document.getElementById('nearByMap'), {
+		this.map = new google.maps.Map(document.getElementById('nearByMap'), {
 			zoom: 13,
 			center: myLatLng
 		});
 
 		// Create the search box and link it to the UI element.
 		var input = document.getElementById('pac-input');
-		google.maps.event.addDomListener(input, 'keydown', function (e) {
-			if (e.keyCode == 13) {
-				self.assignValuetoInput(e.target.value);
-			}
-		});
 		var searchBox = new google.maps.places.SearchBox(input);
+
+		searchBox.addListener('places_changed', function () {
+			var places = searchBox.getPlaces();
+			if (!places[0].geometry) {
+				console.log("Returned place contains no geometry");
+				return;
+			}
+			console.log("Places : ", places[0].formatted_address);
+			console.log("Location: " + places[0].geometry.location.lat() + ", " + places[0].geometry.location.lng());
+
+			self.ngZone.run(() => {
+				self.cityName = places[0].formatted_address;
+				self.latitudeMap = places[0].geometry.location.lat();
+				self.longitudeMap = places[0].geometry.location.lng();
+				self.getMatchMarkers();
+			});
+		});
 		// map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
 		// Bias the SearchBox results towards current map's viewport.
@@ -101,44 +142,7 @@ export class FindMatchComponent implements OnInit {
 		// 	searchBox.setBounds(map.getBounds());
 		// });
 
-		var index = 0;
-		for (let myMarker of self.nearByMatchMarkers) {
-			// console.log("setting marker",myMarker.myLatLng)
-			var image = '';
-			if (myMarker.title == 'soccer') {
 
-				image = 'assets/map-pins/rsz_soccer-pin.png';
-			}
-			else if (myMarker.title == 'basketball') {
-
-				image = 'assets/map-pins/rsz_basketball-pin.png';
-			}
-			else {
-
-				image = 'assets/map-pins/rsz_padel-pin.png';
-			}
-			var showContent = '<h4> Creator: ' + myMarker.creator + '<h4> Game: ' + myMarker.title + '</h4><p>Price: ' + myMarker.price +
-				"</p><br><button md-button onclick=FindMatchComponent.navigateToDetails('" + myMarker.id + "');>Join Now</button>";
-			// console.log("my marker id", myMarker.id);
-			// console.log("content = ", showContent);
-
-			var infowindow = new google.maps.InfoWindow({
-				content: showContent,
-				maxWidth: 200
-			});
-
-			markers[index] = new google.maps.Marker({
-				icon: image,
-				position: myMarker.myLatLng,
-				map: map,
-				title: myMarker.title
-			});
-			markers[index].addListener('click', function () {
-				infowindow.setPosition(myMarker.myLatLng);
-				infowindow.open(map, markers[index]);
-			});
-			index++;
-		}
 	}
 
 	navigateToDetails(id) {
@@ -149,41 +153,64 @@ export class FindMatchComponent implements OnInit {
 	getAndSetLocation() {
 		let self = this;
 		if (navigator.geolocation) {
-			console.log("navigator.geolocation found");
+		 	console.log("navigator.geolocation found");
 
-			navigator.geolocation.getCurrentPosition(this.setLocation.bind(this));
+		 	navigator.geolocation.getCurrentPosition(this.setLocation.bind(this));
 		} else {
 			this.error = "Cannot find Geolocation";
+			if(this.user.city) {
+				this.cityName = this.user.city;
+				this.getLatLongByCityName();
+			}			
 		}
 	}
+
 	setLocation(position) {
-		// console.log("position",position);
+		console.log("position", position);
 		// console.log("latitudeMap",position.coords.latitude);
 		// console.log("temp ",temp);
 
 		this.latitudeMap = position.coords.latitude;
 		this.longitudeMap = position.coords.longitude;
+		this.getAddressFromLatLng();
 		this.getMatchMarkers();
 	}
 
-	getLatLongByCityName() {
-		console.log("cityName", this.cityName);
-		this.coreService.getLatLongByCityName(this.cityName)
+	getAddressFromLatLng() {
+		let self = this;
+		this.coreService.getAddressFromLatLong(this.latitudeMap, this.longitudeMap)
 			.subscribe((response) => {
-				console.log(response)
-				this.latitudeMap = response.lat;
-				this.longitudeMap = response.lng;
-				// this.initMap();
-				this.getMatchMarkers();
+				console.log("getAddressFromLatLng response: ", response);
+				self.ngZone.run(() => {
+					self.cityName = response;
+				});				
 			},
 			(error: any) => {
 				this.coreService.emitErrorMessage(error);
-				// console.log(error);
-				// this.success = '';
-				// this.error = error;
-				// this._router.navigate(['/login']);
 			});
+	}
 
+	//--------- Method obsolated as we are getting lat,long directly from places api ----------
+	//--------- Let's keep this method in case we might need in future ----------
+	getLatLongByCityName() {
+		console.log("cityName", this.cityName);
+		let self = this;
+		this.coreService.getLatLongByCityName(this.cityName)
+			.subscribe((response) => {
+				console.log("getLatLongByCityName response: ", response)
+				self.ngZone.run(() => {
+					self.latitudeMap = response.lat;
+					self.longitudeMap = response.lng;
+					self.getMatchMarkers();
+				});				
+			},
+			(error: any) => {
+				this.coreService.emitErrorMessage(error);
+			});
+	}
+
+	onSportChange() {
+		this.getMatchMarkers();
 	}
 
 	getMatchMarkers() {
@@ -237,23 +264,80 @@ export class FindMatchComponent implements OnInit {
 	}
 
 	setMatchMarker() {
-		this.nearByMatchMarkers.length = 0;
-		for (let match of this.nearByMatch) {
-			var marker = {
-				id: match._id,
-				creator: match.userdetail[0].username,
-				title: match.sport,
-				price: match.price,
-				myLatLng: {
-					lat: parseFloat(match.coordinates[1]),
-					lng: parseFloat(match.coordinates[0])
-				}
-			}
-			this.nearByMatchMarkers.push(marker);
+		console.log("setMatchMarker ", this.nearByMatch);
 
+		// Clear out the old markers.
+		this.markers.forEach(function (marker) {
+			marker.setMap(null);
+		});
+		this.markers = [];
+
+		var bounds = new google.maps.LatLngBounds();
+		for (var index = 0; index < this.nearByMatch.length; index++) {
+			let match = this.nearByMatch[index];
+			let sportdetail = match.sportdetail[0];
+			let userdetail = match.userdetail[0];
+
+			var goldStar = {
+				url: sportdetail.imageurl,
+				anchor: new google.maps.Point(25, 50),
+				scaledSize: new google.maps.Size(20, 20)
+				// path: image,
+				// fillColor: 'yellow',
+				// fillOpacity: 0.8,
+				// scale: 1,
+				// strokeColor: 'gold',
+				// strokeWeight: 14
+			};
+
+			var showContent = '<h4> Creator: ' + userdetail.username + '</h4>'
+				+ '<h4> Game: ' + sportdetail.title + '</h4>'
+				+ '<p>Price: ' + match.price + "</p><br>"
+				+ "<button md-button onclick=FindMatchComponent.navigateToDetails('" + match._id + "');>Join Now</button>";
+			// console.log("my marker id", myMarker.id);
+			// console.log("content = ", showContent);
+
+			var infowindow = new google.maps.InfoWindow({
+				content: showContent,
+				maxWidth: 200
+			});
+
+			var myLatLng = {
+				lat: parseFloat(match.coordinates[1]),
+				lng: parseFloat(match.coordinates[0])
+			}
+			this.markers[index] = new google.maps.Marker({
+				icon: goldStar,
+				position: myLatLng,
+				map: this.map,
+				title: sportdetail.title
+			});
+			this.markers[index].addListener('click', function () {
+				infowindow.setPosition(myLatLng);
+				infowindow.open(this.map, this.markers[index]);
+			});
+
+			bounds.extend(this.markers[index].getPosition());
 		}
+		// for (let match of this.nearByMatch) {
+		// 	var marker = {
+		// 		id: match._id,
+		// 		creator: match.userdetail[0].username,
+		// 		title: match.sportdetail[0].title,
+		// 		price: match.price,
+		// 		myLatLng: {
+		// 			lat: parseFloat(match.coordinates[1]),
+		// 			lng: parseFloat(match.coordinates[0])
+		// 		}
+		// 	}
+		// 	this.nearByMatchMarkers.push(marker);
+
+		// }
+
+		this.map.fitBounds(bounds);
+
 		// console.log("MArkers", this.nearByMatchMarkers);
-		this.initMap();
+		// this.initMap();
 	}
 
 
@@ -268,11 +352,6 @@ export class FindMatchComponent implements OnInit {
 			return true;
 		}
 		return false;
-	}
-
-	assignValuetoInput(v) {
-		console.log("value assigned");
-		this.cityName = v;
 	}
 
 }

@@ -55,7 +55,8 @@ export class HomeComponent implements OnInit {
 					else
 						match.matchdetail[0].userdetail[0].profileimage = "../../assets/img/sidebar_photo.png";
 
-					match.matchdetail[0].benchplayers = match.matchdetail[0].benchplayers + match.matchdetail[0].benchplayers;
+					//match.matchdetail[0].benchplayers = match.matchdetail[0].benchplayers + match.matchdetail[0].benchplayers;
+					match.matchdetail[0].subsport[0].value =match.matchdetail[0].subsport[0].value + match.matchdetail[0].subsport[0].value;
 
 					if (match.filteredMatchDate != dateToCheck) {
 						match["displayDate"] = true;
@@ -105,8 +106,8 @@ export class HomeComponent implements OnInit {
 					else
 						match.matchdetail[0].userdetail[0].profileimage = "../../assets/img/sidebar_photo.png";
 
-					match.matchdetail[0].benchplayers = match.matchdetail[0].benchplayers + match.matchdetail[0].benchplayers;
-
+					//match.matchdetail[0].benchplayers = match.matchdetail[0].benchplayers + match.matchdetail[0].benchplayers;
+					match.matchdetail[0].subsport[0].value =match.matchdetail[0].subsport[0].value + match.matchdetail[0].subsport[0].value;
 					if (match.filteredMatchDate != dateToCheck) {
 						match["displayDate"] = true;
 						dateToCheck = match.filteredMatchDate;

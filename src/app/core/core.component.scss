@@ -11,9 +11,10 @@ md-sidenav {
         padding: 20px;
     }
     .side_bar_inner {
-        width: 300px;
+        width: 250px;
         padding: 0;
         text-align: left;
+        overflow: auto;
     }
     .side_bar_inner h4 {
         margin: 10px 0 5px;
@@ -38,6 +39,14 @@ md-sidenav {
         font-size: 13px;
         vertical-align: middle;
         text-align: left;
+    }
+    .menu-item {
+        .material-icons {
+            margin-right: 15px;
+        }
+    }
+    .ball_box {
+        margin: 10px 0;
     }
 }
 
@@ -68,7 +77,7 @@ md-sidenav {
         border-bottom: none;
     }
     .mat-tab-link {
-        min-width: auto;
+        min-width: inherit;
         opacity: 9;
         font-size: 12px;
         text-transform: uppercase;
@@ -205,10 +214,10 @@ md-sidenav {
         margin-right: 10px;
         padding-top: 5px;
     }
-//        .ball_box {
-     //        margin: 10px 0 40px;
-     //        text-align: right;
-     //    }
+    //        .ball_box {
+    //        margin: 10px 0 40px;
+    //        text-align: right;
+    //    }
     .ball_box a {
         width: 35px;
         height: 35px;
@@ -372,6 +381,10 @@ md-sidenav {
     -moz-border-radius: 50%;
 }
 
+.ball_box a:focus {
+    outline: none ;
+} 
+
 .link_box {
     text-align: right;
     margin-bottom: 20px;
@@ -436,7 +449,6 @@ md-sidenav {
 
 .mobilemenu {
     width: 100%;
-    overflow: auto;
     display: none;
 }
 

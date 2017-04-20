@@ -255,17 +255,29 @@ app-profile {
     .mat-button-ripple {
         border-radius: 50%;
     }
-    
-    
-// media query start ------------------------------------------------------------
-    
-    
-    @media screen and (max-width:599px) {
-        
-        .form-fileds{margin-top:15px;}
-        label {margin: 0 0 12px 0;}
-        .example-section{display: block;}
-        
+    .user-image-block {
+        float: left;
+        width: 25%;
     }
-    
+    .form-fields1 {
+        float: left;
+        width: 75%;
+    }
+    // media query start ------------------------------------------------------------
+    @media screen and (max-width:599px) {
+        label {
+            margin: 0 0 12px 0;
+        }
+        .example-section {
+            display: block;
+        }
+        .user-image-block,
+        .form-fields1 {
+            float: none;
+            width: 100%;
+        }
+        .form-fields1 {
+            margin: 20px 0 0;
+        }
+    }
 }

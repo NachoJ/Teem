@@ -60,8 +60,11 @@ app-pitch {
         box-shadow: none;
         font-weight: normal;
         position: absolute;
-        bottom: 2px;
-        right: 0;
+        bottom: 0;
+        right: -1px;
+        border-radius: 4px 4px 0 0 !important;
+        -webkit-border-radius: 4px 4px 0 0 !important;
+        -moz-border-radius: 4px 4px 0 0 !important;
     }
     /****  Form CSS  *****/
     form {
@@ -171,6 +174,13 @@ app-pitch {
         margin: 20px 0px 0px;
         background: #fff;
     }
+	.pitch-sport {
+		margin-bottom: 10px;
+		a {
+			margin-left: 5px;
+			line-height: 35px;
+		}
+	}
     .mat-radio-container,
     .mat-radio-inner-circle,
     .mat-radio-outer-circle {
@@ -252,23 +262,12 @@ app-pitch {
     }
     // media query start ------------------------------------------------------------
     @media screen and (max-width:599px) {
-        .single-form {
-            padding: 56px 10px 20px;
-            position: relative;
-            margin: 20px 0px 0px;
-            background: #fff;
-        }
-        form {
-            padding-right: 0px;
-        }
-        label {
-            margin: 0 0 12px 0;
-        }
-        app-pitch .single-form {
-            padding: 46px 10px 20px;
-        }
-        .addpitchwrapper {
-            padding: 15px;
-        }
+        .single-form { padding: 56px 20px 20px; position: relative; margin: 20px 0px 0px; background: #fff; }
+        form { padding-right: 0px; }
+        .form-group {margin-bottom:20px;}
+        label { margin: 0 0 12px 0; }
+        app-pitch .single-form { padding: 46px 10px 20px; }
+        .addpitchwrapper { padding: 15px; }
+        .pitch-sport a { margin-left: 0; line-height: 25px; font-size: 13px; }
     }
 }

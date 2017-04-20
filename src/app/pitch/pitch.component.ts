@@ -4,6 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CoreService } from '../core/core.service';
 import { Pitch } from '../shared/interface/pitch';
 
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
+// import 'rxjs/Rx';  // use this line if you want to be lazy, otherwise:
+import 'rxjs/add/operator/do';  // debug
+
 @Component({
 	selector: 'app-pitch',
 	templateUrl: './pitch.component.html',
@@ -19,7 +26,15 @@ export class PitchComponent implements OnInit {
 	covering: string;
 	lights: string;
 	surface: string;
-	sport: string;
+	// sport: string;
+
+	sport = [];
+	mySportOptions = [
+		{ value: 'option1', viewValue: 'option1' },
+		{ value: 'option2', viewValue: 'option2' },
+		{ value: 'option3', viewValue: 'option3' }
+	];
+
 	surfaceOptions = [
 		{ value: 'option1', viewValue: 'option1' },
 		{ value: 'option2', viewValue: 'option2' },
@@ -33,12 +48,13 @@ export class PitchComponent implements OnInit {
 	// ];
 	price: string;
 
-	pitches: Pitch[] = [];
+	pitches: Pitch[];
 	deleteData = [];
 
 	// nameCtrl = FormControl[];
 
 	sub: any;
+	subNew: any;
 
 	// public pitchFormGroup: FormGroup;
 	public pitchFormGroupArray: FormGroup[] = [];
@@ -48,14 +64,33 @@ export class PitchComponent implements OnInit {
 		this.sub = this.route.snapshot.params.scId;
 		console.log("sub", this.sub);
 		this.coreService.getAllSports()
-			.subscribe((response) => {
-				this.sportOptions = response;
+			.subscribe((response: any) => {
+				console.log("sport options response = ", response);
+				// tslint:disable-next-line:forin
+				let tempsport = "";
+				for (var res of response) {
+					if (tempsport != res.sportid.title) {
+						tempsport = res.sportid.title;
+						console.log("Sport = ", res.sportid.title);
+						this.sportOptions.push({ value: res.sportid.title, viewValue: res.sportid.title, isDisabled: true });
+					}
+					console.log("res title " + res.title + " res value " + res.value);
+					this.sportOptions.push({ value: res.id, viewValue: res.sportid.title + " " + res.title, isDisabled: false });
+				}
+				console.log("sport options  = ", this.sportOptions);
+				//this.sportOptions = response;
+
+				if (this.subNew) {
+					this.addMore();
+				} else {
+					this.loadPitch();
+				}
 			},
 			(error: any) => {
 				this.error = error;
 			});
-
-		this.loadPitch();
+		this.pitches = [];
+		this.subNew = this.route.snapshot.params.new;
 		// this.addMore();
 
 	}
@@ -68,11 +103,14 @@ export class PitchComponent implements OnInit {
 			console.log("pitchFormGroupArray length", this.pitchFormGroupArray.length);
 			console.log("deleteData length", this.deleteData.length);
 			this.isFormValid = true;
+			let index = 0;
 			for (let fm of this.pitchFormGroupArray) {
-				if (!fm.valid) {
+				// console.log("sport = ", index + " " + this.pitches[index].sport)
+				if (!fm.valid || this.pitches[index].sport.length <= 0) {
 					this.isFormValid = false;
 					break;
 				}
+				index++;
 			}
 		}, 100);
 	}
@@ -83,7 +121,7 @@ export class PitchComponent implements OnInit {
 			covering: ['', [Validators.required]],
 			lights: ['', [Validators.required]],
 			surface: ['', [Validators.required]],
-			sports: ['', [Validators.required]],
+			// sports: ['', [Validators.required]],
 			price: ['', [Validators.required]]
 		}));
 	}
@@ -95,6 +133,8 @@ export class PitchComponent implements OnInit {
 		this.addValidationControls();
 		let tempPitch = <Pitch>{};
 		tempPitch.scid = this.sub;
+		tempPitch.sport = [];
+		tempPitch.sport.push(this.sportOptions[0].id);
 		this.pitches.push(tempPitch);
 		this.formChanged();
 	}
@@ -106,7 +146,9 @@ export class PitchComponent implements OnInit {
 				for (let res of response) {
 					console.log('pitch load')
 					this.addValidationControls();
-					this.pitches.push(res);
+					let temp = res;
+					temp.sport = res.sport.split(',');
+					this.pitches.push(temp);
 				}
 				this.formChanged();
 			},
@@ -133,7 +175,16 @@ export class PitchComponent implements OnInit {
 	}
 
 	SavePitch() {
+		// let temppitches= this.pitches
+		// console.log(temppitches);
+		// for (let p of temppitches) {
 
+		// 	var temp = p.sport.toString();
+		// 	// delete p.sport;
+		// 	// p.sport = temp;
+		// 	console.log("temp1",temp);
+		// }
+		// console.log("tempitches = ",JSON.stringify(temppitches));
 		let dataPitches = JSON.stringify(this.pitches);
 		let data = {
 			"fields": this.pitches,
@@ -157,4 +208,22 @@ export class PitchComponent implements OnInit {
 			});
 	}
 
+	addSportFeild(index) {
+
+		console.log("pitches = ", this.pitches);
+		if (this.pitches[index].sport) {
+
+			this.pitches[index].sport.push(this.sportOptions[0].id);
+			console.log("sport found 1", this.pitches[index].sport.length);
+		}
+		if (!this.pitches[index].sport) {
+			console.log("sport not found 2");
+			this.pitches[index].sport = [];
+			this.pitches[index].sport.push(this.sportOptions[0].id);
+		}
+	}
+
+	removeSelect(index) {
+
+	}
 }

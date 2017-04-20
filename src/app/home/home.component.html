@@ -15,52 +15,50 @@
                         </div>
                         <div fxLayout="column" fxFlexOffset="2" fxLayoutAlign="center start" fxFlex="58">
                             <p class="md-list-event-hour datetime"><b>{{match.filteredMatchTime}}</b> </p>
-                            <p class="md-list-event-hour"><b>{{match.matchdetail[0].sport}}</b> </p>
+                            <p class="md-list-event-hour"><b>{{match.matchdetail[0].sportdetail[0].title}}</b> </p>
                             <p><b style="margin:2px 0px;">{{match.matchdetail[0].sportcenterdetail[0].address}} </b></p>
                         </div>
                         <div fxLayoutAlign="center center" fxFlex="20" class="match-time left">
-                            <p><b style="margin:2px 0px; display: block;">3 DE 6 </b> <b style="margin:2px 0px; display: block;">€0.00 </b> </p>
+                            <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{match.matchdetail[0].subsport[0].value}} </b> <b style="margin:2px 0px; display: block;">€{{match.matchdetail[0].price}} </b> </p>
                         </div>
                     </div>
                     <div fxHide.xs fxLayout="row" fxFlex="100">
-                        <div fxLayout="row" fxFlex="20" fxLayoutAlign="center center" class="datetime">
-                            <i class="material-icons play-arrow-icon">play_arrow</i>
+                        <div fxLayout="row" fxFlex="15" fxLayoutAlign="center center" class="datetime"> <i class="material-icons play-arrow-icon">play_arrow</i>
                             <p class="md-list-event-hour"><b>{{match.filteredMatchTime}}</b> </p>
                         </div>
-                        <div fxLayout="column" fxFlex="15">
-                            <p class="md-list-event-hour"><b>{{match.matchdetail[0].sport}}</b> </p>
-                            <p style="font-size:10px !important; margin:2px 0px;"><b>Created by</b> </p>
-                            <p style="font-size:10px !important"><b>{{match.matchdetail[0].userdetail[0].username}}</b> </p>
+                        <div fxLayout="row" fxFlex="85" fxLayoutAlign="center center">
+                            <!--<p fxFlex="20" class="md-list-event-hour"><b>{{match.matchdetail[0].sportdetail[0].title}}</b> </p>-->
+                            <div fxLayout="column" fxFlexOffset="1" fxFlex="19">
+                                <p class="md-list-event-hour"><b>{{match.matchdetail[0].sportdetail[0].title}}</b> </p>
+                                <p style="font-size:10px !important; margin:2px 0px;"><b>Created by</b> </p>
+                                <p style="font-size:10px !important"><b>{{match.matchdetail[0].userdetail[0].username}}</b> </p>
+                            </div>
+                            <div fxFlex="10" class="match-time center">
+                                <a [mdMenuTriggerFor]="profilePopupMenu"><img src="{{match.matchdetail[0].userdetail[0].profileimage}}" alt="" class="user-img-icon"></a>
+                            </div>
+                            <div fxFlex="25" class="match-time left">
+                                <p><b style="margin:2px 0px; display: block;">{{match.matchdetail[0].sportcenterdetail[0].address}} </b> <b style="margin:2px 0px; display: block;"><!--BERNABÉU --> </b> </p>
+                            </div>
+                            <div fxFlex="10" class="match-time left">
+                                <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{ match.matchdetail[0].subsport[0].value }} </b> <b style="margin:2px 0px; display: block;">€{{match.matchdetail[0].price}} </b> </p>
+                            </div>
+                            <div fxLayoutAlign="center center" fxFlex="15" class="match-time center">
+                                <button md-raised-button [routerLink]="['/match-details',match.matchdetail[0]._id]">Info</button>
+                            </div>
+                            <md-menu #profilePopupMenu="mdMenu">
+                                <h4>{{match.matchdetail[0].userdetail[0].username}}</h4>
+                                <p><i class="material-icons">location_on</i>{{match.matchdetail[0].userdetail[0].city}} </p>
+                                <a *ngIf="checkSport(1,match.matchdetail[0].userdetail[0].sports)"><img src="/assets/img/b01.png"></a>
+                                <a *ngIf="checkSport(2,match.matchdetail[0].userdetail[0].sports)"><img src="/assets/img/b02.png"></a>
+                                <a *ngIf="checkSport(3,match.matchdetail[0].userdetail[0].sports)"><img src="/assets/img/b03.png"></a>
+                            </md-menu>
                         </div>
-                        <div fxFlex="15" class="match-time center">
-                            <a [mdMenuTriggerFor]="profilePopupMenu"><img src="{{match.matchdetail[0].userdetail[0].profileimage}}" alt="" class="user-img-icon"></a>
-                        </div>
-                        <div fxFlex="25" class="match-time left">
-                            <p><b style="margin:2px 0px; display: block;">{{match.matchdetail[0].sportcenterdetail[0].address}} </b> <b style="margin:2px 0px; display: block;"><!--BERNABÉU --> </b> </p>
-                        </div>
-                        <div fxFlex="10" class="match-time left">
-                            <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{ match.matchdetail[0].benchplayers }} </b> <b style="margin:2px 0px; display: block;">€{{match.matchdetail[0].price}} </b> </p>
-                        </div>
-                        <div fxLayoutAlign="center center" fxFlex="15" class="match-time center">
-                            <button md-raised-button [routerLink]="['/match-details',match.matchdetail[0]._id]">Info</button>
-                        </div>
-                        <md-menu #profilePopupMenu="mdMenu">
-                            <h4>{{match.matchdetail[0].userdetail[0].username}}</h4>
-                            <p><i class="material-icons">location_on</i>{{match.matchdetail[0].userdetail[0].city}} </p>
-                            <a *ngIf="checkSport(1,match.matchdetail[0].userdetail[0].sports)"><img src="/assets/img/b01.png"></a>
-                            <a *ngIf="checkSport(2,match.matchdetail[0].userdetail[0].sports)"><img src="/assets/img/b02.png"></a>
-                            <a *ngIf="checkSport(3,match.matchdetail[0].userdetail[0].sports)"><img src="/assets/img/b03.png"></a>
-
-                        </md-menu>
                     </div>
                 </div>
             </md-list-item>
         </md-list>
     </div>
 </div>
-
-
-
 <div fxLayout="column" fxLayoutAlign="start start" class="detail-box">
     <div class="title-list-items">
         <p class="title-list-items-text"> <i class="material-icons">chat_bubble</i> INVITATIONS</p>
@@ -78,20 +76,19 @@
                         </div>
                         <div fxLayout="column" fxFlexOffset="2" fxLayoutAlign="center start" fxFlex="58">
                             <p class="md-list-event-hour datetime"><b>{{invite.filteredMatchTime}}</b> </p>
-                            <p class="md-list-event-hour"><b>{{invite.matchdetail[0].sport}}</b> </p>
+                            <p class="md-list-event-hour"><b>{{invite.matchdetail[0].sportdetail[0].title}}</b> </p>
                             <p><b style="margin:2px 0px;">ESTADIO SANTIAGO BERNABÉU </b></p>
                         </div>
                         <div fxLayoutAlign="center center" fxFlex="20" class="match-time left">
-                            <p><b style="margin:2px 0px; display: block;">{{invite.totalmatchplayer}} DE {{invite.matchdetail[0].benchplayers}} </b> <b style="margin:2px 0px; display: block;">€{{invite.matchdetail[0].price}} </b> </p>
+                            <p><b style="margin:2px 0px; display: block;">{{invite.totalmatchplayer}} DE {{invite.matchdetail[0].subsport[0].value}} </b> <b style="margin:2px 0px; display: block;">€{{invite.matchdetail[0].price}} </b> </p>
                         </div>
                     </div>
                     <div fxHide.xs fxLayout="row" fxFlex="100">
-                        <div fxLayout="row" fxFlex="20" fxLayoutAlign="center center" class="datetime">
-                            <i class="material-icons play-arrow-icon">play_arrow</i>
+                        <div fxLayout="row" fxFlex="20" fxLayoutAlign="center center" class="datetime"> <i class="material-icons play-arrow-icon">play_arrow</i>
                             <p class="md-list-event-hour"><b>{{invite.filteredMatchTime}}</b> </p>
                         </div>
                         <div fxLayout="column" fxFlex="15">
-                            <p class="md-list-event-hour"><b>{{invite.matchdetail[0].sport}}</b> </p>
+                            <p class="md-list-event-hour"><b>{{invite.matchdetail[0].sportdetail[0].title}}</b> </p>
                             <p style="font-size:10px !important; margin:2px 0px;"><b>Created by</b> </p>
                             <p style="font-size:10px !important"><b>{{invite.matchdetail[0].userdetail[0].username}}</b> </p>
                         </div>
@@ -102,13 +99,9 @@
                             <p><b style="margin:2px 0px; display: block;">{{invite.matchdetail[0].sciddetail[0].address}} </b> <b style="margin:2px 0px; display: block;"><!--BERNABÉU --> </b> </p>
                         </div>
                         <div fxFlex="10" class="match-time left">
-                            <p><b style="margin:2px 0px; display: block;">{{invite.totalmatchplayer}} DE {{invite.matchdetail[0].benchplayers}} </b> <b style="margin:2px 0px; display: block;">€{{invite.matchdetail[0].price}} </b> </p>
+                            <p><b style="margin:2px 0px; display: block;">{{invite.totalmatchplayer}} DE {{invite.matchdetail[0].subsport[0].value}} </b> <b style="margin:2px 0px; display: block;">€{{invite.matchdetail[0].price}} </b> </p>
                         </div>
-                        <div fxLayoutAlign="center center" fxFlex="15" class="match-time center">
-                              <i class="material-icons" (click)="openAcceptDialog(invite._id)">done</i>
-                            <i class="material-icons" (click)="openCancelDialog(invite._id)">close</i>
-                            
-                        </div>
+                        <div fxLayoutAlign="center center" fxFlex="15" class="match-time center"> <i class="material-icons" (click)="openAcceptDialog(invite._id)">done</i> <i class="material-icons" (click)="openCancelDialog(invite._id)">close</i> </div>
                         <md-menu #profileInvitePopupMenu="mdMenu">
                             <h4>{{invite.matchdetail[0].userdetail[0].username}}</h4>
                             <p><i class="material-icons">location_on</i>{{invite.matchdetail[0].userdetail[0].city}} </p>
@@ -156,5 +149,4 @@
             </md-list-item>
         </md-list>
     </div>
--->
-</div>
+--></div>

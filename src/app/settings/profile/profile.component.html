@@ -1,9 +1,10 @@
 <!--fxFlexOffset="column"-->
-<div fxFlex="100" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" class="main-padding">
+<!--fxFlex="100" fxLayout.sm="column" fxLayout.xs="column"-->
+<div class="main-padding clearfix" fxFlex="100" fxLayout.sm="column" fxLayout.xs="column">
     <!--<div *ngIf="error" class="error"> {{error}} </div>
         <div *ngIf="success" class="success"> {{success}} </div>-->
     <!--<div fxLayout.sm="column" fxLayout.xs="column" fxLayout="row" fxFlex="100">-->
-    <div fxFlex="25" fxFlex.sm="100" fxFlex.xs="100">
+    <div class="user-image-block" fxLayout.sm="column" fxLayout.xs="column" fxLayout="row" fxFlex="100">
         <div class="example-section example-margin text-center">
             <button md-raised-button (click)="profileDialog()" class="user-pic-btn">
                 <div class="overlay">
@@ -11,8 +12,8 @@
                 </div> <img src="{{imgSrc}}" class="user-img"></button>
         </div>
     </div>
-    <div fxFlex="75" fxFlex.sm="100" fxFlex.xs="100" fxLayout="column" class="form-fileds">
-        <form [formGroup]="profile" novalidate fxFlex="100" fxLayout="column">
+    <div fxLayout.sm="column" fxLayout.xs="column" fxLayout="row" fxFlex="100">
+        <form [formGroup]="profile" novalidate>
             <div class="example-section example-margin">
                 <div fxLayout="column" class="form-group" fxFlex="100">
                     <div fxLayout="row" fxLayout.xs="column">
@@ -46,7 +47,8 @@
                     <div fxLayout="row" fxLayout.xs="column">
                         <label for="" fxLayoutAlign="left center" fxFlex="30">Date of birth</label>
                         <md-input-container class="md-block register-form-text-area" fxFlex="70" md-no-float>
-                            <input mdInput datepicker id="fromDate" formControlName="dob" class="user-text-label datepicker"> </md-input-container>
+                            <!--<input mdInput type="date"   id="fromDate" formControlName="dob" name="bod" class="user-text-label datepicker" > </md-input-container>-->
+                             <input mdInput type="date"  id="fromDate"  formControlName="dob" [ngModel]="birthdate | date:'yyyy-MM-dd'" (ngModelChange)="birthdate = $event" class="user-text-label datepicker" > </md-input-container>
                     </div>
                 </div>
             </div>
@@ -85,7 +87,7 @@
                                 <md-checkbox class="example-margin mat-checkbox-btn" formControlName="all" [checked]="checked" [(ngModel)]="allVal" (change)="sportAllSelect()">All</md-checkbox>
                                 <md-checkbox class="example-margin mat-checkbox-btn" formControlName="basketball" [(ngModel)]="basketballVal" (change)="sportSelect('basketball')">Basketball</md-checkbox>
                                 <md-checkbox class="example-margin mat-checkbox-btn" formControlName="soccer" [(ngModel)]="soccerVal" (change)="sportSelect('soccer')">Soccer</md-checkbox>
-                                <md-checkbox class="example-margin mat-checkbox-btn" formControlName="paddle" [(ngModel)]="padelVal" (change)="sportSelect('paddle')">Paddle</md-checkbox>
+                                <md-checkbox class="example-margin mat-checkbox-btn" formControlName="paddle" [(ngModel)]="padelVal" (change)="sportSelect('paddle')">Padel</md-checkbox>
                             </div>
                         </div>
                     </div>

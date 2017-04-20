@@ -49,7 +49,7 @@ export class CoreService {
 		console.log(data);
 		return this.http.post(environment.BASEAPI + environment.ADD_SPORTS_CENTER, data, this.options)
 			.map((res: Response) => {
-				return res.json().message;
+				return res.json().data;
 
 			}).catch(this.handleError);
 		// .do(data => console.log('server data:', data))  // debug
@@ -126,7 +126,14 @@ export class CoreService {
 	}
 
 	getAllSports() {
-		return this.http.get(environment.BASEAPI + environment.GET_ALL_SPORTS, this.options)
+		return this.http.get(environment.BASEAPI + environment.GET_ALL_SPORTS_WITH_SUB, this.options)
+			.map((res: Response) => {
+				return res.json().data;
+
+			}).catch(this.handleError);
+	}
+	getMainSports() {
+		return this.http.get(environment.BASEAPI + environment.GET_SPORT, this.options)
 			.map((res: Response) => {
 				return res.json().data;
 
@@ -150,11 +157,20 @@ export class CoreService {
 	}
 
 	getLatLongByCityName(cityName) {
-		return this.http.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + cityName + "&key=AIzaSyDD7oo0yCjyp2pIBLbRr_h3b0_NiMXXu3g")
+		return this.http.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + cityName + environment.GoogleKey)
 			.map((res: Response) => {
 				return res.json().results[0].geometry.location;
 
 			}).catch(this.handleError);
+	}
+
+	getAddressFromLatLong(lat: string, lng: string) {
+		let latlng = "latlng="+lat+","+lng;
+		return this.http.get("https://maps.googleapis.com/maps/api/geocode/json?" + latlng + environment.GoogleKey)
+			.map((res: Response) => {
+				return res.json().results[0].formatted_address;
+
+			}).catch(this.handleError);		
 	}
 
 	getNearByMatch(data) {
@@ -164,6 +180,7 @@ export class CoreService {
 
 			}).catch(this.handleError);
 	}
+
 	sportIconDisplay(data: any) {
 		console.log('service data', data);
 		this.sportIcon.next(data);
@@ -180,6 +197,14 @@ export class CoreService {
 		return this.http.get(environment.BASEAPI + environment.GET_BENCH_PLAYERS + sport, this.options)
 			.map((res: Response) => {
 				return res.json().data.players;
+
+			}).catch(this.handleError);
+	}
+
+	getSubSports(sportData) {
+		return this.http.post(environment.BASEAPI + environment.GET_SUB_SPORTS , sportData, this.options)
+			.map((res: Response) => {
+				return res.json().data;
 
 			}).catch(this.handleError);
 	}
