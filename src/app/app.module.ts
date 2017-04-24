@@ -6,7 +6,6 @@ import { ProfileComponent } from './settings/profile/profile.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MaterialModule } from '@angular/material';
@@ -28,7 +27,16 @@ import { MatchCreateComponent } from './match-create/match-create.component';
 import { MatchDetailsComponent } from './match-details/match-details.component';
 import { NotificationComponent } from './settings/notification/notification.component';
 // import { DialogResult } from './my-sportscenter/DialogResult';
+import { DatepickerModule } from 'angular2-material-datepicker'
 
+import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+import { HttpModule, Http } from '@angular/http';
+
+export function createTranslateLoader(http: Http) {
+	return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
+}
 
 @NgModule({
 	declarations: [
@@ -64,13 +72,20 @@ import { NotificationComponent } from './settings/notification/notification.comp
 		BrowserAnimationsModule,
 		MaterialModule.forRoot(),
 		FlexLayoutModule,
-
+		DatepickerModule,
 		AppRoutingModule,
 
 		SharedModule.forRoot(),
 
 		CoreModule,
 		AuthModule,
+		TranslateModule.forRoot({
+			loader: {
+				provide: TranslateLoader,
+				useFactory: createTranslateLoader,
+				deps: [Http]
+			}
+		})
 	],
 	exports: [
 	],

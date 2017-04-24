@@ -3,10 +3,13 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { Observable } from 'rxjs/Observable';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MdIconRegistry } from '@angular/material';
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 
 import { CoreService } from '../core/core.service';
 import { Pitch } from '../shared/interface/pitch';
+import { TranslateService } from "@ngx-translate/core";
+
+declare var moment: any;
 
 @Component({
 	selector: 'app-match-create',
@@ -34,6 +37,7 @@ export class MatchCreateComponent implements OnInit {
 	// sportOptions = [];
 
 	date: string = '';
+	dt: string = '';
 	hour: string;
 	hourOptions = [];
 
@@ -57,15 +61,29 @@ export class MatchCreateComponent implements OnInit {
 
 	someradio = "";
 
-	isCost: boolean = false;
+	subscId: any;
+	subscName: any;
 
+	currencySymbol = String.fromCharCode(36);
+	EURSymbol = String.fromCharCode(8364);
+	USDSymbol = String.fromCharCode(36);
+	GBPSymbol = String.fromCharCode(163);
+	SEKSymbol = String.fromCharCode(107) + String.fromCharCode(114);
+	AUDSymbol = String.fromCharCode(36);
+
+	hideCurrencyCtrls = false;
+
+	translate: any;
 	// filteredOptions: Observable<any[]>;
 
 	/* style variables */
 	// displayPitch: string = 'block';
 	// displayFormDetails: string = 'none';
 
-	constructor(private coreService: CoreService, iconRegistry: MdIconRegistry, sanitizer: DomSanitizer, private formBuilder: FormBuilder, private router: Router) {
+	// tslint:disable-next-line:max-line-length
+	constructor(private coreService: CoreService, iconRegistry: MdIconRegistry, sanitizer: DomSanitizer, private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute, translate: TranslateService) {
+
+		this.translate = translate;
 
 		iconRegistry.addSvgIcon(
 			'all',
@@ -105,16 +123,27 @@ export class MatchCreateComponent implements OnInit {
 			});
 
 		for (let i = 0; i <= 23; i++) {
-			this.hourOptions.push({ value: i, viewValue: i });
+			this.hourOptions.push({ value: i, viewValue: (i > 9 ? i : "0" + i) });
 		}
 		for (let i = 0; i <= 59; i += 15) {
-			this.minuteOptions.push({ value: i, viewValue: i });
+			this.minuteOptions.push({ value: i, viewValue: (i > 9 ? i : "0" + i) });
 		}
 
 		for (let j = 0; j <= 10; j++) {
 			this.benchOpt.push({ value: j, viewValue: j });
 		}
+		this.subscId = this.route.snapshot.params.scId;
+		this.subscName = this.route.snapshot.params.scName;
+		if (this.subscId && this.subscName) {
+			this.selectedSportsCenter = <any>{};
+			this.selectedSportsCenter.id = this.subscId;
+			this.selectedSportsCenter.name = this.subscName;
+			this.loadAutoComplete();
+			this.itemSelected();
+			this.displayFn(this.selectedSportsCenter);
+		}
 
+		this.moneyMethodSelected();
 	}
 
 	ngOnInit() {
@@ -135,7 +164,7 @@ export class MatchCreateComponent implements OnInit {
 	}
 
 	displayFn(sp): string {
-		// console.log("sports center set", sp);
+		console.log("sports center set", sp);
 		// console.log("selectedSportsCenter from display", this.selectedSportsCenterId);
 		// console.log("selectedSportsCenterName", this.selectedSportsCenter);
 		return sp ? sp.name : "";
@@ -190,14 +219,22 @@ export class MatchCreateComponent implements OnInit {
 				let tempsport = "";
 				for (var res of response) {
 					// console.log("res = ",res);
+					let langTitle = "";
+					this. translate.get(res.title).subscribe(
+						value => {
+							// value is our translated string
+							langTitle = value;
+						})
 					if (tempsport != res.title) {
 						tempsport = res.title;
 						console.log("sport = ", res.title + " " + res.id);
-						this.subSportOption.push({ value: res.id, viewValue: res.title, isDisabled: true });
+						// this.subSportOption.push({ value: res.id, viewValue: res.title, isDisabled: true });
+						this.subSportOption.push({ value: res.id, viewValue: langTitle, isDisabled: true });
 					}
 					for (var r of res.subsport) {
 						console.log("r id = " + r.title + " " + r.id)
-						this.subSportOption.push({ value: r.id, viewValue: res.title + " " + r.title, sportid: res.id, isDisabled: false });
+						this.subSportOption.push({ value: r.id, viewValue: langTitle + " " + r.title, sportid: res.id, isDisabled: false });
+						// this.subSportOption.push({ value: r.id, viewValue: res.title + " " + r.title, sportid: res.id, isDisabled: false });
 					}
 					// console.log("res title " + res.title + " res value " + res.value);
 					// this.subSportOption.push({ value: res.id, viewValue: res.sportid.title + " " + res.title, isDisabled: false });
@@ -227,6 +264,7 @@ export class MatchCreateComponent implements OnInit {
 		let user = JSON.parse(localStorage.getItem('teem_user'));
 		let userId = user.id;
 		let filteredDate = this.date.replace(/-/gi, '/');
+		// let filteredDate = moment(this.date).format('YYYY/MM/DD');
 		let finalDate = filteredDate + ' ' + this.hour + ":" + this.minute;
 		let sportid: any;
 		for (let i of this.subSportOption) {
@@ -269,11 +307,36 @@ export class MatchCreateComponent implements OnInit {
 		if (this.payment == 'free') {
 			this.matchFormGroup.get("currencyCtrl").disable();
 			this.matchFormGroup.get("costCtrl").disable();
-			this.currency = "";
-			this.cost = "";
+			this.hideCurrencyCtrls = false;
+			// this.currency = "";
+			// this.cost = "";
 		} else {
+			this.hideCurrencyCtrls = true;
 			this.matchFormGroup.get("currencyCtrl").enable();
 			this.matchFormGroup.get("costCtrl").enable();
+		}
+	}
+
+	currencyChanged() {
+		// console.log("curreny changed = ", this.currency);
+		switch (this.currency) {
+			case "eur":
+				this.currencySymbol = this.EURSymbol;
+				break;
+			case "usd":
+				this.currencySymbol = this.USDSymbol;
+				break;
+			case "gbp":
+				this.currencySymbol = this.GBPSymbol;
+				break;
+			case "sek":
+				this.currencySymbol = this.SEKSymbol;
+				break;
+			case "aud":
+				this.currencySymbol = this.AUDSymbol;
+				break;
+			default:
+				this.currencySymbol = this.AUDSymbol;
 		}
 	}
 

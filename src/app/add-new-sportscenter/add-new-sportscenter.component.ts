@@ -91,13 +91,15 @@ export class AddNewSportscenterComponent implements OnInit {
 
 	addSportsCenter() {
 		// console.log("address",this.el.nativeElement.value);
+		let user = JSON.parse(window.localStorage['teem_user']);
 		let data = {
 			name: this.name,
 			address: this.el.nativeElement.value,
 			phone: this.phone,
 			description: this.description,
 			lat: this.lat,
-			long: this.long
+			long: this.long,
+			userid: user.id
 			// description: ''
 		};
 		this.coreService.addNewSportsCenter(data)
@@ -120,6 +122,7 @@ export class AddNewSportscenterComponent implements OnInit {
 
 	updateSportsCenter() {
 		console.log("update record");
+
 		let data = {
 			id: this.sub,
 			name: this.name,

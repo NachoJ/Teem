@@ -11,6 +11,8 @@ import 'rxjs/add/observable/throw';
 // import 'rxjs/Rx';  // use this line if you want to be lazy, otherwise:
 import 'rxjs/add/operator/do';  // debug
 
+import { TranslateService } from '@ngx-translate/core';
+
 @Component({
 	selector: 'app-pitch',
 	templateUrl: './pitch.component.html',
@@ -60,7 +62,7 @@ export class PitchComponent implements OnInit {
 	public pitchFormGroupArray: FormGroup[] = [];
 	isFormValid: boolean = false;
 
-	constructor(private coreService: CoreService, private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router) {
+	constructor(private coreService: CoreService, private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, translate: TranslateService) {
 		this.sub = this.route.snapshot.params.scId;
 		console.log("sub", this.sub);
 		this.coreService.getAllSports()
@@ -69,11 +71,17 @@ export class PitchComponent implements OnInit {
 				// tslint:disable-next-line:forin
 				let tempsport = "";
 				for (var res of response) {
+					translate.get(res.sportid.title).subscribe(
+						value => {
+							// value is our translated string
+							res.sportid.title = value;
+						})
 					if (tempsport != res.sportid.title) {
 						tempsport = res.sportid.title;
 						console.log("Sport = ", res.sportid.title);
 						this.sportOptions.push({ value: res.sportid.title, viewValue: res.sportid.title, isDisabled: true });
 					}
+
 					console.log("res title " + res.title + " res value " + res.value);
 					this.sportOptions.push({ value: res.id, viewValue: res.sportid.title + " " + res.title, isDisabled: false });
 				}
@@ -188,16 +196,17 @@ export class PitchComponent implements OnInit {
 		let dataPitches = JSON.stringify(this.pitches);
 		let data = {
 			"fields": this.pitches,
+			"scid": this.sub,
 			"deleteids": this.deleteData
 		};
 		console.log("data", JSON.stringify(data));
 		this.coreService.savePitches(JSON.stringify(data))
 			.subscribe((response) => {
-				console.log(response);
+				console.log("save pitch = ", response);
 				// this.error = '';
 				// this.success = response;
-				this.coreService.emitSuccessMessage(response);
-				this.router.navigate(['/my-sportscenter']);
+				this.coreService.emitSuccessMessage(response.message);
+				this.router.navigate(['/match-create/' + this.sub + "/" + response.data.name]);
 				// this.loadPitch();
 			},
 			(error: any) => {

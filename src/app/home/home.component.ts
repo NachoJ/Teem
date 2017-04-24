@@ -14,19 +14,21 @@ export class HomeComponent implements OnInit {
 
 
 	nextMatch: any[] = [];
+	lastMatch:any[]=[];
 	invitation: any[] = [];
 	user: any;
 	constructor(private coreService: CoreService, private dialog: MdDialog, private zone: NgZone) {
 		this.user = JSON.parse(window.localStorage['teem_user']);
 		this.nextMatchList();
 		this.invitationList();
+		this.lastMatchList();
 	}
 
 	ngOnInit() { }
 
 	nextMatchList() {
 
-		this.coreService.getNextMatch(this.user.id)
+		this.coreService.getNextMatch(this.user.id, moment().subtract(1, "days").format('YYYY-MM-DD'))
 			.subscribe((response) => {
 				console.log("next match = ", response);
 				this.nextMatch = [];
@@ -127,6 +129,56 @@ export class HomeComponent implements OnInit {
 
 	}
 
+	lastMatchList() {
+
+		this.coreService.getLastMatch(this.user.id, moment().subtract(1, "days").format('YYYY-MM-DD'))
+			.subscribe((response) => {
+				console.log("next match = ", response);
+				this.lastMatch = [];
+				// this.nearByMatch = response;
+				for (let match of response) {
+					match["filteredMatchTime"] = moment(match.matchdetail[0].matchtime).format('HH:mm');
+					match["filteredMatchDate"] = moment(match.matchdetail[0].matchtime).format('MMM DD, YYYY');
+					this.lastMatch.push(match);
+				}
+
+				this.lastMatch.sort(function (a, b) {
+					if (a.filteredMatchDate < b.filteredMatchDate) {
+						return -1;
+					}
+					if (a.filteredMatchDate > b.filteredMatchDate) {
+
+						return 1;
+					}
+					return 0;
+				});
+
+				let dateToCheck: string = "";
+				for (let match of this.lastMatch) {
+					if (match.matchdetail[0].userdetail[0].profileimage != "")
+						match.matchdetail[0].userdetail[0].profileimage = environment.PROFILE_IMAGE_PATH + match.matchdetail[0].userdetail[0].profileimage;
+					else
+						match.matchdetail[0].userdetail[0].profileimage = "../../assets/img/sidebar_photo.png";
+
+					//match.matchdetail[0].benchplayers = match.matchdetail[0].benchplayers + match.matchdetail[0].benchplayers;
+					match.matchdetail[0].subsport[0].value =match.matchdetail[0].subsport[0].value + match.matchdetail[0].subsport[0].value;
+
+					if (match.filteredMatchDate != dateToCheck) {
+						match["displayDate"] = true;
+						dateToCheck = match.filteredMatchDate;
+					} else {
+						match["displayDate"] = false;
+					}
+
+				}
+				console.log("lastMatch", this.lastMatch);
+			},
+			(error) => {
+				this.coreService.emitErrorMessage(error);
+				this.lastMatch=[];
+			}
+			);
+	}
 	checkSport(index, value: string): boolean {
 		if (index == 1 && value.includes('soccer')) {
 			return true;

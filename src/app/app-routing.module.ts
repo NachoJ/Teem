@@ -28,6 +28,7 @@ import { ProfileComponent } from './settings/profile/profile.component';
 
 // import { AU } form '/auth/authguard.service';
 import { AuthGuard } from "./auth/authguard.service";
+import { ProfileGuard } from "app/core/profileguard.service";
 
 @NgModule({
 	imports: [
@@ -47,27 +48,30 @@ import { AuthGuard } from "./auth/authguard.service";
 			{
 				path: '',
 				component: CoreComponent,
+				canActivate: [AuthGuard],
 				children: [
-					{ path: '', component: HomeComponent, canActivate: [AuthGuard] },
-					{ path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-					{ path: 'find-match', component: FindMatchComponent },
-					{ path: 'tournaments', component: TournamentsComponent },
-					{ path: 'my-sportscenter', component: MySportscenterComponent },
-					{ path: 'add-new-sportscenter', component: AddNewSportscenterComponent },
-					{ path: 'add-new-sportscenter/:updateId', component: AddNewSportscenterComponent },
-					{ path: 'pitch/:scId', component: PitchComponent },
-					{ path: 'pitch/:scId/:new', component: PitchComponent },
-					{ path: 'match-create', component: MatchCreateComponent },
-					 {path: 'match-details/:matchId', component: MatchDetailsComponent },
-					{ path: 'settings', 
-					  component: SettingsComponent,
-						children:[
-							{ path: '', component: ProfileComponent},
-							{ path: 'profile', component: ProfileComponent},
+					{ path: '', component: HomeComponent, canActivate: [ProfileGuard]},
+					{ path: 'home', component: HomeComponent, canActivate: [ProfileGuard] },
+					{ path: 'find-match', component: FindMatchComponent, canActivate: [ProfileGuard] },
+					{ path: 'tournaments', component: TournamentsComponent, canActivate: [ProfileGuard] },
+					{ path: 'my-sportscenter', component: MySportscenterComponent, canActivate: [ProfileGuard] },
+					{ path: 'add-new-sportscenter', component: AddNewSportscenterComponent, canActivate: [ProfileGuard] },
+					{ path: 'add-new-sportscenter/:updateId', component: AddNewSportscenterComponent, canActivate: [ProfileGuard] },
+					{ path: 'pitch/:scId', component: PitchComponent, canActivate: [ProfileGuard] },
+					{ path: 'pitch/:scId/:new', component: PitchComponent, canActivate: [ProfileGuard] },
+					{ path: 'match-create', component: MatchCreateComponent, canActivate: [ProfileGuard] },
+					{ path: 'match-create/:scId/:scName', component: MatchCreateComponent, canActivate: [ProfileGuard] },
+					{ path: 'match-details/:matchId', component: MatchDetailsComponent, canActivate: [ProfileGuard] },
+					{
+						path: 'settings',
+						component: SettingsComponent,
+						children: [
+							{ path: '', component: ProfileComponent },
+							{ path: 'profile', component: ProfileComponent },
 							{ path: 'account', component: AccountComponent },
 							{ path: 'notification', component: NotificationComponent },
-							{ path: 'email/:activationid', component: AccountComponent },		
-						]		 
+							{ path: 'email/:activationid', component: AccountComponent },
+						]
 					},
 				],
 			}

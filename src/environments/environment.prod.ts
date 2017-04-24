@@ -15,6 +15,7 @@ export const environment = {
 	RESET_PASSWORD: '/auth/resetpassword',
 	LOGIN_FB_USER: '/auth/fblogin',
 	GET_ALL_SPORTS_CENTERS: '/sportcenter',
+	GET_ALL_SPORTS_CENTERS_USER: '/sportcenter/user/',
 	GET_SPORTS_CENTERS: '/sportcenter/',
 	ADD_SPORTS_CENTER: '/sportcenter',
 	DELETE_SPORTS_CENTER: '/sportcenter/',
@@ -42,6 +43,8 @@ export const environment = {
 	GET_MATCH_USER: '/match/user/',
 	INVITATION_ACCEPT: '/invitation/accept/',
 	INITATION_DELETE: '/invitation/',
-
+	JOIN_MATCH:'/match/join',
+	DELETE_MATCH:'/match/',
+	GET_LAST_MATCH:'/match/last/user/',
 	GoogleKey: "&key=AIzaSyDD7oo0yCjyp2pIBLbRr_h3b0_NiMXXu3g"
 };

@@ -16,15 +16,16 @@ export class AccountComponent implements OnInit, AfterViewInit {
 	errormsg: string;
 	//fbId:any=false;
 	sub: any;
-
+	user:any;
 	constructor(private fb: FormBuilder, private coreservice: CoreService, private route: ActivatedRoute, private router: Router) {
 
+		 this.user = JSON.parse(window.localStorage['teem_user']);
 		this.accountFormGroup = this.fb.group({
 			email: ['', [Validators.required, Validators.email]]
 		});
 
 		this.accountPasswordGroup = this.fb.group({
-			oldpassword: ['', [Validators.minLength(8)]],
+			oldpassword: ['', [Validators.required,Validators.minLength(8)]],
 			encryptedpassword: ['', [Validators.required, Validators.minLength(8)]],
 			confirmpassword: ['', [Validators.required, Validators.minLength(8)]]
 		}, { validator: this.matchingPasswords('encryptedpassword', 'confirmpassword') });
@@ -61,9 +62,9 @@ export class AccountComponent implements OnInit, AfterViewInit {
 	}
 
 	ngAfterViewInit() {
-		let user = JSON.parse(window.localStorage['teem_user']);
+		
 		this.accountFormGroup.patchValue({
-			email: user.email
+			email: this.user.email
 		});
 		
 		// if(user.fbid){

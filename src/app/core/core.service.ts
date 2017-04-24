@@ -75,8 +75,8 @@ export class CoreService {
 		// .do(data => console.log('server data:', data))  // debug
 	}
 
-	getAllSportsCenter() {
-		return this.http.get(environment.BASEAPI + environment.GET_ALL_SPORTS_CENTERS, this.options)
+	getAllSportsCenter(userid) {
+		return this.http.get(environment.BASEAPI + environment.GET_ALL_SPORTS_CENTERS_USER + userid, this.options)
 			.map((res: Response) => {
 				return res.json();
 
@@ -104,7 +104,7 @@ export class CoreService {
 	savePitches(data) {
 		return this.http.post(environment.BASEAPI + environment.ADD_FEILDS, data, this.options)
 			.map((res: Response) => {
-				return res.json().message;
+				return res.json();
 
 			}).catch(this.handleError);
 	}
@@ -306,8 +306,8 @@ export class CoreService {
 			}).catch(this.handleError);
 	}
 	
-	getNextMatch(id){
-		return this.http.get(environment.BASEAPI + environment.GET_MATCH_USER + id , this.options)
+	getNextMatch(id,date){
+		return this.http.get(environment.BASEAPI + environment.GET_MATCH_USER + id + "/" + date, this.options)
 			.map((res: Response) => {
 				return res.json().data;
 
@@ -333,7 +333,25 @@ export class CoreService {
 					return res.json().message;
 				}).catch(this.handleError);
 	}
+	joinMatch(user){
+		return this.http.post(environment.BASEAPI + environment.JOIN_MATCH ,user,this.options)
+				.map((res:Response)=>{
+					return res.json().message;
+				}).catch(this.handleError);
+	}
+	leaveMatch(matchid,userid){
+		return this.http.delete(environment.BASEAPI + environment.DELETE_MATCH  + userid + '/' + matchid, this.options)
+				.map((res:Response)=>{
+					return res.json().message;
+			}).catch(this.handleError);
+	}
+	getLastMatch(id,date){
+		return this.http.get(environment.BASEAPI + environment.GET_LAST_MATCH + id + "/" + date, this.options)
+			.map((res: Response) => {
+				return res.json().data;
 
+			}).catch(this.handleError);
+	}
 
 	handleError(error: any) {
 		console.log("res", error);

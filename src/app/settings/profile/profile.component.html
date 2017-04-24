@@ -17,13 +17,13 @@
             <div class="example-section example-margin">
                 <div fxLayout="column" class="form-group" fxFlex="100">
                     <div fxLayout="row" fxLayout.xs="column">
-                        <label for="" fxLayoutAlign="left center" fxFlex="30">Firstname</label>
+                        <label for="" fxLayoutAlign="left center" fxFlex="30">{{'FIRSTNAME' | translate}}</label>
                         <md-input-container class="md-block register-form-text-area" fxFlex="70" md-no-float>
                             <input mdInput formControlName="firstname" class="user-text-label"> </md-input-container>
                     </div>
                     <div *ngIf="firstname.touched">
                         <div ng-message="required" fxFlex="100" fxLayoutAlign="right start">
-                            <p *ngIf="firstname.hasError('required')" class="error-message">Firstname is required</p>
+                            <p *ngIf="firstname.hasError('required')" class="error-message">{{'FIRSTNAME IS REQUIRED' | translate}}</p>
                         </div>
                     </div>
                 </div>
@@ -31,13 +31,13 @@
             <div class="example-section example-margin">
                 <div fxLayout="column" class="form-group" fxFlex="100">
                     <div fxLayout="row" fxLayout.xs="column">
-                        <label for="" fxLayoutAlign="left center" fxFlex="30">Lastname</label>
+                        <label for="" fxLayoutAlign="left center" fxFlex="30">{{'LASTNAME' | translate}}</label>
                         <md-input-container class="md-block register-form-text-area" fxFlex="70" md-no-float>
                             <input mdInput formControlName="lastname" class="user-text-label"> </md-input-container>
                     </div>
                     <div *ngIf="lastname.touched">
                         <div ng-message="required" fxFlex="100" fxLayoutAlign="right start">
-                            <p *ngIf="lastname.hasError('required')" class="error-message">Lastname is required</p>
+                            <p *ngIf="lastname.hasError('required')" class="error-message">{{'LASTNAME IS REQUIRED'}}</p>
                         </div>
                     </div>
                 </div>
@@ -48,20 +48,22 @@
                         <label for="" fxLayoutAlign="left center" fxFlex="30">Date of birth</label>
                         <md-input-container class="md-block register-form-text-area" fxFlex="70" md-no-float>
                             <!--<input mdInput type="date"   id="fromDate" formControlName="dob" name="bod" class="user-text-label datepicker" > </md-input-container>-->
-                             <input mdInput type="date"  id="fromDate"  formControlName="dob" [ngModel]="birthdate | date:'yyyy-MM-dd'" (ngModelChange)="birthdate = $event" class="user-text-label datepicker" > </md-input-container>
+                            <input mdInput type="date"  id="fromDate"  formControlName="dob" [ngModel]="birthdate" (ngModelChange)="birthdate = $event" class="user-text-label datepicker" > 
+                          <!--<material-datepicker class="md-block register-form-text-area" fxFlex="70"  [(date)]="date">-->
+                             </md-input-container>
                     </div>
                 </div>
             </div>
             <div class="example-section example-margin">
                 <div fxLayout="column" class="form-group" fxFlex="100">
                     <div fxLayout="row" fxLayout.xs="column">
-                        <label for="" fxLayoutAlign="left center" fxFlex="30">City</label>
+                        <label for="" fxLayoutAlign="left center" fxFlex="30">{{'CITY' | translate}}</label>
                         <md-input-container class="md-block register-form-text-area" fxFlex="70" md-no-float>
                             <input mdInput id="city" formControlName="city" [(ngModel)]="selectedCity" class="user-text-label"> </md-input-container>
                     </div>
                     <div *ngIf="city.touched">
                         <div ng-message="required" fxFlex="100" fxLayoutAlign="right start">
-                            <p *ngIf="city.hasError('required')" class="error-message">City is required</p>
+                            <p *ngIf="city.hasError('required')" class="error-message">{{'CITY IS REQUIRED'}}</p>
                         </div>
                     </div>
                 </div>
@@ -70,7 +72,7 @@
                 <div fxLayout="column" class="form-group clearfix" fxFlex="100">
                     <div class="description">
                         <div fxLayoutAlign="start start" fxLayout="row" fxLayout.xs="column">
-                            <label for="" fxLayoutAlign="left center" fxFlex="30">Description</label>
+                            <label for="" fxLayoutAlign="left center" fxFlex="30">{{'DESCRIPTION' | translate}}</label>
                             <md-input-container class="md-block register-form-text-area" fxFlex="70" md-no-float>
                                 <textarea mdInput formControlName="description" class="user-text-label"> </textarea>
                             </md-input-container>
@@ -81,20 +83,20 @@
             <div class="example-section example-margin">
                 <div fxLayout="column" class="form-group" fxFlex="100">
                     <div fxLayout="row" fxLayout.xs="column">
-                        <label for="" fxLayoutAlign="left center" fxFlex="30">Choose game</label>
+                        <label for="" fxLayoutAlign="left center" fxFlex="30">{{'CHOOSE GAME' | translate}}</label>
                         <div class="md-block register-form-text-area" fxFlex="70" md-no-float>
                             <div class="example-section">
-                                <md-checkbox class="example-margin mat-checkbox-btn" formControlName="all" [checked]="checked" [(ngModel)]="allVal" (change)="sportAllSelect()">All</md-checkbox>
-                                <md-checkbox class="example-margin mat-checkbox-btn" formControlName="basketball" [(ngModel)]="basketballVal" (change)="sportSelect('basketball')">Basketball</md-checkbox>
-                                <md-checkbox class="example-margin mat-checkbox-btn" formControlName="soccer" [(ngModel)]="soccerVal" (change)="sportSelect('soccer')">Soccer</md-checkbox>
-                                <md-checkbox class="example-margin mat-checkbox-btn" formControlName="paddle" [(ngModel)]="padelVal" (change)="sportSelect('paddle')">Padel</md-checkbox>
+                                <md-checkbox class="example-margin mat-checkbox-btn" formControlName="all" [checked]="checked" [(ngModel)]="allVal" (change)="sportAllSelect()">{{'ALL' | translate}}</md-checkbox>
+                                <md-checkbox class="example-margin mat-checkbox-btn" formControlName="basketball" [(ngModel)]="basketballVal" (change)="sportSelect('basketball')">{{'Basketball' | translate}}</md-checkbox>
+                                <md-checkbox class="example-margin mat-checkbox-btn" formControlName="soccer" [(ngModel)]="soccerVal" (change)="sportSelect('soccer')">{{'Soccer' | translate}}</md-checkbox>
+                                <md-checkbox class="example-margin mat-checkbox-btn" formControlName="paddle" [(ngModel)]="padelVal" (change)="sportSelect('paddle')">{{'Padel' | translate}}</md-checkbox>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="example-section example-margin">
-                <button md-raised-button color="primary" class="creatematch mat-raised-button" [disabled]="!profile.valid" (click)="formSubmit()">Save</button>
+                <button md-raised-button color="primary" class="creatematch mat-raised-button" [disabled]="!profile.valid" (click)="formSubmit()">{{'SAVE' | translate}}</button>
             </div>
         </form>
     </div>

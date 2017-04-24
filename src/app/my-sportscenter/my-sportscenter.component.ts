@@ -29,7 +29,9 @@ export class MySportscenterComponent implements OnInit {
 	}
 
 	loadSportCenters() {
-		this.coreService.getAllSportsCenter()
+		let user = JSON.parse(window.localStorage['teem_user']);
+		let userid = user.id;
+		this.coreService.getAllSportsCenter(userid)
 			.subscribe((response) => {
 				// console.log('received sports centers', response);
 				this.sportCenters = response.data;

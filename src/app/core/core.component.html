@@ -17,7 +17,7 @@
 </div>
 -->
             <md-list class="mobilemenu" *ngFor="let nl of navMobileLinks">
-                <md-list-item (click)="sidenav.toggle()" routerLink="{{ nl.link }}" class="menu-item"><i class="material-icons">{{nl.icon}}</i>{{nl.title}}</md-list-item>
+                <md-list-item (click)="sidenav.toggle()" routerLink="{{ nl.link }}" class="menu-item"><i class="material-icons">{{nl.icon}}</i>{{nl.title | translate}}</md-list-item>
             </md-list>
             <!--          <div class="mobilemenu"> <a md-tab-link> Home</a> <a md-tab-link> Find match</a> <a md-tab-link> Tournments</a> <a md-tab-link> My sport center</a> </div>--></div>
     </md-sidenav>
@@ -36,13 +36,13 @@
             </nav>-->
                     <nav md-tab-nav-bar>
                         <a md-tab-link *ngFor="let link of navLinks" [routerLink]="link.link" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
-                            <!--{{tabLink.label}}-->{{link.title}} </a>
+                            <!--{{tabLink.label}}-->{{link.title | translate }} </a>
                         <a md-tab-link class="email"><img src="/assets/img/email.png"></a>
                         <div class="dropdown">
                             <a md-tab-link [mdMenuTriggerFor]="menu" class="userprofile"><img src="/assets/img/player-boy.png"></a>
                             <md-menu class="user-menu" #menu="mdMenu">
-                                <button md-menu-item routerLink="/settings/profile"> <span>Profile</span> </button>
-                                <button md-menu-item (click)="logout()"> <span>Logout</span> </button>
+                                <button md-menu-item routerLink="/settings/profile"> <span>{{'PROFILE' | translate}}</span> </button>
+                                <button md-menu-item (click)="logout()"> <span>{{'LOGOUT' | translate}}</span> </button>
                             </md-menu>
                         </div>
                     </nav>
@@ -62,8 +62,8 @@
                     <a href="#" *ngIf="paddle"><img src="/assets/img/b03.png"></a>
                 </div>
                 <div class="link_box">
-                    <button md-button routerLinkActive="active" routerLink="/match-create">New Match<i class="material-icons">keyboard_arrow_right</i></button>
-                    <button md-button routerLinkActive="active" routerLink="/find-match" class="search">Find Match<i class="material-icons">search</i></button>
+                    <button md-button routerLinkActive="active" routerLink="/match-create">{{ 'NEW MATCH' | translate }}<i class="material-icons">keyboard_arrow_right</i></button>
+                    <button md-button routerLinkActive="active" routerLink="/find-match" class="search">{{ 'FIND MATCH SIDE' | translate }}<i class="material-icons">search</i></button>
                 </div>
                 <div class="link_box"> </div>
             </div>

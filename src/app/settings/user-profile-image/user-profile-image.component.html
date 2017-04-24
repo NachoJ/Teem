@@ -1,11 +1,11 @@
 <div class="modal-header">
-    <h5>Upload Your Photo here</h5>
+    <h5>{{'UPLOAD YOUR PHOTO HERE' | translate}}</h5>
     <button md-raised-button md-dialog-close>×</button>
 </div>
 <div class="containerr">
     <div class="uploadbtn">
         <input #inputFil type="file" name="" value="" id="file" (change)="getImage($event)" style="display: none;">
-        <button md-raised-button class="btn-choose-file" (click)="inputFil.click()">Choose File</button>
+        <button md-raised-button class="btn-choose-file" (click)="inputFil.click()">{{'Choose File' | translate}}</button>
     </div>
     <!--    <div fxLayout.xs="column" fxLayout="row" class="previewblock">-->
     <div class="previewblock">
@@ -22,7 +22,7 @@
             <div class="col preview-sm" *ngIf="!this.isMobile">
                 <div class="preview"></div>
             </div>
-            <button md-raised-button class="done-btn" type="button" (click)="onCropperPopupDone()">Done</button>
+            <button md-raised-button class="done-btn" type="button" (click)="onCropperPopupDone()">{{'DONE' | translate }}</button>
         </div>
     </div>
 </div>

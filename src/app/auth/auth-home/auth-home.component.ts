@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../auth.service';
+import { TranslateService } from "@ngx-translate/core";
 
 declare const FB: any;
 
@@ -21,7 +22,7 @@ export class AuthHomeComponent implements OnInit {
 	fbToken: string;
 
 	error: string;
-	constructor(private authService: AuthService, private router: Router) {
+	constructor(private authService: AuthService, private router: Router, private ngZone: NgZone) {
 		FB.init({
 			appId: '785727668257883', //main id 785727668257883  test app id 793209790843004
 			cookie: true,  // enable cookies to allow the server to access the session
@@ -54,8 +55,11 @@ export class AuthHomeComponent implements OnInit {
 								firstname: result.first_name,
 								lastname: result.last_name,
 								dob: (result.birthday || ""),
-								city: result.location.name
+								city: ""
 							};
+							if (result.location) {
+								data.city = result.location.name;
+							}
 							console.log("data sent = ", data);
 							this.authService.loginFbUser(data)
 								.subscribe((response) => {
@@ -77,9 +81,12 @@ export class AuthHomeComponent implements OnInit {
 		}, { scope: 'email,public_profile,user_birthday,user_location', return_scopes: true, auth_type: 'rerequest' });
 	}
 
-	redirect(response){
+	redirect(response) {
+		var self = this;
 		window.localStorage['teem_user'] = JSON.stringify(response.data);
-									this.router.navigate(['']);
+		self.ngZone.run(() => {
+			this.router.navigate(['']);
+		});
 	}
 	mfbLogout() {
 		FB.logout((result: any) => {

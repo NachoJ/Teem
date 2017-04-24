@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { AuthService } from '../auth.service';
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
 	selector: 'te-forgot-password',
@@ -15,7 +16,7 @@ export class ForgotPasswordComponent implements OnInit {
 	error: string;
 	success: string;
 
-	constructor(private authService: AuthService, private formBuilder: FormBuilder) {
+	constructor(private authService: AuthService, private formBuilder: FormBuilder, private translate: TranslateService) {
 		this.forgotFormGroup = this.formBuilder.group({
 			email: ['', [Validators.required, Validators.email]],
 			/*password: ['', [Validators.required, Validators.minLength(3)]]
@@ -37,6 +38,12 @@ export class ForgotPasswordComponent implements OnInit {
 		this.authService.forgotPasswordRequest(userEmail)
 			.subscribe((res: any) => {
 				this.error = '';
+				// this.translate.get(res.toString()).subscribe(
+				// 	value => {
+				// 		// value is our translated string
+				// 		this.success = value;
+				// 	}
+				// );
 				this.success = res;
 				console.log("success", res);
 			},

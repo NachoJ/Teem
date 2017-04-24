@@ -20,6 +20,7 @@ declare var google: any;
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
 
+	//date: Date;
 	profile: FormGroup;
 	firstname: FormControl;
 	lastname: FormControl;
@@ -31,7 +32,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 	paddle: FormControl;
 	all: FormControl;
 	imgSrc;
-
+	birthdate: any;
 	success: string;
 	error: string;
 
@@ -40,14 +41,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 	soccerVal: any = false;
 	padelVal: any = false;
 
-	birthdate: any;
+
 	user: any;
 	sport: any;
 	checked: any = false;
 
 	selectedCity = "";
 
-	//@ViewChild(DatePickerDirective) dtpicker: DatePickerDirective;
+	sub: any;
 
 	constructor(private coreService: CoreService, private fb: FormBuilder,
 		private route: ActivatedRoute, private zone: NgZone, public dialog: MdDialog, private router: Router) {
@@ -59,6 +60,12 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 		this.coreService.profileImage$.subscribe(resultImg => {
 			this.imgSrc = environment.PROFILE_IMAGE_PATH + resultImg;
 		});
+
+		this.sub = this.route.snapshot.queryParams.new;
+		if (this.sub == 'profile') {
+			console.log("sub found", this.sub);
+			this.coreService.emitSuccessMessage("Please Fill Full Profile");
+		}
 	}
 
 
@@ -88,7 +95,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 			console.log("jQuery is ready");
 			self.initAutoComplete();
 		});
-		this.ngAfterViewInit();
+		//this.ngAfterViewInit();
 	}
 
 	ngAfterViewInit() {
@@ -105,10 +112,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 			this.checked = false;
 		}
 
-		if (!this.user.dob)
-			this.birthdate = new Date();
+	if (!this.user.dob)
+			this.birthdate =moment(new Date()).format("YYYY-MM-DD");
 		else
-			this.birthdate = new Date(this.user.dob);
+			this.birthdate = moment(this.user.dob).format("YYYY-MM-DD");
+		
 
 		this.profile.patchValue({
 			firstname: this.user.firstname,
@@ -134,8 +142,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 			{
 				"firstname": this.firstname,
 				"lastname": this.lastname,
-				"dob": this.dob,
 				"city": this.city,
+				"dob": this.dob,
 				"description": this.description,
 				"basketball": this.basketball,
 				"soccer": this.soccer,
@@ -144,6 +152,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 			}
 		);
 	}
+
 
 	formSubmit() {
 		let self = this;
@@ -167,7 +176,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
 		formVal.sports = sport.join(',');
 		formVal.userid = user.id;
+		formVal.dob = this.birthdate;
 
+		console.log("form val = ", formVal);
 		this.coreService.profileUpdate(JSON.stringify(formVal))
 			.subscribe((response) => {
 				//this.error = '';
@@ -175,7 +186,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 				this.coreService.emitSuccessMessage(response.data.message);
 				self.userDetailEmit(response.data.data);
 				window.localStorage['teem_user'] = JSON.stringify(response.data.data);
-				// this.router.navigate(['']);
+				 this.router.navigate(['']);
 			},
 			(error: any) => {
 				//this.success = '';

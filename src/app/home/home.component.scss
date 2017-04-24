@@ -63,8 +63,8 @@
     color: #716f6f;
     font-size: 14px;
     font-weight: bold;
-    margin: 10px 0 10px 15px;
-    padding: 0 15px;
+    padding: 10px 30px 8px;
+    border-top: 1px solid grey;
 }
 
 .md-list-item-inner {
@@ -81,8 +81,14 @@
     background: #dcdbdb;
 }
 
+
+
 .mat-list {
     padding-top:0px;
+}
+
+.detail-listing .mat-list:first-child .md-list-header p {
+    border:none;
 }
 
 .md-list-item-text {

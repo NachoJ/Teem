@@ -322,4 +322,32 @@ app-match-create {
             margin-top: 10px;
         }
     }
+    /* currency symbol */
+    .form-group.costCtrl span {
+        position: absolute;
+        top: -8px;
+        left: -45px;
+        width: 35px;
+        height: 33px;
+        line-height: 33px;
+        text-align: center;
+    }
+    .form-group.costCtrl span:after {
+        border-right: 1px solid rgba(0, 0, 0, 0.3);
+        display: block;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        text-align: center;
+        line-height: 32px;
+        font-weight: normal;
+        border-radius: 4px 0 0 4px;
+        -webkit-border-radius: 4px 0 0 4px;
+        -moz-border-radius: 4px 0 0 4px;
+    }
+    .form-group.costCtrl .mat-input-container {
+        padding-left: 45px;
+    }
 }

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms'; 
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '@angular/material';
 
@@ -18,29 +18,47 @@ import { AuthHomeComponent } from './auth-home/auth-home.component';
 
 import { AuthGuard } from "../auth/authguard.service";
 
-@NgModule({
-        imports: [
-                BrowserModule,
-                CommonModule,
-                MaterialModule.forRoot(),
-                RouterModule,
-                FlexLayoutModule,
-                ReactiveFormsModule
-        ],
-        declarations: [
-                AuthComponent,
-                RegisterComponent,
-                SigninComponent,
-                ForgotPasswordComponent,
-                ResetPasswordComponent,
-                AuthHomeComponent
-        ],
-        exports: [
+import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-        ],
-        providers: [
-                AuthService,
-				AuthGuard
-        ]
+import { HttpModule, Http } from '@angular/http';
+
+export function createTranslateLoader(http: Http) {
+	return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
+}
+
+@NgModule({
+	imports: [
+		BrowserModule,
+		CommonModule,
+		MaterialModule.forRoot(),
+		RouterModule,
+		FlexLayoutModule,
+		ReactiveFormsModule,
+		TranslateModule.forRoot({
+			loader: {
+				provide: TranslateLoader,
+				useFactory: createTranslateLoader,
+				deps: [Http]
+			}
+		})
+	],
+	declarations: [
+		AuthComponent,
+		RegisterComponent,
+		SigninComponent,
+		ForgotPasswordComponent,
+		ResetPasswordComponent,
+		AuthHomeComponent
+	],
+	exports: [
+
+	],
+	providers: [
+		AuthService,
+		AuthGuard
+	]
 })
-export class AuthModule { }
+export class AuthModule {
+}
+

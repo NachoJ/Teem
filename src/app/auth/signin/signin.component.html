@@ -1,7 +1,7 @@
 <div fxLayout="column" class="register-formbox" layout-align="center center" fxLayoutAlign="center center">
-    <div fxLayout="column" class="form-block" >
+    <div fxLayout="column" class="form-block">
         <div class="title-block">
-            <h3 class="title-list-items-text">Log in</h3>
+            <h3 class="title-list-items-text">{{ 'LOG IN' | translate }}</h3>
             <a class="md-icon-button md-accent register-form-button-close" routerLink="/auth">
                 <md-icon class="register-form-close-icon">close</md-icon>
             </a>
@@ -11,28 +11,28 @@
             <div *ngIf="success" class="success"> {{success}} </div>
             <div class="form-group">
                 <md-input-container class="md-block register-form-text-area" md-no-float>
-                    <input mdInput class="user-text-label" formControlName="email" [(ngModel)]="email" placeholder="Email" required> </md-input-container>
+                    <input mdInput class="user-text-label" formControlName="email" [(ngModel)]="email" placeholder="{{'EMAIL' | translate }}" required> </md-input-container>
                 <div *ngIf="userFormGroup.controls.email.invalid && userFormGroup.controls.email.touched">
                     <div ng-message="required" fxLayoutAlign="end start">
-                        <p class="error-message">Email is invalid</p>
+                        <p class="error-message">{{'EMAIL IS INVALID' | translate }}</p>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <md-input-container class="md-block register-form-text-area" md-no-float>
-                    <input mdInput type="password" name="password" class="user-text-label" placeholder="Password" formControlName="password" [(ngModel)]="password"> </md-input-container>
+                    <input mdInput type="password" name="password" class="user-text-label" placeholder="{{'PASSWORD' | translate }}" formControlName="password" [(ngModel)]="password"> </md-input-container>
                 <div *ngIf="userFormGroup.controls.password.invalid && userFormGroup.controls.password.touched" role="alert">
                     <div ng-message="required" fxLayoutAlign="end start">
-                        <p class="error-message">Enter your password.</p>
+                        <p class="error-message">{{ 'ENTER YOUR PASSWORD' | translate }}</p>
                     </div>
                     <div ng-repeat="passwordError in passwordErrors" fxLayoutAlign="end start">
                         <p class="help-block error-text">{{passwordError}}</p>
                     </div>
                 </div>
             </div>
-            <button md-raised-button class="md-button-register-form" [disabled]="!userFormGroup.valid" type="submit"> LOG IN </button>
+            <button md-raised-button class="md-button-register-form" [disabled]="!userFormGroup.valid" type="submit"> {{'LOG IN' | translate }} </button>
             <button md-raised-button class="md-button-forgotten-pass" routerLink="/auth/forgot-password">
-                <p class="register-form-text-label-pass">Forgotten Password?</p>
+                <p class="register-form-text-label-pass">{{'FORGOT PASSWORD?' | translate}}</p>
             </button>
         </form>
     </div>

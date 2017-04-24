@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { AuthService } from 'app/auth/auth.service';
 
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
 	selector: 'te-core',
@@ -27,7 +28,8 @@ export class CoreComponent implements OnInit {
 	erroShow: boolean = false;
 	successShow: boolean = false;
 
-	constructor(private router: Router, private authService: AuthService, private coreservice: CoreService) {
+	constructor(private router: Router, private authService: AuthService, private coreservice: CoreService, private translate: TranslateService) {
+		this.loadLanguage();
 		if (!authService.isLoggedIn()) {
 			console.log("not looged in");
 			this.router.navigate(['auth']);
@@ -35,32 +37,32 @@ export class CoreComponent implements OnInit {
 
 		let self = this;
 		coreservice.successMessage$.subscribe(
-            item => {
-                self.successmsg = item;
-                self.successShow = true;
-                setTimeout(function() {
-                    self.successShow = false;
-                    self.successmsg = '';
-                }, 3000);
-            });
+			item => {
+				self.successmsg = item;
+				self.successShow = true;
+				setTimeout(function () {
+					self.successShow = false;
+					self.successmsg = '';
+				}, 3000);
+			});
 
-        coreservice.errorMessage$.subscribe(
-            item => {
-                self.errormsg = item;
-                self.erroShow = true;
-                setTimeout(function() {
-                    self.erroShow = false;
-                    self.errormsg = '';
-                }, 3000);
-            });
+		coreservice.errorMessage$.subscribe(
+			item => {
+				self.errormsg = item;
+				self.erroShow = true;
+				setTimeout(function () {
+					self.erroShow = false;
+					self.errormsg = '';
+				}, 3000);
+			});
 
-		this.user = JSON.parse(window.localStorage['teem_user'] || '' );
+		this.user = JSON.parse(window.localStorage['teem_user'] || '');
 		if (this.user) {
 			this.sport = this.user.sports;
 			let sportkey = [];
-			if (this.sport){
+			if (this.sport) {
 
-			 sportkey = this.sport.split(",");
+				sportkey = this.sport.split(",");
 			}
 
 			let self = this;
@@ -175,6 +177,20 @@ export class CoreComponent implements OnInit {
 
 	}
 
+	loadLanguage() {
+		console.log("language loaded core component");
+		var arrLang = navigator.language.split('-');
+		var languageN;
+		if (arrLang.length > 0) {
+			languageN = arrLang[0];
+		} else {
+			languageN = navigator.language;
+		}
+		console.log("language = " + languageN);
+		this.translate.setDefaultLang('en');
+		this.translate.use(languageN);
+		// this.translate.use('fr');
+	}
 
 	ngOnInit() {
 	}

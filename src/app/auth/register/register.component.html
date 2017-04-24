@@ -1,46 +1,46 @@
 <div fxLayout="column" class="register-formbox" layout-align="center center" fxLayoutAlign="center center">
     <div fxLayout="column" class="form-block">
         <div class="title-block">
-            <h3 class="title-list-items-text">Register</h3>
+            <h3 class="title-list-items-text">{{ "REGISTER" | translate }}</h3>
             <a class="md-icon-button md-accent register-form-button-close" routerLink="/auth">
                 <md-icon class="register-form-close-icon">close</md-icon>
             </a>
         </div>
         <form [formGroup]="userRegisterFormGroup" (ngSubmit)="registerUser()" fxLayout="column">
-            <div *ngIf="error" class="error"> {{error}} </div>
-            <div *ngIf="success" class="success"> {{success}} </div>
+            <div *ngIf="error" class="error"> {{error | translate }} </div>
+            <div *ngIf="success" class="success"> {{success | translate }} </div>
             <div class="form-group">
                 <md-input-container class="md-block register-form-text-area" md-no-float>
-                    <input mdInput class="user-text-label" formControlName="uname" [(ngModel)]="userName" placeholder="User Name" required> </md-input-container>
+                    <input mdInput class="user-text-label" formControlName="uname" [(ngModel)]="userName" placeholder="{{'USER NAME' | translate }}" required> </md-input-container>
                 <div *ngIf="userRegisterFormGroup.controls.uname.invalid && userRegisterFormGroup.controls.uname.touched">
                     <div ng-message="required" fxLayoutAlign="end start">
-                        <p class="error-message">User Name is invalid</p>
+                        <p class="error-message">{{ "User Name is invalid" | translate }}</p>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <md-input-container class="md-block register-form-text-area" md-no-float>
-                    <input mdInput name="email" class="user-text-label" placeholder="Email" formControlName="email" [(ngModel)]="email"> </md-input-container>
+                    <input mdInput name="email" class="user-text-label" placeholder="{{'EMAIL' | translate }}" formControlName="email" [(ngModel)]="email"> </md-input-container>
                 <div *ngIf="userRegisterFormGroup.controls.email.invalid && userRegisterFormGroup.controls.email.touched" role="alert">
                     <div ng-message="required" fxLayoutAlign="end start">
-                        <p class="error-message">Enter your email.</p>
+                        <p class="error-message">{{ "Enter your email" | translate }}.</p>
                     </div>
 
                 </div>
             </div>
             <div class="form-group">
                 <md-input-container class="md-block register-form-text-area" md-no-float>
-                    <input mdInput type="password" class="user-text-label" formControlName="password" [(ngModel)]="password" placeholder="Password" password-validator required>
+                    <input mdInput type="password" class="user-text-label" formControlName="password" [(ngModel)]="password" placeholder="{{'PASSWORD' | translate }}" password-validator required>
                 </md-input-container>
                 <div *ngIf="userRegisterFormGroup.controls.password.invalid && userRegisterFormGroup.controls.password.touched" role="alert">
                     <div ng-message="required" fxLayoutAlign="end start">
-                        <p class="error-message">Invalid Password, (Must be 8 characters)</p>
+                        <p class="error-message">{{ "Invalid Password, (Must be 8 characters)" | translate }}</p>
                     </div>
                 </div>
             </div>
-            <button md-raised-button class="md-button-register-form" [disabled]="!userRegisterFormGroup.valid" type="submit"> REGISTER </button>
+            <button md-raised-button class="md-button-register-form" [disabled]="!userRegisterFormGroup.valid" type="submit"> {{'REGISTER' | translate }} </button>
             <button md-raised-button class="md-button-forgotten-pass" routerLink="/auth/forgot-password">
-                <p class="register-form-text-label-pass">Forgotten Password?</p>
+                <p class="register-form-text-label-pass">{{ "FORGOT PASSWORD?" | translate }}</p>
             </button>
         </form>
     </div>

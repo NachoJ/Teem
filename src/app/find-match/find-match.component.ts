@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { CoreService } from '../core/core.service';
 
 import { environment } from '../../environments/environment';
+import { TranslateService } from "@ngx-translate/core";
 
 declare var moment: any;
 declare var google: any;
@@ -45,7 +46,7 @@ export class FindMatchComponent implements OnInit {
 		private ngZone: NgZone, private router: Router) {
 		this.PROFILE_IMAGE_PATH = environment.PROFILE_IMAGE_PATH;
 
-		this.user = JSON.parse(window.localStorage['teem_user'] || '' );
+		this.user = JSON.parse(window.localStorage['teem_user'] || '');
 
 		iconRegistry.addSvgIcon(
 			'all',
@@ -55,10 +56,10 @@ export class FindMatchComponent implements OnInit {
 			sanitizer.bypassSecurityTrustResourceUrl('assets/svg/futbol_off.svg'));
 		iconRegistry.addSvgIcon(
 			'Padel',
-			sanitizer.bypassSecurityTrustResourceUrl('assets/svg/baloncesto_off.svg'));
+			sanitizer.bypassSecurityTrustResourceUrl('assets/svg/padel_off.svg'));
 		iconRegistry.addSvgIcon(
 			'Basketball',
-			sanitizer.bypassSecurityTrustResourceUrl('assets/svg/padel_off.svg'));
+			sanitizer.bypassSecurityTrustResourceUrl('assets/svg/baloncesto_off.svg'));
 
 		window["FindMatchComponent"] = this;
 
@@ -153,15 +154,15 @@ export class FindMatchComponent implements OnInit {
 	getAndSetLocation() {
 		let self = this;
 		if (navigator.geolocation) {
-		 	console.log("navigator.geolocation found");
+			console.log("navigator.geolocation found");
 
-		 	navigator.geolocation.getCurrentPosition(this.setLocation.bind(this));
+			navigator.geolocation.getCurrentPosition(this.setLocation.bind(this));
 		} else {
 			this.error = "Cannot find Geolocation";
-			if(this.user.city) {
+			if (this.user.city) {
 				this.cityName = this.user.city;
 				this.getLatLongByCityName();
-			}			
+			}
 		}
 	}
 
@@ -183,7 +184,7 @@ export class FindMatchComponent implements OnInit {
 				console.log("getAddressFromLatLng response: ", response);
 				self.ngZone.run(() => {
 					self.cityName = response;
-				});				
+				});
 			},
 			(error: any) => {
 				this.coreService.emitErrorMessage(error);
@@ -202,7 +203,7 @@ export class FindMatchComponent implements OnInit {
 					self.latitudeMap = response.lat;
 					self.longitudeMap = response.lng;
 					self.getMatchMarkers();
-				});				
+				});
 			},
 			(error: any) => {
 				this.coreService.emitErrorMessage(error);
@@ -333,7 +334,11 @@ export class FindMatchComponent implements OnInit {
 		// 	this.nearByMatchMarkers.push(marker);
 
 		// }
-
+		if (this.nearByMatch.length <= 0) {
+			console.log("no place found");
+			bounds.extend(new google.maps.LatLng(this.latitudeMap, this.longitudeMap));
+			this.map.setZoom(13);
+		}
 		this.map.fitBounds(bounds);
 
 		// console.log("MArkers", this.nearByMatchMarkers);
