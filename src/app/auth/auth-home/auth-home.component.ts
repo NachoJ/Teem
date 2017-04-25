@@ -84,6 +84,7 @@ export class AuthHomeComponent implements OnInit {
 	redirect(response) {
 		var self = this;
 		window.localStorage['teem_user'] = JSON.stringify(response.data);
+		window.localStorage['teem_user_fblogin'] = true;
 		self.ngZone.run(() => {
 			this.router.navigate(['']);
 		});

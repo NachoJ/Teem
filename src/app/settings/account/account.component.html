@@ -8,14 +8,14 @@
             <div fxLayout="column" class="form-group" fxFlex="100">
                 <div fxLayout="row" fxLayoutAlign="top left">
                     <!--<label for="" fxLayoutAlign="left center" fxFlex.xs="20" fxFlex="25" class="no-margin">{{EMAIL | translate}}</label>-->
-                    <md-input-container class="md-block register-form-text-area" [class.red-border]="!accountFormGroup.valid" fxFlex.xs="55" fxFlex="50" md-no-float>
+                    <md-input-container class="md-block register-form-text-area" [class.red-border]="accountFormGroup.invalid && accountFormGroup.touched" fxFlex.xs="55" fxFlex="50" md-no-float>
                         <input mdInput formControlName="email" class="user-text-label"> </md-input-container>
                     <button md-raised-button color="primary" fxFlexOffset="2" fxFlex="23" [disabled]="!accountFormGroup.valid" class="save-btn no-margin">{{'SAVE' | translate}}</button>
                     <!--<div class="text-danger" *ngIf="accountFormGroup.controls.email.touched"> <span *ngIf="accountFormGroup.controls.email.invalid">Enter your email</span> </div>--></div>
             </div>
         </div>
     </form>
-    <div *ngIf="!this.user.fbid">
+    <div *ngIf="!isLoginTypeFb">
         <div class="example-section example-margin">
             <p class="user-text-label-account">{{'WRITE YOUR CURRENT PASSWORD AND THEN INTRODUCE AND CONFIRM THE NEW PASSWORD' | translate}}.</p>
         </div>

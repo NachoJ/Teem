@@ -56,7 +56,8 @@ export class MatchDetailsComponent implements OnInit {
 				this.team2 = [];
 				this.team1player = [];
 				this.team2player = [];
-
+				this.matchjoin = true;
+				this.matchleave = false;
 				this.match = response[0];
 				this.match["filteredDate"] = moment(response[0].matchtime).format('MMM DD, YYYY');
 				this.initTeam();
@@ -148,21 +149,21 @@ export class MatchDetailsComponent implements OnInit {
 			}
 		} else {
 			for (var i = 0; i < sportplayer; i++) {
-			this.team1player.push({
-				id: "",
-				profileimg: "../../assets/img/avatar.png",
-				userid: this.user['id'],
-				matchid: this.match.id,
-				teamid: 1
-			});
+				this.team1player.push({
+					id: "",
+					profileimg: "../../assets/img/avatar.png",
+					userid: this.user['id'],
+					matchid: this.match.id,
+					teamid: 1
+				});
 
-			this.team2player.push({
-				id: "",
-				profileimg: "../../assets/img/avatar.png",
-				userid: this.user['id'],
-				matchid: this.match.id,
-				teamid: 2
-			});
+				this.team2player.push({
+					id: "",
+					profileimg: "../../assets/img/avatar.png",
+					userid: this.user['id'],
+					matchid: this.match.id,
+					teamid: 2
+				});
 			}
 		}
 	}
@@ -240,11 +241,11 @@ export class MatchDetailsComponent implements OnInit {
 			});
 	}
 
-	joinMatch(user: any) {
-		delete user.id;
-		delete user.profileimg;
-		console.log("user", user);
-		this.coreService.joinMatch(JSON.stringify(user)).subscribe(
+	joinMatch(team: any) {
+		delete team.id;
+		delete team.profileimg;
+		console.log("team", team);
+		this.coreService.joinMatch(JSON.stringify(team)).subscribe(
 			(result: any) => {
 				this.coreService.emitSuccessMessage(result);
 				this.initGetMatch(this.sub);
@@ -254,6 +255,48 @@ export class MatchDetailsComponent implements OnInit {
 			}
 		);
 	}
+
+	joinMatchDefault() {
+		// console.log("team 1 = ", this.team1.length);
+		// console.log("team 2 = ", this.team2.length);
+		let user = JSON.parse(window.localStorage['teem_user']);
+		let data = {
+			matchid: this.match.id,
+			teamid: 1,
+			userid: user.id
+		};
+		if (this.team1.length < this.match.subsportid['value']) {
+			// console.log("join team 1");
+			this.coreService.joinMatch(JSON.stringify(data)).subscribe(
+				(result: any) => {
+					this.coreService.emitSuccessMessage(result);
+					this.initGetMatch(this.sub);
+				},
+				(error: any) => {
+					this.coreService.emitErrorMessage(error);
+				});
+			this.matchjoin = false;
+			this.matchleave = true;
+
+			return false;
+		}
+		if (this.team2.length < this.match.subsportid['value']) {
+			// console.log("join team 2");
+			data.teamid = 2;
+			this.coreService.joinMatch(JSON.stringify(data)).subscribe(
+				(result: any) => {
+					this.coreService.emitSuccessMessage(result);
+					this.initGetMatch(this.sub);
+				},
+				(error: any) => {
+					this.coreService.emitErrorMessage(error);
+				});
+			this.matchjoin = false;
+			this.matchleave = true;
+		}
+
+	}
+
 	leaveMatch() {
 		this.coreService.leaveMatch(this.sub, this.user.id).subscribe(
 			(result: any) => {

@@ -16,19 +16,26 @@ export class AccountComponent implements OnInit, AfterViewInit {
 	errormsg: string;
 	//fbId:any=false;
 	sub: any;
-	user:any;
+	user: any;
+
+	isLoginTypeFb: any;
+
 	constructor(private fb: FormBuilder, private coreservice: CoreService, private route: ActivatedRoute, private router: Router) {
 
-		 this.user = JSON.parse(window.localStorage['teem_user']);
+		this.isLoginTypeFb = (window.localStorage['teem_user_fblogin']);
+		console.log("isLoginTypeFb",this.isLoginTypeFb)
+
+		this.user = JSON.parse(window.localStorage['teem_user']);
 		this.accountFormGroup = this.fb.group({
 			email: ['', [Validators.required, Validators.email]]
 		});
 
 		this.accountPasswordGroup = this.fb.group({
-			oldpassword: ['', [Validators.required,Validators.minLength(8)]],
+			oldpassword: ['', [Validators.required, Validators.minLength(8)]],
 			encryptedpassword: ['', [Validators.required, Validators.minLength(8)]],
 			confirmpassword: ['', [Validators.required, Validators.minLength(8)]]
 		}, { validator: this.matchingPasswords('encryptedpassword', 'confirmpassword') });
+
 
 		this.sub = this.route.params.subscribe(params => {
 			let activationcode = params['activationid']; // (+) converts string 'id' to a number
@@ -58,15 +65,18 @@ export class AccountComponent implements OnInit, AfterViewInit {
 	}
 
 	ngOnInit() {
-		
+
 	}
 
 	ngAfterViewInit() {
-		
+
 		this.accountFormGroup.patchValue({
 			email: this.user.email
 		});
-		
+
+		if (this.isLoginTypeFb) {
+			this.accountFormGroup.get("email").disable();
+		}
 		// if(user.fbid){
 		// 	this.fbId=false;
 		// }else{

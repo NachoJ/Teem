@@ -46,9 +46,10 @@
                 <div class="md-list-item-text" ng-class-odd="'odd'" ng-class-even="'odd'">
                     <div fxHide.gt-xs fxLayout="row" fxFlex="100">
                         <div fxLayoutAlign="center center" fxFlex="20" class="match-time center">
-                            <a><img src="../../assets/img/sidebar_photo.png" alt="" class="user-img-icon"></a>
+                            <!--<a><img src="../../assets/img/sidebar_photo.png" alt="" class="user-img-icon"></a>-->
+                            <a *ngIf="match.userdetail[0]" [mdMenuTriggerFor]="profilePopupMenu"><img src="{{PROFILE_IMAGE_PATH+match.userdetail[0].profileimage}}" alt="" class="user-img-icon"></a>
                         </div>
-                        <div fxLayout="column" fxFlexOffset="2" fxLayoutAlign="center start" fxFlex="58">
+                        <div fxLayout="column" fxFlexOffset="2" fxLayoutAlign="center start" fxFlex="58" [routerLink]="['/match-details',match._id]">
                             <p class="md-list-event-hour datetime"><b>{{match.filteredMatchTime}}</b> </p>
                             <p class="md-list-event-hour"><b>{{match.sportdetail[0].title}}</b> </p>
                             <p *ngIf="match.sportcenterdetail[0]"><b style="margin:2px 0px;">{{match.sportcenterdetail[0].address}}</b></p>

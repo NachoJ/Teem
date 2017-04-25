@@ -274,7 +274,9 @@ export class FindMatchComponent implements OnInit {
 		this.markers = [];
 
 		var bounds = new google.maps.LatLngBounds();
+		var infowindow = [];
 		for (var index = 0; index < this.nearByMatch.length; index++) {
+			console.log("index = ", index);
 			let match = this.nearByMatch[index];
 			let sportdetail = match.sportdetail[0];
 			let userdetail = match.userdetail[0];
@@ -290,15 +292,17 @@ export class FindMatchComponent implements OnInit {
 				// strokeColor: 'gold',
 				// strokeWeight: 14
 			};
-
+			var price = 'free';
+			if (match.price)
+				price = match.price;
 			var showContent = '<h4> Creator: ' + userdetail.username + '</h4>'
 				+ '<h4> Game: ' + sportdetail.title + '</h4>'
-				+ '<p>Price: ' + match.price + "</p><br>"
+				+ '<p>Price: ' + price + "</p><br>"
 				+ "<button md-button onclick=FindMatchComponent.navigateToDetails('" + match._id + "');>Join Now</button>";
 			// console.log("my marker id", myMarker.id);
 			// console.log("content = ", showContent);
 
-			var infowindow = new google.maps.InfoWindow({
+			infowindow[index] = new google.maps.InfoWindow({
 				content: showContent,
 				maxWidth: 200
 			});
@@ -313,10 +317,18 @@ export class FindMatchComponent implements OnInit {
 				map: this.map,
 				title: sportdetail.title
 			});
-			this.markers[index].addListener('click', function () {
-				infowindow.setPosition(myLatLng);
-				infowindow.open(this.map, this.markers[index]);
-			});
+			let self = this;
+			// this.markers[index].addListener('click', function () {
+			// 	infowindow.setPosition(myLatLng);
+			// 	console.log("info window = ", index);
+			// 	infowindow.open(this.map, self.markers[index]);
+			// });
+
+			google.maps.event.addListener(this.markers[index], 'click', function (innerKey) {
+				return function () {
+					infowindow[innerKey].open(this.map, self.markers[innerKey]);
+				}
+			}(index));
 
 			bounds.extend(this.markers[index].getPosition());
 		}

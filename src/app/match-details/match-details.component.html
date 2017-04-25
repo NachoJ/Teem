@@ -40,7 +40,7 @@
         <div class="title-list-items">
             <p class="title-list-items-text"> <i class="material-icons">person_pin</i> {{'PLAYERS' | translate}}</p>
             <button md-raised-button (click)="leaveMatch()" *ngIf="matchleave"> {{'LEAVE' | translate}}</button>
-            <button md-raised-button (click)="leaveMatch()" *ngIf="matchjoin"> {{'JOIN' | translate}}</button>
+            <button md-raised-button (click)="joinMatchDefault()" *ngIf="matchjoin"> {{'JOIN' | translate}}</button>
         </div>
         <div fxLayoutAilgn="center center">
             <!--style="margin: 10px 0px 15px; width: 100%; text-align: center;"-->
@@ -109,7 +109,7 @@
                     </md-autocomplete>
                 </div>
                 <div fxLayout="row" class="chipbox">
-                    <md-chip-list color="primary" *ngFor="let p of selectedPlayer; let i = index">
+                    <md-chip-list *ngFor="let p of selectedPlayer; let i = index">
                         <md-chip (click)="removeInvites(i)">
                             <img class="avatar" src="{{PROFILE_IMAGE_PATH+p.profileimage}}" /> <label>{{p.firstname}}</label>
                             <a href="javascript:void(0)" (click)="removeInvites(i)">×</a></md-chip>

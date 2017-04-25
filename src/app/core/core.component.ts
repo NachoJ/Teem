@@ -175,6 +175,13 @@ export class CoreComponent implements OnInit {
 			}
 		];
 
+		let navigateTo = window.localStorage['teem_user_navigateto'] || '';
+		if (navigateTo) {
+			console.log("navigate to ", navigateTo);
+			window.localStorage.removeItem("teem_user_navigateto");
+			router.navigate([navigateTo]);
+		}
+
 	}
 
 	loadLanguage() {

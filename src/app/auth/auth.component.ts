@@ -22,7 +22,7 @@ export class AuthComponent implements OnInit {
 		console.log("language = " + languageN);
 		this.translate.setDefaultLang('en');
 		this.translate.use(languageN);
-		// this.translate.use('fr');
+		// this.translate.use('es');
 	}
 	ngOnInit() {
 	}
