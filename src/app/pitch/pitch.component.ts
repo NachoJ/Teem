@@ -68,22 +68,28 @@ export class PitchComponent implements OnInit {
 		this.coreService.getAllSports()
 			.subscribe((response: any) => {
 				console.log("sport options response = ", response);
-				// tslint:disable-next-line:forin
-				let tempsport = "";
 				for (var res of response) {
-					translate.get(res.sportid.title).subscribe(
+					// console.log("res = ",res);
+					let langTitle = "";
+					let tempsport = "";
+					translate.get(res.title).subscribe(
 						value => {
 							// value is our translated string
-							res.sportid.title = value;
+							langTitle = value;
 						})
-					if (tempsport != res.sportid.title) {
-						tempsport = res.sportid.title;
-						console.log("Sport = ", res.sportid.title);
-						this.sportOptions.push({ value: res.sportid.title, viewValue: res.sportid.title, isDisabled: true });
+					if (tempsport != res.title) {
+						tempsport = res.title;
+						console.log("sport = ", res.title + " " + res.id);
+						// this.subSportOption.push({ value: res.id, viewValue: res.title, isDisabled: true });
+						this.sportOptions.push({ value: res.id, viewValue: langTitle, isDisabled: true });
 					}
-
-					console.log("res title " + res.title + " res value " + res.value);
-					this.sportOptions.push({ value: res.id, viewValue: res.sportid.title + " " + res.title, isDisabled: false });
+					for (var r of res.subsport) {
+						console.log("r id = " + r.title + " " + r.id)
+						this.sportOptions.push({ value: r.id, viewValue: langTitle + " " + r.title, sportid: res.id, isDisabled: false });
+						// this.subSportOption.push({ value: r.id, viewValue: res.title + " " + r.title, sportid: res.id, isDisabled: false });
+					}
+					// console.log("res title " + res.title + " res value " + res.value);
+					// this.subSportOption.push({ value: res.id, viewValue: res.sportid.title + " " + res.title, isDisabled: false });
 				}
 				console.log("sport options  = ", this.sportOptions);
 				//this.sportOptions = response;

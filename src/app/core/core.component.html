@@ -11,10 +11,10 @@
                 <a href="#" *ngIf="paddle"><img src="/assets/img/b03.png"></a>
             </div>
             <!--
-         <div class="link_box">
-    <button md-raised-button routerLink="/match-create" routerLinkActive="active">New Match<i class="material-icons">keyboard_arrow_right</i></button>
-    <button md-raised-button routerLink="/find-match" routerLinkActive="active" class="search">Find Match<i class="material-icons">search</i></button>
-</div>
+			<div class="link_box">
+				<button md-raised-button routerLink="/match-create" routerLinkActive="active">New Match<i class="material-icons">keyboard_arrow_right</i></button>
+				<button md-raised-button routerLink="/find-match" routerLinkActive="active" class="search">Find Match<i class="material-icons">search</i></button>
+			</div>
 -->
             <md-list class="mobilemenu" *ngFor="let nl of navMobileLinks">
                 <md-list-item (click)="sidenav.toggle()" routerLink="{{ nl.link }}" class="menu-item"><i class="material-icons">{{nl.icon}}</i>{{nl.title | translate}}</md-list-item>
@@ -30,10 +30,10 @@
             <section fxLayout="row" fxLayoutAlign="end start" fxFlex="80%" class="topmenubelt">
                 <div fxFlexAlign="end" class="header-nav">
                     <!--<nav md-tab-nav-bar>
-                <a md-tab-link  routerLink="" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">HOME</a>
-                <a md-tab-link  routerLink="" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">FIND MATCH</a>
-                <a md-tab-link  routerLink="" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">TOURNAMENTS</a>
-            </nav>-->
+						<a md-tab-link  routerLink="" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">HOME</a>
+						<a md-tab-link  routerLink="" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">FIND MATCH</a>
+						<a md-tab-link  routerLink="" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">TOURNAMENTS</a>
+					</nav>-->
                     <nav md-tab-nav-bar>
                         <a md-tab-link *ngFor="let link of navLinks" [routerLink]="link.link" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
                             <!--{{tabLink.label}}-->{{link.title | translate }} </a>
@@ -42,6 +42,8 @@
                             <a md-tab-link [mdMenuTriggerFor]="menu" class="userprofile"><img src="/assets/img/player-boy.png"></a>
                             <md-menu class="user-menu" #menu="mdMenu">
                                 <button md-menu-item routerLink="/settings/profile"> <span>{{'PROFILE' | translate}}</span> </button>
+                                <button md-menu-item (click)="changeLanguage('en')"> <img class="flag" src="assets/img/flags/gb.png"/><span>English</span> </button>
+                                <button md-menu-item (click)="changeLanguage('es')"> <img class="flag" src="assets/img/flags/es.png"/><span>Español</span> </button>
                                 <button md-menu-item (click)="logout()"> <span>{{'LOGOUT' | translate}}</span> </button>
                             </md-menu>
                         </div>

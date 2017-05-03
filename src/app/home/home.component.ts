@@ -14,9 +14,12 @@ export class HomeComponent implements OnInit {
 
 
 	nextMatch: any[] = [];
-	lastMatch:any[]=[];
+	lastMatch: any[] = [];
 	invitation: any[] = [];
 	user: any;
+	displayMatch: number = 3;
+	isMore: boolean = true;
+
 	constructor(private coreService: CoreService, private dialog: MdDialog, private zone: NgZone) {
 		this.user = JSON.parse(window.localStorage['teem_user']);
 		this.nextMatchList();
@@ -28,22 +31,25 @@ export class HomeComponent implements OnInit {
 
 	nextMatchList() {
 
-		this.coreService.getNextMatch(this.user.id, moment().subtract(1, "days").format('YYYY-MM-DD'))
+		this.coreService.getNextMatch(this.user.id, moment().format('YYYY-MM-DD HH:mm.Z'))
 			.subscribe((response) => {
 				console.log("next match = ", response);
 				this.nextMatch = [];
 				// this.nearByMatch = response;
 				for (let match of response) {
+					//match["filteredMatchTime"] =  moment(match.matchdetail[0].matchtime, ['YYYY', moment.ISO_8601]).format('HH:mm');
+					//console.log("time",moment(match.matchdetail[0].matchtime, ['YYYY', moment.ISO_8601]).format('HH:mm'));
 					match["filteredMatchTime"] = moment(match.matchdetail[0].matchtime).format('HH:mm');
 					match["filteredMatchDate"] = moment(match.matchdetail[0].matchtime).format('MMM DD, YYYY');
+					match["compareMatchDate"] = new Date(match.matchdetail[0].matchtime);
 					this.nextMatch.push(match);
 				}
 
 				this.nextMatch.sort(function (a, b) {
-					if (a.filteredMatchDate < b.filteredMatchDate) {
+					if (a.compareMatchDate < b.compareMatchDate) {
 						return -1;
 					}
-					if (a.filteredMatchDate > b.filteredMatchDate) {
+					if (a.compareMatchDate > b.compareMatchDate) {
 
 						return 1;
 					}
@@ -58,7 +64,7 @@ export class HomeComponent implements OnInit {
 						match.matchdetail[0].userdetail[0].profileimage = "../../assets/img/sidebar_photo.png";
 
 					//match.matchdetail[0].benchplayers = match.matchdetail[0].benchplayers + match.matchdetail[0].benchplayers;
-					match.matchdetail[0].subsport[0].value =match.matchdetail[0].subsport[0].value + match.matchdetail[0].subsport[0].value;
+					match.matchdetail[0].subsport[0].value = match.matchdetail[0].subsport[0].value + match.matchdetail[0].subsport[0].value;
 
 					if (match.filteredMatchDate != dateToCheck) {
 						match["displayDate"] = true;
@@ -72,7 +78,7 @@ export class HomeComponent implements OnInit {
 			},
 			(error) => {
 				this.coreService.emitErrorMessage(error);
-				this.nextMatch=[];
+				this.nextMatch = [];
 			}
 			);
 	}
@@ -86,13 +92,14 @@ export class HomeComponent implements OnInit {
 				for (let match of response) {
 					match["filteredMatchTime"] = moment(match.matchdetail[0].matchtime).format('HH:mm');
 					match["filteredMatchDate"] = moment(match.matchdetail[0].matchtime).format('MMM DD, YYYY');
+					match["compareMatchDate"] = new Date(match.matchdetail[0].matchtime);
 					this.invitation.push(match);
 				}
 				this.invitation.sort(function (a, b) {
-					if (a.filteredMatchDate < b.filteredMatchDate) {
+					if (a.compareMatchDate < b.compareMatchDate) {
 						return -1;
 					}
-					if (a.filteredMatchDate > b.filteredMatchDate) {
+					if (a.compareMatchDate > b.compareMatchDate) {
 
 						return 1;
 					}
@@ -109,7 +116,7 @@ export class HomeComponent implements OnInit {
 						match.matchdetail[0].userdetail[0].profileimage = "../../assets/img/sidebar_photo.png";
 
 					//match.matchdetail[0].benchplayers = match.matchdetail[0].benchplayers + match.matchdetail[0].benchplayers;
-					match.matchdetail[0].subsport[0].value =match.matchdetail[0].subsport[0].value + match.matchdetail[0].subsport[0].value;
+					match.matchdetail[0].subsport[0].value = match.matchdetail[0].subsport[0].value + match.matchdetail[0].subsport[0].value;
 					if (match.filteredMatchDate != dateToCheck) {
 						match["displayDate"] = true;
 						dateToCheck = match.filteredMatchDate;
@@ -122,8 +129,8 @@ export class HomeComponent implements OnInit {
 			},
 			(error) => {
 				this.coreService.emitErrorMessage(error);
-				console.log("error",this.invitation);
-				this.invitation=[];
+				console.log("error", this.invitation);
+				this.invitation = [];
 			}
 			);
 
@@ -131,7 +138,7 @@ export class HomeComponent implements OnInit {
 
 	lastMatchList() {
 
-		this.coreService.getLastMatch(this.user.id, moment().subtract(1, "days").format('YYYY-MM-DD'))
+		this.coreService.getLastMatch(this.user.id, moment().format('YYYY-MM-DD HH:mm.Z'))
 			.subscribe((response) => {
 				console.log("next match = ", response);
 				this.lastMatch = [];
@@ -139,14 +146,15 @@ export class HomeComponent implements OnInit {
 				for (let match of response) {
 					match["filteredMatchTime"] = moment(match.matchdetail[0].matchtime).format('HH:mm');
 					match["filteredMatchDate"] = moment(match.matchdetail[0].matchtime).format('MMM DD, YYYY');
+					match["compareMatchDate"] = new Date(match.matchdetail[0].matchtime);
 					this.lastMatch.push(match);
 				}
 
 				this.lastMatch.sort(function (a, b) {
-					if (a.filteredMatchDate < b.filteredMatchDate) {
+					if (a.compareMatchDate < b.compareMatchDate) {
 						return -1;
 					}
-					if (a.filteredMatchDate > b.filteredMatchDate) {
+					if (a.compareMatchDate > b.compareMatchDate) {
 
 						return 1;
 					}
@@ -161,7 +169,7 @@ export class HomeComponent implements OnInit {
 						match.matchdetail[0].userdetail[0].profileimage = "../../assets/img/sidebar_photo.png";
 
 					//match.matchdetail[0].benchplayers = match.matchdetail[0].benchplayers + match.matchdetail[0].benchplayers;
-					match.matchdetail[0].subsport[0].value =match.matchdetail[0].subsport[0].value + match.matchdetail[0].subsport[0].value;
+					match.matchdetail[0].subsport[0].value = match.matchdetail[0].subsport[0].value + match.matchdetail[0].subsport[0].value;
 
 					if (match.filteredMatchDate != dateToCheck) {
 						match["displayDate"] = true;
@@ -175,7 +183,7 @@ export class HomeComponent implements OnInit {
 			},
 			(error) => {
 				this.coreService.emitErrorMessage(error);
-				this.lastMatch=[];
+				this.lastMatch = [];
 			}
 			);
 	}
@@ -198,7 +206,7 @@ export class HomeComponent implements OnInit {
 			let self = this;
 			// this.selectedOption = result;
 			if (result == 'accept') {
-				this.coreService.acceptInvitation(this.user.id,id).subscribe((result: any) => {
+				this.coreService.acceptInvitation(this.user.id, id).subscribe((result: any) => {
 					this.coreService.emitSuccessMessage(result);
 					setTimeout(function () {
 						self.zone.run(() => {
@@ -238,6 +246,18 @@ export class HomeComponent implements OnInit {
 				)
 			}
 		});
+	}
+	nextMoreMatch() {
+
+		if (this.nextMatch.length <= this.displayMatch)
+			this.displayMatch = 3;
+		else
+			this.displayMatch += 3;
+
+		if (typeof this.nextMatch[this.displayMatch] == "undefined")
+			this.isMore = false;
+		else
+			this.isMore = true;
 	}
 
 }

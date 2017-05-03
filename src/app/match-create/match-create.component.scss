@@ -221,8 +221,7 @@ app-match-create {
     }
     .selectbadges .mat-radio-label {
         width: 100%;
-        padding: 10px;
-        width: 118px;
+        padding: 10px 30px;
     }
     .selectbadges .mat-radio-checked .mat-radio-label {
         box-shadow: inset 0px 0px 0px 2px #c61315;
@@ -238,6 +237,9 @@ app-match-create {
         font-size: 18px;
         font-weight: normal;
         margin: 1px 0px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
     }
     .mat-radio-checked svg path {
         fill: #c61315;
@@ -290,6 +292,9 @@ app-match-create {
     }
     .clearfix {
         display: inline-block !important;
+    }
+    .custom-height input {
+        height: 31px;
     }
     /* start commented backslash hack \*/
     .clearfix {

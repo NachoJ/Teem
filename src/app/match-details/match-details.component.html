@@ -19,7 +19,7 @@
                             <label class="sample-label">{{match.scid.address}}</label>
                         </div>
                         <div fxLayout="row" class="matchdetails"> <i class="material-icons">public</i>
-                            <label class="sample-label">Public</label>
+                            <label class="sample-label">public</label>
                         </div>
                         <div fxLayout="row" class="matchdetails" *ngIf="match.price">
                             <div fxLayout="row"> <i class="material-icons">attach_money</i>
@@ -54,9 +54,21 @@
                     <ng-container *ngFor="let player1 of team1player">
                         <a *ngIf="player1.id!=''; else notplayer1"><img src="{{ player1.profileimg}}"></a>
                         <ng-template #notplayer1>
-                            <a (click)="joinMatch(player1)"><img src="{{ player1.profileimg}}"></a>
+                            <a *ngIf="player1.clickDisabled"><img src="{{ player1.profileimg}}"></a>
+                            <a *ngIf="!player1.clickDisabled" (click)="joinMatch(player1)"><img src="{{ player1.profileimg}}"></a>
                         </ng-template>
                     </ng-container>
+                </div>
+                <div *ngIf="benchPlayer1.length>0">
+                    <h5>Bench players</h5>
+                    <div fxLayout="row" fxLayoutAlign="center center">
+                        <ng-container *ngFor="let bplayer1 of benchPlayer1">
+                            <a *ngIf="bplayer1.id!=''; else notbplayer1"><img src="{{ bplayer1.profileimg}}"></a>
+                            <ng-template #notbplayer1>
+                                <a (click)="joinMatch(bplayer1)"><img src="{{ bplayer1.profileimg}}"></a>
+                            </ng-template>
+                        </ng-container>
+                    </div>
                 </div>
             </div>
             <div fxFlex="50" class="teems">
@@ -66,9 +78,21 @@
                     <ng-container *ngFor="let player2 of team2player">
                         <a *ngIf="player2.id!=''; else notplayer2"><img src="{{ player2.profileimg}}"></a>
                         <ng-template #notplayer2>
-                            <a (click)="joinMatch(player2)"><img src="{{ player2.profileimg}}"></a>
+                            <a *ngIf="player2.clickDisabled"><img src="{{ player2.profileimg}}"></a>
+                            <a *ngIf="!player2.clickDisabled" (click)="joinMatch(player2)"><img src="{{ player2.profileimg}}"></a>
                         </ng-template>
                     </ng-container>
+                </div>
+                <div *ngIf="benchPlayer2.length>0">
+                    <h5>Bench players</h5>
+                    <div fxLayout="row" fxLayoutAlign="center center">
+                        <ng-container *ngFor="let bplayer2 of benchPlayer2">
+                            <a *ngIf="bplayer2.id!=''; else notbplayer2"><img src="{{ bplayer2.profileimg}}"></a>
+                            <ng-template #notbplayer2>
+                                <a (click)="joinMatch(bplayer2)"><img src="{{ bplayer2.profileimg}}"></a>
+                            </ng-template>
+                        </ng-container>
+                    </div>
                 </div>
             </div>
         </div>
@@ -81,14 +105,22 @@
             </div>
             <div>
                 <div class="form-group">
-                    <md-input-container class="md-block register-form-text-area" fxFlex="100" md-no-float>
+                    <!--<md-input-container class="md-block register-form-text-area" fxFlex="100" md-no-float>
                         <textarea mdInput class="user-text-label"> </textarea>
-                    </md-input-container>
+                    </md-input-container>-->
+                    <div id="main-chat-box" class="chat-list">
+                        <ul *ngFor="let item of chat">
+                            <li *ngIf="item.fromuserid.id != user.id"><img class="avatar" src="{{PROFILE_IMAGE_PATH+item.fromuserid.profileimage}}" onError="this.onerror=null;this.src='assets/img/sidebar_photo.png';" /> <span class="msg">{{item.message}}</span>
+                            </li>
+                            <li *ngIf="item.fromuserid.id == user.id" class="text-to-right"><img class="avatar" align="right" src="{{PROFILE_IMAGE_PATH+item.fromuserid.profileimage}}" onError="this.onerror=null;this.src='assets/img/sidebar_photo.png';" /><span class="msg2">{{item.message}}</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="form-group">
                     <md-input-container class="md-block register-form-text-area" fxFlex="100" md-no-float>
-                        <input mdInput class="user-text-label">
-                        <a href="#"><i class="material-icons ng-scope">send</i></a>
+                        <input mdInput [(ngModel)]="chatString" (keyup.enter)="sendMessage()" class="user-text-label">
+                        <a href="javascript:void(0);" (click)="sendMessage()"><i class="material-icons ng-scope">send</i></a>
                     </md-input-container>
                 </div>
             </div>
@@ -96,7 +128,7 @@
         <!-- Invitation -->
         <div fxFlexOffset.xs="0" fxFlexOffset="4" fxFlex="48" class="detail-box chat-box">
             <div class="title-list-items">
-                <p class="title-list-items-text"> <i class="material-icons">chat</i> {{'Invitation' | translate}}</p>
+                <p class="title-list-items-text"> <i class="material-icons">chat</i> {{'INVITATION' | translate}}</p>
             </div>
             <div>
                 <div class="form-group">
@@ -117,14 +149,20 @@
                 </div>
             </div>
             <div class="form-group" style="text-align: center;">
-                <button md-raised-button (click)="sendInvitations()">{{'SEND INVITATIONS' | translate}}</button>
+                <button md-raised-button (click)="promptForSendInvitation()" [disabled]="selectedPlayer.length==0">{{'SEND INVITATIONS' | translate}}</button>
             </div>
             <div class="invite">
                 <p>{{'YOUR FRIEND ARE NOT ON TEEM YET? INVITE THEM TO PLAY!' | translate}}</p>
                 <div fxLayoutAlign="center center" fxLayout="row" style="width:100%;">
-                    <a href="#"><i class="material-icons">email</i> </a>
-                    <a href="#"><i class="material-icons">email</i> </a>
-                    <a href="#"><i class="material-icons">email</i> </a>
+                    <a href="javascript:void(0)" (click)="socialShare('facebook')"><img height="36" width="36" src="/assets/img/facebook-circle.png" /> </a>
+                    <a href="javascript:void(0)" (click)="socialShare('twitter')"><img height="36" width="36" src="/assets/img/twitter.png" /> </a>
+                    <a [href]="sanitizedWhatsappUrl" data-action="share/whatsapp/share" *ngIf="isMobile"><img height="36" width="36" src="/assets/img/whatsapp.png" /></a>
+                    <a [href]="sanitizedTelegramUrl" *ngIf="isMobile"><img height="36" width="36" src="/assets/img/telegram.png" /></a>
+                    <a [href]="sanitizedFacebookMessangerUrl" *ngIf="isMobile"><img height="36" width="36" src="/assets/img/fbmsg.png" /></a>
+                    <a href="mailto:?subject=match%20detail%20share%20link&body=linkToShare"><i class="material-icons" style="color:#333">email</i> </a>
+                    <!--<a href="tg://msg?text=linkToShare" *ngIf="isMobile"><img height="36" width="36" src="/assets/img/telegram.png" /></a>-->
+                    <!--<a href="whatsapp://send?text=linkToShare" data-action="share/whatsapp/share" *ngIf="isMobile"><img height="36" width="36" src="/assets/img/whatsapp.png" /></a>-->
+                    <!--<a href="fb-messenger://share/?link={{linkToShare}}&app_id=fbAppId" *ngIf="isMobile"><img height="36" width="36" src="/assets/img/fbmsg.png" /></a>-->
                 </div>
             </div>
         </div>

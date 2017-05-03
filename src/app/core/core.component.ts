@@ -195,7 +195,10 @@ export class CoreComponent implements OnInit {
 		}
 		console.log("language = " + languageN);
 		this.translate.setDefaultLang('en');
-		this.translate.use(languageN);
+		if (window.localStorage.getItem('teem_user_language'))
+			this.translate.use(window.localStorage.getItem('teem_user_language'));
+		else
+			this.translate.use(languageN);
 		// this.translate.use('fr');
 	}
 
@@ -206,8 +209,14 @@ export class CoreComponent implements OnInit {
 		console.log('logout clicked');
 		//   window.localStorage['teem_user'] = '';
 		window.localStorage.removeItem['teem_user'];
-		window.localStorage.clear();
+		// window.localStorage.clear();
 		this.router.navigate(['/auth']);
+	}
+
+	changeLanguage(language) {
+		console.log("language to set = ", language);
+		window.localStorage.setItem('teem_user_language', language);
+		this.translate.use(language);
 	}
 
 }

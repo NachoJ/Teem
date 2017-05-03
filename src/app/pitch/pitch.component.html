@@ -24,7 +24,7 @@
                 </div>
                 <div *ngIf="pitchFormGroupArray[i].controls.name.invalid && pitchFormGroupArray[i].controls.name.touched">
                     <div ng-message="required" fxFlex="100" fxLayoutAlign="right start">
-                        <p class="error-message">{{'NAME IS INVALID'}}</p>
+                        <p class="error-message">{{'NAME IS INVALID' | translate}}</p>
                     </div>
                 </div>
             </div>

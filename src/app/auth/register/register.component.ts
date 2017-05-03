@@ -23,7 +23,8 @@ export class RegisterComponent implements OnInit {
 		this.userRegisterFormGroup = this.formBuilder.group({
 			uname: ['', [Validators.required, Validators.minLength(3)]],
 			password: ['', [Validators.required, Validators.minLength(8)]],
-			email: ['', [Validators.required, Validators.email]]
+			email: ['', [Validators.required, Validators.email]],
+			termAndConditions: ['', [Validators.required]]
 		});
 	}
 
@@ -55,6 +56,12 @@ export class RegisterComponent implements OnInit {
 				this.error = error;
 			});
 
+	}
+
+	termsAndConditionsChanged() {
+		if (this.userRegisterFormGroup.controls.termAndConditions.value == false) {
+			this.userRegisterFormGroup.controls.termAndConditions.setErrors({ "wrongDate": true });
+		}
 	}
 
 }

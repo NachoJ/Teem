@@ -1,10 +1,10 @@
 <div fxLayout="column" fxLayoutAlign="start start" class="detail-box">
     <div class="title-list-items">
-        <p class="title-list-items-text"> <i class="material-icons">flag</i> NEXT MATCHS</p>
+        <p class="title-list-items-text"> <i class="material-icons">flag</i> {{'NEXT MATCHS' | translate}}</p>
     </div>
     <div fxLayout="column" class="detail-listing">
 
-        <md-list class="nopadding ng-scope" *ngFor=" let match of nextMatch; let i = index;">
+        <md-list class="nopadding ng-scope" *ngFor=" let match of nextMatch | slice:0:displayMatch; let i = index;">
             <div *ngIf="match.displayDate" class="md-toolbar-tools" layout-align="start start" class="md-list-header">
                 <p class="md-list-event-date"> <em> <span>{{match.filteredMatchDate}}</span> </em> </p>
             </div>
@@ -20,7 +20,7 @@
                             <p><b style="margin:2px 0px;">{{match.matchdetail[0].sportcenterdetail[0].address}} </b></p>
                         </div>
                         <div fxLayoutAlign="center center" fxFlex="20" class="match-time left">
-                            <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{match.matchdetail[0].subsport[0].value}} </b> <b style="margin:2px 0px; display: block;">€{{match.matchdetail[0].price}} </b> </p>
+                            <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{match.matchdetail[0].subsport[0].value}} </b>                                <b style="margin:2px 0px; display: block;">€{{match.matchdetail[0].price}} </b> </p>
                         </div>
                     </div>
                     <div fxHide.xs fxLayout="row" fxFlex="100">
@@ -37,10 +37,10 @@
                             <a [mdMenuTriggerFor]="profilePopupMenu"><img src="{{match.matchdetail[0].userdetail[0].profileimage}}" alt="" class="user-img-icon"></a>
                         </div>
                         <div fxFlex="25" class="match-time left">
-                            <p><b style="margin:2px 0px; display: block;">{{match.matchdetail[0].sportcenterdetail[0].address}} </b> <b style="margin:2px 0px; display: block;"><!--BERNABÉU --> </b> </p>
+                            <p><b style="margin:2px 0px; display: block;">{{match.matchdetail[0].sportcenterdetail[0].address}} </b>                                <b style="margin:2px 0px; display: block;"><!--BERNABÉU --> </b> </p>
                         </div>
                         <div fxFlex="10" class="match-time left">
-                            <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{ match.matchdetail[0].subsport[0].value }} </b> <b style="margin:2px 0px; display: block;">€{{match.matchdetail[0].price}} </b> </p>
+                            <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{ match.matchdetail[0].subsport[0].value }} </b>                                <b style="margin:2px 0px; display: block;">€{{match.matchdetail[0].price}} </b> </p>
                         </div>
                         <div fxLayoutAlign="center center" fxFlex="15" class="match-time center">
                             <button md-raised-button [routerLink]="['/match-details',match.matchdetail[0]._id]">Info</button>
@@ -57,12 +57,17 @@
                 </div>
             </md-list-item>
         </md-list>
-
+        <div fxFlex='10' fxLayoutAlign="end" class="morebtn">
+            <button md-raised-button (click)="nextMoreMatch()" *ngIf="nextMatch.length>3" color="primary">
+                <span *ngIf="isMore">More</span>
+                <span *ngIf="!isMore">Less</span>
+            </button>
+      </div>
     </div>
 </div>
 <div fxLayout="column" fxLayoutAlign="start start" class="detail-box">
     <div class="title-list-items">
-        <p class="title-list-items-text"> <i class="material-icons">chat_bubble</i> INVITATIONS</p>
+        <p class="title-list-items-text"> <i class="material-icons">chat_bubble</i> {{'INVITATIONS'|translate}}</p>
     </div>
     <div fxLayout="column" class="detail-listing">
         <md-list class="nopadding ng-scope" *ngFor=" let invite of invitation; let i = index;">
@@ -78,10 +83,13 @@
                         <div fxLayout="column" fxFlexOffset="2" fxLayoutAlign="center start" fxFlex="58">
                             <p class="md-list-event-hour datetime"><b>{{invite.filteredMatchTime}}</b> </p>
                             <p class="md-list-event-hour"><b>{{invite.matchdetail[0].sportdetail[0].title}}</b> </p>
-                            <p><b style="margin:2px 0px;">ESTADIO SANTIAGO BERNABÉU </b></p>
+                            <p><b style="margin:2px 0px;">{{invite.matchdetail[0].sciddetail[0].address}} </b></p>
                         </div>
                         <div fxLayoutAlign="center center" fxFlex="20" class="match-time left">
-                            <p><b style="margin:2px 0px; display: block;">{{invite.totalmatchplayer}} DE {{invite.matchdetail[0].subsport[0].value}} </b> <b style="margin:2px 0px; display: block;">€{{invite.matchdetail[0].price}} </b> </p>
+                            <p><b style="margin:2px 0px; display: block;">{{invite.totalmatchplayer}} DE {{invite.matchdetail[0].subsport[0].value}} </b>                                <b style="margin:2px 0px; display: block;">€{{invite.matchdetail[0].price}} </b> </p>
+                        </div>
+                        <div>
+                            <a [mdMenuTriggerFor]="invitePopupMenu"><i class="material-icons">more_vert</i></a>
                         </div>
                     </div>
                     <div fxHide.xs fxLayout="row" fxFlex="100">
@@ -97,18 +105,23 @@
                             <a [mdMenuTriggerFor]="profileInvitePopupMenu"><img src="{{invite.matchdetail[0].userdetail[0].profileimage}}" alt="" class="user-img-icon"></a>
                         </div>
                         <div fxFlex="25" class="match-time left">
-                            <p><b style="margin:2px 0px; display: block;">{{invite.matchdetail[0].sciddetail[0].address}} </b> <b style="margin:2px 0px; display: block;"><!--BERNABÉU --> </b> </p>
+                            <p><b style="margin:2px 0px; display: block;">{{invite.matchdetail[0].sciddetail[0].address}} </b>                                <b style="margin:2px 0px; display: block;"><!--BERNABÉU --> </b> </p>
                         </div>
                         <div fxFlex="10" class="match-time left">
-                            <p><b style="margin:2px 0px; display: block;">{{invite.totalmatchplayer}} DE {{invite.matchdetail[0].subsport[0].value}} </b> <b style="margin:2px 0px; display: block;">€{{invite.matchdetail[0].price}} </b> </p>
+                            <p><b style="margin:2px 0px; display: block;">{{invite.totalmatchplayer}} DE {{invite.matchdetail[0].subsport[0].value}} </b>                                <b style="margin:2px 0px; display: block;">€{{invite.matchdetail[0].price}} </b> </p>
                         </div>
-                        <div fxLayoutAlign="center center" fxFlex="15" class="match-time center"> <i class="material-icons" (click)="openAcceptDialog(invite._id)">done</i> <i class="material-icons" (click)="openCancelDialog(invite._id)">close</i> </div>
+                        <div fxLayoutAlign="center center" fxFlex="15" class="match-time center"> <i class="material-icons" (click)="openAcceptDialog(invite._id)">done</i> <i class="material-icons"
+                                (click)="openCancelDialog(invite._id)">close</i> </div>
                         <md-menu #profileInvitePopupMenu="mdMenu">
                             <h4>{{invite.matchdetail[0].userdetail[0].username}}</h4>
                             <p><i class="material-icons">location_on</i>{{invite.matchdetail[0].userdetail[0].city}} </p>
                             <a *ngIf="checkSport(1,invite.matchdetail[0].userdetail[0].sports)"><img src="/assets/img/b01.png"></a>
                             <a *ngIf="checkSport(2,invite.matchdetail[0].userdetail[0].sports)"><img src="/assets/img/b02.png"></a>
                             <a *ngIf="checkSport(3,invite.matchdetail[0].userdetail[0].sports)"><img src="/assets/img/b03.png"></a>
+                        </md-menu>
+                        <md-menu #invitePopupMenu="mdMenu">
+                            <i class="material-icons" (click)="openAcceptDialog(invite._id)">done</i> <i class="material-icons"
+                                (click)="openCancelDialog(invite._id)">close</i>
                         </md-menu>
                     </div>
                 </div>
@@ -119,7 +132,7 @@
 
 <div fxLayout="column" fxLayoutAlign="start start" class="detail-box">
     <div class="title-list-items">
-        <p class="title-list-items-text"> <i class="material-icons">flag</i> LAST MATCHS</p>
+        <p class="title-list-items-text"> <i class="material-icons">flag</i> {{'LAST MATCHS' | translate}}</p>
     </div>
     <div fxLayout="column" class="detail-listing">
 
@@ -139,7 +152,7 @@
                             <p><b style="margin:2px 0px;">{{match.matchdetail[0].sportcenterdetail[0].address}} </b></p>
                         </div>
                         <div fxLayoutAlign="center center" fxFlex="20" class="match-time left">
-                            <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{match.matchdetail[0].subsport[0].value}} </b> <b style="margin:2px 0px; display: block;">€{{match.matchdetail[0].price}} </b> </p>
+                            <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{match.matchdetail[0].subsport[0].value}} </b>                                <b style="margin:2px 0px; display: block;">€{{match.matchdetail[0].price}} </b> </p>
                         </div>
                     </div>
                     <div fxHide.xs fxLayout="row" fxFlex="100">
@@ -156,10 +169,10 @@
                             <a [mdMenuTriggerFor]="profilePopupMenu"><img src="{{match.matchdetail[0].userdetail[0].profileimage}}" alt="" class="user-img-icon"></a>
                         </div>
                         <div fxFlex="25" class="match-time left">
-                            <p><b style="margin:2px 0px; display: block;">{{match.matchdetail[0].sportcenterdetail[0].address}} </b> <b style="margin:2px 0px; display: block;"><!--BERNABÉU --> </b> </p>
+                            <p><b style="margin:2px 0px; display: block;">{{match.matchdetail[0].sportcenterdetail[0].address}} </b>                                <b style="margin:2px 0px; display: block;"><!--BERNABÉU --> </b> </p>
                         </div>
                         <div fxFlex="10" class="match-time left">
-                            <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{ match.matchdetail[0].subsport[0].value }} </b> <b style="margin:2px 0px; display: block;">€{{match.matchdetail[0].price}} </b> </p>
+                            <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{ match.matchdetail[0].subsport[0].value }} </b>                                <b style="margin:2px 0px; display: block;">€{{match.matchdetail[0].price}} </b> </p>
                         </div>
                         <div fxLayoutAlign="center center" fxFlex="15" class="match-time center">
                             <button md-raised-button [routerLink]="['/match-details',match.matchdetail[0]._id]">Info</button>

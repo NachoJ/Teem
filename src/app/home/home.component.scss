@@ -124,7 +124,10 @@
 .mat-list-item:hover .datetime i {
     opacity: 1;
 }
-
+.morebtn{
+    margin-top:10px;
+    margin-right: 22px;
+}
 @media screen and (max-width:599px) {
     .detail-listing .mat-list-item-content {
         height: auto !important;

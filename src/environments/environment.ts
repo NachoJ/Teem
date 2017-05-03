@@ -36,6 +36,8 @@ export const environment = {
 	PROFILE_IMAGE_UPDATE: '/profile/image/',
 	CREATE_MATCH: '/match',
 	GET_MATCH: '/match/',
+	GET_TEAM_MATCH: '/match/team/',
+	UNSUBCRIBE_MATCH: '/match/unsubscribe/',
 	NEARBY_MATCH: '/match/nearby',
 	GET_BENCH_PLAYERS: '/sportplayer/',
 	GET_SUB_SPORTS: '/subsport/list',
@@ -50,5 +52,8 @@ export const environment = {
 	JOIN_MATCH:'/match/join',
 	DELETE_MATCH:'/match/',
 	GET_LAST_MATCH:'/match/last/user/',
+	GET_MATCH_CHAT:'/chatmatch/',
+	SEND_CHAT_MESSAGE: '/chatmatch',
+
 	GoogleKey: "&key=AIzaSyDD7oo0yCjyp2pIBLbRr_h3b0_NiMXXu3g"
 };

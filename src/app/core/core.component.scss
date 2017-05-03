@@ -382,8 +382,8 @@ md-sidenav {
 }
 
 .ball_box a:focus {
-    outline: none ;
-} 
+    outline: none;
+}
 
 .link_box {
     text-align: right;
@@ -592,6 +592,13 @@ md-sidenav {
     visibility: visible;
     -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+.flag {
+    vertical-align: middle;
+    height: 25px;
+    width: 25px;
+    margin-right: 5px;
 }
 
 @-webkit-keyframes fadein {

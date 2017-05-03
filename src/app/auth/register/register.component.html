@@ -38,6 +38,17 @@
                     </div>
                 </div>
             </div>
+            <!-- terms and conditions check box -->
+            <div class="form-group">
+                <section class="removecenter">
+                    <md-checkbox color="primary" (change)="termsAndConditionsChanged()" formControlName="termAndConditions" [required]><span>I agree with the <a>Terms and Conditions</a></span></md-checkbox>
+                </section>
+                <!--<div *ngIf="userRegisterFormGroup.controls.termAndConditions.invalid" role="alert">
+                    <div ng-message="required" fxLayoutAlign="end start">
+                        <p class="error-message">{{ "MUST ACCEPT OVER TERMS AND CONDITIONS" | translate }}.</p>
+                    </div>
+                </div>-->
+            </div>
             <button md-raised-button class="md-button-register-form" [disabled]="!userRegisterFormGroup.valid" type="submit"> {{'REGISTER' | translate }} </button>
             <button md-raised-button class="md-button-forgotten-pass" routerLink="/auth/forgot-password">
                 <p class="register-form-text-label-pass">{{ "FORGOT PASSWORD?" | translate }}</p>

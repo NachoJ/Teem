@@ -1,6 +1,6 @@
 <div class="detail-box">
     <div class="title-list-items">
-        <p class="title-list-items-text"> <i class="material-icons">search</i> FIND MATCH</p>
+        <p class="title-list-items-text"> <i class="material-icons">search</i> {{'FIND MATCH' | translate}}</p>
     </div>
     <div class="find-match-main">
         <div class="my-from" fxFlex="100">
@@ -17,7 +17,7 @@
             </div>
             <div fxLayout="column" fxFlex="100" class="form-group date">
                 <div fxLayout="row">
-                    <label fxLayoutAlign="left center" fxFlex="15">Sport</label>
+                    <label fxLayoutAlign="left center" fxFlex="15">{{'SPORT' | translate}}</label>
                     <md-radio-group [(ngModel)]="sport" (change)="onSportChange()">
                         <md-radio-button *ngFor="let sp of sportOptions" [value]="sp.id">
                             <div class="span-white">

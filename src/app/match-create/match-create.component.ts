@@ -10,6 +10,7 @@ import { Pitch } from '../shared/interface/pitch';
 import { TranslateService } from "@ngx-translate/core";
 
 declare var moment: any;
+declare var $: any;
 
 @Component({
 	selector: 'app-match-create',
@@ -220,7 +221,7 @@ export class MatchCreateComponent implements OnInit {
 				for (var res of response) {
 					// console.log("res = ",res);
 					let langTitle = "";
-					this. translate.get(res.title).subscribe(
+					this.translate.get(res.title).subscribe(
 						value => {
 							// value is our translated string
 							langTitle = value;
@@ -266,6 +267,8 @@ export class MatchCreateComponent implements OnInit {
 		let filteredDate = this.date.replace(/-/gi, '/');
 		// let filteredDate = moment(this.date).format('YYYY/MM/DD');
 		let finalDate = filteredDate + ' ' + this.hour + ":" + this.minute;
+		finalDate = moment(new Date(finalDate)).format('YYYY-MM-DDTHH:mm:ss.Z');
+		console.log("offset = ", finalDate);
 		let sportid: any;
 		for (let i of this.subSportOption) {
 			if (i.value == this.subSport) {

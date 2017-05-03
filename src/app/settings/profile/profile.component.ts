@@ -112,11 +112,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 			this.checked = false;
 		}
 
-	if (!this.user.dob)
-			this.birthdate =moment(new Date()).format("YYYY-MM-DD");
+		if (!this.user.dob)
+			this.birthdate = moment(new Date()).format("YYYY-MM-DD");
 		else
 			this.birthdate = moment(this.user.dob).format("YYYY-MM-DD");
-		
+
 
 		this.profile.patchValue({
 			firstname: this.user.firstname,
@@ -186,7 +186,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 				this.coreService.emitSuccessMessage(response.data.message);
 				self.userDetailEmit(response.data.data);
 				window.localStorage['teem_user'] = JSON.stringify(response.data.data);
-				 this.router.navigate(['']);
+				this.router.navigate(['']);
 			},
 			(error: any) => {
 				//this.success = '';
@@ -259,10 +259,19 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 				//console.log("prevented default");
 			}
 		});
+		google.maps.event.addDomListener(autocomplete, 'place_changed', function () {
+			// self.assignValuetoCity(e.target.value);
+			console.log("place_chnaged event ");
+			self.zone.run(() => {
+				self.assignValuetoCity($('#city').val());
+			});
+			console.log("mousedown = ", $('#city').val());
+		});
 	}
 
 	assignValuetoCity(v) {
-		//console.log("city = ", v);
+		console.log("city = ", v);
 		this.selectedCity = v;
+		// console.log("selected city = ", this.selectedCity)
 	}
 }

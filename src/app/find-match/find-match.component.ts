@@ -218,9 +218,10 @@ export class FindMatchComponent implements OnInit {
 		let data = {
 			"lat": this.latitudeMap,
 			"long": this.longitudeMap,
-			"maxdistance": "2000",
+			"maxdistance": "100",
 			"sport": this.sport
 		};
+		if(data.lat && data.long)
 		this.coreService.getNearByMatch(data)
 			.subscribe((response) => {
 				console.log("nearByMatch = ", response);
@@ -229,13 +230,14 @@ export class FindMatchComponent implements OnInit {
 				for (let match of response) {
 					match["filteredMatchTime"] = moment(match.matchtime).format('HH:mm');
 					match["filteredMatchDate"] = moment(match.matchtime).format('MMM DD, YYYY');
+					match["compareMatchDate"] = new Date(match.matchtime);
 					this.nearByMatch.push(match);
 				}
 				this.nearByMatch.sort(function (a, b) {
-					if (a.filteredMatchDate < b.filteredMatchDate) {
+					if (a.compareMatchDate < b.compareMatchDate) {
 						return -1;
 					}
-					if (a.filteredMatchDate > b.filteredMatchDate) {
+					if (a.compareMatchDate > b.compareMatchDate) {
 
 						return 1;
 					}
@@ -276,7 +278,6 @@ export class FindMatchComponent implements OnInit {
 		var bounds = new google.maps.LatLngBounds();
 		var infowindow = [];
 		for (var index = 0; index < this.nearByMatch.length; index++) {
-			console.log("index = ", index);
 			let match = this.nearByMatch[index];
 			let sportdetail = match.sportdetail[0];
 			let userdetail = match.userdetail[0];
@@ -348,8 +349,9 @@ export class FindMatchComponent implements OnInit {
 		// }
 		if (this.nearByMatch.length <= 0) {
 			console.log("no place found");
-			bounds.extend(new google.maps.LatLng(this.latitudeMap, this.longitudeMap));
+			// bounds.extend(new google.maps.LatLng(this.latitudeMap, this.longitudeMap));
 			this.map.setZoom(13);
+			return 0;
 		}
 		this.map.fitBounds(bounds);
 

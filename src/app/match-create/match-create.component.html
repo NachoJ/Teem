@@ -114,7 +114,7 @@
                     <label fxLayoutAlign="left center" fxFlex="30">Date</label>
                     <!--<material-datepicker class="md-block register-form-text-area" fxFlex="40" [(date)]="date"></material-datepicker>-->
 
-                    <md-input-container fxFlex="40">
+                    <md-input-container class="custom-height" fxFlex="40">
                         <input type="date" mdInput class="user-text-label" formControlName="dateCtrl" [(ngModel)]="date" required> </md-input-container>
                     <md-select fxFlexOffset.xs="0" fxFlexOffset="2" fxFlex="13" formControlName="hourCtrl" [(ngModel)]="hour" ariaLabelledby="Hour" required>
                         <md-option *ngFor="let h of hourOptions" [value]="h.value"> {{ h.viewValue }} </md-option>

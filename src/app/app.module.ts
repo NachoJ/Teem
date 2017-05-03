@@ -24,7 +24,7 @@ import { AddNewSportscenterComponent } from './add-new-sportscenter/add-new-spor
 import { MySportscenterComponent, DialogResult } from './my-sportscenter/my-sportscenter.component';
 import { PitchComponent } from './pitch/pitch.component';
 import { MatchCreateComponent } from './match-create/match-create.component';
-import { MatchDetailsComponent } from './match-details/match-details.component';
+import { MatchDetailsComponent, InvitationDialogResult } from './match-details/match-details.component';
 import { NotificationComponent } from './settings/notification/notification.component';
 // import { DialogResult } from './my-sportscenter/DialogResult';
 import { DatepickerModule } from 'angular2-material-datepicker'
@@ -57,13 +57,15 @@ export function createTranslateLoader(http: Http) {
 		SettingsComponent,
 		NotificationComponent,
 		HomeDialogResult,
-		HomeDialogCancel
+		HomeDialogCancel,
+		InvitationDialogResult
 	],
 	entryComponents: [
 		UserProfileImageComponent,
 		DialogResult,
 		HomeDialogResult,
 		HomeDialogCancel,
+		InvitationDialogResult
 	],
 	imports: [
 		BrowserModule,

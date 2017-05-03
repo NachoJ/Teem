@@ -186,7 +186,7 @@ app-match-details {
         display: none;
     }
     /***** Invitaion *****/
-    .chipbox .avatar{
+    .chipbox .avatar {
         vertical-align: middle;
         height: 30px;
         width: 30px;
@@ -238,13 +238,12 @@ app-match-details {
         color: #fff;
         width: 30px;
         height: 30px;
-        background: #333;
         border-radius: 50%;
         text-align: center;
     }
     .invite a i {
-        font-size: 18px;
-        line-height: 30px;
+        font-size: 33px;
+        line-height: 38px;
     }
     /* google map */
     #nearByMap {
@@ -280,5 +279,51 @@ app-match-details {
         .invite {
             width: 100%;
         }
+    }
+    /* chat */
+    .chat-list {
+        min-width: 283px;
+        max-width: 283px;
+        min-height: 135px;
+        max-height: 135px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        background-color: #fff;
+    }
+    // .chat-list:hover {
+    //     overflow-y: scroll;
+    // }
+    .form-group ul {
+        list-style: none;
+    }
+    .form-group ul li {
+        margin: 5px 5px 5px 5px;
+        background-color: #e7f5fe;
+        border-radius: 5px;
+    }
+    .form-group ul li .avatar {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+    }
+    .form-group ul li .msg {
+        word-wrap: break-word;
+        vertical-align: super;
+        margin-right: 5px;
+        font-size: 12px;
+    }
+    .form-group ul li .msg2 {
+        word-wrap: break-word;
+        // vertical-align: super;
+        margin-right: 5px;
+        font-size: 12px;
+    }
+    .form-group ul .text-to-right {
+        // float: right;
+        text-align: right;
+        margin-right: 6px;
+        // background-color: #ffcccc;
+        background-color: #ffe6e6;
+        border-radius: 5px;
     }
 }

@@ -45,12 +45,12 @@
             <div class="example-section example-margin">
                 <div fxLayout="column" class="form-group" fxFlex="100">
                     <div fxLayout="row" fxLayout.xs="column">
-                        <label for="" fxLayoutAlign="left center" fxFlex="30">Date of birth</label>
+                        <label for="" fxLayoutAlign="left center" fxFlex="30">{{'DATE OF BIRTH' | translate }}</label>
                         <md-input-container class="md-block register-form-text-area" fxFlex="70" md-no-float>
                             <!--<input mdInput type="date"   id="fromDate" formControlName="dob" name="bod" class="user-text-label datepicker" > </md-input-container>-->
-                            <input mdInput type="date"  id="fromDate"  formControlName="dob" [ngModel]="birthdate" (ngModelChange)="birthdate = $event" class="user-text-label datepicker" > 
-                          <!--<material-datepicker class="md-block register-form-text-area" fxFlex="70"  [(date)]="date">-->
-                             </md-input-container>
+                            <input mdInput type="date" id="fromDate" formControlName="dob" [ngModel]="birthdate" (ngModelChange)="birthdate = $event" class="user-text-label datepicker">
+                            <!--<material-datepicker class="md-block register-form-text-area" fxFlex="70"  [(date)]="date">-->
+                        </md-input-container>
                     </div>
                 </div>
             </div>
