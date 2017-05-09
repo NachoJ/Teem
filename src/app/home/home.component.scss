@@ -81,14 +81,12 @@
     background: #dcdbdb;
 }
 
-
-
 .mat-list {
-    padding-top:0px;
+    padding-top: 0px;
 }
 
 .detail-listing .mat-list:first-child .md-list-header p {
-    border:none;
+    border: none;
 }
 
 .md-list-item-text {
@@ -124,10 +122,12 @@
 .mat-list-item:hover .datetime i {
     opacity: 1;
 }
-.morebtn{
-    margin-top:10px;
+
+.morebtn {
+    margin-top: 10px;
     margin-right: 22px;
 }
+
 @media screen and (max-width:599px) {
     .detail-listing .mat-list-item-content {
         height: auto !important;
@@ -147,4 +147,20 @@
     .detail-box .title-list-items {
         padding: 0px 10px;
     }
+}
+
+
+/* limiting text to two line addreess */
+
+.giveMeEllipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    /* number of lines to show */
+    line-height: 20px;
+    /* fallback */
+    max-height: 40px;
+    /* fallback */
 }

@@ -2,6 +2,7 @@ import { environment } from './../../environments/environment';
 import { CoreService } from './../core/core.service';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { MdDialog, MdDialogRef } from '@angular/material';
+import { Router } from "@angular/router";
 
 declare var moment: any;
 
@@ -20,7 +21,7 @@ export class HomeComponent implements OnInit {
 	displayMatch: number = 3;
 	isMore: boolean = true;
 
-	constructor(private coreService: CoreService, private dialog: MdDialog, private zone: NgZone) {
+	constructor(private coreService: CoreService, private dialog: MdDialog, private router: Router, private zone: NgZone) {
 		this.user = JSON.parse(window.localStorage['teem_user']);
 		this.nextMatchList();
 		this.invitationList();
@@ -84,7 +85,8 @@ export class HomeComponent implements OnInit {
 	}
 
 	invitationList() {
-		this.coreService.getInvitation(this.user.id)
+		console.log("date = ",  moment().format('YYYY-MM-DD 23:59:00'));
+		this.coreService.getInvitation(this.user.id, moment().format('YYYY-MM-DD 23:59:00'))
 			.subscribe((response) => {
 				console.log("invite = ", response);
 				this.invitation = [];
@@ -200,7 +202,7 @@ export class HomeComponent implements OnInit {
 		return false;
 	}
 
-	openAcceptDialog(id) {
+	openAcceptDialog(id, matchId) {
 		let dialogRef = this.dialog.open(HomeDialogResult);
 		dialogRef.afterClosed().subscribe(result => {
 			let self = this;
@@ -208,12 +210,14 @@ export class HomeComponent implements OnInit {
 			if (result == 'accept') {
 				this.coreService.acceptInvitation(this.user.id, id).subscribe((result: any) => {
 					this.coreService.emitSuccessMessage(result);
-					setTimeout(function () {
-						self.zone.run(() => {
-							self.invitationList();
-							self.nextMatchList();
-						});
-					}, 2000);
+					this.router.navigate(['match-details/' + matchId]);
+					// ----- redirecting to match detail page -----
+					// setTimeout(function () {
+					// 	self.zone.run(() => {
+					// 		self.invitationList();
+					// 		self.nextMatchList();
+					// 	});
+					// }, 2000);
 
 				},
 					(error: any) => {

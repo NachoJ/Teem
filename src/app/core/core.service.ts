@@ -314,8 +314,8 @@ export class CoreService {
 			}).catch(this.handleError);
 	}
 
-	getInvitation(id){
-		return this.http.get(environment.BASEAPI + environment.INVITATION_SEARCH_USER  + id , this.options)
+	getInvitation(id, date){
+		return this.http.get(environment.BASEAPI + environment.INVITATION_SEARCH_USER  + id + "/" + date, this.options)
 			.map((res: Response) => {
 				return res.json().data;
 

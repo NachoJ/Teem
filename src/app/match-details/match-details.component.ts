@@ -49,7 +49,7 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 	isSocketConnected: boolean = false;
 	chatString = "";
 	chat: any[] = [];
-	
+
 	constructor(private route: ActivatedRoute, private sanitizer: DomSanitizer, private coreService: CoreService, public dialog: MdDialog, private ngZone: NgZone) {
 
 		this.PROFILE_IMAGE_PATH = environment.PROFILE_IMAGE_PATH;
@@ -88,8 +88,8 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 				function chatReceived(response) {
 					self.ngZone.run(() => {
 						console.log("response chat= ", response);
-						if(!response.error)
-						self.chat = response.data;
+						if (!response.error)
+							self.chat = response.data;
 					});
 				});
 		}
@@ -126,6 +126,7 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 
 			case 'messaged':
 				self.ngZone.run(() => {
+					console.log("messaged");
 					if (message.data.type == 'jointeam') {
 						self.socket.get(environment.BASEAPI + environment.GET_TEAM_MATCH + self.sub,
 							function matchReceived(response) {
@@ -329,7 +330,7 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 					this.matchjoin = false;
 					this.matchleave = true;
 				}
-				this.benchPlayer1.push({ id: this.somebenchPlayer1[i].userid.id, profileimg: profileImg });
+				this.benchPlayer1.push({ id: this.somebenchPlayer1[i].userid.id, profileimg: profileImg,  });
 			} else {
 				this.benchPlayer1.push({
 					id: "",
@@ -438,17 +439,21 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 	}
 
 	itemSelected() {
-		let insertInSelectedPlayer = true;
-		for (let p of this.selectedPlayer) {
-			if (p.id == this.searchPlayer.id) {
-				insertInSelectedPlayer = false;
-				break;
+		if (this.searchPlayer.id) {
+			// console.log("player = ", this.searchPlayer);
+			let insertInSelectedPlayer = true;
+			for (let p of this.selectedPlayer) {
+				if (p.id == this.searchPlayer.id) {
+					insertInSelectedPlayer = false;
+					break;
+				}
 			}
+			if (insertInSelectedPlayer) {
+				this.selectedPlayer.push(this.searchPlayer);
+			}
+			this.searchPlayer = "";
+			this.players.length = 0;
 		}
-		if (insertInSelectedPlayer) {
-			this.selectedPlayer.push(this.searchPlayer);
-		}
-		this.searchPlayer = "";
 	}
 
 	removeInvites(index) {
@@ -489,19 +494,69 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 
 	joinMatch(team: any) {
 
-		delete team.id;
-		delete team.profileimg;
-		delete team.clickDisabled;
+		console.log("teem1 = ", this.team1);
+		console.log("teem2 = ", this.team2);
+		console.log("team = ", team);
+		console.log("match = ", this.match);
+
+		// if (team.teamid == 1 && this.team1.length < this.match.subsportid.value){
+		// 	console.log("join teem player team 1");
+		// 	team.isbenchplayer = false;
+		// }
+		// if (team.teamid == 2 && this.team2.length < this.match.subsportid.value){
+		// 	console.log("join teem player team 2");
+		// 	team.isbenchplayer = false;
+		// }
 
 		var self = this;
-		if (!team.clickDisabled) {
-			self.socket.post(environment.BASEAPI + environment.JOIN_MATCH, team,
-				function joinReceived(response) {
-					self.ngZone.run(() => {
-						console.log("response joinReceived= ", response);
-					});
-				});
+		// returning when user found on same team
+		if (team.teamid == 1)
+			var obj = this.team1.filter(function (obj) {
+				// console.log("obj = ",obj);
+				return (obj.userid.id === self.user.id && team.isbenchplayer == true);
+			})[0];
+		if (team.teamid == 2)
+			var obj2 = this.team2.filter(function (obj) {
+				// console.log("obj = ",obj);
+				return obj.userid.id === self.user.id  && team.isbenchplayer == true;
+			})[0];
+		if (obj) {
+			console.log("user found team1");
+			return 0;
 		}
+		if (obj2) {
+			console.log("user found team2");
+			return 0;
+		}
+
+		// assigning bench player to false when team is not full
+		if (team.isbenchplayer == true) {
+			if (this.team1.length < this.match.subsportid.value) {
+				team.isbenchplayer = false;
+				team.teamid = 1;
+				console.log("join teem player team 1");
+			} else if (this.team2.length < this.match.subsportid.value) {
+				team.isbenchplayer = false;
+				team.teamid = 2;
+				console.log("join teem player team 2");
+			}
+		}
+
+		// delete team.id;
+		// delete team.profileimg;
+		// delete team.clickDisabled;
+		var tempuser = team;
+		delete tempuser.id;
+		delete tempuser.profileimg;
+		delete tempuser.clickDisabled;
+		console.log("team = ",tempuser);
+		self.socket.post(environment.BASEAPI + environment.JOIN_MATCH, tempuser,
+			function joinReceived(response) {
+				self.ngZone.run(() => {
+					// if(response.message == 'You are join the match')
+					console.log("response joinReceived= ", response);
+				});
+			});
 	}
 
 	joinMatchDefault() {

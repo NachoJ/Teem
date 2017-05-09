@@ -46,7 +46,6 @@ export class AuthHomeComponent implements OnInit {
 					if (result.data[i].permission == 'email' && result.data[i].status == 'granted') {
 						console.log('permission found')
 						FB.api('/me', 'GET', { 'fields': 'id,name,first_name,last_name,email,picture.type(large),birthday,location' }, (result: any) => {
-							console.log('get user data request', result);
 							let data = {
 								fbid: result.id,
 								email: result.email,
@@ -57,6 +56,7 @@ export class AuthHomeComponent implements OnInit {
 								dob: (result.birthday || ""),
 								city: ""
 							};
+							console.log('get user data request', result);
 							if (result.location) {
 								data.city = result.location.name;
 							}

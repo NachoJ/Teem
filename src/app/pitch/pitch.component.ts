@@ -226,15 +226,16 @@ export class PitchComponent implements OnInit {
 	addSportFeild(index) {
 
 		console.log("pitches = ", this.pitches);
+		console.log("sportOptions = ", this.sportOptions);
 		if (this.pitches[index].sport) {
 
-			this.pitches[index].sport.push(this.sportOptions[0].id);
+			this.pitches[index].sport.push(this.sportOptions[1].sportid);
 			console.log("sport found 1", this.pitches[index].sport.length);
 		}
 		if (!this.pitches[index].sport) {
 			console.log("sport not found 2");
 			this.pitches[index].sport = [];
-			this.pitches[index].sport.push(this.sportOptions[0].id);
+			this.pitches[index].sport.push(this.sportOptions[1].sportid);
 		}
 	}
 

@@ -208,7 +208,7 @@ export class CoreComponent implements OnInit {
 	logout() {
 		console.log('logout clicked');
 		//   window.localStorage['teem_user'] = '';
-		window.localStorage.removeItem['teem_user'];
+		window.localStorage.removeItem('teem_user');
 		// window.localStorage.clear();
 		this.router.navigate(['/auth']);
 	}

@@ -107,8 +107,8 @@ export class FindMatchComponent implements OnInit {
 				lng: parseFloat(this.longitudeMap)
 			};
 		} else {
-			console.log("latitude not found");
-			var myLatLng = { lat: 22.278323, lng: 70.798889 };
+			console.log("latitude not found default set to madrid");
+			var myLatLng = { lat: 40.415363, lng: -3.707398 };
 		}
 
 		this.map = new google.maps.Map(document.getElementById('nearByMap'), {
@@ -218,52 +218,52 @@ export class FindMatchComponent implements OnInit {
 		let data = {
 			"lat": this.latitudeMap,
 			"long": this.longitudeMap,
-			"maxdistance": "100",
+			"maxdistance": "10",
 			"sport": this.sport
 		};
-		if(data.lat && data.long)
-		this.coreService.getNearByMatch(data)
-			.subscribe((response) => {
-				console.log("nearByMatch = ", response);
-				this.nearByMatch = [];
-				// this.nearByMatch = response;
-				for (let match of response) {
-					match["filteredMatchTime"] = moment(match.matchtime).format('HH:mm');
-					match["filteredMatchDate"] = moment(match.matchtime).format('MMM DD, YYYY');
-					match["compareMatchDate"] = new Date(match.matchtime);
-					this.nearByMatch.push(match);
-				}
-				this.nearByMatch.sort(function (a, b) {
-					if (a.compareMatchDate < b.compareMatchDate) {
-						return -1;
+		if (data.lat && data.long)
+			this.coreService.getNearByMatch(data)
+				.subscribe((response) => {
+					console.log("nearByMatch = ", response);
+					this.nearByMatch = [];
+					// this.nearByMatch = response;
+					for (let match of response) {
+						match["filteredMatchTime"] = moment(match.matchtime).format('HH:mm');
+						match["filteredMatchDate"] = moment(match.matchtime).format('MMM DD, YYYY');
+						match["compareMatchDate"] = new Date(match.matchtime);
+						this.nearByMatch.push(match);
 					}
-					if (a.compareMatchDate > b.compareMatchDate) {
+					this.nearByMatch.sort(function (a, b) {
+						if (a.compareMatchDate < b.compareMatchDate) {
+							return -1;
+						}
+						if (a.compareMatchDate > b.compareMatchDate) {
 
-						return 1;
+							return 1;
+						}
+						return 0;
+					});
+					let dateToCheck: string = "";
+					for (let match of this.nearByMatch) {
+						if (match.filteredMatchDate != dateToCheck) {
+							match["displayDate"] = true;
+							dateToCheck = match.filteredMatchDate;
+						} else {
+							match["displayDate"] = false;
+						}
+
 					}
-					return 0;
+					// console.log("moment = ", moment(match.matchtime).format('HH:mm'));
+					// console.log("Matches", this.nearByMatch)
+					this.setMatchMarker();
+				},
+				(error: any) => {
+					this.coreService.emitErrorMessage(error);
+					// console.log(error);
+					// this.success = '';
+					// this.error = error;
+					// this._router.navigate(['/login']);
 				});
-				let dateToCheck: string = "";
-				for (let match of this.nearByMatch) {
-					if (match.filteredMatchDate != dateToCheck) {
-						match["displayDate"] = true;
-						dateToCheck = match.filteredMatchDate;
-					} else {
-						match["displayDate"] = false;
-					}
-
-				}
-				// console.log("moment = ", moment(match.matchtime).format('HH:mm'));
-				// console.log("Matches", this.nearByMatch)
-				this.setMatchMarker();
-			},
-			(error: any) => {
-				this.coreService.emitErrorMessage(error);
-				// console.log(error);
-				// this.success = '';
-				// this.error = error;
-				// this._router.navigate(['/login']);
-			});
 	}
 
 	setMatchMarker() {
@@ -347,10 +347,16 @@ export class FindMatchComponent implements OnInit {
 		// 	this.nearByMatchMarkers.push(marker);
 
 		// }
+
+		// -------------- fixing map to current location and emitting error msg when no match found --------------
 		if (this.nearByMatch.length <= 0) {
-			console.log("no place found");
+			// console.log("no place found");
+			// console.log("latitudeMap", this.latitudeMap);
+			// console.log("longitudeMap", this.longitudeMap);
 			// bounds.extend(new google.maps.LatLng(this.latitudeMap, this.longitudeMap));
+			this.map.setCenter({ lat: this.latitudeMap, lng: this.longitudeMap });
 			this.map.setZoom(13);
+			this.coreService.emitErrorMessage("No Match Found");
 			return 0;
 		}
 		this.map.fitBounds(bounds);

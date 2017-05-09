@@ -133,7 +133,7 @@ app-find-match {
         background-color: white;
     }
     .mat-list {
-        padding:0px;
+        padding: 0px;
     }
     .detail-listing .mat-list:first-child .md-list-header p {
         border: none;
@@ -239,7 +239,7 @@ app-find-match {
         background-color: lightpink;
         height: 230px;
         width: 100%;
-        margin-bottom:20px;
+        margin-bottom: 20px;
     }
     #nearByMap {
         height: 100%;
@@ -249,7 +249,7 @@ app-find-match {
         width: 100%;
         margin-top: 15px;
     }
-//    Media query start----------------------------------------------------------------------------------------
+    //    Media query start----------------------------------------------------------------------------------------
     @media screen and (max-width:599px) {
         .detail-listing .mat-list-item-content {
             height: auto !important;
@@ -272,5 +272,18 @@ app-find-match {
         .find-match-main {
             padding: 0 15px;
         }
+    }
+    /* limiting text to two line addreess */
+    .giveMeEllipsis {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        /* number of lines to show */
+        line-height: 20px;
+        /* fallback */
+        max-height: 40px;
+        /* fallback */
     }
 }
