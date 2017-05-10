@@ -19,7 +19,11 @@ export class HomeComponent implements OnInit {
 	invitation: any[] = [];
 	user: any;
 	displayMatch: number = 3;
+	displayLastMatch: number = 3;
+	displayInvitationMatch: number = 3;
 	isMore: boolean = true;
+	isLastMore: boolean = true;
+	isInvitationMore: boolean = true;
 
 	constructor(private coreService: CoreService, private dialog: MdDialog, private router: Router, private zone: NgZone) {
 		this.user = JSON.parse(window.localStorage['teem_user']);
@@ -262,6 +266,30 @@ export class HomeComponent implements OnInit {
 			this.isMore = false;
 		else
 			this.isMore = true;
+	}
+
+	lastMoreMatch() {
+		if (this.lastMatch.length <= this.displayLastMatch)
+			this.displayLastMatch = 3;
+		else
+			this.displayLastMatch += 3;
+
+		if (typeof this.lastMatch[this.displayLastMatch] == "undefined")
+			this.isLastMore = false;
+		else
+			this.isLastMore = true;
+	}
+
+	invitationMoreMatch() {
+		if (this.invitation.length <= this.displayInvitationMatch)
+			this.displayInvitationMatch = 3;
+		else
+			this.displayInvitationMatch += 3;
+
+		if (typeof this.invitation[this.displayInvitationMatch] == "undefined")
+			this.isInvitationMore = false;
+		else
+			this.isInvitationMore = true;
 	}
 
 }

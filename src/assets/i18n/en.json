@@ -140,7 +140,14 @@
     "CHOOSE FILE": "Choose File",
     "DONE": "Done",
 
-
+    "/*---------surfaceoptions": "/*---------surfaceoptions",
+    "SYNTHETHIC TURF": "Synthethic turf",
+    "NATURAL GRASS": "Natural grass",
+    "PARQUET FLOOR": "Parquet floor",
+    "RUBBER/PVC": "Rubber/PVC",
+    "RESIN": "Resin",
+    "TERRAIN": "Terrain",
+    "CEMENT": "Cement",
 
     "new values added in  minor changes v3": "new values added in  minor changes v3",
     "NEXT MATCHS": "NEXT MATCHS",

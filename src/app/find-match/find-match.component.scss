@@ -249,6 +249,10 @@ app-find-match {
         width: 100%;
         margin-top: 15px;
     }
+    .morebtn {
+        margin-top: 10px;
+        margin-right: 22px;
+    }
     //    Media query start----------------------------------------------------------------------------------------
     @media screen and (max-width:599px) {
         .detail-listing .mat-list-item-content {

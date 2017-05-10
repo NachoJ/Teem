@@ -20,7 +20,7 @@
                             <p><b style="margin:2px 0px;">{{match.matchdetail[0].sportcenterdetail[0].address}} </b></p>
                         </div>
                         <div fxLayoutAlign="center center" fxFlex="20" class="match-time left">
-                            <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{match.matchdetail[0].subsport[0].value}} </b> <b style="margin:2px 0px; display: block;">€{{match.matchdetail[0].price}} </b> </p>
+                            <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{match.matchdetail[0].subsport[0].value + match.matchdetail[0].benchplayers}} </b> <b style="margin:2px 0px; display: block;">€{{match.matchdetail[0].price}} </b>                                </p>
                         </div>
                     </div>
                     <div fxHide.xs fxLayout="row" fxFlex="100">
@@ -70,7 +70,7 @@
         <p class="title-list-items-text"> <i class="material-icons">chat_bubble</i> {{'INVITATIONS'|translate}}</p>
     </div>
     <div fxLayout="column" class="detail-listing">
-        <md-list class="nopadding ng-scope" *ngFor=" let invite of invitation; let i = index;">
+        <md-list class="nopadding ng-scope" *ngFor=" let invite of invitation | slice:0:displayInvitationMatch; let i = index;">
             <div *ngIf="invite.displayDate" class="md-toolbar-tools" layout-align="start start" class="md-list-header">
                 <p class="md-list-event-date"> <em> <span >{{invite.filteredMatchDate}}</span> </em> </p>
             </div>
@@ -86,7 +86,7 @@
                             <p><b style="margin:2px 0px;">{{invite.matchdetail[0].sciddetail[0].address}} </b></p>
                         </div>
                         <div fxLayoutAlign="center center" fxFlex="20" class="match-time left">
-                            <p><b style="margin:2px 0px; display: block;">{{invite.totalmatchplayer}} DE {{invite.matchdetail[0].subsport[0].value}} </b> <b style="margin:2px 0px; display: block;">€{{invite.matchdetail[0].price}} </b> </p>
+                            <p><b style="margin:2px 0px; display: block;">{{invite.totalmatchplayer}} DE {{invite.matchdetail[0].subsport[0].value+ invite.matchdetail[0].benchplayers}} </b> <b style="margin:2px 0px; display: block;">€{{invite.matchdetail[0].price}} </b>                                </p>
                         </div>
                         <div>
                             <a [mdMenuTriggerFor]="invitePopupMenu"><i class="material-icons">more_vert</i></a>
@@ -125,6 +125,12 @@
                 </div>
             </md-list-item>
         </md-list>
+        <div fxFlex='10' fxLayoutAlign="end" class="morebtn">
+            <button md-raised-button (click)="invitationMoreMatch()" *ngIf="invitation.length>3" color="primary">
+                <span *ngIf="isInvitationMore">More</span>
+                <span *ngIf="!isInvitationMore">Less</span>
+            </button>
+        </div>
     </div>
 </div>
 
@@ -134,7 +140,7 @@
     </div>
     <div fxLayout="column" class="detail-listing">
 
-        <md-list class="nopadding ng-scope" *ngFor=" let match of lastMatch; let i = index;">
+        <md-list class="nopadding ng-scope" *ngFor=" let match of lastMatch | slice:0:displayLastMatch; let i = index;">
             <div *ngIf="match.displayDate" class="md-toolbar-tools" layout-align="start start" class="md-list-header">
                 <p class="md-list-event-date"> <em> <span>{{match.filteredMatchDate}}</span> </em> </p>
             </div>
@@ -150,7 +156,7 @@
                             <p><b style="margin:2px 0px;">{{match.matchdetail[0].sportcenterdetail[0].address}} </b></p>
                         </div>
                         <div fxLayoutAlign="center center" fxFlex="20" class="match-time left">
-                            <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{match.matchdetail[0].subsport[0].value}} </b> <b style="margin:2px 0px; display: block;">€{{match.matchdetail[0].price}} </b> </p>
+                            <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{match.matchdetail[0].subsport[0].value + match.matchdetail[0].benchplayers}} </b> <b style="margin:2px 0px; display: block;">€{{match.matchdetail[0].price}} </b>                                </p>
                         </div>
                     </div>
                     <div fxHide.xs fxLayout="row" fxFlex="100">
@@ -188,5 +194,11 @@
             </md-list-item>
         </md-list>
 
+        <div fxFlex='10' fxLayoutAlign="end" class="morebtn">
+            <button md-raised-button (click)="lastMoreMatch()" *ngIf="lastMatch.length>3" color="primary">
+                <span *ngIf="isLastMore">More</span>
+                <span *ngIf="!isLastMore">Less</span>
+            </button>
+        </div>
     </div>
 </div>

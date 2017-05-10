@@ -38,9 +38,14 @@ export class PitchComponent implements OnInit {
 	];
 
 	surfaceOptions = [
-		{ value: 'option1', viewValue: 'option1' },
-		{ value: 'option2', viewValue: 'option2' },
-		{ value: 'option3', viewValue: 'option3' }
+		{ value: 'synthethic turf', viewValue: 'SYNTHETHIC TURF' },
+		{ value: 'natural grass', viewValue: 'NATURAL GRASS' },
+		{ value: 'parquet floor', viewValue: 'PARQUET FLOOR' },
+		{ value: 'rubber/pvc', viewValue: 'RUBBER/PVC' },
+		{ value: 'resin', viewValue: 'RESIN' },
+		{ value: 'terrain', viewValue: 'TERRAIN' },
+		{ value: 'cement', viewValue: 'CEMENT' },
+
 	];
 	sportOptions = [];
 	// sportOptions = [

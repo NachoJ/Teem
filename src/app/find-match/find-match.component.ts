@@ -42,6 +42,9 @@ export class FindMatchComponent implements OnInit {
 
 	user: any;
 
+	displayMatch: number = 3;
+	isMore: boolean = true;
+
 	constructor(private coreService: CoreService, iconRegistry: MdIconRegistry, sanitizer: DomSanitizer,
 		private ngZone: NgZone, private router: Router) {
 		this.PROFILE_IMAGE_PATH = environment.PROFILE_IMAGE_PATH;
@@ -219,8 +222,11 @@ export class FindMatchComponent implements OnInit {
 			"lat": this.latitudeMap,
 			"long": this.longitudeMap,
 			"maxdistance": "10",
-			"sport": this.sport
+			"sport": this.sport,
+			"date": moment().format('YYYY-MM-DD HH:mm.Z')
 		};
+		// console.clear();
+		console.log("data = ",data);
 		if (data.lat && data.long)
 			this.coreService.getNearByMatch(data)
 				.subscribe((response) => {
@@ -377,6 +383,19 @@ export class FindMatchComponent implements OnInit {
 			return true;
 		}
 		return false;
+	}
+
+	nextMoreMatch() {
+
+		if (this.nearByMatch.length <= this.displayMatch)
+			this.displayMatch = 3;
+		else
+			this.displayMatch += 3;
+
+		if (typeof this.nearByMatch[this.displayMatch] == "undefined")
+			this.isMore = false;
+		else
+			this.isMore = true;
 	}
 
 }

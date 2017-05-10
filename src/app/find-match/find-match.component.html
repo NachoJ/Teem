@@ -38,7 +38,7 @@
         <p class="title-list-items-text"> <i class="material-icons">chat_bubble</i> {{'NEXT MATCH' | translate }}</p>
     </div>
     <div fxLayout="column" class="detail-listing">
-        <md-list class="nopadding ng-scope" *ngFor=" let match of nearByMatch; let i = index;">
+        <md-list class="nopadding ng-scope" *ngFor=" let match of nearByMatch | slice:0:displayMatch; let i = index;">
             <div *ngIf="match.displayDate" class="md-toolbar-tools" layout-align="start start" class="md-list-header">
                 <p class="md-list-event-date"> <em> <span>{{match.filteredMatchDate}}</span> </em> </p>
             </div>
@@ -55,7 +55,7 @@
                             <p *ngIf="match.sportcenterdetail[0]"><b style="margin:2px 0px;">{{match.sportcenterdetail[0].address}}</b></p>
                         </div>
                         <div fxLayoutAlign="center center" fxFlex="20" class="match-time left">
-                            <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{match.subsportdetail[0].value*2}} </b> <b style="margin:2px 0px; display: block;">€{{match.price}} </b> </p>
+                            <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{match.subsportdetail[0].value*2 + match.benchplayers}} </b> <b style="margin:2px 0px; display: block;">€{{match.price}} </b> </p>
                         </div>
                     </div>
                     <div fxHide.xs fxLayout="row" fxFlex="100">
@@ -92,5 +92,11 @@
                 </div>
             </md-list-item>
         </md-list>
+        <div fxFlex='10' fxLayoutAlign="end" class="morebtn">
+            <button md-raised-button (click)="nextMoreMatch()" *ngIf="nearByMatch.length>3" color="primary">
+                <span *ngIf="isMore">More</span>
+                <span *ngIf="!isMore">Less</span>
+            </button>
+        </div>
     </div>
 </div>

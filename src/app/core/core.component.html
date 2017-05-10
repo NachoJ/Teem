@@ -39,7 +39,8 @@
                             <!--{{tabLink.label}}-->{{link.title | translate }} </a>
                         <a md-tab-link class="email"><img src="/assets/img/email.png"></a>
                         <div class="dropdown">
-                            <a md-tab-link [mdMenuTriggerFor]="menu" class="userprofile"><img src="/assets/img/player-boy.png"></a>
+                            <!--<a md-tab-link [mdMenuTriggerFor]="menu" class="userprofile"><img src="/assets/img/player-boy.png"></a>-->
+                            <a md-tab-link [mdMenuTriggerFor]="menu" class="userprofile"><img src="{{ profileImage }}"></a>
                             <md-menu class="user-menu" #menu="mdMenu">
                                 <button md-menu-item routerLink="/settings/profile"> <span>{{'PROFILE' | translate}}</span> </button>
                                 <button md-menu-item (click)="changeLanguage('en')"> <img class="flag" src="assets/img/flags/gb.png"/><span>English</span> </button>
@@ -49,8 +50,7 @@
                         </div>
                     </nav>
                 </div>
-                <div id="successmsg" [class.show]='successShow'>{{successmsg}}</div>
-                <div id="errormsg" [class.show]='erroShow'>{{errormsg}}</div>
+
             </section>
         </md-toolbar>
         <!--<te-nav-bar></te-nav-bar>-->
@@ -75,3 +75,5 @@
         </div>
     </div>
 </md-sidenav-container>
+<div id="successmsg" [class.show]='successShow'>{{successmsg}}</div>
+<div id="errormsg" [class.show]='erroShow'>{{errormsg}}</div>

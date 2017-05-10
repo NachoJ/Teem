@@ -303,7 +303,7 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 			}
 		}
 
-		//saprate bench player array
+		//separate bench player array
 		this.somebenchPlayer1 = [];
 		this.somebenchPlayer2 = [];
 		this.benchPlayer1 = [];
@@ -330,7 +330,7 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 					this.matchjoin = false;
 					this.matchleave = true;
 				}
-				this.benchPlayer1.push({ id: this.somebenchPlayer1[i].userid.id, profileimg: profileImg,  });
+				this.benchPlayer1.push({ id: this.somebenchPlayer1[i].userid.id, profileimg: profileImg, });
 			} else {
 				this.benchPlayer1.push({
 					id: "",
@@ -381,6 +381,24 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 			}
 			player.clickDisabled = clickDisabled2;
 		}
+
+		// disabling join leave when team is full
+		// console.log("this.team1.length = ", this.team1.length);
+		// console.log("this.team2.length = ", this.team2.length);
+		// console.log("this.match.subsportid.value + this.match.benchplayers = ", this.match.subsportid.value + Math.ceil(this.match.benchplayers/2));
+		if (this.team1.length == this.match.subsportid.value + Math.ceil(this.match.benchplayers / 2) && this.team2.length == this.match.subsportid.value + Math.floor(this.match.benchplayers / 2)) {
+			// console.log("match full");
+			this.matchjoin = false;
+		}
+
+		// Disabling match join and leave for older match
+		console.log("moment now = ", moment().isAfter(moment(this.match.matchtime).subtract(3, 'h') ));
+		if (moment().isAfter(moment(this.match.matchtime).subtract(3, 'h')) ) {
+			console.log("Old match Found");
+			this.matchjoin = false;
+			this.matchleave = false;
+		}
+
 		// console.log("teamplayer 1 = ", this.team1player);
 		// console.log("team 1 = ", this.team1);
 		// console.log("team bench 1 = ", this.benchPlayer1);
@@ -518,7 +536,7 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 		if (team.teamid == 2)
 			var obj2 = this.team2.filter(function (obj) {
 				// console.log("obj = ",obj);
-				return obj.userid.id === self.user.id  && team.isbenchplayer == true;
+				return obj.userid.id === self.user.id && team.isbenchplayer == true;
 			})[0];
 		if (obj) {
 			console.log("user found team1");
@@ -549,7 +567,7 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 		delete tempuser.id;
 		delete tempuser.profileimg;
 		delete tempuser.clickDisabled;
-		console.log("team = ",tempuser);
+		console.log("team = ", tempuser);
 		self.socket.post(environment.BASEAPI + environment.JOIN_MATCH, tempuser,
 			function joinReceived(response) {
 				self.ngZone.run(() => {
@@ -565,7 +583,8 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 		let data = {
 			matchid: this.match.id,
 			teamid: 1,
-			userid: user.id
+			userid: user.id,
+			isbenchplayer: false
 		};
 		let team1Lenght = 0;
 		let team2Lenght = 0;
@@ -577,28 +596,74 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 			if (!player.isbenchplayer)
 				team2Lenght++;
 		}
+		let bplayer1Insert = false;
+		let bplayer2Insert = false;
+		for (let player of this.benchPlayer1) {
+			if (player.id == '') {
+				bplayer1Insert = true;
+				break;
+			}
+		}
+		for (let player of this.benchPlayer2) {
+			if (player.id == '') {
+				bplayer2Insert = true;
+				break;
+			}
+		}
+
 		if (team1Lenght < this.match.subsportid['value']) {
 			self.socket.post(environment.BASEAPI + environment.JOIN_MATCH, data,
 				function joinReceived(response) {
 					self.ngZone.run(() => {
-						console.log("response join button Received= ", response);
+						console.log("response join button Received team1 = ", response);
 					});
 				});
 			this.matchjoin = false;
 			this.matchleave = true;
 
-			return false;
+			return 0;
 		}
 		if (team2Lenght < this.match.subsportid['value']) {
 			data.teamid = 2;
 			self.socket.post(environment.BASEAPI + environment.JOIN_MATCH, data,
 				function joinReceived(response) {
 					self.ngZone.run(() => {
-						console.log("response join button Received= ", response);
+						console.log("response join button Received team2 = ", response);
 					});
 				});
 			this.matchjoin = false;
 			this.matchleave = true;
+
+			return 0;
+		}
+
+		if (bplayer1Insert) {
+			data.isbenchplayer = true;
+			self.socket.post(environment.BASEAPI + environment.JOIN_MATCH, data,
+				function joinReceived(response) {
+					self.ngZone.run(() => {
+						console.log("response join button Received bt1 = ", response);
+					});
+				});
+			this.matchjoin = false;
+			this.matchleave = true;
+
+			return 0;
+		}
+
+		if (bplayer2Insert) {
+			data.teamid = 2;
+			data.isbenchplayer = true;
+			self.socket.post(environment.BASEAPI + environment.JOIN_MATCH, data,
+				function joinReceived(response) {
+					self.ngZone.run(() => {
+						console.log("response join button Received bt2 = ", response);
+					});
+				});
+			this.matchjoin = false;
+			this.matchleave = true;
+
+			return 0;
 		}
 
 	}

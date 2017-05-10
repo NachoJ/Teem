@@ -138,5 +138,14 @@
     "user profile separator": "separador de perfil de usuario",
     "UPLOAD YOUR PHOTO HERE": "Sube tu foto aquí",
     "CHOOSE FILE": "Elige el archivo",
-    "DONE": "Hecho"
+    "DONE": "Hecho",
+
+    "/*---------surfaceoptions": "/*---------surfaceoptions",
+    "SYNTHETHIC TURF": "Hierba artificial",
+    "NATURAL GRASS": "Hierba natural",
+    "PARQUET FLOOR": "Parquet",
+    "RUBBER/PVC": " Goma/PVC",
+    "RESIN": "Resina",
+    "TERRAIN": "Tierra",
+    "CEMENT": "Cemento"
 }
