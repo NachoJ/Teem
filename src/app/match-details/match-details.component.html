@@ -1,4 +1,4 @@
-<div fxLayout="column">
+<div fxLayout="column" scroll="no">
     <div fxLayout="column" fxLayoutAlign="start start" class="detail-box">
         <div class="title-list-items">
             <p class="title-list-items-text"> <i class="material-icons">control_point</i> {{'MATCH DETAILS' | translate}}</p>
@@ -108,7 +108,7 @@
                     <!--<md-input-container class="md-block register-form-text-area" fxFlex="100" md-no-float>
                         <textarea mdInput class="user-text-label"> </textarea>
                     </md-input-container>-->
-                    <div id="main-chat-box" fxFlex="100" class="chat-list">
+                    <div id="main-chat-box" class="chat-list">
                         <ul *ngFor="let item of chat">
                             <li *ngIf="item.fromuserid.id != user.id"><img class="avatar" src="{{PROFILE_IMAGE_PATH+item.fromuserid.profileimage}}" onError="this.onerror=null;this.src='assets/img/sidebar_photo.png';" /> <span class="msg">{{item.message}}</span>
                             </li>
@@ -118,7 +118,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <md-input-container class="md-block register-form-text-area" fxFlex="100" md-no-float>
+                    <md-input-container class="md-block register-form-text-area bordered" fxFlex="100" md-no-float>
                         <input mdInput [(ngModel)]="chatString" (keyup.enter)="sendMessage()" class="user-text-label">
                         <a href="javascript:void(0);" (click)="sendMessage()"><i class="material-icons ng-scope">send</i></a>
                     </md-input-container>

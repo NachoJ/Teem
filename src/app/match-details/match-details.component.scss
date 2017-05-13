@@ -279,7 +279,28 @@ app-match-details {
         .invite {
             width: 100%;
         }
+        .bordered {
+            margin-top: 15px;
+            border-color: #716f6f;
+            border-style: solid;
+            border-width: 1px;
+            border-radius: 5px;
+        }
     }
+    // @media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
+    //     .mat-autocomplete-panel.mat-autocomplete-panel-below {
+    //         // top: 150px !important;
+    //         // max-height: 150px !important;
+    //         background-color: yellowgreen !important;
+    //     }
+    //     div #cdk-overlay-0 .cdk-overlay-pane {
+    //         top: 256px !important;
+    //         background-color: yellowgreen !important;
+    //     }
+    //     .invite p {
+    //         background-color: pink !important;
+    //     }
+    // }
     /* chat */
     .chat-list {
         // min-width: 283px;
@@ -289,6 +310,7 @@ app-match-details {
         overflow-y: scroll;
         overflow-x: hidden;
         background-color: #fff;
+        border-radius: 5px;
     }
     // .chat-list:hover {
     //     overflow-y: scroll;
@@ -324,6 +346,12 @@ app-match-details {
         margin-right: 6px;
         // background-color: #ffcccc;
         background-color: #ffe6e6;
+        border-radius: 5px;
+    }
+    .bordered {
+        border-color: #716f6f;
+        border-style: solid;
+        border-width: 1px;
         border-radius: 5px;
     }
 }

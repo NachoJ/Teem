@@ -52,7 +52,6 @@ export class AddNewSportscenterComponent implements OnInit {
 						this.lat = response.data[0].lat;
 						this.long = response.data[0].long;
 						this.initAutocomplete();
-
 					},
 					(error: any) => {
 						// this.error = error;
@@ -85,6 +84,7 @@ export class AddNewSportscenterComponent implements OnInit {
 		$(document).ready(function () {
 			console.log("jQuery is ready");
 			// self.initMap();
+			if(!self.sub)
 			self.initAutocomplete();
 		});
 	}
@@ -154,19 +154,25 @@ export class AddNewSportscenterComponent implements OnInit {
 
 	initAutocomplete() {
 		var self = this;
+		var initlat = 40.415363;
+		var initlng = -3.707398;
 
-		var initlat = -33.8688;
-		var initlng = 151.2195;
-
+		// setting marker coordinate to display on map when record update
 		if (self.lat && self.long && self.sub) {
 			initlat = parseFloat(self.lat);
 			initlng = parseFloat(self.long);
 		}
-		// setting map from here
+		// setting map from here for update record manually
 		var map = new google.maps.Map(document.getElementById('map'), {
 			center: { lat: initlat, lng: initlng },
-			zoom: 13,
+			zoom: 16,
 			mapTypeId: 'roadmap'
+		});
+		var myMarker = new google.maps.Marker({
+			position: { lat: initlat, lng: initlng },
+			draggable: true,
+			animation: google.maps.Animation.DROP,
+			map: map
 		});
 
 		// Create the search box and link it to the UI element.
@@ -179,10 +185,21 @@ export class AddNewSportscenterComponent implements OnInit {
 		// searchBox.setBounds(map.getBounds());
 		// });
 
+		// default marker array
 		var markers = [];
+		// pushing value for update sportcenter
+		markers.push(myMarker);
+		google.maps.event.addListener(markers[0], 'dragend', function () {
+					console.log("marker dragend", markers[0]);
+					// console.log(this.getPosition().lat(), this.getPosition().lng());
+					map.setCenter(this.getPosition()); // Set map center to marker position
+					self.lat = this.getPosition().lat();
+					self.long = this.getPosition().lng();
+				});
 		// Listen for the event fired when the user selects a prediction and retrieve
 		// more details for that place.
 		searchBox.addListener('places_changed', function () {
+			console.log("places_changed called");
 			var places = searchBox.getPlaces();
 
 			if (places.length == 0) {
@@ -202,21 +219,36 @@ export class AddNewSportscenterComponent implements OnInit {
 					console.log("Returned place contains no geometry");
 					return;
 				}
-				var icon = {
-					url: place.icon,
-					size: new google.maps.Size(71, 71),
-					origin: new google.maps.Point(0, 0),
-					anchor: new google.maps.Point(17, 34),
-					scaledSize: new google.maps.Size(25, 25)
-				};
+				// var icon = {
+				// 	url: place.icon,
+				// 	size: new google.maps.Size(71, 71),
+				// 	origin: new google.maps.Point(0, 0),
+				// 	anchor: new google.maps.Point(17, 34),
+				// 	scaledSize: new google.maps.Size(25, 25)
+				// };
 
 				// Create a marker for each place.
 				markers.push(new google.maps.Marker({
 					map: map,
-					icon: icon,
+					// icon: icon,
 					title: place.name,
+					draggable: true,
+					animation: google.maps.Animation.DROP,
 					position: place.geometry.location
 				}));
+				google.maps.event.addListener(markers[0], 'dragend', function () {
+					console.log("marker dragend", markers[0]);
+					// console.log(this.getPosition().lat(), this.getPosition().lng());
+					map.setCenter(this.getPosition()); // Set map center to marker position
+					self.lat = this.getPosition().lat();
+					self.long = this.getPosition().lng();
+				});
+
+				// google.maps.event.addListener(map, 'dragend', function () {
+				// 	console.log("map dragend");
+				// 	markers[0].setPosition(this.getCenter()); // set marker position to map center
+				// });
+
 				var location = place.geometry.location;
 				var lat = location.lat();
 				var long = location.lng();
@@ -240,6 +272,5 @@ export class AddNewSportscenterComponent implements OnInit {
 				console.log("prevented default");
 			}
 		});
-
 	}
 }

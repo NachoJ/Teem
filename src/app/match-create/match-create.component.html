@@ -81,7 +81,7 @@
                 <div fxLayout="row" fxLayout.xs="column">
                     <label fxLayoutAlign="left center" fxFlex="30">{{'SELECT SUB SPORT' | translate }}</label>
                     <md-select fxFlex="70" formControlName="subSportCtrl" [(ngModel)]="subSport" required>
-                        <md-option *ngFor="let m of subSportOption" [disabled]="m.isDisabled" [value]="m.value"> {{ m.viewValue }} </md-option>
+                        <md-option *ngFor="let m of subSportOption" [disabled]="m.isDisabled" [value]="m.value"> {{ m.viewValue | translate }} {{m.viewValue2}}</md-option>
                     </md-select>
                 </div>
                 <div *ngIf="matchFormGroup.controls.subSportCtrl.invalid && matchFormGroup.controls.subSportCtrl.touched">

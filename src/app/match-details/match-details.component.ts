@@ -392,8 +392,8 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 		}
 
 		// Disabling match join and leave for older match
-		console.log("moment now = ", moment().isAfter(moment(this.match.matchtime).subtract(3, 'h') ));
-		if (moment().isAfter(moment(this.match.matchtime).subtract(3, 'h')) ) {
+		console.log("moment now = ", moment().isAfter(moment(this.match.matchtime).subtract(3, 'h')));
+		if (moment().isAfter(moment(this.match.matchtime).subtract(3, 'h'))) {
 			console.log("Old match Found");
 			this.matchjoin = false;
 			this.matchleave = false;
@@ -441,6 +441,10 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 	}
 
 	loadAutoComplete() {
+		if (this.searchPlayer.length == 0) {
+			this.players.length = 0;
+			return 0;
+		}
 		if (this.searchPlayer.length >= 2) {
 			this.coreService.getInvitationSearchPlayer(this.searchPlayer)
 				.subscribe((response) => {

@@ -55,7 +55,7 @@
                             <p *ngIf="match.sportcenterdetail[0]"><b style="margin:2px 0px;">{{match.sportcenterdetail[0].address}}</b></p>
                         </div>
                         <div fxLayoutAlign="center center" fxFlex="20" class="match-time left">
-                            <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{match.subsportdetail[0].value*2 + match.benchplayers}} </b> <b style="margin:2px 0px; display: block;">€{{match.price}} </b> </p>
+                            <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{match.subsportdetail[0].value*2 + match.benchplayers}} </b> <b style="margin:2px 0px; display: block;">{{match.payment }} {{match.price}} </b> </p>
                         </div>
                     </div>
                     <div fxHide.xs fxLayout="row" fxFlex="100">
@@ -74,7 +74,7 @@
                             <p *ngIf="match.sportcenterdetail[0]" class="giveMeEllipsis"><b style="margin:2px 0px; display: block;">{{match.sportcenterdetail[0].address}} </b> <b style="margin:2px 0px; display: block;"><!-- some addr --> </b> </p>
                         </div>
                         <div fxFlex="10" class="match-time left">
-                            <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{match.subsportdetail[0].value*2 + match.benchplayers}} </b> <b style="margin:2px 0px; display: block;">€{{match.price}} </b> </p>
+                            <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{match.subsportdetail[0].value*2 + match.benchplayers}} </b> <b style="margin:2px 0px; display: block;">{{match.payment }} {{match.price}} </b> </p>
                         </div>
                         <div fxLayoutAlign="center center" fxFlex="15" class="match-time center">
                             <button md-raised-button [routerLink]="['/match-details',match._id]">Info</button>

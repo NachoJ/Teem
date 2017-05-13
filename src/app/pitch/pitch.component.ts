@@ -11,7 +11,7 @@ import 'rxjs/add/observable/throw';
 // import 'rxjs/Rx';  // use this line if you want to be lazy, otherwise:
 import 'rxjs/add/operator/do';  // debug
 
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslationChangeEvent, LangChangeEvent } from '@ngx-translate/core';
 
 @Component({
 	selector: 'app-pitch',
@@ -67,9 +67,25 @@ export class PitchComponent implements OnInit {
 	public pitchFormGroupArray: FormGroup[] = [];
 	isFormValid: boolean = false;
 
-	constructor(private coreService: CoreService, private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, translate: TranslateService) {
+	constructor(private coreService: CoreService, private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private translate: TranslateService) {
 		this.sub = this.route.snapshot.params.scId;
 		console.log("sub", this.sub);
+		this.loadSports();
+		this.pitches = [];
+		this.subNew = this.route.snapshot.params.new;
+		// this.addMore();
+
+		// translate.onLangChange.subscribe((event: LangChangeEvent) => {
+		// 	console.log("language chnaged", event);
+		// 	this.loadSports();
+		// });
+
+	}
+
+	ngOnInit() { }
+
+	loadSports() {
+		this.sportOptions.length = 0;
 		this.coreService.getAllSports()
 			.subscribe((response: any) => {
 				console.log("sport options response = ", response);
@@ -77,20 +93,20 @@ export class PitchComponent implements OnInit {
 					// console.log("res = ",res);
 					let langTitle = "";
 					let tempsport = "";
-					translate.get(res.title).subscribe(
-						value => {
-							// value is our translated string
-							langTitle = value;
-						})
+					// this.translate.get(res.title).subscribe(
+					// 	value => {
+					// 		// value is our translated string
+					// 		langTitle = value;
+					// 	})
 					if (tempsport != res.title) {
 						tempsport = res.title;
 						console.log("sport = ", res.title + " " + res.id);
 						// this.subSportOption.push({ value: res.id, viewValue: res.title, isDisabled: true });
-						this.sportOptions.push({ value: res.id, viewValue: langTitle, isDisabled: true });
+						this.sportOptions.push({ value: res.id, viewValue: res.title, isDisabled: true });
 					}
 					for (var r of res.subsport) {
 						console.log("r id = " + r.title + " " + r.id)
-						this.sportOptions.push({ value: r.id, viewValue: langTitle + " " + r.title, sportid: res.id, isDisabled: false });
+						this.sportOptions.push({ value: r.id, viewValue: res.title, viewValue2: r.title, sportid: res.id, isDisabled: false });
 						// this.subSportOption.push({ value: r.id, viewValue: res.title + " " + r.title, sportid: res.id, isDisabled: false });
 					}
 					// console.log("res title " + res.title + " res value " + res.value);
@@ -108,13 +124,7 @@ export class PitchComponent implements OnInit {
 			(error: any) => {
 				this.error = error;
 			});
-		this.pitches = [];
-		this.subNew = this.route.snapshot.params.new;
-		// this.addMore();
-
 	}
-
-	ngOnInit() { }
 
 	formChanged() {
 		setTimeout(() => {
@@ -247,4 +257,6 @@ export class PitchComponent implements OnInit {
 	removeSelect(index) {
 
 	}
+
+
 }

@@ -113,7 +113,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 		}
 
 		if (!this.user.dob)
-			this.birthdate = moment(new Date()).format("YYYY-MM-DD");
+			this.birthdate ='';
+			// this.birthdate = moment(new Date()).format("YYYY-MM-DD");
 		else
 			this.birthdate = moment(this.user.dob).format("YYYY-MM-DD");
 

@@ -125,9 +125,43 @@ md-option img.thumb-circle {
     padding: 10px 20px;
 }
 
+
+/*iphone 5*/
+
+// @media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
+// @media screen and (device-aspect-ratio: 2/3) {
+// @media only screen and (min-device-width: 560px) and (max-device-width: 1136px) and (-webkit-min-device-pixel-ratio: 2) {
+//     #cdk-overlay-0 {
+//         top: 320px !important;
+//     }
+//     .invite p {
+//         background-color: pink;
+//     }
+// }
+// @media screen and (device-aspect-ratio: 40/71) {
+//     #cdk-overlay-0 {
+//         top: 268px !important;
+//     }
+// }
+// @media screen and (device-aspect-ratio: 375/667) {
+//     #cdk-overlay-0 {
+//         top: 365px !important;
+//     }
+// }
+
+/*iphone over*/
+
 @media screen and (max-width:991px) {
     .container {
         width: 100%;
+    }
+    .morebtn {
+        display: block !important;
+        margin: 25px 0;
+        flex: auto !important;
+    }
+    .morebtn .mat-raised-button.mat-primary {
+        float: right;
     }
 }
 
@@ -164,8 +198,6 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($candy-app-theme);
-
-
 .mat-dialog-container {
     // width: 900px !important;
     max-width: 96% !important;

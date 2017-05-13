@@ -45,6 +45,13 @@ export class FindMatchComponent implements OnInit {
 	displayMatch: number = 3;
 	isMore: boolean = true;
 
+	currencySymbol = String.fromCharCode(36);
+	EURSymbol = String.fromCharCode(8364);
+	USDSymbol = String.fromCharCode(36);
+	GBPSymbol = String.fromCharCode(163);
+	SEKSymbol = String.fromCharCode(107) + String.fromCharCode(114);
+	AUDSymbol = String.fromCharCode(36);
+
 	constructor(private coreService: CoreService, iconRegistry: MdIconRegistry, sanitizer: DomSanitizer,
 		private ngZone: NgZone, private router: Router) {
 		this.PROFILE_IMAGE_PATH = environment.PROFILE_IMAGE_PATH;
@@ -237,6 +244,7 @@ export class FindMatchComponent implements OnInit {
 						match["filteredMatchTime"] = moment(match.matchtime).format('HH:mm');
 						match["filteredMatchDate"] = moment(match.matchtime).format('MMM DD, YYYY');
 						match["compareMatchDate"] = new Date(match.matchtime);
+						match['payment']="";
 						this.nearByMatch.push(match);
 					}
 					this.nearByMatch.sort(function (a, b) {
@@ -258,6 +266,11 @@ export class FindMatchComponent implements OnInit {
 							match["displayDate"] = false;
 						}
 
+						if(match.paymenttype=="free"){
+							match['payment']="FREE";
+						}else{
+							match['payment']=this.currencyChanged(match.currency);
+						}
 					}
 					// console.log("moment = ", moment(match.matchtime).format('HH:mm'));
 					// console.log("Matches", this.nearByMatch)
@@ -396,6 +409,21 @@ export class FindMatchComponent implements OnInit {
 			this.isMore = false;
 		else
 			this.isMore = true;
+	}
+	currencyChanged(currency) {
+		if(currency=="eur")
+			return this.EURSymbol;
+		else if(currency=="usd")
+			return this.USDSymbol;
+		else if(currency=="gbp")
+			return this.GBPSymbol;
+		else if(currency=="sek")
+			return this.SEKSymbol;
+		else if(currency=="aud")
+			return this.AUDSymbol;
+		else 
+			return this.AUDSymbol;	
+
 	}
 
 }

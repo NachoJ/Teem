@@ -7,7 +7,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 
 import { CoreService } from '../core/core.service';
 import { Pitch } from '../shared/interface/pitch';
-import { TranslateService } from "@ngx-translate/core";
+import { TranslateService, LangChangeEvent } from "@ngx-translate/core";
 
 declare var moment: any;
 declare var $: any;
@@ -211,40 +211,26 @@ export class MatchCreateComponent implements OnInit {
 		let data = {
 			sportid: pitchSport
 		}
-		console.log("selected pitchSport = ", JSON.stringify(data));
+		// console.log("selected pitchSport = ", JSON.stringify(data));
 		this.coreService.getSubSports(JSON.stringify(data))
 			.subscribe((response) => {
 				this.subSportOption.length = 0;
-				console.log("pitch sub sport response", response);
-				// tslint:disable-next-line:forin
+				// console.log("pitch sub sport response", response);
 				let tempsport = "";
 				for (var res of response) {
-					// console.log("res = ",res);
-					let langTitle = "";
-					this.translate.get(res.title).subscribe(
-						value => {
-							// value is our translated string
-							langTitle = value;
-						})
 					if (tempsport != res.title) {
 						tempsport = res.title;
-						console.log("sport = ", res.title + " " + res.id);
-						// this.subSportOption.push({ value: res.id, viewValue: res.title, isDisabled: true });
-						this.subSportOption.push({ value: res.id, viewValue: langTitle, isDisabled: true });
+						// console.log("sport = ", res.title + " " + res.id);
+						this.subSportOption.push({ value: res.id, viewValue: res.title, isDisabled: true });
 					}
 					for (var r of res.subsport) {
-						console.log("r id = " + r.title + " " + r.id)
-						this.subSportOption.push({ value: r.id, viewValue: langTitle + " " + r.title, sportid: res.id, isDisabled: false });
-						// this.subSportOption.push({ value: r.id, viewValue: res.title + " " + r.title, sportid: res.id, isDisabled: false });
+						// console.log("r id = " + r.title + " " + r.id)
+						this.subSportOption.push({ value: r.id, viewValue: res.title , viewValue2: r.title, sportid: res.id, isDisabled: false });
 					}
-					// console.log("res title " + res.title + " res value " + res.value);
-					// this.subSportOption.push({ value: res.id, viewValue: res.sportid.title + " " + res.title, isDisabled: false });
 				}
 			},
 			(error: any) => {
 				this.coreService.emitErrorMessage(error);
-				// this.success = '';
-				// this.error = error;
 			});
 		this.selectedPitchId = pitchid;
 		for (let sc of this.sportsCenterOptions) {

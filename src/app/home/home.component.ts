@@ -25,6 +25,13 @@ export class HomeComponent implements OnInit {
 	isLastMore: boolean = true;
 	isInvitationMore: boolean = true;
 
+	currencySymbol = String.fromCharCode(36);
+	EURSymbol = String.fromCharCode(8364);
+	USDSymbol = String.fromCharCode(36);
+	GBPSymbol = String.fromCharCode(163);
+	SEKSymbol = String.fromCharCode(107) + String.fromCharCode(114);
+	AUDSymbol = String.fromCharCode(36);
+
 	constructor(private coreService: CoreService, private dialog: MdDialog, private router: Router, private zone: NgZone) {
 		this.user = JSON.parse(window.localStorage['teem_user']);
 		this.nextMatchList();
@@ -47,6 +54,7 @@ export class HomeComponent implements OnInit {
 					match["filteredMatchTime"] = moment(match.matchdetail[0].matchtime).format('HH:mm');
 					match["filteredMatchDate"] = moment(match.matchdetail[0].matchtime).format('MMM DD, YYYY');
 					match["compareMatchDate"] = new Date(match.matchdetail[0].matchtime);
+					match['payment']="";
 					this.nextMatch.push(match);
 				}
 
@@ -70,6 +78,11 @@ export class HomeComponent implements OnInit {
 
 					//match.matchdetail[0].benchplayers = match.matchdetail[0].benchplayers + match.matchdetail[0].benchplayers;
 					match.matchdetail[0].subsport[0].value = match.matchdetail[0].subsport[0].value + match.matchdetail[0].subsport[0].value;
+					if(match.matchdetail[0].paymenttype=="free"){
+						match['payment']="FREE";
+					}else{
+						match['payment']=this.currencyChanged(match.matchdetail[0].currency);
+					}
 
 					if (match.filteredMatchDate != dateToCheck) {
 						match["displayDate"] = true;
@@ -99,6 +112,7 @@ export class HomeComponent implements OnInit {
 					match["filteredMatchTime"] = moment(match.matchdetail[0].matchtime).format('HH:mm');
 					match["filteredMatchDate"] = moment(match.matchdetail[0].matchtime).format('MMM DD, YYYY');
 					match["compareMatchDate"] = new Date(match.matchdetail[0].matchtime);
+					match['payment']="";
 					this.invitation.push(match);
 				}
 				this.invitation.sort(function (a, b) {
@@ -123,6 +137,13 @@ export class HomeComponent implements OnInit {
 
 					//match.matchdetail[0].benchplayers = match.matchdetail[0].benchplayers + match.matchdetail[0].benchplayers;
 					match.matchdetail[0].subsport[0].value = match.matchdetail[0].subsport[0].value + match.matchdetail[0].subsport[0].value;
+				
+					if(match.matchdetail[0].paymenttype=="free"){
+						match['payment']="FREE";
+					}else{
+						match['payment']=this.currencyChanged(match.matchdetail[0].currency);
+					}
+
 					if (match.filteredMatchDate != dateToCheck) {
 						match["displayDate"] = true;
 						dateToCheck = match.filteredMatchDate;
@@ -153,6 +174,7 @@ export class HomeComponent implements OnInit {
 					match["filteredMatchTime"] = moment(match.matchdetail[0].matchtime).format('HH:mm');
 					match["filteredMatchDate"] = moment(match.matchdetail[0].matchtime).format('MMM DD, YYYY');
 					match["compareMatchDate"] = new Date(match.matchdetail[0].matchtime);
+					match['payment']="";
 					this.lastMatch.push(match);
 				}
 
@@ -176,6 +198,12 @@ export class HomeComponent implements OnInit {
 
 					//match.matchdetail[0].benchplayers = match.matchdetail[0].benchplayers + match.matchdetail[0].benchplayers;
 					match.matchdetail[0].subsport[0].value = match.matchdetail[0].subsport[0].value + match.matchdetail[0].subsport[0].value;
+
+					if(match.matchdetail[0].paymenttype=="free"){
+						match['payment']="FREE";
+					}else{
+						match['payment']=this.currencyChanged(match.matchdetail[0].currency);
+					}
 
 					if (match.filteredMatchDate != dateToCheck) {
 						match["displayDate"] = true;
@@ -290,6 +318,21 @@ export class HomeComponent implements OnInit {
 			this.isInvitationMore = false;
 		else
 			this.isInvitationMore = true;
+	}
+	currencyChanged(currency) {
+		if(currency=="eur")
+			return this.EURSymbol;
+		else if(currency=="usd")
+			return this.USDSymbol;
+		else if(currency=="gbp")
+			return this.GBPSymbol;
+		else if(currency=="sek")
+			return this.SEKSymbol;
+		else if(currency=="aud")
+			return this.AUDSymbol;
+		else 
+			return this.AUDSymbol;	
+
 	}
 
 }

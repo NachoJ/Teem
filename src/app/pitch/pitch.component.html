@@ -95,7 +95,7 @@
                     <div fxFlex="100">
                         <div *ngFor="let mySport of p.sport;let si = index" fxLayout.xs="column" fxLayout="row" class="pitch-sport">
                             <md-select fxFlex="50" fxFlex.xs="10" class="md-block" [(ngModel)]="p.sport[si]" [ngModelOptions]="{standalone: true}" required>
-                                <md-option *ngFor="let ms of sportOptions" [disabled]="ms.isDisabled" [value]="ms.value"> {{ ms.viewValue }} </md-option>
+                                <md-option *ngFor="let ms of sportOptions" [disabled]="ms.isDisabled" [value]="ms.value"> {{ ms.viewValue | translate}} {{ms.viewValue2}} </md-option>
                             </md-select>
                             <a *ngIf="si != 0" href="javascript:void(0)" (click)="p.sport.splice(si, 1)">remove</a>
                         </div>
