@@ -15,9 +15,15 @@ te-add-new-sportscenter {
         -webkit-border-radius: 10px;
         -moz-border-radius: 10px;
     }
+    .title-list-items p {
+        font-size: 16px;
+    }
+    label {
+        font-weight: inherit !important;
+    }
     /****  Title CSS  *****/
     .title-list-items {
-        padding:0px;    
+        padding: 0px;
     }
     .title-list-items-text {
         color: #c61315;
@@ -127,15 +133,16 @@ te-add-new-sportscenter {
     .form-group.address .mat-input-container {
         padding: 8px 15px 8px 95px;
     }
-    
-    
     @media screen and (max-width:599px) {
-       form {
-        padding-right: 0;
-        margin-bottom: 30px;
+        form {
+            padding-right: 0;
+            margin-bottom: 30px;
+        }
+        .addsportcenter {
+            padding: 10px 15px 20px;
+        }
+        label {
+            margin: 0 0 10px 0;
+        }
     }
-   .addsportcenter {padding: 10px 15px 20px;}
-    label{margin: 0  0 10px 0;}
 }
-}
-

@@ -95,5 +95,9 @@ export class AuthHomeComponent implements OnInit {
 		});
 	}
 
+	checkLoginState(){
+		console.log("user logged in");
+	}
+
 
 }

@@ -12,6 +12,9 @@ app-match-details {
         overflow: visible;
         position: relative;
     }
+    .title-list-items p {
+        font-size: 16px;
+    }
     /****  Title CSS  *****/
     .title-list-items-text {
         color: #c61315;
@@ -110,6 +113,12 @@ app-match-details {
     .teems h4 {
         text-transform: uppercase;
         margin-bottom: 10px;
+        font-family: inherit !important;
+        font-size: 16px;
+        font-weight: bold !important;
+    }
+    .team h5 {
+        font-weight: 700px;
     }
     .teems a {
         display: block;
@@ -250,6 +259,17 @@ app-match-details {
         height: 100%;
         // width: 100%;
     }
+    .bold {
+        font-weight: 700;
+        font-style: normal;
+        margin-left: 5px;
+        margin-top: 3px;
+        color: #716f6f;
+    }
+    // h4 {
+    //     font-size: inherit !important;
+    //     font-weight: bold !important;
+    // }
     @media screen and (max-width:599px) {
         .form-group {
             margin-top: 0px;
@@ -353,5 +373,94 @@ app-match-details {
         border-style: solid;
         border-width: 1px;
         border-radius: 5px;
+    }
+    .select-box {
+        margin-top: 15px !important;
+        position: relative !important;
+    }
+    .div-center {
+        display: table-cell !important;
+        height: 187px !important;
+        width: 272px !important;
+        text-align: center;
+        vertical-align: middle !important;
+        // border: 1px solid red;
+    }
+}
+
+.parent-invite {
+    // position: relative;
+    // margin: 0 0 10px 0;
+}
+
+.avatar {
+    vertical-align: middle;
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+}
+
+.username {
+    margin: 0 0 0 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap !important
+}
+
+.tokens-container {
+    max-height: 75px !important;
+    overflow-y: auto;
+    max-width: 270px !important;
+    overflow-x: hidden;
+}
+
+.tokenize>.tokens-container>.token-search>input {
+    width: auto;
+    border: 0px solid #fff !important;
+}
+
+// making dropdown material
+.dropdown-menu {
+    border: none !important;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+// .dropdown-menu a:link,
+// .dropdown-menu a:visited,
+// .dropdown-menu a:hover,
+// .dropdown-menu a:focus,
+// .dropdown-menu a:active {
+//     background-color: #c61315 !important;
+// }
+// .tokenize-dropdown {
+//     max-height: 100px;
+//     max-width: 50px;
+//     overflow-y: scroll !important;
+// }
+// ::-webkit-scrollbar {
+//     -webkit-appearance: none; // you need to tweak this to make it available..
+//     width: 8px;
+// }
+// ::-webkit-scrollbar-thumb {
+//     border-radius: 4px;
+//     background-color: rgba(0, 0, 0, .5);
+//     box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+// }
+@media screen and (device-aspect-ratio: 40/71) {
+    .dropdown-menu {
+        // max-height: 100px;
+        // max-width: 50px;
+        height: 100px;
+        overflow-y: scroll !important;
+        -webkit-overflow-scrolling: auto;
+    }
+     ::-webkit-scrollbar {
+        -webkit-appearance: none;
+        width: 15px;
+    }
+     ::-webkit-scrollbar-thumb {
+        border-radius: 8px;
+        background-color: rgba(0, 0, 0, .2);
+        -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
     }
 }

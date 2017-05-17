@@ -8,39 +8,49 @@
     -moz-border-radius: 10px;
 }
 
+.title-block p {
+    font-size: 16px;
+}
+
+
 /****  Title CSS  *****/
+
 .title-block {
-    width:100%;
+    width: 100%;
     overflow: auto;
     position: relative;
     text-align: left;
 }
+
 .title-block .title-list-items-text {
     color: #c61315;
     font-weight: bold;
     margin-bottom: 2px;
     display: block;
     vertical-align: middle;
-    padding:5px 0px 10px;
+    padding: 5px 0px 10px;
     position: relative;
-    font-style:italic;
+    font-style: italic;
     text-transform: uppercase;
 }
+
 .title-block .title-list-items-text:after {
     position: absolute;
     content: "";
-    left:0;
-    right:0;
-    bottom:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: #c61315;
-    height:2px;
-    width:100%;
+    height: 2px;
+    width: 100%;
     display: block;
 }
+
 .title-block .title-list-items-text i {
     display: inline-block;
     vertical-align: middle;
 }
+
 .title-block button.mat-raised-button {
     background: #c61315;
     color: #fff;
@@ -51,38 +61,40 @@
     bottom: 2px;
     right: 0;
 }
-/********/
 
+
+/********/
 
 .sportcenterblock {
     text-align: center;
     align-content: center;
-    padding:10px 30px;
+    padding: 10px 30px;
 }
 
 .sportcenterblock h2 {
     font-size: 23px;
-    color:#333;
+    color: #333;
     text-align: left;
     text-transform: capitalize;
     line-height: 45px;
 }
 
-
-.mat-fab:not([disabled]):active, .mat-mini-fab:not([disabled]):active, .mat-raised-button:not([disabled]):active {
+.mat-fab:not([disabled]):active,
+.mat-mini-fab:not([disabled]):active,
+.mat-raised-button:not([disabled]):active {
     box-shadow: none;
 }
 
-
 .sports-centers {
-    width:100%;
+    width: 100%;
     overflow: auto;
     margin-top: 10px;
 }
 
 .sports-centers ul li {
-    padding:6px 0px 6px 20px;
+    padding: 6px 0px 6px 20px;
 }
+
 .sports-centers ul li:nth-child(2n + 1) {
     background: #e9e9e9;
 }
@@ -93,30 +105,47 @@
     font-weight: 100;
     min-width: auto;
     box-shadow: none;
-    background: rgba(0,0,0,0.05);
+    background: rgba(0, 0, 0, 0.05);
     text-transform: uppercase;
     font-size: 13px;
-    min-width:inherit;
-    border-radius:4px;
-    -webkit-border-radius:4px;
-    -moz-border-radius:4px;
+    min-width: inherit;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
 }
 
 .sports-centers ul li a .material-icons {
-    font-size:20px;
+    font-size: 20px;
 }
 
+.sports-centers span {
+    font-family: Roboto, Helvetica Neue, sans-serif !important;
+    font-size: 16px !important;
+}
+
+a {
+    text-decoration: inherit !important;
+}
+
+a:focus {
+    outline: inherit !important;
+}
 
 @media screen and (max-width:599px) {
-    .sportcenterblock { padding: 25px 20px; }
-    .sportcenterblock h2 { font-size: 21px; text-align: center; margin-bottom: 20px; }
-    .title-block button.mat-raised-button{position: relative; bottom: 0;}
-    .sports-centers ul li a{padding: 0;background: transparent;}
-
-    
-    
+    .sportcenterblock {
+        padding: 25px 20px;
+    }
+    .sportcenterblock h2 {
+        font-size: 21px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .title-block button.mat-raised-button {
+        position: relative;
+        bottom: 0;
+    }
+    .sports-centers ul li a {
+        padding: 0;
+        background: transparent;
+    }
 }
-
-
-
-

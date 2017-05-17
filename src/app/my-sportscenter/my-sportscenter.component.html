@@ -9,10 +9,10 @@
 <div class="sports-centers">
     <ul fxLayout="column">
         <li *ngFor="let sportCenter of sportCenters" fxLayout="row" class="width-max">
-            <div fxLayoutAlign="start center" fxFlex="69" fxFlex.xs="60"> <span class="badge">{{sportCenter.name}}</span> </div>
-            <div fxLayoutAlign="center center" fxFlex="13" fxFlex.xs="20"> <a md-raised-button [routerLink]="['/pitch',sportCenter.id]">Pitches</a> </div>
-            <div fxLayoutAlign="center center" fxFlex="9" fxFlex.xs="10"> <a md-raised-button [routerLink]="['/add-new-sportscenter',sportCenter.id]"><i class="material-icons">mode_edit</i></a> </div>
-            <div fxLayoutAlign="center center" fxFlex="9" fxFlex.xs="10"> <a md-raised-button (click)="openDialog(sportCenter.id)"><i class="material-icons">delete</i></a> </div>
+            <div fxLayoutAlign="start center" fxFlex="74" fxFlex.xs="60"> <span>{{sportCenter.name}}</span> </div>
+            <div fxLayoutAlign="center center" fxFlex="12" fxFlex.xs="20"> <a md-raised-button [routerLink]="['/pitch',sportCenter.id]">Pitches</a> </div>
+            <div fxLayoutAlign="center center" fxFlex="12" fxFlex.xs="10"> <a md-raised-button [routerLink]="['/add-new-sportscenter',sportCenter.id]"><i class="material-icons">mode_edit</i></a> </div>
+            <!--<div fxLayoutAlign="center center" fxFlex="9" fxFlex.xs="10"> <a md-raised-button (click)="openDialog(sportCenter.id)"><i class="material-icons">delete</i></a> </div>-->
             <!--
              <div fxLayoutAlign="center center" fxFlex="30">
              <div fxLayoutAlign="center center" fxFlex="33.33"> <a md-raised-button [routerLink]="['/pitch',sportCenter.id]">Pitches</a> </div>

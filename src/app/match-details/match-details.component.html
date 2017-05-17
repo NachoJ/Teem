@@ -21,9 +21,10 @@
                         <div fxLayout="row" class="matchdetails"> <i class="material-icons">public</i>
                             <label class="sample-label">public</label>
                         </div>
-                        <div fxLayout="row" class="matchdetails" *ngIf="match.price">
-                            <div fxLayout="row"> <i class="material-icons">attach_money</i>
-                                <label class="sample-label">{{match.price}}</label>
+                        <div fxLayout="row" class="matchdetails">
+                            <div fxLayout="row"> <i class="bold">{{match['payment']}}</i>
+                                <label class="sample-label" *ngIf="match.price">{{match.price}}</label>
+                                <label class="sample-label" *ngIf="!match.price">FREE</label>
                             </div>
                         </div>
                     </div>
@@ -50,14 +51,37 @@
             <div fxFlex="50" class="teems border">
                 <!--fxLayoutAlign="center center" fxLayout="column" -->
                 <h4>Red Arrows</h4>
-                <div fxLayout="row" fxLayoutAlign="center center">
-                    <ng-container *ngFor="let player1 of team1player">
-                        <a *ngIf="player1.id!=''; else notplayer1"><img src="{{ player1.profileimg}}"></a>
-                        <ng-template #notplayer1>
-                            <a *ngIf="player1.clickDisabled"><img src="{{ player1.profileimg}}"></a>
-                            <a *ngIf="!player1.clickDisabled" (click)="joinMatch(player1)"><img src="{{ player1.profileimg}}"></a>
-                        </ng-template>
-                    </ng-container>
+                <div fxLayout="column" fxLayoutAlign="center center">
+                    <!--0 to 5 players at a time-->
+                    <div fxLayout="row">
+                        <ng-container *ngFor="let player1 of team1player | slice:0:5">
+                            <a *ngIf="player1.id!=''; else notplayer1"><img src="{{ player1.profileimg}}"></a>
+                            <ng-template #notplayer1>
+                                <a *ngIf="player1.clickDisabled"><img src="{{ player1.profileimg}}"></a>
+                                <a *ngIf="!player1.clickDisabled" (click)="joinMatch(player1)"><img src="{{ player1.profileimg}}"></a>
+                            </ng-template>
+                        </ng-container>
+                    </div>
+                    <!--5 to 10 player-->
+                    <div fxLayout="row" style="margin-top:10px">
+                        <ng-container *ngFor="let player1 of team1player | slice:5:10">
+                            <a *ngIf="player1.id!=''; else notplayer1"><img src="{{ player1.profileimg}}"></a>
+                            <ng-template #notplayer1>
+                                <a *ngIf="player1.clickDisabled"><img src="{{ player1.profileimg}}"></a>
+                                <a *ngIf="!player1.clickDisabled" (click)="joinMatch(player1)"><img src="{{ player1.profileimg}}"></a>
+                            </ng-template>
+                        </ng-container>
+                    </div>
+                    <!--10 to 11 player-->
+                    <div fxLayout="row" style="margin-top:10px">
+                        <ng-container *ngFor="let player1 of team1player | slice:10:11">
+                            <a *ngIf="player1.id!=''; else notplayer1"><img src="{{ player1.profileimg}}"></a>
+                            <ng-template #notplayer1>
+                                <a *ngIf="player1.clickDisabled"><img src="{{ player1.profileimg}}"></a>
+                                <a *ngIf="!player1.clickDisabled" (click)="joinMatch(player1)"><img src="{{ player1.profileimg}}"></a>
+                            </ng-template>
+                        </ng-container>
+                    </div>
                 </div>
                 <div *ngIf="benchPlayer1.length>0">
                     <h5>Bench players</h5>
@@ -74,14 +98,37 @@
             <div fxFlex="50" class="teems">
                 <!--fxLayoutAlign="center center" fxLayout="column" -->
                 <h4>Blue Hammers</h4>
-                <div fxLayout="row" fxLayoutAlign="center center">
-                    <ng-container *ngFor="let player2 of team2player">
-                        <a *ngIf="player2.id!=''; else notplayer2"><img src="{{ player2.profileimg}}"></a>
-                        <ng-template #notplayer2>
-                            <a *ngIf="player2.clickDisabled"><img src="{{ player2.profileimg}}"></a>
-                            <a *ngIf="!player2.clickDisabled" (click)="joinMatch(player2)"><img src="{{ player2.profileimg}}"></a>
-                        </ng-template>
-                    </ng-container>
+                <div fxLayout="column" fxLayoutAlign="center center">
+                    <!--0 to 5 players at a time-->
+                    <div fxLayout="row">
+                        <ng-container *ngFor="let player2 of team2player | slice:0:5">
+                            <a *ngIf="player2.id!=''; else notplayer2"><img src="{{ player2.profileimg}}"></a>
+                            <ng-template #notplayer2>
+                                <a *ngIf="player2.clickDisabled"><img src="{{ player2.profileimg}}"></a>
+                                <a *ngIf="!player2.clickDisabled" (click)="joinMatch(player2)"><img src="{{ player2.profileimg}}"></a>
+                            </ng-template>
+                        </ng-container>
+                    </div>
+                    <!--5 to 10 player-->
+                    <div fxLayout="row" style="margin-top:10px">
+                        <ng-container *ngFor="let player2 of team2player | slice:5:10">
+                            <a *ngIf="player2.id!=''; else notplayer2"><img src="{{ player2.profileimg}}"></a>
+                            <ng-template #notplayer2>
+                                <a *ngIf="player2.clickDisabled"><img src="{{ player2.profileimg}}"></a>
+                                <a *ngIf="!player2.clickDisabled" (click)="joinMatch(player2)"><img src="{{ player2.profileimg}}"></a>
+                            </ng-template>
+                        </ng-container>
+                    </div>
+                    <!--5 to 10 player-->
+                    <div fxLayout="row" style="margin-top:10px">
+                        <ng-container *ngFor="let player2 of team2player | slice:10:11">
+                            <a *ngIf="player2.id!=''; else notplayer2"><img src="{{ player2.profileimg}}"></a>
+                            <ng-template #notplayer2>
+                                <a *ngIf="player2.clickDisabled"><img src="{{ player2.profileimg}}"></a>
+                                <a *ngIf="!player2.clickDisabled" (click)="joinMatch(player2)"><img src="{{ player2.profileimg}}"></a>
+                            </ng-template>
+                        </ng-container>
+                    </div>
                 </div>
                 <div *ngIf="benchPlayer2.length>0">
                     <h5>Bench players</h5>
@@ -130,8 +177,8 @@
             <div class="title-list-items">
                 <p class="title-list-items-text"> <i class="material-icons">chat</i> {{'INVITATION' | translate}}</p>
             </div>
-            <div>
-                <div class="form-group">
+            <div *ngIf="!disableInvitation">
+                <!--<div class="form-group">
                     <md-input-container>
                         <input type="text" mdInput [(ngModel)]="searchPlayer" [mdAutocomplete]="auto" (input)="loadAutoComplete()" (keyup.enter)="itemSelected()"> </md-input-container>
                     <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
@@ -146,12 +193,18 @@
                             <img class="avatar" src="{{PROFILE_IMAGE_PATH+p.profileimage}}" /> <label>{{p.firstname}}</label>
                             <a href="javascript:void(0)" (click)="removeInvites(i)">×</a></md-chip>
                     </md-chip-list>
+                </div>-->
+                <div class="select-box">
+                    <select id="tokenize-demo" class="tokenize-demo" multiple>
+					
+				</select>
                 </div>
             </div>
-            <div class="form-group" style="text-align: center;">
-                <button md-raised-button (click)="promptForSendInvitation()" [disabled]="selectedPlayer.length==0">{{'SEND INVITATIONS' | translate}}</button>
+
+            <div class="form-group" style="text-align: center;" *ngIf="!disableInvitation">
+                <button md-raised-button [disabled]="tokenLenght==0" (click)="promptForSendInvitation()">{{'SEND INVITATIONS' | translate}}</button>
             </div>
-            <div class="invite">
+            <div class="invite" *ngIf="!disableInvitation">
                 <p>{{'YOUR FRIEND ARE NOT ON TEEM YET? INVITE THEM TO PLAY!' | translate}}</p>
                 <div fxLayoutAlign="center center" fxLayout="row" style="width:100%;">
                     <a href="javascript:void(0)" (click)="socialShare('facebook')"><img height="36" width="36" src="/assets/img/facebook-circle.png" /> </a>
@@ -159,11 +212,14 @@
                     <a [href]="sanitizedWhatsappUrl" data-action="share/whatsapp/share" *ngIf="isMobile"><img height="36" width="36" src="/assets/img/whatsapp.png" /></a>
                     <a [href]="sanitizedTelegramUrl" *ngIf="isMobile"><img height="36" width="36" src="/assets/img/telegram.png" /></a>
                     <a [href]="sanitizedFacebookMessangerUrl" *ngIf="isMobile"><img height="36" width="36" src="/assets/img/fbmsg.png" /></a>
-                    <a href="mailto:?subject=match%20detail%20share%20link&body=linkToShare"><i class="material-icons" style="color:#333">email</i> </a>
+                    <a [href]="sanitizedEmailUrl"><i class="material-icons" style="color:#333">email</i> </a>
                     <!--<a href="tg://msg?text=linkToShare" *ngIf="isMobile"><img height="36" width="36" src="/assets/img/telegram.png" /></a>-->
                     <!--<a href="whatsapp://send?text=linkToShare" data-action="share/whatsapp/share" *ngIf="isMobile"><img height="36" width="36" src="/assets/img/whatsapp.png" /></a>-->
                     <!--<a href="fb-messenger://share/?link={{linkToShare}}&app_id=fbAppId" *ngIf="isMobile"><img height="36" width="36" src="/assets/img/fbmsg.png" /></a>-->
                 </div>
+            </div>
+            <div fxLayout="column" class="div-center" *ngIf="disableInvitation">
+                <label fxFlex="100">Thank you for using Teem.</label>
             </div>
         </div>
     </div>

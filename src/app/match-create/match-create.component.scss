@@ -25,6 +25,20 @@ app-match-create {
             }
         }
     }
+    .removeTopMargin {
+        margin-top: 0px !important;
+    }
+    .pitch-selection-note {
+        font-size: 14px !important;
+        color: #c61315;
+        margin-bottom: 15px;
+    }
+    .title-list-items p {
+        font-size: 16px !important;
+    }
+    label {
+        font-weight: inherit !important;
+    }
     .creatmach-wrapper {
         margin-bottom: 20px;
         background-color: #f4f4f4;
@@ -206,7 +220,7 @@ app-match-create {
         position: absolute;
         opacity: 0;
     }
-    .selectbadges p.badge {
+    .selectbadges p.badged {
         color: #666;
         margin: 0;
         display: inline-block;
@@ -233,7 +247,7 @@ app-match-create {
         height: 28px;
         width: 28px;
     }
-    .selectbadges h4.badge {
+    .selectbadges h4.badged {
         font-size: 18px;
         font-weight: normal;
         margin: 1px 0px;

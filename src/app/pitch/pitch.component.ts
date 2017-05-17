@@ -227,7 +227,7 @@ export class PitchComponent implements OnInit {
 				// this.error = '';
 				// this.success = response;
 				this.coreService.emitSuccessMessage(response.message);
-				this.router.navigate(['/match-create/' + this.sub + "/" + response.data.name]);
+				this.router.navigate(['/match-create/' + this.sub + "/" + response.data.name + "/" + response.data.address]);
 				// this.loadPitch();
 			},
 			(error: any) => {
@@ -246,6 +246,8 @@ export class PitchComponent implements OnInit {
 
 			this.pitches[index].sport.push(this.sportOptions[1].sportid);
 			console.log("sport found 1", this.pitches[index].sport.length);
+			console.log("this.sportOptions[1].viewValue2", this.sportOptions[1].viewValue2);
+			console.log("this.sportOptions[1].sportid value = ", this.pitches[index].sport);
 		}
 		if (!this.pitches[index].sport) {
 			console.log("sport not found 2");

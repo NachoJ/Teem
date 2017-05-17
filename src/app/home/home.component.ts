@@ -103,7 +103,7 @@ export class HomeComponent implements OnInit {
 
 	invitationList() {
 		console.log("date = ",  moment().format('YYYY-MM-DD 23:59:00'));
-		this.coreService.getInvitation(this.user.id, moment().format('YYYY-MM-DD 23:59:00'))
+		this.coreService.getInvitation(this.user.id, moment().add(3,'h').format('YYYY-MM-DD HH:mm.Z'))
 			.subscribe((response) => {
 				console.log("invite = ", response);
 				this.invitation = [];

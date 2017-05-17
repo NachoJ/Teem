@@ -60,7 +60,7 @@ import { ProfileGuard } from "app/core/profileguard.service";
 					{ path: 'pitch/:scId', component: PitchComponent, canActivate: [ProfileGuard] },
 					{ path: 'pitch/:scId/:new', component: PitchComponent, canActivate: [ProfileGuard] },
 					{ path: 'match-create', component: MatchCreateComponent, canActivate: [ProfileGuard] },
-					{ path: 'match-create/:scId/:scName', component: MatchCreateComponent, canActivate: [ProfileGuard] },
+					{ path: 'match-create/:scId/:scName/:scAddress', component: MatchCreateComponent, canActivate: [ProfileGuard] },
 					{ path: 'match-details/:matchId', component: MatchDetailsComponent, canActivate: [ProfileGuard] },
 					{
 						path: 'settings',

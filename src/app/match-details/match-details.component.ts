@@ -44,17 +44,30 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 	sanitizedFacebookMessangerUrl: any;
 	sanitizedWhatsappUrl: any;
 	sanitizedTelegramUrl: any;
+	sanitizedEmailUrl: any;
+
 	clickDisabled = false;
 	socket: any;
 	isSocketConnected: boolean = false;
 	chatString = "";
 	chat: any[] = [];
 
+	currencySymbol = String.fromCharCode(36);
+	EURSymbol = String.fromCharCode(8364);
+	USDSymbol = String.fromCharCode(36);
+	GBPSymbol = String.fromCharCode(163);
+	SEKSymbol = String.fromCharCode(107) + String.fromCharCode(114);
+	AUDSymbol = String.fromCharCode(36);
+
+	disableInvitation = false;
+	tokenLenght = 0;
+
 	constructor(private route: ActivatedRoute, private sanitizer: DomSanitizer, private coreService: CoreService, public dialog: MdDialog, private ngZone: NgZone) {
 
 		this.PROFILE_IMAGE_PATH = environment.PROFILE_IMAGE_PATH;
 		this.user = JSON.parse(window.localStorage['teem_user']);
 		this.linkToShare = document.location.href;
+		this.sanitizedEmailUrl = sanitizer.bypassSecurityTrustUrl('mailto:?subject=match%20detail%20share%20link&body=' + document.location.href);
 		this.sanitizedFacebookMessangerUrl = sanitizer.bypassSecurityTrustUrl('fb-messenger://share/?link=' + document.location.href + '&app_id=785727668257883');
 		this.sanitizedWhatsappUrl = sanitizer.bypassSecurityTrustUrl('whatsapp://send?text=' + document.location.href);
 		this.sanitizedTelegramUrl = sanitizer.bypassSecurityTrustUrl('tg://msg?text=' + document.location.href);
@@ -96,7 +109,7 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 		setTimeout(function () {
 			if ($('#main-chat-box')[0])
 				$("#main-chat-box").animate({ scrollTop: $('#main-chat-box')[0].scrollHeight }, 0);
-		}, 1000);
+		}, 1500);
 	}
 
 	updateOnMatchModel(message: any) {
@@ -164,7 +177,13 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 	initMatch(message) {
 		var self = this;
 		self.match = message.data[0];
-		self.match["filteredDate"] = moment(message.data[0].matchtime).format('MMM DD, YYYY');
+		self.match["filteredDate"] = moment(message.data[0].matchtime).format('MMM DD, YYYY HH:mm');
+		if (self.match.paymenttype == "free") {
+			self.match['payment'] = "";
+		} else {
+			self.match['payment'] = this.currencyChanged(self.match.currency);
+		}
+
 		self.initMap();
 		self.initTeam();
 	}
@@ -392,11 +411,13 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 		}
 
 		// Disabling match join and leave for older match
-		console.log("moment now = ", moment().isAfter(moment(this.match.matchtime).subtract(3, 'h')));
+		// console.log("is oldmatch = ", moment().isAfter(moment(this.match.matchtime).substract(3, 'h')));
+		// console.log("is oldmatch logic 2 = ", moment().add(3, 'h').isAfter(moment(this.match.matchtime)));
 		if (moment().isAfter(moment(this.match.matchtime).subtract(3, 'h'))) {
 			console.log("Old match Found");
 			this.matchjoin = false;
 			this.matchleave = false;
+			this.disableInvitation = true;
 		}
 
 		// console.log("teamplayer 1 = ", this.team1player);
@@ -438,6 +459,45 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 			this.isMobile = true;
 		}
 
+		let id = JSON.parse(window.localStorage['teem_user']).id;
+		var self = this;
+		$(document).ready(function () {
+			$('.tokenize-demo').tokenize2({
+				dropdownMaxItems: 5,
+				searchHighlight: false,
+				dataSource: function (term, object) {
+					// console.log("Object = ", object);
+					self.coreService.getInvitationSearchPlayer(term)
+						.subscribe((response) => {
+							var $items = [];
+							// $.each(response.data, function (k, v) {
+								for (let v of response ){
+								// console.log(k + " = ", v)
+								// console.log("v = ", v.email);
+								var imgpath = environment.PROFILE_IMAGE_PATH + v.profileimage;
+								$items.push({
+									value: v.id,
+									text: "<div class='parent-invite'><img class='avatar' src=" + imgpath + " onError=this.onerror=null;this.src='assets/img/sidebar_photo.png';>" + "<span class='username'>" + v.username + "</span></div>"
+								});
+							};
+							object.trigger('tokenize:dropdown:fill', [$items]);
+						},
+						(error: any) => {
+							this.coreService.emitErrorMessage(error);
+						});
+				}
+			});
+			$('.tokenize-demo').on('tokenize:tokens:add', function(e, value){
+				self.ngZone.run(() => {
+					self.tokenLenght = $('.tokenize-demo').data('tokenize2').toArray().length;
+				});
+			});
+			$('.tokenize-demo').on('tokenize:tokens:remove', function(e, value){
+				self.ngZone.run(() => {
+					self.tokenLenght = $('.tokenize-demo').data('tokenize2').toArray().length;
+				});
+			});
+		});
 	}
 
 	loadAutoComplete() {
@@ -448,13 +508,24 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 		if (this.searchPlayer.length >= 2) {
 			this.coreService.getInvitationSearchPlayer(this.searchPlayer)
 				.subscribe((response) => {
+					console.log(response);
 					this.players = response;
 				},
 				(error: any) => {
 					this.coreService.emitErrorMessage(error);
 				});
 		}
+
+		// this.fillAutoComplete();
 	}
+
+	// fillAutoComplete() {
+	// 	console.log("fill autocomplete")
+	// 	var self = this;
+	// 	self.ngZone.run(() => {
+	// 		$('.tokenize-demo').tokenize2().trigger('tokenize:remap');
+	// 	});
+	// }
 
 	displayFn(player): string {
 		return player ? player.firstname : "";
@@ -495,19 +566,27 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 
 	sendInvitations() {
 		let userIds = [];
-		for (let p of this.selectedPlayer) {
-			userIds.push(p.id);
-		}
+		// for (let p of this.selectedPlayer) {
+		// 	userIds.push(p.id);
+		// }
+		var self = this;
+		self.ngZone.run(() => {
+			userIds = $('.tokenize-demo').data('tokenize2').toArray();
+		});
 		let user = JSON.parse(window.localStorage['teem_user']);
 		let data = {
 			userid: userIds.toString(),
 			matchid: this.sub,
 			inviterid: user.id
 		};
+		console.log("invitation data = ", data);
 		this.coreService.sendInvitations(JSON.stringify(data))
 			.subscribe((response) => {
 				this.coreService.emitSuccessMessage(response);
-				this.selectedPlayer = [];
+				// this.selectedPlayer = [];
+				self.ngZone.run(() => {
+					$('.tokenize-demo').tokenize2().trigger('tokenize:clear');
+				});
 			},
 			(error: any) => {
 				this.coreService.emitErrorMessage(error);
@@ -736,6 +815,22 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 					self.chatString = "";
 				});
 			});
+
+	}
+
+	currencyChanged(currency) {
+		if (currency == "eur")
+			return this.EURSymbol;
+		else if (currency == "usd")
+			return this.USDSymbol;
+		else if (currency == "gbp")
+			return this.GBPSymbol;
+		else if (currency == "sek")
+			return this.SEKSymbol;
+		else if (currency == "aud")
+			return this.AUDSymbol;
+		else
+			return this.AUDSymbol;
 
 	}
 }

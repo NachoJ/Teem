@@ -37,22 +37,22 @@ export class MatchCreateComponent implements OnInit {
 	// sport: string;
 	// sportOptions = [];
 
-	date: string = '';
+	date: string = "";
 	dt: string = '';
-	hour: string;
+	hour: string = '20';
 	hourOptions = [];
 
-	minute: string;
+	minute: string = '0';
 	minuteOptions = [];
 
-	payment: string;
+	payment: string = 'atthepitch';
 
-	currency: string;
+	currency: string = "eur";
 	currencyOption = [];
 
 	cost: string;
 
-	bench: string;
+	bench: any;
 	benchOpt = [];
 
 	subSport: string;
@@ -60,10 +60,11 @@ export class MatchCreateComponent implements OnInit {
 
 	selectedPitchSport: any;
 
-	someradio = "";
+	someradio: any;
 
 	subscId: any;
 	subscName: any;
+	subscAddress: any;
 
 	currencySymbol = String.fromCharCode(36);
 	EURSymbol = String.fromCharCode(8364);
@@ -73,6 +74,7 @@ export class MatchCreateComponent implements OnInit {
 	AUDSymbol = String.fromCharCode(36);
 
 	hideCurrencyCtrls = false;
+	hideBenchPlayerCtrl: boolean = false;
 
 	translate: any;
 	// filteredOptions: Observable<any[]>;
@@ -117,6 +119,7 @@ export class MatchCreateComponent implements OnInit {
 		this.coreService.getAllCurrency()
 			.subscribe((response) => {
 				this.currencyOption = response;
+				this.currencyChanged();
 				// console.log("currecy", response)
 			},
 			(error: any) => {
@@ -124,21 +127,27 @@ export class MatchCreateComponent implements OnInit {
 			});
 
 		for (let i = 0; i <= 23; i++) {
-			this.hourOptions.push({ value: i, viewValue: (i > 9 ? i : "0" + i) });
+			this.hourOptions.push({ value: i + "", viewValue: (i > 9 ? i : "0" + i) });
 		}
 		for (let i = 0; i <= 59; i += 15) {
-			this.minuteOptions.push({ value: i, viewValue: (i > 9 ? i : "0" + i) });
+			this.minuteOptions.push({ value: i + "", viewValue: (i > 9 ? i : "0" + i) });
 		}
 
 		for (let j = 0; j <= 10; j++) {
 			this.benchOpt.push({ value: j, viewValue: j });
 		}
+
+		this.date = moment().add(1, 'days').format('YYYY-MM-DD');
+		// date.setDate(date.getDate() + 1)
+
 		this.subscId = this.route.snapshot.params.scId;
 		this.subscName = this.route.snapshot.params.scName;
-		if (this.subscId && this.subscName) {
+		this.subscAddress = this.route.snapshot.params.scAddress;
+		if (this.subscId && this.subscName && this.subscAddress) {
 			this.selectedSportsCenter = <any>{};
 			this.selectedSportsCenter.id = this.subscId;
 			this.selectedSportsCenter.name = this.subscName;
+			this.selectedSportsCenter.address = this.subscAddress;
 			this.loadAutoComplete();
 			this.itemSelected();
 			this.displayFn(this.selectedSportsCenter);
@@ -198,12 +207,19 @@ export class MatchCreateComponent implements OnInit {
 					// 	this.pitches = response;
 					// }
 					this.pitches = response;
+					if (this.pitches.length == 1) {
+						this.someradio = this.pitches[0].id;
+						this.pitchSelected(this.pitches[0].id, this.pitches[0].sport);
+					} else {
+						this.subSportOption.length = 0;
+					}
 				},
 				(error: any) => {
 					this.coreService.emitErrorMessage(error);
 					// this.success = '';
 					// this.error = error;
 				});
+
 		}
 	}
 
@@ -211,34 +227,39 @@ export class MatchCreateComponent implements OnInit {
 		let data = {
 			sportid: pitchSport
 		}
-		// console.log("selected pitchSport = ", JSON.stringify(data));
 		this.coreService.getSubSports(JSON.stringify(data))
 			.subscribe((response) => {
 				this.subSportOption.length = 0;
-				// console.log("pitch sub sport response", response);
 				let tempsport = "";
 				for (var res of response) {
 					if (tempsport != res.title) {
 						tempsport = res.title;
-						// console.log("sport = ", res.title + " " + res.id);
 						this.subSportOption.push({ value: res.id, viewValue: res.title, isDisabled: true });
 					}
 					for (var r of res.subsport) {
-						// console.log("r id = " + r.title + " " + r.id)
-						this.subSportOption.push({ value: r.id, viewValue: res.title , viewValue2: r.title, sportid: res.id, isDisabled: false });
+						this.subSportOption.push({ value: r.id, viewValue: res.title, viewValue2: r.title, sportid: res.id, isDisabled: false });
 					}
+				}
+				// selecting sub sport if subsport is only one
+				if (this.subSportOption.length == 2) {
+					this.subSport = this.subSportOption[1].value;
+					this.bench = 0;
+					this.subSportChanged(this.subSportOption[1]);
+				} else {
+					this.subSport = "";
+					this.bench = "";
 				}
 			},
 			(error: any) => {
 				this.coreService.emitErrorMessage(error);
 			});
 		this.selectedPitchId = pitchid;
+
+		// assigning phone number
 		for (let sc of this.sportsCenterOptions) {
 			if (sc.id == this.selectedSportsCenterId)
 				this.selectedSportsCenterPhone = sc.phone;
 		}
-
-
 	}
 
 	changeSportCentre() {
@@ -275,6 +296,8 @@ export class MatchCreateComponent implements OnInit {
 			"currency": this.currency,
 			"price": this.cost
 		};
+		if (!data.benchplayers)
+			data.benchplayers = 0;
 
 		console.log("data = ", JSON.stringify(data));
 
@@ -329,4 +352,25 @@ export class MatchCreateComponent implements OnInit {
 		}
 	}
 
+	subSportChanged(e: any) {
+		let padelsport = false;
+		for (let sp of this.subSportOption) {
+			if (sp.value == e.value) {
+				if (sp.viewValue.toLowerCase().includes('padel')) {
+					padelsport = true;
+				}
+				break;
+			}
+		}
+		if (padelsport) {
+			this.matchFormGroup.controls.benchCtrl.disable();
+			this.hideBenchPlayerCtrl = true;
+		} else {
+			this.matchFormGroup.controls.benchCtrl.enable();
+			this.hideBenchPlayerCtrl = false;
+		}
+		// let rSubSportViewValue = rSubSport.viewValue;
+		// if (rSubSportViewValue.toLowerCase().includes('padel'))
+		// 	this.matchFormGroup.controls.benchCtrl.disable();
+	}
 }

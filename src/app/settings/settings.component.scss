@@ -150,6 +150,19 @@ app-settings {
     .main-padding {
         padding: 20px 0 0;
     }
+    a {
+        color: inherit !important;
+        text-decoration: inherit !important;
+    }
+    label {
+        font-weight: inherit !important;
+    }
+    font-size: 16px;
+    // a:hover,
+    // a:focus {
+    //     color: #23527c;
+    //     text-decoration: underline;
+    // }
     // media query start ------------------------------------------------------------
     @media screen and (max-width:599px) {
         .mat-tab-link {

@@ -4,6 +4,9 @@
     background-size: cover;
     height: 100%;
     width: 100%;
+    label {
+        font-weight: inherit !important;
+    }
 }
 
 .register-formbox {
@@ -116,8 +119,26 @@ md-checkbox span a {
     text-decoration: underline;
 }
 
+.mat-input-element {
+    font-family: inherit !important;
+}
+
+h3 {
+    font-size: 16px;
+}
+
+label .mat-input-placeholder {
+    display: block;
+    cursor: text;
+    font-weight: inherit !important;
+}
+
 .removecenter {
     text-align: start !important;
+}
+
+label {
+    font-weight: inherit !important;
 }
 
 @media screen and (max-width:599px) {

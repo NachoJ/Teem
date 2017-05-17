@@ -13,9 +13,9 @@
     <div *ngFor="let p of pitches;let i = index" class="single-form">
         <form [formGroup]="pitchFormGroupArray[i]" (click)="formChanged()" (keyup)="formChanged()" (change)="formChanged()" fxLayout="column">
             <!-- Name -->
-            <button md-mini-fab (click)="removePitch(i)" class="close">
+            <!--<button md-mini-fab (click)="removePitch(i)" class="closee">
                 <md-icon>close</md-icon>
-            </button>
+            </button>-->
             <div class="form-group">
                 <div fxLayout="row" fxFlex="100" fxLayout.xs="column">
                     <label for="" fxLayoutAlign="left center" fxFlex="15" fxFlex.xs="20">{{'NAME' | translate}}</label>

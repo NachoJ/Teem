@@ -12,6 +12,9 @@ app-find-match {
         overflow: visible;
         padding: 0 30px;
     }
+    .title-list-items p {
+        font-size: 16px;
+    }
     /****  Title CSS  *****/
     .title-list-items-text {
         color: #c61315;
@@ -252,6 +255,9 @@ app-find-match {
     .morebtn {
         margin-top: 10px;
         margin-right: 22px;
+    }
+    label {
+        font-weight: inherit !important;
     }
     //    Media query start----------------------------------------------------------------------------------------
     @media screen and (max-width:599px) {
