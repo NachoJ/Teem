@@ -85,8 +85,8 @@
     "SELECT SPORTS CENTRE": "Selecciona el centro deportivo",
     "SPORT CENTER NOT SELECTED": "No has seleccionado el centro deportivo",
     "CLICK ON PITCH TO SELECT IT": "Clic en el campo para seleccionarlo",
-    "SELECT SUB SPORT": "Selecciona el sub deporte",
-    "SUB SPORT NOT SELECTED": "No has seleccionado el sub deporte",
+    "SELECT SUB SPORT": "Selecciona el deporte",
+    "SUB SPORT NOT SELECTED": "No has seleccionado el deporte",
     "SELECT BENCH PLAYERS": "Selecciona el número de suplentes",
     "BENCH PLAYER NOT ASSIGNED": "No has asignado ningún suplente",
     "MAKE SURE YOU HAVE BOOKED THE FIELD BEFORE CONTINUING!": "¡Asegúrese de haber reservado el campo antes de continuar!",
@@ -147,5 +147,16 @@
     "RUBBER/PVC": " Goma/PVC",
     "RESIN": "Resina",
     "TERRAIN": "Tierra",
-    "CEMENT": "Cemento"
+    "CEMENT": "Cemento",
+
+    "NEXT MATCHS": "PROXIMOS PARTIDOS",
+    "INVITATIONS": "INVITACIONES",
+    "LAST MATCHS": "ULTIMOS PARTIDOS",
+    "SPORT": "Deporte",
+    "NOTIFICATIONS": "Notificaciones",
+    "MY SPORTSCENTER": "Mi centro deportivo",
+    "MUST ACCEPT OVER TERMS AND CONDITIONS": "Debes aceptar los terminos y condiciones",
+    "ADD NEW SPORT CENTER": "añadir centro deportivo",
+    "MY SPORT CENTER": "mis centros deportivos",
+    "ADD SPORTS CENTER": "Añadir centro deportivo"
 }

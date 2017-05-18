@@ -16,10 +16,10 @@ export class SettingsComponent implements OnInit {
 				link: "profile",
 				title: "SPROFILE"
 			},
-			{
+			/* {
 				link: "notification",
 				title: "NOTIFICATIONS"
-			},
+			}, */
 			{
 				link: "account",
 				title: "ACCOUNT"

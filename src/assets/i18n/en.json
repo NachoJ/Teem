@@ -85,8 +85,8 @@
     "SELECT SPORTS CENTRE": "Select Sports Centre",
     "SPORT CENTER NOT SELECTED": "Sport Center not Selected",
     "CLICK ON PITCH TO SELECT IT": "Click on pitch to select it",
-    "SELECT SUB SPORT": "Select Sub Sport",
-    "SUB SPORT NOT SELECTED": "Sub Sport not selected",
+    "SELECT SUB SPORT": "Select Sport",
+    "SUB SPORT NOT SELECTED": "Sport not selected",
     "SELECT BENCH PLAYERS": "Select Bench Players",
     "BENCH PLAYER NOT ASSIGNED": "Bench player not assigned",
     "MAKE SURE YOU HAVE BOOKED THE FIELD BEFORE CONTINUING!": "Make Sure you have booked the field before continuing!",
@@ -155,7 +155,10 @@
     "LAST MATCHS": "LAST MATCHS",
     "SPORT": "Sport",
     "NOTIFICATIONS": "NOTIFICATIONS",
-    "MY-SPORTSCENTER": "MY-SPORTSCENTRE",
+    "MY SPORTSCENTER": "My sportcenter",
     "MUST ACCEPT OVER TERMS AND CONDITIONS": "Must accept over terms and conditions",
-    "SELECT THE PITCH WHERE TO WANT TO PLAY": "Select the pitch where to want to play"
+    "SELECT THE PITCH WHERE TO WANT TO PLAY": "Select the pitch where to want to play",
+    "ADD NEW SPORT CENTER": "add new sport center",
+    "MY SPORT CENTER": "My sport center",
+    "ADD SPORTS CENTER": "Add sport center"
 }

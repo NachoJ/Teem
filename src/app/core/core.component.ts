@@ -127,10 +127,6 @@ export class CoreComponent implements OnInit {
 				link: "/find-match"
 			},
 			{
-				title: "TOURNMENTS",
-				link: "/tournaments"
-			},
-			{
 				title: "My Sports Center",
 				link: "/my-sportscenter"
 			},
@@ -152,11 +148,6 @@ export class CoreComponent implements OnInit {
 				title: "SEARCH MATCH",
 				icon: "search",
 				link: "/find-match"
-			},
-			{
-				title: "TOURNMENTS",
-				icon: "people",
-				link: "/tournaments"
 			},
 			{
 				title: "NOTIFICATION",
