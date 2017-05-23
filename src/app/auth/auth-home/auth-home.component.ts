@@ -24,7 +24,7 @@ export class AuthHomeComponent implements OnInit {
 	error: string;
 	constructor(private authService: AuthService, private router: Router, private ngZone: NgZone) {
 		FB.init({
-			appId: '785727668257883', //main id 785727668257883  test app id 793209790843004
+			appId: '122806058294007', //main id 785727668257883  test app id 793209790843004
 			cookie: true,  // enable cookies to allow the server to access the session
 			xfbml: true,  // parse social plugins on this page
 			version: 'v2.8' // use graph api version 2.8

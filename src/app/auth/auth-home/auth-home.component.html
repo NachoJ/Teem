@@ -13,13 +13,11 @@
              
     </button>-->
     <button md-raised-button class="fb-button" (click)="callFbLogin()"> {{ 'LOGIN WITH FACEBOOK' | translate }} </button>
-    <div fxLayout="row" fxLayoutAlign="space-between" class="li-full-width">
-        <div>
-            <button md-raised-button class="registerbtn" routerLink="register"> {{ 'REGISTER' | translate }} </button>
-        </div>
-        <div>
-            <button md-raised-button class="loginbtn" routerLink="login"> {{ 'LOG IN' | translate }} </button>
-        </div>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+        <button md-raised-button class="registerbtn" routerLink="register"> {{ 'REGISTER' | translate }} </button>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+        <button md-raised-button class="loginbtn" routerLink="login"> {{ 'LOG IN' | translate }} </button>
     </div>
     <!-- new fb button -->
 </div>

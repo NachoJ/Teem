@@ -1,7 +1,4 @@
 :host {
-    display: block;
-    background: #fff url(/assets/img/bg-main.jpg) no-repeat 50% fixed;
-    background-size: cover;
     height: 100%;
     width: 100%;
     label {
@@ -13,6 +10,7 @@
     height: 100%;
     background-color: rgba(255, 255, 255, 0.498039);
     transition: all 0.5s linear;
+    overflow: auto;
     padding: 20px 0px;
 }
 
