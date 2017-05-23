@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <h5>{{'UPLOAD YOUR PHOTO HERE' | translate}}</h5>
+    <button md-raised-button md-dialog-close>×</button>
+</div>
+<div class="containerr">
+    <div class="uploadbtn">
+        <input #inputFil type="file" name="" value="" id="file" (change)="getImage($event)" style="display: none;">
+        <button md-raised-button class="btn-choose-file" (click)="inputFil.click()">{{'Choose File' | translate}}</button>
+    </div>
+    <!--    <div fxLayout.xs="column" fxLayout="row" class="previewblock">-->
+    <div class="previewblock">
+        <!--        <div fxFlex="70" class="profile-wrapper col"> <img id="image" [src]="sanitizer.bypassSecurityTrustResourceUrl(imgSrc)" alt="Picture"> </div>-->
+        <div class="profile-wrapper col"> <img id="image" [src]="sanitizer.bypassSecurityTrustResourceUrl(imgSrc)" alt="Picture"> </div>
+        <!--        <div fxFlexOffset="5" fxFlex="25" fxLayout="column">-->
+        <div class="cropper">
+            <div class="col preview-lg" *ngIf="!this.isMobile">
+                <div class="preview"></div>
+            </div>
+            <div class="col preview-md" *ngIf="!this.isMobile">
+                <div class="preview"></div>
+            </div>
+            <div class="col preview-sm" *ngIf="!this.isMobile">
+                <div class="preview"></div>
+            </div>
+            <button md-raised-button class="done-btn" type="button" (click)="onCropperPopupDone()">{{'DONE' | translate }}</button>
+        </div>
+    </div>
+</div>

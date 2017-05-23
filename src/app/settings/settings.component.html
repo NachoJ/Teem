@@ -1,0 +1,9 @@
+<section class="main">
+    <div class="title-list-items">
+        <p class="title-list-items-text"><em><i class="material-icons">settings</i> {{'SETTINGS' | translate}}</em> </p>
+    </div>
+    <nav md-tab-nav-bar> <a md-tab-link *ngFor="let link of navLinks" [routerLink]="link.link" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
+    {{link.title | translate}}
+  </a> </nav>
+    <router-outlet></router-outlet>
+</section>

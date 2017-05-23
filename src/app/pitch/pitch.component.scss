@@ -1,0 +1,298 @@
+:host {
+    display: block;
+    background-color: #f4f4f4;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+}
+
+app-pitch {
+    .addpitchwrapper {
+        width: 100%;
+        overflow: auto;
+        padding: 10px 30px 20px;
+        text-align: center;
+        align-content: center;
+        position: relative;
+        background-color: #f4f4f4;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+    }
+    .title-list-items p {
+        font-size: 16px;
+    }
+    /****  Title CSS  *****/
+    .addpitchwrapper .title-list-items {
+        position: relative;
+        padding: 0px;
+    }
+    .title-list-items-text {
+        color: #c61315;
+        font-weight: bold;
+        margin-bottom: 2px;
+        display: block;
+        vertical-align: middle;
+        padding: 5px 0px 10px;
+        position: relative;
+        font-style: italic;
+        text-transform: uppercase;
+        text-align: left;
+    }
+    .title-list-items-text:after {
+        position: absolute;
+        content: "";
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #c61315;
+        height: 2px;
+        width: 100%;
+        display: block;
+    }
+    .title-list-items-text i {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .addpitchwrapper .title-list-items button {
+        background: #c61315;
+        color: #fff;
+        padding: 0px 30px;
+        box-shadow: none;
+        font-weight: normal;
+        position: absolute;
+        bottom: 0;
+        right: -1px;
+        border-radius: 4px 4px 0 0 !important;
+        -webkit-border-radius: 4px 4px 0 0 !important;
+        -moz-border-radius: 4px 4px 0 0 !important;
+    }
+    /****  Form CSS  *****/
+    form {
+        align-content: center;
+        text-align: center;
+        padding-right: 15px;
+    }
+    .mat-input-underline {
+        display: none;
+    }
+    .mat-input-wrapper {
+        margin: 0px !important;
+        padding: 0px !important;
+    }
+    .form-group.price span {
+        position: absolute;
+        top: -8px;
+        left: -45px;
+        width: 35px;
+        height: 33px;
+    }
+    .form-group.price span:after {
+        border-right: 1px solid rgba(0, 0, 0, 0.3);
+        display: block;
+        content: "$";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        text-align: center;
+        line-height: 32px;
+        font-weight: normal;
+        border-radius: 4px 0 0 4px;
+        -webkit-border-radius: 4px 0 0 4px;
+        -moz-border-radius: 4px 0 0 4px;
+    }
+    .form-group.price .mat-input-container {
+        padding-left: 45px;
+    }
+    .mat-input-container,
+    .mat-select {
+        width: 100%;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        padding: 8px 15px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: #333;
+        height: 35px;
+    }
+    .mat-select {
+        padding: 0px;
+    }
+    .mat-input-container:focus {
+        outline: none;
+        border-color: #c61315;
+    }
+    .form-group {
+        position: relative;
+        margin-bottom: 15px;
+        text-align: left;
+    }
+    .covering {
+        margin: 10px 0 20px;
+    }
+    .lights {
+        margin-bottom: 25px;
+    }
+    .form-group label {
+        font-size: 14px;
+        color: #666;
+    }
+    .md-button-register-form {
+        width: auto;
+        background-color: #c61315;
+        color: #fff !important;
+        margin-bottom: 0px;
+        text-align: center;
+        padding: 0px 60px;
+        box-shadow: none;
+        text-transform: uppercase;
+        font-weight: normal;
+    }
+    .error-message {
+        font-size: 11px;
+        margin-top: 5px;
+        color: #c61315;
+        font-weight: bold;
+        width: 100%;
+        text-align: right;
+    }
+    /***************/
+    .add-btn {
+        margin-bottom: 20px;
+    }
+    .add-btn button {
+        background: #72d572;
+        color: #fff;
+        padding: 5px 50px;
+        box-shadow: none;
+        font-weight: normal;
+        font-size: 16px;
+    }
+    .single-form {
+        padding: 40px 40px 20px;
+        position: relative;
+        margin: 20px 0px 0px;
+        background: #fff;
+    }
+    .pitch-sport {
+        margin-bottom: 10px;
+        a {
+            margin-left: 5px;
+            line-height: 35px;
+        }
+    }
+    .mat-radio-container,
+    .mat-radio-inner-circle,
+    .mat-radio-outer-circle {
+        width: 17px !important;
+        height: 17px !important;
+    }
+    .mat-radio-inner-circle {
+        background: #666;
+    }
+    .mat-radio-checked .mat-radio-outer-circle {
+        border-color: #666;
+    }
+    .mat-radio-label-content {
+        top: -1px;
+        position: relative;
+    }
+    .mat-select-underline {
+        display: none;
+    }
+    .mat-radio-button {
+        margin-right: 20px;
+    }
+    .mat-select-placeholder::after {
+        display: none;
+    }
+    .mat-select-trigger {
+        margin: 0 15px;
+        height: 33px !important;
+        font-size: 14px !important;
+    }
+    .save-btn {
+        margin-top: 20px;
+    }
+    .save-btn button {
+        background: #72d572;
+        color: #fff;
+        padding: 3px 50px;
+        box-shadow: none;
+        font-size: 14px;
+        width: 170px;
+        margin: auto;
+        font-weight: normal;
+        text-transform: uppercase;
+        font-style: italic;
+    }
+    .md-block {
+        display: block;
+    }
+    em {
+        color: white;
+    }
+    .mat-button-ripple-round {
+        border-radius: 0px;
+        -webkit-border-radius: 0px;
+        -moz-border-radius: 0px;
+    }
+    .addpitchwrapper .success p {
+        color: #3c763d;
+        background-color: #dff0d8;
+        border-color: #d6e9c6;
+    }
+    /******* Custon form CSS ********/
+    button.closee.mat-mini-fab {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #aaa;
+        border-radius: 50% !important;
+        width: 30px;
+        height: 30px;
+    }
+    .mat-mini-fab .mat-icon,
+    .mat-mini-fab i {
+        padding: 3px 0px;
+        font-size: 20px;
+    }
+    .mat-button-ripple-round {
+        border-radius: 50% !important;
+    }
+    label {
+        font-weight: inherit !important;
+    }
+    // media query start ------------------------------------------------------------
+    @media screen and (max-width:599px) {
+        .single-form {
+            padding: 56px 20px 20px;
+            position: relative;
+            margin: 20px 0px 0px;
+            background: #fff;
+        }
+        form {
+            padding-right: 0px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            margin: 0 0 12px 0;
+        }
+        app-pitch .single-form {
+            padding: 46px 10px 20px;
+        }
+        .addpitchwrapper {
+            padding: 15px;
+        }
+        .pitch-sport a {
+            margin-left: 0;
+            line-height: 25px;
+            font-size: 13px;
+        }
+    }
+}

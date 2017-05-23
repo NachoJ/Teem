@@ -1,0 +1,238 @@
+<div fxFlex="100" class="creatmach-wrapper">
+    <!--<form [formGroup]="sportsCenterFormGroup" *ngIf="sub" (ngSubmit)="updateSportsCenter()">-->
+    <div *ngIf="success" class="success"> {{success}} </div>
+    <!--
+    <div fxFlex="100" class="title-list-items">
+        <p class="title-list-items-text"> <i class="material-icons">thumb_up</i> Match Creation</p>
+    </div>
+-->
+    <div fxFlex="100" class="title-list-items clearfix">
+        <p class="title-list-items-text"> <i class="material-icons">thumb_up</i> {{'MATCH CREATION' | translate}}</p>
+        <button md-raised-button routerLink="/add-new-sportscenter">{{'CLICK TO ADD A NEW ONE' | translate}}.</button>
+    </div>
+    <!--<div fxLayoutAlign="center center" fxFlex="100" class="note">
+        <p>Make Sure you have booked the field before continuing!</p>
+             <p class="info">Make Sure you have booked the field before continuing! <span><md-icon>phone</md-icon> {{selectedSportsCenterPhone}}</span> </p>
+    </div>-->
+    <form [formGroup]="matchFormGroup">
+        <div fxFlex="100" fxLayout="column" style="width:100%;" class="clearfix">
+            <!-- auto complete -->
+            <div fxLayout="column" class="form-group">
+                <div fxLayout.xs="column" fxLayout="row">
+                    <label for="" fxLayoutAlign="left center" fxFlex="30">{{'SELECT SPORTS CENTRE' | translate}}</label>
+                    <md-input-container fxFlex="70">
+                        <input type="text" mdInput formControlName="sportCentreCtrl" (keyup.enter)="itemSelected()" [(ngModel)]="selectedSportsCenter" [mdAutocomplete]="auto" (input)="loadAutoComplete()"> </md-input-container>
+                </div>
+                <div fxLayout="row" fxFlexOffset.xs="0" fxFlexOffset="30" class="address">
+                    <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
+                        <md-option name="auto" *ngFor="let option of sportsCenterOptions" (change)="itemSelected()" (click)="itemSelected()" (keyup.enter)="itemSelected()" [value]="option"> {{ option.name +', '+ option.address}} </md-option>
+                    </md-autocomplete>
+                    <label *ngIf="selectedSportsCenterAddress">{{selectedSportsCenterAddress}}</label>
+                </div>
+                <!--<div *ngIf="error" class="error"> {{error}} </div>-->
+                <div *ngIf="matchFormGroup.controls.sportCentreCtrl.invalid && matchFormGroup.controls.sportCentreCtrl.touched">
+                    <div ng-message="required" fxFlex="100" fxLayoutAlign="right start">
+                        <p class="error-message">{{'SPORT CENTER NOT SELECTED' | translate}}</p>
+                    </div>
+                </div>
+            </div>
+            <!--
+            <div fxFlex="100" class="select-center">
+                <md-input-container>
+                    <input type="text" mdInput placeholder="Select Sports Centre" formControlName="sportCentreCtrl" (keyup.enter)="itemSelected()" [(ngModel)]="selectedSportsCenter" [mdAutocomplete]="auto" (input)="loadAutoComplete()"> </md-input-container>
+                <div *ngIf="matchFormGroup.controls.sportCentreCtrl.invalid && matchFormGroup.controls.sportCentreCtrl.touched" style="text-align:right;">
+                    <p class="error-message">Sport Center not Selected</p>
+                </div>
+            </div>
+            <div fxLayout.xs="column" fxLayoutAlign="center center" fxLayout="row" fxFlex="100" class="info">
+                <p>Can't find find Sports Centre you are looking for? </p>
+                <button md-raised-button>Click to add a new one.</button>
+            </div>
+-->
+            <!-- pitches -->
+            <div fxLayout="column" class="pitch clearfix">
+                <p class="note" [hidden]="pitches">{{'CLICK ON PITCH TO SELECT IT' | translate }}</p>
+                <div *ngIf="pitches" class="selectbadges">
+                    <p class="pitch-selection-note" *ngIf="pitches.length>1">{{'SELECT THE PITCH WHERE TO WANT TO PLAY' | translate }}</p>
+                    <md-radio-group formControlName="pitchRadioGroupCtrl" [(ngModel)]="someradio">
+                        <div *ngFor="let pitch of pitches; let i = index" (click)="pitchSelected(pitch.id,pitch.sport)" fxLayout="row" class="pitch-display">
+                            <md-radio-button [value]="pitch.id">
+                                <div class="span-white">
+                                    <md-icon class="material-icons md-48" svgIcon={{pitch.sportname}}></md-icon>
+                                </div>
+                                <h4 class="badged">{{pitch.name}}</h4>
+                                <p class="badged">{{pitch.covering}}</p>
+                                <!--<p class="badge">{{pitch.sport}}</p>-->
+                            </md-radio-button>
+                        </div>
+                    </md-radio-group>
+                </div>
+            </div>
+        </div>
+        <div style="width:100%;">
+            <!--
+            <div fxLayoutAlign="center center" fxLayout="row" fxFlex="100" class="address">
+                <md-input-container fxFlex="60">
+                    <input type="text" name="displaySc" [ngModelOptions]="{standalone: true}" mdInput [disabled]="true" [(ngModel)]="selectedSportsCenterName"> </md-input-container>
+                <button md-raised-button (click)="changeSportCentre()" fxFlex="20">Change</button>
+            </div>
+-->
+            <!-- sub type-->
+            <div fxLayout="column" fxFlex="100" class="form-group">
+                <div fxLayout="row" fxLayout.xs="column">
+                    <label fxLayoutAlign="left center" fxFlex="30">{{'SELECT SUB SPORT' | translate }}</label>
+                    <md-select fxFlex="70" formControlName="subSportCtrl" (change)="subSportChanged($event)" [(ngModel)]="subSport" required>
+                        <md-option *ngFor="let m of subSportOption" [disabled]="m.isDisabled" [value]="m.value"> {{ m.viewValue | translate }} {{m.viewValue2}}</md-option>
+                    </md-select>
+                </div>
+                <div *ngIf="matchFormGroup.controls.subSportCtrl.invalid && matchFormGroup.controls.subSportCtrl.touched">
+                    <div ng-message="required">
+                        <p class="error-message">{{'SUB SPORT NOT SELECTED' | translate}}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- bench -->
+            <div fxLayout="column" fxFlex="100" class="form-group" *ngIf="!hideBenchPlayerCtrl">
+                <div fxLayout="row" fxLayout.xs="column">
+                    <label fxLayoutAlign="left center" fxFlex="30">{{'SELECT BENCH PLAYERS' | translate}}</label>
+                    <md-select fxFlex="70" formControlName="benchCtrl" [(ngModel)]="bench" required>
+                        <md-option *ngFor="let opt of benchOpt" [value]="opt.value"> {{ opt.viewValue }} </md-option>
+                    </md-select>
+                </div>
+                <div *ngIf="matchFormGroup.controls.benchCtrl.invalid && matchFormGroup.controls.benchCtrl.touched">
+                    <div ng-message="required">
+                        <p class="error-message">{{'BENCH PLAYER NOT ASSIGNED' | translate }}</p>
+                    </div>
+                </div>
+            </div>
+            <div fxLayoutAlign="center center" fxFlex="100" class="note">
+                <p>{{'MAKE SURE YOU HAVE BOOKED THE FIELD BEFORE CONTINUING!' | translate}}<span><md-icon>phone</md-icon> {{selectedSportsCenterPhone}}</span></p>
+                <!--        <p class="info">Make Sure you have booked the field before continuing! <span><md-icon>phone</md-icon> {{selectedSportsCenterPhone}}</span> </p>-->
+            </div>
+            <!-- Date -->
+            <div fxLayout="column" fxFlex="100" class="form-group date">
+                <div fxLayout="row" fxHide.xs="true">
+                    <label fxLayoutAlign="left center" fxFlex="30">Start date</label>
+                    <!--<material-datepicker class="md-block register-form-text-area" fxFlex="40" [(date)]="date"></material-datepicker>-->
+                    <md-input-container class="custom-height" fxFlex="40">
+                        <input type="date" mdInput class="user-text-label" formControlName="dateCtrl" [(ngModel)]="date" required> </md-input-container>
+                    <md-select fxFlexOffset.xs="0" fxFlexOffset="2" fxFlex="13" [(ngModel)]="hour" formControlName="hourCtrl" ariaLabelledby="Hour" required>
+                        <md-option *ngFor="let h of hourOptions" [value]="h.value"> {{ h.viewValue }} </md-option>
+                    </md-select>
+                    <md-select fxFlexOffset.xs="0" fxFlexOffset="2" fxFlex="13" formControlName="minuteCtrl" [(ngModel)]="minute" ariaLabelledby="Minute" required>
+                        <md-option *ngFor="let m of minuteOptions" [value]="m.value"> {{ m.viewValue }} </md-option>
+                    </md-select>
+                </div>
+                <!--mobile -->
+                <div fxShow.xs="true" fxLayout.xs="column" fxHide="true" fxFlexLayout="start end">
+                    <div fxLayout="column">
+                        <label fxLayoutAlign="left center" fxFlex="30">when</label>
+                        <div fxLayout="row">
+                            <md-input-container class="custom-height" fxFlex="100">
+                                <input type="date" mdInput class="user-text-label" formControlName="dateCtrl" [(ngModel)]="date" required> </md-input-container>
+                        </div>
+                        <!--<label fxLayoutAlign="left center">Hour</label>
+                        <label fxLayoutAlign="left center">Minute</label>-->
+                        <div fxLayout="row">
+                            <label style="margin-bottom:0px" fxFlex="45">Hour</label>
+                            <label style="margin-bottom:0px" fxFlexOffset.xs="10" fxFlex="45">Minute</label>
+                        </div>
+                        <div fxLayout="row" class="removeTopMargin">
+                            <md-select class="removeTopMargin" fxFlex="45" [(ngModel)]="hour" formControlName="hourCtrl" ariaLabelledby="Hour" required>
+                                <md-option *ngFor="let h of hourOptions" [value]="h.value"> {{ h.viewValue }} </md-option>
+                            </md-select>
+                            <md-select class="removeTopMargin" fxFlexOffset.xs="10" fxFlex="45" formControlName="minuteCtrl" [(ngModel)]="minute" ariaLabelledby="Minute" required>
+                                <md-option *ngFor="let m of minuteOptions" [value]="m.value"> {{ m.viewValue }} </md-option>
+                            </md-select>
+                        </div>
+                    </div>
+                </div>
+                <!--<div *ngIf="matchFormGroup.controls.dateCtrl.invalid && matchFormGroup.controls.dateCtrl.touched">
+                    <div ng-message="required">
+                        <p class="error-message">Date not selected</p>
+                    </div>
+                </div>-->
+            </div>
+            <!-- time -->
+            <!--
+            <div fxLayout="column" fxFlex="100" class="form-group">
+                <div fxLayout="row" fxLayout.xs="column">
+                    <label fxLayoutAlign="left center" fxFlex="30">Hour</label>
+                    <md-select fxFlex="70" formControlName="hourCtrl" [(ngModel)]="hour" required>
+                        <md-option *ngFor="let h of hourOptions" [value]="h.value"> {{ h.viewValue }} </md-option>
+                    </md-select>
+                </div>
+                <div *ngIf="matchFormGroup.controls.hourCtrl.invalid && matchFormGroup.controls.hourCtrl.touched">
+                    <div ng-message="required">
+                        <p class="error-message">Hour not selected</p>
+                    </div>
+                </div>
+            </div>
+-->
+            <!-- minite -->
+            <!--
+            <div fxLayout="column" fxFlex="100" class="form-group">
+                <div fxLayout="row" fxLayout.xs="column">
+                    <label fxLayoutAlign="left center" fxFlex="30">Minute</label>
+                    <md-select fxFlex="70" formControlName="minuteCtrl" [(ngModel)]="minute" required>
+                        <md-option *ngFor="let m of minuteOptions" [value]="m.value"> {{ m.viewValue }} </md-option>
+                    </md-select>
+                </div>
+                <div *ngIf="matchFormGroup.controls.minuteCtrl.invalid && matchFormGroup.controls.minuteCtrl.touched">
+                    <div ng-message="required">
+                        <p class="error-message">Minute not selected</p>
+                    </div>
+                </div>
+            </div>
+-->
+
+            <!-- money collection method -->
+            <div fxLayout="column" class="form-group payoption">
+                <div fxLayout="row" fxLayout.xs="column">
+                    <label fxLayoutAlign="left center" fxFlex="30">{{'HOW WILL YOU COLLECT MONEY?' | translate}}</label>
+                    <md-radio-group fxFlex="70" class="" (change)="moneyMethodSelected()" formControlName="paymentCtrl" [(ngModel)]="payment" required>
+                        <md-radio-button value="free">{{'FREE' | translate}}</md-radio-button>
+                        <md-radio-button value="atthepitch">{{'AT THE PITCH' | translate}}</md-radio-button>
+                        <md-radio-button value="online">{{'ONLINE' | translate}}</md-radio-button>
+                    </md-radio-group>
+                </div>
+                <div *ngIf="matchFormGroup.controls.paymentCtrl.invalid && matchFormGroup.controls.paymentCtrl.touched">
+                    <div ng-message="required">
+                        <p class="error-message">{{'SELECT A PAYMENT OPTION' | translate }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- currency -->
+            <div fxLayout="column" class="form-group" *ngIf="hideCurrencyCtrls">
+                <div fxLayout="row" fxLayout.xs="column">
+                    <label fxLayoutAlign="left center" fxFlex="30" style="line-height:inherit;">{{'CURRENCY' | translate}}</label>
+                    <md-select fxFlex="70" formControlName="currencyCtrl" (change)="currencyChanged()" class="md-block" [(ngModel)]="currency" required>
+                        <md-option *ngFor="let c of currencyOption" [value]="c.currencykey"> {{ c.currencytitle }} </md-option>
+                    </md-select>
+                </div>
+                <div *ngIf="matchFormGroup.controls.currencyCtrl.invalid && matchFormGroup.controls.currencyCtrl.touched">
+                    <div ng-message="required">
+                        <p class="error-message">{{'SELECT A CURRENCY' | translate}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- cost -->
+            <div fxLayout="column" class="form-group costCtrl" *ngIf="hideCurrencyCtrls">
+                <div fxLayout="row" fxLayout.xs="column">
+                    <label fxLayoutAlign="left center" fxFlex="30" style="line-height:inherit;">{{'COST OF HIRING THE PITCH' | translate }}</label>
+                    <md-input-container fxFlex="70">
+                        <span>{{currencySymbol}}</span>
+                        <input type="number" formControlName="costCtrl" mdInput [(ngModel)]="cost" required> </md-input-container>
+                </div>
+                <div *ngIf="matchFormGroup.controls.currencyCtrl.invalid && matchFormGroup.controls.currencyCtrl.touched" style="margin:0px;">
+                    <div ng-message="required">
+                        <p class="error-message">{{'ENTER COST' | translate}}Enter cost</p>
+                    </div>
+                </div>
+            </div>
+            <button md-raised-button [disabled]="!matchFormGroup.valid" (click)="createMatch()" type="submit" class="creatematch">{{ 'CREATE MATCH' | translate}} </button>
+        </div>
+    </form>
+</div>
