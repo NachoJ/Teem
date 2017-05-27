@@ -1,0 +1,49 @@
+<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign.xs="start start" class="main-container">
+    <div fxLayout="column" fxFlex="48" fxLayoutAlign="start start" class="detail-box">
+        <div class="title-list-items">
+            <p class="title-list-items-text"> <i class="material-icons">search</i> {{'USERS' | translate}}</p>
+        </div>
+        <div fxLayout="row" class="detail-listing">
+            <!--Users-->
+            <md-list fxFlex.xs="80">
+                <md-list-item *ngFor="let user of users">
+                    <span (click)="navigateToUserProfile(user)">
+                        <img md-list-avatar onError="this.onerror=null;this.src='assets/img/sidebar_photo.png';" src="{{profileImageBaseUrl + user.profileimage}}"
+                            alt="... ">
+                        <h3 md-line class="ellipse"> {{user.username}} </h3>
+                        <p md-line>
+                            <span class="demo-2 ellipse"> {{user.city}} </span>
+                    </p>
+                    </span>
+                    <button md-line md-raised-button color="primary" *ngIf="followers.indexOf(user.id)!= -1" (click)="unFollow(user.id)">{{ 'FOLLOWING' | translate }}</button>
+                    <button md-line md-raised-button color="primary" *ngIf="followers.indexOf(user.id) == -1" (click)="followUser(user.id)">{{ 'FOLLOW' | translate }}</button>
+                </md-list-item>
+            </md-list>
+        </div>
+    </div>
+    <div fxFlex="2">
+    </div>
+    <div fxLayout="column" fxFlex="48" fxLayoutAlign="start start" class="detail-box ">
+        <div class="title-list-items">
+            <p class="title-list-items-text "> <i class="material-icons ">search</i> {{'SPORT CENTRES' | translate}}</p>
+        </div>
+        <div fxLayout="row" class="detail-listing ">
+            <!--SPORT CENTRE-->
+            <md-list fxFlex.xs="80">
+                <md-list-item *ngFor="let sc of sportCentres">
+                    <span (click)="navigationToSc(sc)">
+                    <img *ngIf="sc.userid" md-list-avatar onError="this.onerror=null;this.src='assets/img/sidebar_photo.png';" src="{{profileImageBaseUrl + sc.userid.profileimage}}"
+                        alt="... ">
+                    <img *ngIf="!sc.userid" md-list-avatar src='assets/img/sidebar_photo.png' alt="... ">
+                    <h3 md-line class="ellipse"> {{sc.name}} </h3>
+                    <p md-line>
+                        <span class="demo-2 ellipse"> {{sc.address}} </span>
+                    </p>
+                    </span>
+					<button md-line md-raised-button color="primary" *ngIf="scfollowers.indexOf(sc.id)!= -1" (click)="unFollowSc(sc.id)">{{ 'FOLLOWING' | translate }}</button>
+                    <button md-line md-raised-button color="primary" *ngIf="scfollowers.indexOf(sc.id) == -1" (click)="followSc(sc.id)">{{ 'FOLLOW' | translate }}</button>
+                </md-list-item>
+            </md-list>
+        </div>
+    </div>
+</div>

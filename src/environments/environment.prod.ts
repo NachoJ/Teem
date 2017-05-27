@@ -50,6 +50,15 @@ export const environment = {
 	GET_LAST_MATCH: '/match/last/user/',
 	GET_MATCH_CHAT: '/chatmatch/',
 	SEND_CHAT_MESSAGE: '/chatmatch',
+	SEARCH: '/search/',
+	GET_SEARCH_USER: '/search/user/',
+	FOLLOW_USER: '/user/followers',
+	UNFOLLOW_USER: '/unfollow/user/',
+	UNFOLLOW_SPORTCENTER: '/unfollow/sportcenter/',
+	GET_SEARCH_SPORTCENTER:'/search/sportcenter/',
+	FOLLOW_SPORTCENTER:'/sportcenter/followers',
+	
+	GOOGLE_URL_SHORTER: 'https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyBR5otEj6lFr96V9V9eqLeD8FmUiOTJBNg',
 
 	GoogleKey: "&key=AIzaSyDD7oo0yCjyp2pIBLbRr_h3b0_NiMXXu3g"
 };

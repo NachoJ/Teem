@@ -27,7 +27,7 @@ export class CoreComponent implements OnInit {
 	errormsg: string;
 	erroShow: boolean = false;
 	successShow: boolean = false;
-
+	
 	constructor(private router: Router, private authService: AuthService, private coreservice: CoreService, private translate: TranslateService) {
 		this.loadLanguage();
 		if (!authService.isLoggedIn()) {
@@ -208,6 +208,10 @@ export class CoreComponent implements OnInit {
 		console.log("language to set = ", language);
 		window.localStorage.setItem('teem_user_language', language);
 		this.translate.use(language);
+	}
+
+	searchInput(value) {
+		this.router.navigate(['search', value]);
 	}
 
 }

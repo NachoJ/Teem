@@ -34,6 +34,15 @@
 						<a md-tab-link  routerLink="" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">FIND MATCH</a>
 						<a md-tab-link  routerLink="" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">TOURNAMENTS</a>
 					</nav>-->
+                    <div class="search-widget" fxFlexAlign="center">
+                        <div class="search-form">
+                            <div class="form-group has-feedback">
+                                <label for="search" class="sr-only">Search</label>
+                                <input type="text" class="form-control" name="search" id="search" placeholder="search" autocomplete="off" #inputVal (keyup.enter)="searchInput(inputVal.value)">
+                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                            </div>
+                        </div>
+                    </div>
                     <nav md-tab-nav-bar>
                         <a md-tab-link *ngFor="let link of navLinks" [routerLink]="link.link" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
                             <!--{{tabLink.label}}-->{{link.title | translate }} </a>
@@ -54,7 +63,7 @@
             </section>
         </md-toolbar>
         <!--<te-nav-bar></te-nav-bar>-->
-        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutWrap="" fxFlex="100" fxFlex.xs="100" class="container homecontentwrapper">
+        <div fxLayout="row" fxLayoutAlign="start start" fxFlex="100" fxFlex.xs="100" class="container homecontentwrapper">
             <div fxLayout="column" fxFlex="20" class="side_bar_inner" fxHide.xs fxHide.sm> <img src="{{ profileImage }}">
                 <h4>{{ user.firstname}} {{ user.lastname }}</h4>
                 <p> <i class="material-icons user-place-icon">place</i> {{ user.city }}</p>

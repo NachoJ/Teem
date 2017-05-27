@@ -304,8 +304,8 @@ export class MatchCreateComponent implements OnInit {
 		this.coreService.createMatch(JSON.stringify(data))
 			.subscribe((response) => {
 				console.log(response);
-				this.coreService.emitSuccessMessage(response.data.message);
-				this.router.navigate(['/match-details/' + response.data.data.id]);
+				this.coreService.emitSuccessMessage(response.message);
+				this.router.navigate(['/match-details/' + response.data.id]);
 				this.matchFormGroup.reset();
 				this.pitches = [];
 			},

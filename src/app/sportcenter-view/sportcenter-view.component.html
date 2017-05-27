@@ -1,0 +1,113 @@
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8"> </head>
+<div fxLayout="column" class="addsportcenter">
+    <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100" class="title-list-items">
+        <p fxFlex="grow" class="title-list-items-text"> <i class="material-icons">place</i>{{'SPORT CENTER DETAILS' | translate}}</p>
+        <div>
+            <button md-raised-button *ngIf="!follow" (click)="followSportcenter()">{{ 'FOLLOW' | translate}}</button>
+            <button md-raised-button *ngIf="follow" (click)="unFollowSc()">{{ 'FOLLOWING' | translate}}</button>
+        </div>
+    </div>
+    <div fxLayout.xs="column" fxLayout="column">
+        <div fxLayout="column" class="form-group">
+            <div fxLayout="row" fxLayout.xs="column">
+                <label for="" fxLayoutAlign="left center" fxFlex="15">{{ 'NAME' | translate }}</label>
+                <div fxLayoutAlign="left center" fxFlex="100" class="bordered-div">
+                    {{ sportcenter.name }}
+                </div>
+            </div>
+        </div>
+        <div fxLayout="column" class="form-group">
+            <div fxLayout="row" fxLayout.xs="column">
+                <label for="" fxLayoutAlign="left center" fxFlex="15">{{'PHONE' | translate}}</label>
+                <div fxLayoutAlign="left center" fxFlex="100" class="bordered-div">
+                    {{ sportcenter.phone }}
+                </div>
+            </div>
+        </div>
+        <div fxLayout="column" class="form-group">
+            <div fxLayout="row" fxLayout.xs="column">
+                <label for="" fxLayoutAlign="left center" fxFlex="15">{{ 'DESCRIPTION' | translate }}</label>
+                <div fxLayoutAlign="left center" fxFlex="100" class="bordered-div">
+                    {{ sportcenter.description }}
+                </div>
+            </div>
+        </div>
+        <div fxLayout="row" class="form-group" fxLayout.xs="column">
+            <label for="" fxLayoutAlign="left center" fxFlex="15">{{'ADDRESS' | translate}}</label>
+            <div fxLayoutAlign="left center" fxFlex="100" class="bordered-div">
+                {{ sportcenter.address }}
+            </div>
+        </div>
+        <div fxLayout="row" class="form-group" fxLayout.xs="column" fxFlex="100">
+            <div id="map">
+            </div>
+        </div>
+    </div>
+</div>
+<div fxLayout="column" class="addsportcenter" *ngIf="followers.length>0 && followers[0].userdetail[0] != undefined">
+    <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100" class="title-list-items">
+        <p fxFlex="grow" class="title-list-items-text"> <i class="material-icons">insert_emoticon</i> {{'FOLLOWERS' | translate}}</p>
+    </div>
+    <div *ngIf="!isMobile" class="followers-grid">
+        <md-grid-list gutterSize="10px" cols="3" rowHeight="16:5">
+            <div *ngFor="let follower of followers">
+                <md-grid-tile>
+                    <img src="{{profileImageBaseUrl+follower.userdetail[0].profileimage}}" class="followers-img" />
+                    <div class="follower-info">
+                        <label>{{follower.userdetail[0].username}}</label>
+                        <label>{{follower.userdetail[0].city}}</label>
+                    </div>
+                </md-grid-tile>
+            </div>
+        </md-grid-list>
+    </div>
+    <div *ngIf="isMobile" class="followers-grid">
+        <md-grid-list gutterSize="10px" cols="1" rowHeight="16:5">
+            <div *ngFor="let follower of followers">
+                <md-grid-tile>
+                    <img src="{{profileImageBaseUrl+follower.userdetail[0].profileimage}}" class="followers-img" />
+                    <div class="follower-info">
+                        <label>{{follower.userdetail[0].username}}</label>
+                        <label>{{follower.userdetail[0].city}}</label>
+                    </div>
+                </md-grid-tile>
+            </div>
+        </md-grid-list>
+    </div>
+</div>
+
+<div fxLayout="column" class="addsportcenter" *ngIf="pitch.length>0">
+    <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100" class="title-list-items">
+        <p fxFlex="grow" class="title-list-items-text"> <i class="material-icons">public</i> {{'PITCHES' | translate}}</p>
+    </div>
+    <div *ngIf="!isMobile" class="followers-grid">
+        
+            <div *ngFor="let field of pitch" class="pitch-box">
+               
+                    <div class="pitch-info ">
+                        <div class="pitch-icon"><md-icon class="material-icons" svgIcon={{field.sportname}}></md-icon></div>
+                        <label class="pitch-label">{{field.name}}</label>
+                        <label class="pitch-label">{{field.surface}}</label>
+                        <label class="pitch-label">{{field.price}}</label>
+                         <label class="pitch-label" *ngFor="let sc of field.sportdetail">{{sc}}</label> 
+                    </div>
+               
+            </div>
+        
+    </div>
+    <div *ngIf="isMobile" class="followers-grid">
+            <div *ngFor="let field of pitch" class="pitch-box">
+                    <div class="pitch-info ">
+                        <div class="pitch-icon"><md-icon class="material-icons" svgIcon={{field.sportname}}></md-icon></div>
+                        <label class="pitch-label">{{field.name}}</label>
+                        <label class="pitch-label">{{field.surface}}</label>
+                        <label class="pitch-label">{{field.price}}</label>
+                        <label class="pitch-label" *ngFor="let sc of field.sportdetail">{{sc}}</label>
+                    </div>
+               
+            </div>
+        
+    </div>
+</div>

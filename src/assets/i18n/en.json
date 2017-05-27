@@ -160,5 +160,15 @@
     "SELECT THE PITCH WHERE TO WANT TO PLAY": "Select the pitch where to want to play",
     "ADD NEW SPORT CENTER": "add new sport center",
     "MY SPORT CENTER": "My sport center",
-    "ADD SPORTS CENTER": "Add sport center"
+    "ADD SPORTS CENTER": "Add sport center",
+
+    "/*---------SEARCH": "/*---------SEARCH",
+    "USERS": "User",
+    "SPORT CENTRES": "SPORT CENTRES",
+    "FOLLOWERS": "FOLLOWERS",
+    "FOLLOW": "Follow",
+    "FOLLOWING": "Following",
+    "SPORT CENTER DETAILS": "SPORTCENTRE",
+	"ADDRESS":"Address",
+	"PITCHES":"PITCHES"
 }

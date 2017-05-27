@@ -79,8 +79,8 @@ export class UserProfileImageComponent implements OnInit {
 				success: function (result) {
 					console.log(' Upload success');
 					console.log(JSON.stringify(result));
-					self.profileImageEmit(result.data.data.profileimage);
-					window.localStorage.teem_user = JSON.stringify(result.data.data);
+					self.profileImageEmit(result.data.profileimage);
+					window.localStorage.teem_user = JSON.stringify(result.data);
 					self.dialogRef.close();
 
 					self.iscropperloading = false;

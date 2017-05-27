@@ -1,3 +1,4 @@
+import { SportcenterViewComponent } from './sportcenter-view/sportcenter-view.component';
 import { NotificationComponent } from './settings/notification/notification.component';
 import { SettingsComponent } from './settings/settings.component';
 import { NgModule } from '@angular/core';
@@ -25,6 +26,9 @@ import { MatchCreateComponent } from './match-create/match-create.component';
 import { MatchDetailsComponent } from './match-details/match-details.component';
 import { AccountComponent } from './settings/account/account.component';
 import { ProfileComponent } from './settings/profile/profile.component';
+import { SearchComponent } from "./search/search.component";
+import { ProfileViewComponent } from './profile-view/profile-view.component';
+
 
 // import { AU } form '/auth/authguard.service';
 import { AuthGuard } from "./auth/authguard.service";
@@ -62,6 +66,9 @@ import { ProfileGuard } from "app/core/profileguard.service";
 					{ path: 'match-create', component: MatchCreateComponent, canActivate: [ProfileGuard] },
 					{ path: 'match-create/:scId/:scName/:scAddress', component: MatchCreateComponent, canActivate: [ProfileGuard] },
 					{ path: 'match-details/:matchId', component: MatchDetailsComponent, canActivate: [ProfileGuard] },
+					{ path: 'search/:searchValue', component: SearchComponent, canActivate: [ProfileGuard] },
+					{ path: 'profileview/:userId', component: ProfileViewComponent, canActivate: [ProfileGuard] },
+					{ path: 'sportcenterview/:scId', component: SportcenterViewComponent, canActivate: [ProfileGuard] },
 					{
 						path: 'settings',
 						component: SettingsComponent,

@@ -62,6 +62,8 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 	disableInvitation = false;
 	tokenLenght = 0;
 
+	shortUrlForTwitter: any;
+
 	constructor(private route: ActivatedRoute, private sanitizer: DomSanitizer, private coreService: CoreService, public dialog: MdDialog, private ngZone: NgZone) {
 
 		this.PROFILE_IMAGE_PATH = environment.PROFILE_IMAGE_PATH;
@@ -103,13 +105,13 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 						console.log("response chat= ", response);
 						if (!response.error)
 							self.chat = response.data;
+							setTimeout(function () {
+							if ($('#main-chat-box')[0])
+								$("#main-chat-box").animate({ scrollTop: $('#main-chat-box')[0].scrollHeight }, 0);
+						}, 1500);
 					});
 				});
 		}
-		setTimeout(function () {
-			if ($('#main-chat-box')[0])
-				$("#main-chat-box").animate({ scrollTop: $('#main-chat-box')[0].scrollHeight }, 0);
-		}, 1500);
 	}
 
 	updateOnMatchModel(message: any) {
@@ -832,6 +834,17 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 		else
 			return this.AUDSymbol;
 
+	}
+
+	loadShortURL() {
+		this.coreService.shortUrl("http://www.teem.com/1231321313")
+			.subscribe((response) => {
+				console.log("Short Url Data = ", response);
+				this.shortUrlForTwitter = response.id;
+			},
+			(error: any) => {
+				this.coreService.emitErrorMessage(error);
+			});
 	}
 }
 

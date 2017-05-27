@@ -129,8 +129,8 @@ export class PitchComponent implements OnInit {
 	formChanged() {
 		setTimeout(() => {
 
-			console.log("pitchFormGroupArray length", this.pitchFormGroupArray.length);
-			console.log("deleteData length", this.deleteData.length);
+			// console.log("pitchFormGroupArray length", this.pitchFormGroupArray.length);
+			// console.log("deleteData length", this.deleteData.length);
 			this.isFormValid = true;
 			let index = 0;
 			for (let fm of this.pitchFormGroupArray) {
@@ -142,6 +142,11 @@ export class PitchComponent implements OnInit {
 				index++;
 			}
 		}, 100);
+	}
+
+	markDirty(index){
+		console.log("index = ",index);
+		this.pitches[index].isDirty = true;
 	}
 
 	addValidationControls() {
@@ -215,7 +220,9 @@ export class PitchComponent implements OnInit {
 		// }
 		// console.log("tempitches = ",JSON.stringify(temppitches));
 		let dataPitches = JSON.stringify(this.pitches);
+		let userid = JSON.parse(window.localStorage['teem_user']).id;
 		let data = {
+			"userid": userid,
 			"fields": this.pitches,
 			"scid": this.sub,
 			"deleteids": this.deleteData

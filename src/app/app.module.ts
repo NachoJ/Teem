@@ -5,7 +5,7 @@ import { UserProfileImageComponent } from './settings/user-profile-image/user-pr
 import { ProfileComponent } from './settings/profile/profile.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MaterialModule } from '@angular/material';
@@ -33,6 +33,9 @@ import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-transla
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { HttpModule, Http } from '@angular/http';
+import { SearchComponent } from './search/search.component';
+import { ProfileViewComponent } from './profile-view/profile-view.component';
+import { SportcenterViewComponent } from './sportcenter-view/sportcenter-view.component';
 
 export function createTranslateLoader(http: Http) {
 	return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
@@ -58,7 +61,10 @@ export function createTranslateLoader(http: Http) {
 		NotificationComponent,
 		HomeDialogResult,
 		HomeDialogCancel,
-		InvitationDialogResult
+		InvitationDialogResult,
+		SearchComponent,
+		ProfileViewComponent,
+		SportcenterViewComponent
 	],
 	entryComponents: [
 		UserProfileImageComponent,
@@ -70,6 +76,7 @@ export function createTranslateLoader(http: Http) {
 	imports: [
 		BrowserModule,
 		FormsModule,
+		ReactiveFormsModule,
 		HttpModule,
 		BrowserAnimationsModule,
 		MaterialModule.forRoot(),

@@ -184,9 +184,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 			.subscribe((response) => {
 				//this.error = '';
 				//this.success = response.data.message;
-				this.coreService.emitSuccessMessage(response.data.message);
-				self.userDetailEmit(response.data.data);
-				window.localStorage['teem_user'] = JSON.stringify(response.data.data);
+				this.coreService.emitSuccessMessage(response.message);
+				self.userDetailEmit(response.data);
+				window.localStorage['teem_user'] = JSON.stringify(response.data);
 				this.router.navigate(['']);
 			},
 			(error: any) => {

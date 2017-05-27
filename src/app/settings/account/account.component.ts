@@ -45,12 +45,12 @@ export class AccountComponent implements OnInit, AfterViewInit {
 					.subscribe((response) => {
 
 						this.errormsg = '';
-						this.coreservice.emitSuccessMessage(response.data.message);
+						this.coreservice.emitSuccessMessage(response.message);
 						//this.successmsg = response.data.message;
-						window.localStorage['teem_user'] = JSON.stringify(response.data.data);
+						window.localStorage['teem_user'] = JSON.stringify(response.data);
 
 						this.accountFormGroup.patchValue({
-							email: response.data.data.email
+							email: response.data.email
 						});
 						this.router.navigate(['']);
 
@@ -119,6 +119,7 @@ export class AccountComponent implements OnInit, AfterViewInit {
 		this.coreservice.changeEmail(formVal)
 			.subscribe(
 			(result: any) => {
+				console.log("email save = ",result);
 				this.coreservice.emitSuccessMessage(result);
 				//this.successmsg = result;
 				this.router.navigate(['']);

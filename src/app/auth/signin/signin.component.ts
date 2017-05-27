@@ -67,7 +67,7 @@ export class SigninComponent implements OnInit {
 		this.authService.login(user)
 			.subscribe(
 			(res: any) => {
-				window.localStorage['teem_user'] = JSON.stringify(res.data.user);
+				window.localStorage['teem_user'] = JSON.stringify(res.user);
 				window.localStorage.removeItem('teem_user_fblogin');
 				this.router.navigate(['']);
 			},

@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
@@ -9,7 +10,6 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/do';  // debug
 
 import { Subject } from 'rxjs/Subject';
-import { environment } from '../../environments/environment';
 
 @Injectable()
 export class CoreService {
@@ -49,7 +49,7 @@ export class CoreService {
 		console.log(data);
 		return this.http.post(environment.BASEAPI + environment.ADD_SPORTS_CENTER, data, this.options)
 			.map((res: Response) => {
-				return res.json().data;
+				return res.json();
 
 			}).catch(this.handleError);
 		// .do(data => console.log('server data:', data))  // debug
@@ -148,7 +148,7 @@ export class CoreService {
 			}).catch(this.handleError);
 	}
 
-	getMatch (id) {
+	getMatch(id) {
 		return this.http.get(environment.BASEAPI + environment.GET_MATCH + id, this.options)
 			.map((res: Response) => {
 				return res.json().data;
@@ -165,12 +165,12 @@ export class CoreService {
 	}
 
 	getAddressFromLatLong(lat: string, lng: string) {
-		let latlng = "latlng="+lat+","+lng;
+		let latlng = "latlng=" + lat + "," + lng;
 		return this.http.get("https://maps.googleapis.com/maps/api/geocode/json?" + latlng + environment.GoogleKey)
 			.map((res: Response) => {
 				return res.json().results[0].formatted_address;
 
-			}).catch(this.handleError);		
+			}).catch(this.handleError);
 	}
 
 	getNearByMatch(data) {
@@ -202,7 +202,7 @@ export class CoreService {
 	}
 
 	getSubSports(sportData) {
-		return this.http.post(environment.BASEAPI + environment.GET_SUB_SPORTS , sportData, this.options)
+		return this.http.post(environment.BASEAPI + environment.GET_SUB_SPORTS, sportData, this.options)
 			.map((res: Response) => {
 				return res.json().data;
 
@@ -210,8 +210,8 @@ export class CoreService {
 	}
 
 	getInvitationSearchPlayer(search) {
-		let id=JSON.parse(window.localStorage['teem_user']).id;
-		return this.http.get(environment.BASEAPI + environment.INVITATION_SEARCH_PLAYER + search+'/'+id, this.options)
+		let id = JSON.parse(window.localStorage['teem_user']).id;
+		return this.http.get(environment.BASEAPI + environment.INVITATION_SEARCH_PLAYER + search + '/' + id, this.options)
 			.map((res: Response) => {
 				return res.json().data;
 
@@ -288,7 +288,7 @@ export class CoreService {
 	}
 
 	changeEmail(data: any) {
-		console.log("data",data);
+		console.log("data", data);
 		return this.http.post(environment.BASEAPI + environment.CHANGE_EMAIL, data, this.options)
 			.map((res: Response) => {
 				console.log('res', res);
@@ -297,16 +297,16 @@ export class CoreService {
 			}).catch(this.handleError);
 	}
 	updateEmail(data: any) {
-		console.log("data",data);
-		return this.http.get(environment.BASEAPI + environment.CHANGE_EMAIL+'/'+data)
+		console.log("data", data);
+		return this.http.get(environment.BASEAPI + environment.CHANGE_EMAIL + '/' + data)
 			.map((res: Response) => {
 				console.log('res', res);
 				let body = res.json();
 				return body;
 			}).catch(this.handleError);
 	}
-	
-	getNextMatch(id,date){
+
+	getNextMatch(id, date) {
 		return this.http.get(environment.BASEAPI + environment.GET_MATCH_USER + id + "/" + date, this.options)
 			.map((res: Response) => {
 				return res.json().data;
@@ -314,42 +314,110 @@ export class CoreService {
 			}).catch(this.handleError);
 	}
 
-	getInvitation(id, date){
-		return this.http.get(environment.BASEAPI + environment.INVITATION_SEARCH_USER  + id + "/" + date, this.options)
+	getInvitation(id, date) {
+		return this.http.get(environment.BASEAPI + environment.INVITATION_SEARCH_USER + id + "/" + date, this.options)
 			.map((res: Response) => {
 				return res.json().data;
 
 			}).catch(this.handleError);
 	}
-	acceptInvitation(id:any,inviteid:any){
-		return this.http.get(environment.BASEAPI + environment.INVITATION_ACCEPT  + id +'/'+inviteid, this.options)
-			.map((res:Response)=>{
+	acceptInvitation(id: any, inviteid: any) {
+		return this.http.get(environment.BASEAPI + environment.INVITATION_ACCEPT + id + '/' + inviteid, this.options)
+			.map((res: Response) => {
 				return res.json().message;
 			}).catch(this.handleError);
 	}
-	deleteInvitation(id:any){
-		return this.http.delete(environment.BASEAPI + environment.INITATION_DELETE  + id , this.options)
-				.map((res:Response)=>{
-					return res.json().message;
-				}).catch(this.handleError);
-	}
-	joinMatch(user){
-		return this.http.post(environment.BASEAPI + environment.JOIN_MATCH ,user,this.options)
-				.map((res:Response)=>{
-					return res.json().message;
-				}).catch(this.handleError);
-	}
-	leaveMatch(matchid,userid){
-		return this.http.delete(environment.BASEAPI + environment.DELETE_MATCH  + userid + '/' + matchid, this.options)
-				.map((res:Response)=>{
-					return res.json().message;
+	deleteInvitation(id: any) {
+		return this.http.delete(environment.BASEAPI + environment.INITATION_DELETE + id, this.options)
+			.map((res: Response) => {
+				return res.json().message;
 			}).catch(this.handleError);
 	}
-	getLastMatch(id,date){
+	joinMatch(user) {
+		return this.http.post(environment.BASEAPI + environment.JOIN_MATCH, user, this.options)
+			.map((res: Response) => {
+				return res.json().message;
+			}).catch(this.handleError);
+	}
+	leaveMatch(matchid, userid) {
+		return this.http.delete(environment.BASEAPI + environment.DELETE_MATCH + userid + '/' + matchid, this.options)
+			.map((res: Response) => {
+				return res.json().message;
+			}).catch(this.handleError);
+	}
+	getLastMatch(id, date) {
 		return this.http.get(environment.BASEAPI + environment.GET_LAST_MATCH + id + "/" + date, this.options)
 			.map((res: Response) => {
 				return res.json().data;
 
+			}).catch(this.handleError);
+	}
+
+	shortUrl(mUrl) {
+		let data = {
+			"longUrl": mUrl
+		};
+		return this.http.post(environment.GOOGLE_URL_SHORTER, data, this.options)
+			.map((res: Response) => {
+				return res.json();
+			}).catch(this.handleError);
+	}
+
+	loadSearch(value,userid) {
+		return this.http.get(environment.BASEAPI + environment.SEARCH + value+'/'+userid, this.options)
+			.map((res: Response) => {
+				return res.json();
+			}).catch(this.handleError);
+	}
+
+	getUser(id){
+		return this.http.get(environment.BASEAPI + environment.GET_SEARCH_USER + id, this.options)
+			.map((res: Response) => {
+				return res.json();
+			}).catch(this.handleError);
+	}
+
+	followUser(userId, followId) {
+		let data = {
+			"userid": userId,
+			"followinguserid": followId
+		};
+		return this.http.post(environment.BASEAPI + environment.FOLLOW_USER, JSON.stringify(data), this.options)
+			.map((res: Response) => {
+				return res.json();
+			}).catch(this.handleError);
+	}
+
+	unFollowUser(userId, followId) {
+		return this.http.delete(environment.BASEAPI + environment.UNFOLLOW_USER + userId + "/" + followId, this.options)
+			.map((res: Response) => {
+				return res.json();
+			}).catch(this.handleError);
+	}
+
+	sportcenterView(scid:any){
+		return this.http.get(environment.BASEAPI+environment.GET_SEARCH_SPORTCENTER+scid,this.options)
+				.map((res:Response)=>{
+					return res.json();
+				})
+				.catch(this.handleError);
+	}
+
+	followSportcenter(userId,scId){
+			let data = {
+			"userid": userId,
+			"scid": scId
+		};
+		return this.http.post(environment.BASEAPI + environment.FOLLOW_SPORTCENTER, JSON.stringify(data), this.options)
+			.map((res: Response) => {
+				return res.json();
+			}).catch(this.handleError);
+	}
+
+	unFollowSc(userId,scId){
+		return this.http.delete(environment.BASEAPI + environment.UNFOLLOW_SPORTCENTER + userId + "/" + scId, this.options)
+			.map((res: Response) => {
+				return res.json();
 			}).catch(this.handleError);
 	}
 

@@ -1,0 +1,82 @@
+<div fxLayout="column" class="detail-box">
+    <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100" class="title-list-items">
+        <p fxFlex="grow" class="title-list-items-text"> <i class="material-icons">account_circle</i> {{'PROFILE' | translate}}</p>
+        <div *ngIf="showFollowbtn">
+            <button md-raised-button *ngIf="follow" (click)="followUser()">{{ 'FOLLOW' | translate}}</button>
+            <button md-raised-button *ngIf="!follow" (click)="unFollowUser()">{{ 'FOLLOWING' | translate}}</button>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlexOffset.gt-sm="5" fxFlexLayout="start start" class="main-container">
+        <div fxFlex="20" fxFlex.sm="10" fxFLex.xs="10" fxLayout="column">
+            <img class="user-img" src="{{profileImageBaseUrl+userDetails.profileimage}}">
+            <div fxFlexAlign="center" class="sports">
+                <img *ngIf="isSoccer" class="sport-img" src="assets/img/b01.png" />
+                <img *ngIf="isBasketball" class="sport-img" src="assets/img/b02.png" />
+                <img *ngIf="isPadel" class="sport-img" src="assets/img/b03.png" />
+            </div>
+        </div>
+        <div fxFlex="70" fxFlexOffset.gt-sm="5" class="profile-container">
+            <div fxLayout="column" class="form-group" fxFlex="100">
+                <div fxLayout="row" fxLayout.xs="column">
+                    <label fxLayoutAlign="left center" fxFlex="30">{{'FIRSTNAME' | translate}}</label>
+                    <div fxLayoutAlign="left center" fxFlex="70" class="bordered-div">{{userDetails.firstname}}</div>
+                </div>
+            </div>
+            <div fxLayout="column" class="form-group" fxFlex="100">
+                <div fxLayout="row" fxLayout.xs="column">
+                    <label fxLayoutAlign="left center" fxFlex="30">{{'LASTNAME' | translate}}</label>
+                    <div fxLayoutAlign="left center" fxFlex="70" class="bordered-div">{{userDetails.lastname}}</div>
+                </div>
+            </div>
+            <div fxLayout="column" class="form-group" fxFlex="100">
+                <div fxLayout="row" fxLayout.xs="column">
+                    <label fxLayoutAlign="left center" fxFlex="30">{{'DATE OF BIRTH' | translate}}</label>
+                    <div fxLayoutAlign="left center" fxFlex="70" class="bordered-div">{{userDetails.dob}}</div>
+                </div>
+            </div>
+            <div fxLayout="column" class="form-group" fxFlex="100">
+                <div fxLayout="row" fxLayout.xs="column">
+                    <label fxLayoutAlign="left center" fxFlex="30">{{'CITY' | translate}}</label>
+                    <div fxLayoutAlign="left center" fxFlex="70" class="bordered-div">{{userDetails.city}}</div>
+                </div>
+            </div>
+            <div fxLayout="column" class="form-group" fxFlex="100">
+                <div fxLayout="row" fxLayout.xs="column">
+                    <label fxLayoutAlign="left center" fxFlex="30">{{'DESCRIPTION' | translate}}</label>
+                    <div fxLayoutAlign="left center" fxFlex="70" class="bordered-div">{{userDetails.description}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div fxLayout="column" class="detail-box" *ngIf="followers.length>0 && followers[0].userdetail[0] != undefined">
+    <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100" class="title-list-items">
+        <p fxFlex="grow" class="title-list-items-text"> <i class="material-icons">insert_emoticon</i> {{'FOLLOWERS' | translate}}</p>
+    </div>
+    <div *ngIf="!isMobile" class="followers-grid">
+        <md-grid-list gutterSize="10px" cols="3" rowHeight="16:5">
+            <div *ngFor="let follower of followers">
+                <md-grid-tile>
+                    <img src="{{profileImageBaseUrl+follower.userdetail[0].profileimage}}" class="followers-img" />
+                    <div class="follower-info">
+                        <label>{{follower.userdetail[0].username}}</label>
+                        <label>{{follower.userdetail[0].city}}</label>
+                    </div>
+                </md-grid-tile>
+            </div>
+        </md-grid-list>
+    </div>
+    <div *ngIf="isMobile" class="followers-grid">
+        <md-grid-list gutterSize="10px" cols="1" rowHeight="16:5">
+            <div *ngFor="let follower of followers">
+                <md-grid-tile>
+                    <img src="{{profileImageBaseUrl+follower.userdetail[0].profileimage}}" class="followers-img" />
+                    <div class="follower-info">
+                        <label>{{follower.userdetail[0].username}}</label>
+                        <label>{{follower.userdetail[0].city}}</label>
+                    </div>
+                </md-grid-tile>
+            </div>
+        </md-grid-list>
+    </div>
+</div>

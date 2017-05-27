@@ -7,7 +7,7 @@ export interface Pitch {
 	sport: string[];
 	price: string;
 	scid: string;
-	parth: boolean;
+	isDirty: boolean;
 
 	// constructor() {
 	// 	this.id = null;
