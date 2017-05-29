@@ -19,9 +19,12 @@
         "prefix": "app",
         "styles": [
             "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+            "../node_modules/bootstrap/dist/css/bootstrap.css",
             "styles.scss",
             "./assets/css/cropperJS.css",
-            "./assets/css/croppercustom.css"
+            "./assets/css/croppercustom.css",
+            "./assets/css/tokenize2.min.css",
+            "./assets/css/font-awesome.min.css"
         ],
         "scripts": [
             "../node_modules/jquery/dist/jquery.min.js",
@@ -29,7 +32,8 @@
             "../node_modules/bootstrap/dist/js/bootstrap.min.js",
             "../node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js",
             "./assets/js/blob-util.js",
-            "./assets/js/cropperJS.js"
+            "./assets/js/cropperJS.js",
+            "./assets/js/tokenize2.min.js"
         ],
         "environmentSource": "environments/environment.ts",
         "environments": {
