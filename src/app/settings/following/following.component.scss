@@ -1,0 +1,38 @@
+te-following {
+    md-grid-tile {
+        // background: lightblue;
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 10px;
+    }
+    .followers-grid {
+        margin: 15px 28px;
+    }
+    .followers-img {
+        height: auto !important;
+        width: 36px !important;
+        border-radius: 50%;
+        margin-left: 5px;
+    }
+    md-grid-tile>figure .follower-info {
+        margin-left: 10px;
+    }
+    // md-grid-tile {
+    //     margin: 0 5px 0 5px;
+    // }
+    md-grid-tile>figure {
+        justify-content: inherit !important;
+    }
+    .giveMeEllipsis {
+        width: 130px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        /* number of lines to show */
+        line-height: auto;
+        /* fallback */
+        // max-height: 40px;
+        /* fallback */
+    }
+}

@@ -1,0 +1,28 @@
+<div fxLayout="column" class="detail-box" *ngIf="followers.length>0">
+    <div *ngIf="!isMobile" class="followers-grid">
+        <md-grid-list gutterSize="10px" cols="3" rowHeight="16:5">
+            <div *ngFor="let follow of followers">
+                <md-grid-tile>
+                    <img src="{{profileImageBaseUrl+follow.userid.profileimage}}" class="followers-img" />
+                    <div class="follower-info">
+                        <label>{{follow.userid.username}}</label>
+                        <label class="giveMeEllipsis">{{follow.userid.city}}</label>
+                    </div>
+                </md-grid-tile>
+            </div>
+        </md-grid-list>
+    </div>
+    <div *ngIf="isMobile" class="followers-grid">
+        <md-grid-list gutterSize="10px" cols="1" rowHeight="16:5">
+            <div *ngFor="let follow of followers">
+                <md-grid-tile>
+                    <img src="{{profileImageBaseUrl+follow.userid.profileimage}}" class="followers-img" />
+                    <div class="follower-info">
+                        <label>{{follow.userid.username}}</label>
+                        <label class="giveMeEllipsis">{{follow.userid.city}}</label>
+                    </div>
+                </md-grid-tile>
+            </div>
+        </md-grid-list>
+    </div>
+</div>

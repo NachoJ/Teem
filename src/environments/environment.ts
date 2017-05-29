@@ -61,6 +61,8 @@ export const environment = {
 	UNFOLLOW_SPORTCENTER: '/unfollow/sportcenter/',
 	GET_SEARCH_SPORTCENTER:'/sportcenter/search/',
 	FOLLOW_SPORTCENTER:'/sportcenter/followers',
+	GET_FOLLOWERS: '/followers/',
+	GET_FOLLOWING: '/following/',
 	
 	GOOGLE_URL_SHORTER: 'https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyBR5otEj6lFr96V9V9eqLeD8FmUiOTJBNg',
 

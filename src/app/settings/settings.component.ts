@@ -23,6 +23,14 @@ export class SettingsComponent implements OnInit {
 			{
 				link: "account",
 				title: "ACCOUNT"
+			},
+			{
+				link: "following",
+				title: "FOLLOWING"
+			},
+			{
+				link: "followers",
+				title: "FOLLOWERS"
 			}
 
 		]

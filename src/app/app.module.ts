@@ -36,6 +36,8 @@ import { HttpModule, Http } from '@angular/http';
 import { SearchComponent } from './search/search.component';
 import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { SportcenterViewComponent } from './sportcenter-view/sportcenter-view.component';
+import { FollowersComponent } from './settings/followers/followers.component';
+import { FollowingComponent } from './settings/following/following.component';
 
 export function createTranslateLoader(http: Http) {
 	return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
@@ -64,7 +66,9 @@ export function createTranslateLoader(http: Http) {
 		InvitationDialogResult,
 		SearchComponent,
 		ProfileViewComponent,
-		SportcenterViewComponent
+		SportcenterViewComponent,
+		FollowersComponent,
+		FollowingComponent
 	],
 	entryComponents: [
 		UserProfileImageComponent,

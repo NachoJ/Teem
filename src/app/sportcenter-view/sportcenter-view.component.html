@@ -57,7 +57,7 @@
                     <img src="{{profileImageBaseUrl+follower.userdetail[0].profileimage}}" class="followers-img" />
                     <div class="follower-info">
                         <label>{{follower.userdetail[0].username}}</label>
-                        <label>{{follower.userdetail[0].city}}</label>
+                        <label class="giveMeEllipsis">{{follower.userdetail[0].city}}</label>
                     </div>
                 </md-grid-tile>
             </div>
@@ -70,7 +70,7 @@
                     <img src="{{profileImageBaseUrl+follower.userdetail[0].profileimage}}" class="followers-img" />
                     <div class="follower-info">
                         <label>{{follower.userdetail[0].username}}</label>
-                        <label>{{follower.userdetail[0].city}}</label>
+                        <label class="giveMeEllipsis">{{follower.userdetail[0].city}}</label>
                     </div>
                 </md-grid-tile>
             </div>
@@ -78,36 +78,85 @@
     </div>
 </div>
 
+<!--pitches grid-->
 <div fxLayout="column" class="addsportcenter" *ngIf="pitch.length>0">
     <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100" class="title-list-items">
         <p fxFlex="grow" class="title-list-items-text"> <i class="material-icons">public</i> {{'PITCHES' | translate}}</p>
     </div>
-    <div *ngIf="!isMobile" class="followers-grid">
-        
-            <div *ngFor="let field of pitch" class="pitch-box">
-               
-                    <div class="pitch-info ">
-                        <div class="pitch-icon"><md-icon class="material-icons" svgIcon={{field.sportname}}></md-icon></div>
-                        <label class="pitch-label">{{field.name}}</label>
-                        <label class="pitch-label">{{field.surface}}</label>
-                        <label class="pitch-label">{{field.price}}</label>
-                         <label class="pitch-label" *ngFor="let sc of field.sportdetail">{{sc}}</label> 
-                    </div>
-               
+    <div>
+        <div id="article">
+            <div id="section" *ngFor="let field of pitch">
+                <!--<md-icon class="material-icons" svgIcon={{field.sportname}}></md-icon>-->
+                <table>
+                    <tr>
+                        <label><td>Name</td></label>
+                        <td>&nbsp;<label class="pitch-label">{{field.name}}</label></td>
+                    </tr>
+                    <tr>
+                        <label><td>Surface</td></label>
+                        <td>&nbsp;<label class="pitch-label capitalize">{{field.surface}}</label></td>
+                    </tr>
+                    <tr>
+                        <label><td>Price</td></label>
+                        <td>&nbsp;<label class="pitch-label">{{field.price}}</label></td>
+                    </tr>
+                    <tr>
+                        <label><td>Sports</td></label>
+                        <td><label class="pitch-label" *ngFor="let sc of field.sportdetail">&nbsp;{{sc}}</label></td>
+                    </tr>
+                </table>
             </div>
-        
-    </div>
-    <div *ngIf="isMobile" class="followers-grid">
-            <div *ngFor="let field of pitch" class="pitch-box">
-                    <div class="pitch-info ">
-                        <div class="pitch-icon"><md-icon class="material-icons" svgIcon={{field.sportname}}></md-icon></div>
-                        <label class="pitch-label">{{field.name}}</label>
-                        <label class="pitch-label">{{field.surface}}</label>
-                        <label class="pitch-label">{{field.price}}</label>
-                        <label class="pitch-label" *ngFor="let sc of field.sportdetail">{{sc}}</label>
-                    </div>
-               
-            </div>
-        
+        </div>
+        <!--<div *ngIf="isMobile" class="followers-grid">
+            <md-grid-list gutterSize="10px" cols="1" rowHeight="16:5">
+                <div *ngFor="let follow of followers">
+                    <md-grid-tile>
+                        <img src="{{profileImageBaseUrl+follow.userid.profileimage}}" class="followers-img" />
+                        <div class="follower-info">
+                            <label>{{follow.userid.username}}</label>
+                            <label class="giveMeEllipsis">{{follow.userid.city}}</label>
+                        </div>
+                    </md-grid-tile>
+                </div>
+            </md-grid-list>
+        </div>-->
     </div>
 </div>
+
+<!--<div fxLayout="column" class="addsportcenter" *ngIf="pitch.length>0">
+    <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100" class="title-list-items">
+        <p fxFlex="grow" class="title-list-items-text"> <i class="material-icons">public</i> {{'PITCHES' | translate}}</p>
+    </div>
+    <div *ngIf="!isMobile" class="followers-grid">
+
+        <div *ngFor="let field of pitch" class="pitch-box">
+
+            <div class="pitch-info ">
+                <div class="pitch-icon">
+                    <md-icon class="material-icons" svgIcon={{field.sportname}}></md-icon>
+                </div>
+                <label class="pitch-label">{{field.name}}</label>
+                <label class="pitch-label">{{field.surface}}</label>
+                <label class="pitch-label">{{field.price}}</label>
+                <label class="pitch-label" *ngFor="let sc of field.sportdetail">{{sc}}</label>
+            </div>
+
+        </div>
+
+    </div>
+    <div *ngIf="isMobile" class="followers-grid">
+        <div *ngFor="let field of pitch" class="pitch-box">
+            <div class="pitch-info ">
+                <div class="pitch-icon">
+                    <md-icon class="material-icons" svgIcon={{field.sportname}}></md-icon>
+                </div>
+                <label class="pitch-label">{{field.name}}</label>
+                <label class="pitch-label">{{field.surface}}</label>
+                <label class="pitch-label">{{field.price}}</label>
+                <label class="pitch-label" *ngFor="let sc of field.sportdetail">{{sc}}</label>
+            </div>
+
+        </div>
+
+    </div>
+</div>-->

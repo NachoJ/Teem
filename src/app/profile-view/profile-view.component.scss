@@ -114,6 +114,18 @@ te-profile-view {
     md-grid-tile>figure {
         justify-content: inherit !important;
     }
+    .giveMeEllipsis {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        /* number of lines to show */
+        // line-height: 20px;
+        /* fallback */
+        // max-height: 40px;
+        /* fallback */
+    }
     @media screen and (max-width: 320px) {
         .main-container {
             display: block !important;

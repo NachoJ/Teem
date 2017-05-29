@@ -1,3 +1,5 @@
+import { FollowingComponent } from './settings/following/following.component';
+import { FollowersComponent } from './settings/followers/followers.component';
 import { SportcenterViewComponent } from './sportcenter-view/sportcenter-view.component';
 import { NotificationComponent } from './settings/notification/notification.component';
 import { SettingsComponent } from './settings/settings.component';
@@ -78,6 +80,8 @@ import { ProfileGuard } from "app/core/profileguard.service";
 							{ path: 'account', component: AccountComponent },
 							{ path: 'notification', component: NotificationComponent },
 							{ path: 'email/:activationid', component: AccountComponent },
+							{ path: 'followers', component: FollowersComponent },
+							{ path: 'following', component: FollowingComponent },
 						]
 					},
 				],

@@ -7,16 +7,11 @@
             <!--Users-->
             <md-list fxFlex.xs="80">
                 <md-list-item *ngFor="let user of users">
-                    <span (click)="navigateToUserProfile(user)">
-                        <img md-list-avatar onError="this.onerror=null;this.src='assets/img/sidebar_photo.png';" src="{{profileImageBaseUrl + user.profileimage}}"
-                            alt="... ">
-                        <h3 md-line class="ellipse"> {{user.username}} </h3>
-                        <p md-line>
-                            <span class="demo-2 ellipse"> {{user.city}} </span>
-                    </p>
-                    </span>
-                    <button md-line md-raised-button color="primary" *ngIf="followers.indexOf(user.id)!= -1" (click)="unFollow(user.id)">{{ 'FOLLOWING' | translate }}</button>
-                    <button md-line md-raised-button color="primary" *ngIf="followers.indexOf(user.id) == -1" (click)="followUser(user.id)">{{ 'FOLLOW' | translate }}</button>
+                    <img md-list-avatar onError="this.onerror=null;this.src='assets/img/sidebar_photo.png';" src="{{profileImageBaseUrl + user.profileimage}}" alt="... " (click)="navigateToUserProfile(user)">
+                    <h3 md-line class="ellipse" (click)="navigateToUserProfile(user)"> {{user.username}} </h3>
+                    <p md-line><span class="demo-2 ellipse" (click)="navigateToUserProfile(user)"> {{user.city}} </span></p>
+                    <label md-button md-line md-button color="primary" class="bordered-btn following-btn" *ngIf="followers.indexOf(user.id)!= -1" (click)="unFollow(user.id)">{{ 'FOLLOWING' | translate }}</label>
+                    <label md-button md-line md-button color="primary" class="bordered-btn following-btn" *ngIf="followers.indexOf(user.id) == -1" (click)="followUser(user.id)">{{ 'FOLLOW' | translate }}</label>
                 </md-list-item>
             </md-list>
         </div>
@@ -31,17 +26,14 @@
             <!--SPORT CENTRE-->
             <md-list fxFlex.xs="80">
                 <md-list-item *ngFor="let sc of sportCentres">
-                    <span (click)="navigationToSc(sc)">
-                    <img *ngIf="sc.userid" md-list-avatar onError="this.onerror=null;this.src='assets/img/sidebar_photo.png';" src="{{profileImageBaseUrl + sc.userid.profileimage}}"
-                        alt="... ">
-                    <img *ngIf="!sc.userid" md-list-avatar src='assets/img/sidebar_photo.png' alt="... ">
-                    <h3 md-line class="ellipse"> {{sc.name}} </h3>
+                    <img *ngIf="sc.userid" md-list-avatar onError="this.onerror=null;this.src='assets/img/sidebar_photo.png';" src="{{profileImageBaseUrl + sc.userid.profileimage}}" (click)="navigationToSc(sc)" alt="... ">
+                    <img *ngIf="!sc.userid" md-list-avatar src='assets/img/sidebar_photo.png' alt="... " (click)="navigationToSc(sc)">
+                    <h3 md-line class="ellipse" (click)="navigationToSc(sc)"> {{sc.name}} </h3>
                     <p md-line>
-                        <span class="demo-2 ellipse"> {{sc.address}} </span>
+                        <span class="demo-2 ellipse" (click)="navigationToSc(sc)"> {{sc.address}} </span>
                     </p>
-                    </span>
-					<button md-line md-raised-button color="primary" *ngIf="scfollowers.indexOf(sc.id)!= -1" (click)="unFollowSc(sc.id)">{{ 'FOLLOWING' | translate }}</button>
-                    <button md-line md-raised-button color="primary" *ngIf="scfollowers.indexOf(sc.id) == -1" (click)="followSc(sc.id)">{{ 'FOLLOW' | translate }}</button>
+                    <label md-line md-raised-button color="primary" class="bordered-btn following-btn" *ngIf="scfollowers.indexOf(sc.id)!= -1" (click)="unFollowSc(sc.id)">{{ 'FOLLOWING' | translate }}</label>
+                    <label md-line md-raised-button color="primary" class="bordered-btn following-btn" *ngIf="scfollowers.indexOf(sc.id) == -1" (click)="followSc(sc.id)">{{ 'FOLLOW' | translate }}</label>
                 </md-list-item>
             </md-list>
         </div>

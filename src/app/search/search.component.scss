@@ -55,6 +55,20 @@ te-search {
     md-list-item .mat-list-text p {
         color: #666;
     }
+    md-list-item span .bordered-btn {
+        // display: inherit;
+        float: right;
+        border: solid 1px;
+    }
+    .following-btn {
+        color: #c61315;
+        border: solid 1px #c61315;
+        border-radius: 5px;
+        width: 70px;
+        padding: 3px !important;
+        text-align: center;
+        cursor: pointer;
+    }
     .ellipse {
         width: 200px;
         white-space: nowrap;

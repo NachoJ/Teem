@@ -420,6 +420,19 @@ export class CoreService {
 				return res.json();
 			}).catch(this.handleError);
 	}
+	getFollowing(userId){
+		return this.http.get(environment.BASEAPI + environment.GET_FOLLOWING + userId, this.options)
+			.map((res: Response) => {
+				return res.json();
+			}).catch(this.handleError);
+	}
+
+	getFollowers(userId){
+		return this.http.get(environment.BASEAPI + environment.GET_FOLLOWERS + userId, this.options)
+			.map((res: Response) => {
+				return res.json();
+			}).catch(this.handleError);
+	}
 
 	handleError(error: any) {
 		console.log("res", error);
