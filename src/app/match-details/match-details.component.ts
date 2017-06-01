@@ -269,7 +269,7 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 				} else {
 					this.team1player.push({
 						id: "",
-						profileimg: "assets/img/avatar.png",
+						profileimg: "assets/img/avatar.jpg",
 						userid: this.user['id'],
 						matchid: this.match.id,
 						teamid: 1,
@@ -292,7 +292,7 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 				} else {
 					this.team2player.push({
 						id: "",
-						profileimg: "assets/img/avatar.png",
+						profileimg: "assets/img/avatar.jpg",
 						userid: this.user['id'],
 						matchid: this.match.id,
 						teamid: 2,
@@ -306,7 +306,7 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 			for (var i = 0; i < sportplayer; i++) {
 				this.team1player.push({
 					id: "",
-					profileimg: "assets/img/avatar.png",
+					profileimg: "assets/img/avatar.jpg",
 					userid: this.user['id'],
 					matchid: this.match.id,
 					teamid: 1,
@@ -315,7 +315,7 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 
 				this.team2player.push({
 					id: "",
-					profileimg: "assets/img/avatar.png",
+					profileimg: "assets/img/avatar.jpg",
 					userid: this.user['id'],
 					matchid: this.match.id,
 					teamid: 2,
@@ -355,7 +355,7 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 			} else {
 				this.benchPlayer1.push({
 					id: "",
-					profileimg: "assets/img/avatar.png",
+					profileimg: "assets/img/avatar.jpg",
 					userid: this.user.id,
 					matchid: this.match.id,
 					teamid: 1,
@@ -378,7 +378,7 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 			} else {
 				this.benchPlayer2.push({
 					id: "",
-					profileimg: "assets/img/avatar.png",
+					profileimg: "assets/img/avatar.jpg",
 					userid: this.user.id,
 					matchid: this.match.id,
 					teamid: 2,

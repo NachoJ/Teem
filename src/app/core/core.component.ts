@@ -149,21 +149,21 @@ export class CoreComponent implements OnInit {
 				icon: "search",
 				link: "/find-match"
 			},
-			{
+			/*{
 				title: "NOTIFICATION",
 				icon: "email",
 				link: "/home"
-			},
+			},*/
 			{
 				title: "SETTINGS",
 				icon: "settings",
 				link: "/settings"
 			},
-			{
+			/*{
 				title: "LOGOUT",
 				icon: "exit_to_app",
 				link: "/home"
-			}
+			}*/
 		];
 
 		let navigateTo = window.localStorage['teem_user_navigateto'] || '';

@@ -9,8 +9,8 @@ export const environment = {
 	production: false,
 	loginUser: <User>{},
 
-	BASEAPI: 'http://192.168.0.35:1337',
-	PROFILE_IMAGE_PATH: "http://192.168.0.35:1337/upload/profiles/",
+	BASEAPI: 'http://127.0.0.1:1337',
+	PROFILE_IMAGE_PATH: "http://127.0.0.1:1337/upload/profiles/",
 
 	REGISTER_USER: '/auth/register',
 	LOGIN_USER: '/auth/login',

@@ -9,11 +9,11 @@ te-add-new-sportscenter {
         align-content: center;
         text-align: left;
         margin-bottom: 20px;
-        background-color: #f4f4f4;
-        padding: 10px 30px 20px;
-        border-radius: 10px;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
+        background-color: #e6e7e8;
+        padding: 10px 20px 20px;
+        //border-radius: 10px;
+        //-webkit-border-radius: 10px;
+        //-moz-border-radius: 10px;
     }
     .title-list-items p {
         font-size: 16px;
@@ -26,14 +26,14 @@ te-add-new-sportscenter {
         padding: 0px;
     }
     .title-list-items-text {
-        color: #c61315;
-        font-weight: bold;
+        color: #d2232a;
+        font-weight: regular;
+        font-style: regular;
         margin-bottom: 2px;
         display: block;
         vertical-align: middle;
-        padding: 5px 0px 10px;
+        padding: 5px 0px 5px;
         position: relative;
-        font-style: italic;
         text-transform: uppercase;
         margin-bottom: 15px;
     }
@@ -43,8 +43,8 @@ te-add-new-sportscenter {
         left: 0;
         right: 0;
         bottom: 0;
-        background: #c61315;
-        height: 2px;
+        background: #d2232a;
+        height: 1px;
         width: 100%;
         display: block;
     }
@@ -66,16 +66,17 @@ te-add-new-sportscenter {
     }
     .mat-input-container {
         width: 100%;
-        border: 1px solid rgba(0, 0, 0, 0.3);
+        border: 0px solid rgba(0, 0, 0, 0.3);
         padding: 8px 15px;
-        border-radius: 4px;
+        border-radius: 0px;
         font-size: 14px;
-        color: #333;
+        color: #848484;
+        background-color: #fff;
         height: 35px;
     }
     .mat-input-container:focus {
         outline: none;
-        border-color: #c61315;
+        border-color: #d2232a;
     }
     .form-group {
         position: relative;
@@ -83,11 +84,11 @@ te-add-new-sportscenter {
     }
     .form-group label {
         font-size: 14px;
-        color: #666;
+        color: #000;
     }
     .md-button-register-form {
         width: auto;
-        background-color: #c61315;
+        background-color: #d2232a;
         color: #fff !important;
         margin-bottom: 0px;
         text-align: center;
@@ -95,11 +96,12 @@ te-add-new-sportscenter {
         box-shadow: none;
         text-transform: uppercase;
         font-weight: normal;
+        border-radius: 0px !important;
     }
     .error-message {
         font-size: 11px;
         margin-top: 5px;
-        color: #c61315;
+        color: #d2232a;
         font-weight: bold;
         width: 100%;
         text-align: right;

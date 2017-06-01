@@ -8,7 +8,7 @@ app-match-create {
     .note {
         margin-bottom: 15px;
         p {
-            color: #c61315;
+            color: #d2232a;
             padding: 0px 50px 5px;
             font-size: 14px;
             vertical-align: middle;
@@ -30,7 +30,7 @@ app-match-create {
     }
     .pitch-selection-note {
         font-size: 14px !important;
-        color: #c61315;
+        color: #d2232a;
         margin-bottom: 15px;
     }
     .title-list-items p {
@@ -41,12 +41,12 @@ app-match-create {
     }
     .creatmach-wrapper {
         margin-bottom: 20px;
-        background-color: #f4f4f4;
-        padding: 20px 30px;
+        background-color: #e6e7e8;
+        padding: 20px 20px;
         position: relative;
-        border-radius: 10px;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
+        //border-radius: 10px;
+        //-webkit-border-radius: 10px;
+        //-moz-border-radius: 10px;
     }
     .error {
         position: absolute;
@@ -55,7 +55,7 @@ app-match-create {
         text-align: right;
         left: 20px;
         right: 0;
-        color: #c61315;
+        color: #d2232a;
     }
     .success {
         position: absolute;
@@ -70,7 +70,7 @@ app-match-create {
         position: relative;
     }
     .title-list-items button {
-        background: #c61315;
+        background: #d2232a;
         color: #fff;
         padding: 0px 30px;
         box-shadow: none;
@@ -79,16 +79,19 @@ app-match-create {
         bottom: 0;
         right: 0;
     }
+    .title-icon {
+    font-size: 22px;
+    }
     /****  Title CSS  *****/
     .title-list-items-text {
-        color: #c61315;
-        font-weight: bold;
+        color: #d2232a;
+        font-weight: regular;
+        font-style: regular;
         margin-bottom: 2px;
         display: block;
         vertical-align: middle;
-        padding: 5px 0px 10px;
+        padding: 5px 0px 5px;
         position: relative;
-        font-style: italic;
         text-transform: uppercase;
         text-align: left;
     }
@@ -98,8 +101,8 @@ app-match-create {
         left: 0;
         right: 0;
         bottom: 0;
-        background: #c61315;
-        height: 2px;
+        background: #d2232a;
+        height: 1px;
         width: 100%;
         display: block;
     }
@@ -113,7 +116,7 @@ app-match-create {
     form {
         align-content: center;
         text-align: center;
-        padding-right: 15px;
+        padding-right: 0px;
         margin-top: 10px;
     }
     .mat-input-underline {
@@ -126,11 +129,12 @@ app-match-create {
     .mat-input-container,
     .mat-select {
         width: 100%;
-        border: 1px solid rgba(0, 0, 0, 0.3);
+        border: 0px solid rgba(0, 0, 0, 0.3);
         padding: 8px 15px;
-        border-radius: 4px;
+        border-radius: 0px;
+        background-color: #fff;
         font-size: 14px;
-        color: #333;
+        color: #848484;
         height: 35px;
     }
     .mat-select-trigger {
@@ -144,7 +148,7 @@ app-match-create {
     }
     .mat-input-container:focus {
         outline: none;
-        border-color: #c61315;
+        border-color: #d2232a;
     }
     .form-group {
         position: relative;
@@ -153,7 +157,7 @@ app-match-create {
     }
     label {
         font-size: 14px;
-        color: #666;
+        color: #000;
     }
     .form-group.date .mat-input-container {
         padding: 0px 15px;
@@ -166,7 +170,7 @@ app-match-create {
     }
     .md-button-register-form {
         width: auto;
-        background-color: #c61315;
+        background-color: #d2232a;
         color: #fff !important;
         margin-bottom: 0px;
         text-align: center;
@@ -178,7 +182,7 @@ app-match-create {
     .error-message {
         font-size: 11px;
         margin-top: 5px;
-        color: #c61315;
+        color: #d2232a;
         font-weight: bold;
         width: 100%;
         text-align: right;
@@ -201,13 +205,13 @@ app-match-create {
         padding: 30px 20px;
         background: rgba(0, 0, 0, 0.02);
         margin: 0px;
-        color: #c61315;
+        color: #d2232a;
     }
     .pitch p {
         font-size: 12px;
     }
     .selectbadges .pitch-display {
-        background: rgba(0, 0, 0, 0.05);
+        //background: rgba(0, 0, 0, 0.05);
         cursor: pointer;
         display: inline-block !important;
         position: relative;
@@ -221,7 +225,7 @@ app-match-create {
         opacity: 0;
     }
     .selectbadges p.badged {
-        color: #666;
+        color: #000;
         margin: 0;
         display: inline-block;
         font-size: 12px;
@@ -235,10 +239,17 @@ app-match-create {
     }
     .selectbadges .mat-radio-label {
         width: 100%;
-        padding: 10px 30px;
+        //padding: 10px 15px;
+        background: #848484;
+    }
+    .field-info{
+        margin-left: 5px;
+        margin-bottom: 10px;
+        margin-right: 20px;
     }
     .selectbadges .mat-radio-checked .mat-radio-label {
-        box-shadow: inset 0px 0px 0px 2px #c61315;
+        box-shadow: inset 0px 0px 0px 2px #d2232a;
+        background: #d2232a;
     }
     .selectbadges .mat-radio-button {
         margin: 0px;
@@ -256,7 +267,10 @@ app-match-create {
         white-space: nowrap;
     }
     .mat-radio-checked svg path {
-        fill: #c61315;
+        fill: #d2232a;
+    }
+    .md-btn-add-sportcenter {
+        border-radius: 0px !important;
     }
     /****  Match Details CSS  *****/
     .mat-select-placeholder {
@@ -277,12 +291,13 @@ app-match-create {
         width: 210px;
         margin: 20px auto 0;
         text-transform: uppercase;
-        font-style: italic;
+        font-style: regular;
+        border-radius: 0px !important;
     }
     .mat-radio-button {
         margin-right: 20px;
         font-size: 15px;
-        color: #666;
+        color: #000;
     }
     .mat-radio-container,
     .mat-radio-inner-circle,
@@ -294,7 +309,15 @@ app-match-create {
         background: #666;
     }
     .mat-radio-checked .mat-radio-outer-circle {
-        border-color: #666;
+        border-color: #000;
+    }
+    .span-white{
+        width: 72px;
+        height: 72px;
+    }
+    .mat-icon{
+        width: 80px !important;
+        height: 80px !important;
     }
     .clearfix:after {
         visibility: hidden !important;

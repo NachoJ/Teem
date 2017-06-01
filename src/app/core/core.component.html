@@ -1,15 +1,26 @@
 <md-sidenav-container class="example-container" fxLayout="column">
     <md-sidenav #sidenav>
         <div fxLayout="column" fxFlex="100" class="side_bar_inner">
-            <div class="header_mobile"> <img src="{{ profileImage }}">
-                <h4>{{ user.firstname}} {{ user.lastname }}</h4>
+            <div class="header_mobile"> <img class="profile-img-mobile" src="{{ profileImage }}">
+                <p style="font-weight: bold">{{ user.firstname}} {{ user.lastname }}</p>
                 <p> <i class="material-icons user-place-icon">place</i> {{ user.city }}</p>
+                 <div class="language-mobile" fxLayout="row">
+                    <div class="div-nav-flag" (click)="changeLanguage('en')"> <img class="flag" src="assets/img/flags/gb.png"/></div>
+                    <div class="div-nav-flag" (click)="changeLanguage('es')"> <img class="flag" src="assets/img/flags/es.png"/></div>
+                </div>
             </div>
-            <div class="ball_box">
-                <a href="#" *ngIf="soccer"><img src="/assets/img/b01.png"></a>
-                <a href="#" *ngIf="basketball"><img src="/assets/img/b02.png"></a>
-                <a href="#" *ngIf="paddle"><img src="/assets/img/b03.png"></a>
+            <div class="ball_box" fxLayoutAlign="center center" fxFlex="100" fxLayout="row">
+                    <div fxFlex="33" fxLayoutAlign="start start">
+                    <a href="#" style="margin-left: 20px;" *ngIf="soccer"><img src="/assets/img/b01.png"></a>
+                    </div>
+                    <div fxFlex="33" fxLayoutAlign="center center">
+                    <a href="#" *ngIf="basketball"><img src="/assets/img/b02.png"></a>
+                    </div>
+                    <div fxFlex="33" fxLayoutAlign="end end">
+                    <a href="#" style="margin-right: 20px;" *ngIf="paddle"><img src="/assets/img/b03.png"></a>
+                    </div>
             </div>
+            
             <!--
 			<div class="link_box">
 				<button md-raised-button routerLink="/match-create" routerLinkActive="active">New Match<i class="material-icons">keyboard_arrow_right</i></button>
@@ -19,22 +30,25 @@
             <md-list class="mobilemenu" *ngFor="let nl of navMobileLinks">
                 <md-list-item (click)="sidenav.toggle()" routerLink="{{ nl.link }}" class="menu-item"><i class="material-icons">{{nl.icon}}</i>{{nl.title | translate}}</md-list-item>
             </md-list>
+            <md-list class="mobilemenu">
+                <md-list-item (click)="logout()" class="menu-item"><i class="fa fa-sign-out fa-2x material-icons" aria-hidden="true"></i>{{ 'LOGOUT' | translate  | uppercase }}</md-list-item>
+            </md-list>
             <!--          <div class="mobilemenu"> <a md-tab-link> Home</a> <a md-tab-link> Find match</a> <a md-tab-link> Tournments</a> <a md-tab-link> My sport center</a> </div>--></div>
     </md-sidenav>
     <div class="example-sidenav-content">
         <md-toolbar fxFlex="100%" class="header-toolbar">
-            <button md-button (click)="sidenav.open()" class="toggle-btn" fxHide.md fxHide.lg> <span></span> <span></span> <span></span> </button>
-            <div fxLayout="row" fxLayoutAlign="start center" class="logo">
+            <button md-button (click)="sidenav.open()" class="toggle-btn" fxHide.md fxHide.lg><i class="fa fa-bars fa-2x" aria-hidden="true"></i></button>
+            <section fxLayout="row" fxLayoutAlign.gt-md="center start" fxLayoutAlign = "end start" fxFlex="80%" class="topmenubelt">
+                <div fxLayout="row" fxLayoutAlign="start end" class="logo">
                 <a> <img src="/assets/img/logo-1x.png" class="header-logo"> </a>
-            </div>
-            <section fxLayout="row" fxLayoutAlign="end start" fxFlex="80%" class="topmenubelt">
+                </div>
                 <div fxFlexAlign="end" class="header-nav">
                     <!--<nav md-tab-nav-bar>
 						<a md-tab-link  routerLink="" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">HOME</a>
 						<a md-tab-link  routerLink="" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">FIND MATCH</a>
 						<a md-tab-link  routerLink="" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">TOURNAMENTS</a>
 					</nav>-->
-                    <div class="search-widget" fxFlexAlign="center">
+                   <!-- <div class="search-widget" fxFlexAlign="center">
                         <div class="search-form">
                             <div class="form-group has-feedback">
                                 <label for="search" class="sr-only">Search</label>
@@ -42,12 +56,12 @@
                                 <span class="glyphicon glyphicon-search form-control-feedback"></span>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     <nav md-tab-nav-bar>
                         <a md-tab-link *ngFor="let link of navLinks" [routerLink]="link.link" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
                             <!--{{tabLink.label}}-->{{link.title | translate }} </a>
-                        <a md-tab-link class="email"><img src="/assets/img/email.png"></a>
-                        <div class="dropdown">
+                        <!--<a md-tab-link class="email"><img src="/assets/img/email.png"></a>-->
+                        <div class="dropdown" fxHide.xs fxHide.sm>
                             <!--<a md-tab-link [mdMenuTriggerFor]="menu" class="userprofile"><img src="/assets/img/player-boy.png"></a>-->
                             <a md-tab-link [mdMenuTriggerFor]="menu" class="userprofile"><img src="{{ profileImage }}"></a>
                             <md-menu class="user-menu" #menu="mdMenu">
@@ -67,10 +81,16 @@
             <div fxLayout="column" fxFlex="20" class="side_bar_inner" fxHide.xs fxHide.sm> <img src="{{ profileImage }}">
                 <h4>{{ user.firstname}} {{ user.lastname }}</h4>
                 <p> <i class="material-icons user-place-icon">place</i> {{ user.city }}</p>
-                <div class="ball_box">
-                    <a href="#" *ngIf="soccer"><img src="/assets/img/b01.png"></a>
+                <div class="ball_box" fxLayoutAlign="center center" fxFlex="100" fxLayout="row">
+                    <div fxFlex="33" fxLayoutAlign="start start">
+                    <a href="#" style="margin-right: 0px;" *ngIf="soccer"><img src="/assets/img/b01.png"></a>
+                    </div>
+                    <div fxFlex="33" fxLayoutAlign="center center">
                     <a href="#" *ngIf="basketball"><img src="/assets/img/b02.png"></a>
+                    </div>
+                    <div fxFlex="33" fxLayoutAlign="end end">
                     <a href="#" *ngIf="paddle"><img src="/assets/img/b03.png"></a>
+                    </div>
                 </div>
                 <div class="link_box">
                     <button md-button routerLinkActive="active" routerLink="/match-create">{{ 'NEW MATCH' | translate }}<i class="material-icons">keyboard_arrow_right</i></button>

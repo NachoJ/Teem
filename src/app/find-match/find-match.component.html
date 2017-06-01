@@ -1,6 +1,6 @@
 <div class="detail-box">
     <div class="title-list-items">
-        <p class="title-list-items-text"> <i class="material-icons">search</i> {{'FIND MATCH' | translate}}</p>
+        <p class="title-list-items-text"> <i class="fa fa-search fa-2x title-icon" aria-hidden="true"></i> {{'FIND MATCH' | translate}}</p>
     </div>
     <div class="find-match-main">
         <div class="my-from" fxFlex="100">
@@ -16,14 +16,14 @@
                 </div>
             </div>
             <div fxLayout="column" fxFlex="100" class="form-group date">
-                <div fxLayout="row">
+                <div fxLayout="row" fxLayout.xs="column">
                     <label fxLayoutAlign="left center" fxFlex="15">{{'SPORT' | translate}}</label>
-                    <md-radio-group [(ngModel)]="sport" (change)="onSportChange()">
-                        <md-radio-button *ngFor="let sp of sportOptions" [value]="sp.id">
-                            <div class="span-white">
-                                <md-icon class="material-icons md-48" svgIcon={{sp.title}}></md-icon>
-                            </div>
-                        </md-radio-button>
+                    <md-radio-group fxFlex="85" fxLayoutAlign="center center" fxLayout="row" [(ngModel)]="sport" (change)="onSportChange()">
+                            <md-radio-button  *ngFor="let sp of sportOptions" [value]="sp.id" fxFlex="25">
+                                <div class="span-white" fxLayoutAlign="center center">
+                                    <md-icon class="material-icons md-48" svgIcon={{sp.title}}></md-icon>
+                                </div>
+                            </md-radio-button>
                     </md-radio-group>
                 </div>
             </div>
@@ -35,7 +35,7 @@
 </div>
 <div fxLayout="column" fxLayoutAlign="start start" class="detail-box">
     <div class="title-list-items">
-        <p class="title-list-items-text"> <i class="material-icons">chat_bubble</i> {{'NEXT MATCH' | translate }}</p>
+        <p class="title-list-items-text"> <i class="fa fa-superpowers fa-2x title-icon" aria-hidden="true"></i> {{'NEXT MATCH' | translate }}</p>
     </div>
     <div fxLayout="column" class="detail-listing">
         <md-list class="nopadding ng-scope" *ngFor=" let match of nearByMatch | slice:0:displayMatch; let i = index;">

@@ -8,7 +8,7 @@
 
 .register-formbox {
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.498039);
+    //background-color: rgba(255, 255, 255, 0.498039);
     transition: all 0.5s linear;
     overflow: auto;
     padding: 20px 0px;
@@ -18,9 +18,9 @@
     width: 90%;
     padding: 20px 30px;
     background-color: rgb(244, 244, 244);
-    border-radius: 6px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
+    //border-radius: 6px;
+    //-webkit-border-radius: 6px;
+    //-moz-border-radius: 6px;
 }
 
 .title-block {
@@ -58,11 +58,11 @@ form button {
 }
 
 .md-button-register-form {
-    background-color: #c61315 !important;
+    background-color: #d2232a !important;
     color: #fff !important;
     padding: 0 90px;
-    font-style: italic;
-    font-weight: 100;
+    //font-style: italic;
+    //font-weight: 100;
     font-size: 14px;
     text-transform: uppercase;
     margin: 30px auto 20px;
@@ -85,12 +85,12 @@ button.md-button-forgotten-pass.mat-raised-button {
 .error-message {
     font-size: 11px;
     margin-top: 5px;
-    color: #c61315;
+    color: #d2232a;
     font-weight: bold;
 }
 
 .error {
-    color: #c61315;
+    color: #d2232a;
     margin: 5px 0px;
     font-size: 13px;
     font-weight: bold;

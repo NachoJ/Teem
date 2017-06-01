@@ -90,16 +90,16 @@ export class MatchCreateComponent implements OnInit {
 
 		iconRegistry.addSvgIcon(
 			'all',
-			sanitizer.bypassSecurityTrustResourceUrl('assets/svg/all-sports_off.svg'));
+			sanitizer.bypassSecurityTrustResourceUrl('assets/svg/all-sports.svg'));
 		iconRegistry.addSvgIcon(
 			'Soccer',
-			sanitizer.bypassSecurityTrustResourceUrl('assets/svg/futbol_off.svg'));
+			sanitizer.bypassSecurityTrustResourceUrl('assets/svg/football-icon.svg'));
 		iconRegistry.addSvgIcon(
 			'Basketball',
-			sanitizer.bypassSecurityTrustResourceUrl('assets/svg/baloncesto_off.svg'));
+			sanitizer.bypassSecurityTrustResourceUrl('assets/svg/basket-icon.svg'));
 		iconRegistry.addSvgIcon(
 			'Padel',
-			sanitizer.bypassSecurityTrustResourceUrl('assets/svg/padel_off.svg'));
+			sanitizer.bypassSecurityTrustResourceUrl('assets/svg/padel-icon.svg'));
 
 
 

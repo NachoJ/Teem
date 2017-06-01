@@ -82,23 +82,55 @@
             </div>
             <div class="example-section example-margin">
                 <div fxLayout="column" class="form-group" fxFlex="100">
-                    <div fxLayout="row" fxLayout.xs="column">
-                        <label for="" fxLayoutAlign="left center" fxFlex="30">{{'CHOOSE GAME' | translate}}</label>
+                    <div fxLayout="column" fxLayout.xs="column">
+                        <label for="" fxLayoutAlign="left start" fxFlex="30">{{'CHOOSE GAME' | translate}}</label>
                         <div class="md-block register-form-text-area" fxFlex="70" md-no-float>
-                            <div class="example-section">
-                                <md-checkbox class="example-margin mat-checkbox-btn" formControlName="all" [checked]="checked" [(ngModel)]="allVal" (change)="sportAllSelect()">{{'ALL' | translate}}</md-checkbox>
-                                <md-checkbox class="example-margin mat-checkbox-btn" formControlName="basketball" [(ngModel)]="basketballVal" (change)="sportSelect('basketball')">{{'Basketball' | translate}}</md-checkbox>
-                                <md-checkbox class="example-margin mat-checkbox-btn" formControlName="soccer" [(ngModel)]="soccerVal" (change)="sportSelect('soccer')">{{'Soccer' | translate}}</md-checkbox>
-                                <md-checkbox class="example-margin mat-checkbox-btn" formControlName="paddle" [(ngModel)]="padelVal" (change)="sportSelect('paddle')">{{'Padel' | translate}}</md-checkbox>
+                            <div class="example-section" fxLayout.xs="column">
+                                <div fxLayout.xs="row"> 
+                                    <div fxLayout="column" class="sport-settings-column">
+                                        <div class="span-white">
+                                            <div class="div-sport-img">
+                                                <img class="material-icons md-48" src="assets/svg/all-sports.svg">
+                                            </div>
+                                        </div>
+                                        <md-checkbox class="example-margin mat-checkbox-btn" formControlName="all" [checked]="checked" [(ngModel)]="allVal" (change)="sportAllSelect()">{{'ALL' | translate}}</md-checkbox>
+                                    </div>
+                                    <div fxLayout="column" class="sport-settings-column-basket">
+                                        <div class="span-white">
+                                            <div class="div-sport-img">
+                                                <img class="material-icons md-48" src="assets/svg/basket-icon.svg">
+                                            </div>
+                                        </div>
+                                    <md-checkbox class="example-margin mat-checkbox-btn" formControlName="basketball" [(ngModel)]="basketballVal" (change)="sportSelect('basketball')">{{'Basketball' | translate}}</md-checkbox>
+                                    </div>
+                                </div>
+                                <div fxLayout.xs="row">
+                                    <div fxLayout="column" class="sport-settings-column">
+                                        <div class="span-white">
+                                            <div class="div-sport-img">
+                                                <img class="material-icons md-48" src="assets/svg/football-icon.svg">
+                                            </div>
+                                        </div>
+                                        <md-checkbox class="example-margin mat-checkbox-btn" formControlName="soccer" [(ngModel)]="soccerVal" (change)="sportSelect('soccer')">{{'Soccer' | translate}}</md-checkbox>
+                                    </div>
+                                    <div fxLayout="column" class="sport-settings-column">
+                                        <div class="span-white">
+                                            <div class="div-sport-img">
+                                                <img class="material-icons md-48" src="assets/svg/padel-icon.svg">
+                                            </div>
+                                        </div>
+                                        <md-checkbox class="example-margin mat-checkbox-btn" formControlName="paddle" [(ngModel)]="padelVal" (change)="sportSelect('paddle')">{{'Padel' | translate}}</md-checkbox>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="example-section example-margin">
-                <button md-raised-button color="primary" class="creatematch mat-raised-button" [disabled]="!profile.valid" (click)="formSubmit()">{{'SAVE' | translate}}</button>
-            </div>
         </form>
+    </div>
+    <div class="example-section example-margin">
+            <button md-raised-button color="primary" class="creatematch mat-raised-button" [disabled]="!profile.valid" (click)="formSubmit()">{{'SAVE' | translate}}</button>
     </div>
     <!--</div>-->
 </div>

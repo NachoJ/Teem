@@ -3,10 +3,11 @@ app-settings {
         div {
             width: 100%;
             a {
-                width: 25%;
+                width: 33.3%;
             }
         }
     }
+    
     .example-section {
         display: flex;
         align-content: center;
@@ -27,12 +28,12 @@ app-settings {
     }
     .main {
         margin-bottom: 20px;
-        background-color: #f4f4f4;
-        padding: 10px 30px 20px;
+        background-color: #e6e7e8;
+        padding: 20px 20px 20px;
         position: relative;
-        border-radius: 10px;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
+        //border-radius: 10px;
+        //-webkit-border-radius: 10px;
+        //-moz-border-radius: 10px;
         height: 100%;
     }
     .error {
@@ -42,7 +43,7 @@ app-settings {
         text-align: center;
         left: 20px;
         right: 20px;
-        color: #c61315;
+        color: #d2232a;
     }
     .success {
         position: absolute;
@@ -55,14 +56,14 @@ app-settings {
     }
     /****  Title CSS  *****/
     .title-list-items-text {
-        color: #c61315;
-        font-weight: bold;
+        color: #d2232a;
+        font-weight: regular;
+        font-style: regular;
         margin-bottom: 2px;
         display: block;
         vertical-align: middle;
-        padding: 5px 0px 10px;
+        padding: 5px 0px 5px;
         position: relative;
-        font-style: italic;
         text-transform: uppercase;
         text-align: left;
     }
@@ -72,8 +73,8 @@ app-settings {
         left: 0;
         right: 0;
         bottom: 0;
-        background: #c61315;
-        height: 2px;
+        background: #d2232a;
+        height: 1px;
         width: 100%;
         display: block;
     }
@@ -88,7 +89,7 @@ app-settings {
         margin-bottom: 20px;
     }
     .title-list-items button {
-        background: #c61315;
+        background: #d2232a;
         color: #fff;
         padding: 0px 30px;
         box-shadow: none;
@@ -96,6 +97,9 @@ app-settings {
         position: absolute;
         bottom: 0;
         right: 0;
+    }
+    .title-icon {
+    font-size: 22px;
     }
     /****  Form CSS  *****/
     form {
@@ -129,7 +133,7 @@ app-settings {
     }
     .mat-input-container:focus {
         outline: none;
-        border-color: #c61315;
+        border-color: #d2232a;
     }
     .form-group {
         position: relative;
@@ -138,7 +142,7 @@ app-settings {
     }
     label {
         font-size: 14px;
-        color: #666;
+        color: #000;
     }
     .form-group.date .mat-input-container {
         padding: 0px 15px;
@@ -158,11 +162,16 @@ app-settings {
         font-weight: inherit !important;
     }
     font-size: 16px;
-    .mat-tab-link {
-        min-width: auto;
-        text-transform: uppercase;
+
+    /**** Extra CSS ****/
+    .app-settings a {
+        color: #000 !important;  
     }
-    // md-tab-link
+
+    a.mat-tab-link {
+        opacity: 1 !important;
+    }
+
     // a:hover,
     // a:focus {
     //     color: #23527c;
@@ -171,15 +180,11 @@ app-settings {
     // media query start ------------------------------------------------------------
     @media screen and (max-width:599px) {
         .mat-tab-link {
-            min-width: 50%;
             padding: 0 5px;
             font-size: 11px;
         }
         .main {
             padding: 10px 15px 20px;
-        }
-        md-ink-bar {
-            display: none;
         }
     }
 }

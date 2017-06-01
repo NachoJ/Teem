@@ -7,7 +7,7 @@
         <p>{{success}}</p>
     </div>
     <div fxFlex="100" class="title-list-items">
-        <p class="title-list-items-text"> <i class="material-icons">flag</i> {{'FIELDS' | translate }}</p>
+        <p class="title-list-items-text"> <i class="fa fa-flag-o fa-2x title-icon" aria-hidden="true"></i>  {{'FIELDS' | translate }}</p>
         <button md-raised-button (click)="addMore()">{{'ADD FIELDS' | translate}}</button>
     </div>
     <div *ngFor="let p of pitches;let i = index" class="single-form">
@@ -101,7 +101,7 @@
                         </div>
                     </div>
                 </div>
-                <button md-raised-button (click)="addSportFeild(i)" fxLayoutAlign="left center" fxFlexOffset="11" fxFlexOffset.xs="0" fxFlexOffset.sm="0">+ {{'ADD A SPORT' | translate}}</button>
+                <button md-raised-button class="add-field-btn" (click)="addSportFeild(i)" fxLayoutAlign="left center" fxFlexOffset="11" fxFlexOffset.xs="0" fxFlexOffset.sm="0">+ {{'ADD A SPORT' | translate}}</button>
             </div>
 
 

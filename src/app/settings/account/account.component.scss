@@ -2,7 +2,7 @@
 .user-text-label-account {
     font-size: 11px;
     margin-left: 0px;
-    color: #7c7b7b;
+    color: #000;
     margin-top: 20px;
     margin-right: 10px;
 }
@@ -25,14 +25,14 @@
 
 .title-list-items {
     border-bottom-style: solid;
-    border-color: #c61315;
+    border-color: #d2232a;
     border-width: 2px;
     margin-left: 30px;
     margin-right: 30px;
 }
 
 .title-list-items-text {
-    color: #c61315;
+    color: #d2232a;
     font-weight: bold;
 }
 
@@ -44,7 +44,7 @@
 
 .user-text-label-account {
     font-size: 11px;
-    color: #7c7b7b;
+    color: #000;
 }
 
 .main {
@@ -67,7 +67,7 @@
 .title-list-items {}
 
 .title-list-items-text {
-    color: #c61315;
+    color: #d2232a;
     font-weight: bold;
 }
 
@@ -100,13 +100,13 @@
     text-align: center;
     left: 20px;
     right: 20px;
-    color: #c61315;
+    color: #d2232a;
 }
 
 .error-message {
     font-size: 11px;
     margin-top: 5px;
-    color: #c61315;
+    color: #d2232a;
     font-weight: bold;
     width: 100%;
     text-align: right;
@@ -127,7 +127,7 @@
 }
 
 .title-list-items button {
-    background: #c61315;
+    background: #d2232a;
     color: #fff;
     padding: 0px 30px;
     box-shadow: none;
@@ -141,7 +141,7 @@
 /****  Title CSS  *****/
 
 .title-list-items-text {
-    color: #c61315;
+    color: #d2232a;
     font-weight: bold;
     margin-bottom: 2px;
     display: block;
@@ -159,7 +159,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: #c61315;
+    background: #d2232a;
     height: 2px;
     width: 100%;
     display: block;
@@ -207,9 +207,10 @@ form {
 .mat-input-container,
 .mat-select {
     width: 100%;
-    border: 1px solid rgba(0, 0, 0, 0.3);
+    border: 0px solid rgba(0, 0, 0, 0.3);
     padding: 8px 15px;
-    border-radius: 4px;
+    border-radius: 0px;
+    background-color: #fff;
     font-size: 14px;
     color: #333;
     height: 35px;
@@ -227,7 +228,7 @@ form {
 
 .mat-input-container:focus {
     outline: none;
-    border-color: #c61315;
+    border-color: #d2232a;
 }
 
 .mat-checkbox-btn {
@@ -256,6 +257,7 @@ label {
 
 .save-btn {
     margin: 0 0 0 10px;
+    border-radius: 0px !important;
 }
 
 .red-border {
@@ -292,6 +294,7 @@ label {
     margin: 20px auto 0;
     text-transform: uppercase;
     font-style: italic;
+    border-radius: 0px !important;
 }
 
 // media query start ------------------------------------------------------------
@@ -304,6 +307,7 @@ label {
         width: 50px;
         min-width: inherit;
         margin-left: 2% !important;
+        border-radius: 0px !important;
     }
     .full_width_test {
         width: 100%;

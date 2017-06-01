@@ -1,6 +1,6 @@
 <div fxLayout="column" fxLayoutAlign="start start" class="detail-box">
     <div class="title-list-items">
-        <p class="title-list-items-text"> <i class="material-icons">flag</i> {{'NEXT MATCHS' | translate}}</p>
+        <p class="title-list-items-text"> <i class="fa fa-flag-o fa-2x title-icon title-icon" aria-hidden="true"></i>  {{'NEXT MATCHS' | translate}}</p>
     </div>
     <div fxLayout="column" class="detail-listing">
 
@@ -67,7 +67,7 @@
 </div>
 <div fxLayout="column" fxLayoutAlign="start start" class="detail-box">
     <div class="title-list-items">
-        <p class="title-list-items-text"> <i class="material-icons">chat_bubble</i> {{'INVITATIONS'|translate}}</p>
+        <p class="title-list-items-text"> <i class="fa fa-address-card-o fa-2x title-icon title-icon" aria-hidden="true"></i>  {{'INVITATIONS'|translate}}</p>
     </div>
     <div fxLayout="column" class="detail-listing">
         <md-list class="nopadding ng-scope" *ngFor=" let invite of invitation | slice:0:displayInvitationMatch; let i = index;">
@@ -89,7 +89,7 @@
                             <p><b style="margin:2px 0px; display: block;">{{invite.totalmatchplayer}} DE {{invite.matchdetail[0].subsport[0].value+ invite.matchdetail[0].benchplayers}} </b> <b style="margin:2px 0px; display: block;">{{ invite.payment }} {{invite.matchdetail[0].price}} </b>                                </p>
                         </div>
                         <div>
-                            <a [mdMenuTriggerFor]="invitePopupMenu"><i class="material-icons">more_vert</i></a>
+                            <a [mdMenuTriggerFor]="invitePopupMenu"><i class="material-icons" style="color:#d2232a;">more_vert</i></a>
                         </div>
                     </div>
                     <div fxHide.xs fxLayout="row" fxFlex="100">
@@ -136,7 +136,7 @@
 
 <div fxLayout="column" fxLayoutAlign="start start" class="detail-box">
     <div class="title-list-items">
-        <p class="title-list-items-text"> <i class="material-icons">flag</i> {{'LAST MATCHS' | translate}}</p>
+        <p class="title-list-items-text"> <i class="fa fa-flag-o fa-2x title-icon title-icon" aria-hidden="true"></i>  {{'LAST MATCHS' | translate}}</p>
     </div>
     <div fxLayout="column" class="detail-listing">
 

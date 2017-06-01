@@ -1,25 +1,25 @@
 :host {
     display: block;
-    background-color: #f4f4f4;
+    background-color: #e6e7e8;
     height: 100%;
     width: 100%;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
+    //border-radius: 10px;
+    //-webkit-border-radius: 10px;
+    //-moz-border-radius: 10px;
 }
 
 app-pitch {
     .addpitchwrapper {
         width: 100%;
         overflow: auto;
-        padding: 10px 30px 20px;
+        padding: 10px 20px 20px;
         text-align: center;
         align-content: center;
         position: relative;
-        background-color: #f4f4f4;
-        border-radius: 10px;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
+        background-color: #e6e7e8;
+        //border-radius: 10px;
+        //-webkit-border-radius: 10px;
+        //-moz-border-radius: 10px;
     }
     .title-list-items p {
         font-size: 16px;
@@ -30,14 +30,14 @@ app-pitch {
         padding: 0px;
     }
     .title-list-items-text {
-        color: #c61315;
-        font-weight: bold;
+        color: #d2232a;
+        font-weight: regular;
+        font-style: regular;
         margin-bottom: 2px;
         display: block;
         vertical-align: middle;
-        padding: 5px 0px 10px;
+        padding: 15px 0px 5px;
         position: relative;
-        font-style: italic;
         text-transform: uppercase;
         text-align: left;
     }
@@ -47,8 +47,8 @@ app-pitch {
         left: 0;
         right: 0;
         bottom: 0;
-        background: #c61315;
-        height: 2px;
+        background: #d2232a;
+        height: 1px;
         width: 100%;
         display: block;
     }
@@ -57,23 +57,31 @@ app-pitch {
         vertical-align: middle;
     }
     .addpitchwrapper .title-list-items button {
-        background: #c61315;
-        color: #fff;
+        background: #d2232a;
+        color: #e6e7e8;
         padding: 0px 30px;
         box-shadow: none;
         font-weight: normal;
         position: absolute;
         bottom: 0;
         right: -1px;
-        border-radius: 4px 4px 0 0 !important;
-        -webkit-border-radius: 4px 4px 0 0 !important;
-        -moz-border-radius: 4px 4px 0 0 !important;
+        border-radius: 0px 0px 0 0 !important;
+        -webkit-border-radius: 0px 0px 0 0 !important;
+        -moz-border-radius: 0px 0px 0 0 !important;
+    }
+
+    .add-field-btn {
+        background-color: #e6e7e8;
+        margin-left: 5px;
+    }
+    .title-icon {
+    font-size: 22px;
     }
     /****  Form CSS  *****/
     form {
         align-content: center;
         text-align: center;
-        padding-right: 15px;
+        padding-right: 0px;
     }
     .mat-input-underline {
         display: none;
@@ -111,11 +119,12 @@ app-pitch {
     .mat-input-container,
     .mat-select {
         width: 100%;
-        border: 1px solid rgba(0, 0, 0, 0.3);
+        border: 0px solid rgba(0, 0, 0, 0.3);
         padding: 8px 15px;
-        border-radius: 4px;
+        border-radius: 0px;
         font-size: 14px;
-        color: #333;
+        background-color: #fff;
+        color: #848484;
         height: 35px;
     }
     .mat-select {
@@ -123,7 +132,7 @@ app-pitch {
     }
     .mat-input-container:focus {
         outline: none;
-        border-color: #c61315;
+        border-color: #d2232a;
     }
     .form-group {
         position: relative;
@@ -138,11 +147,11 @@ app-pitch {
     }
     .form-group label {
         font-size: 14px;
-        color: #666;
+        color: #000;
     }
     .md-button-register-form {
         width: auto;
-        background-color: #c61315;
+        background-color: #d2232a;
         color: #fff !important;
         margin-bottom: 0px;
         text-align: center;
@@ -154,7 +163,7 @@ app-pitch {
     .error-message {
         font-size: 11px;
         margin-top: 5px;
-        color: #c61315;
+        color: #d2232a;
         font-weight: bold;
         width: 100%;
         text-align: right;
@@ -170,12 +179,13 @@ app-pitch {
         box-shadow: none;
         font-weight: normal;
         font-size: 16px;
+        border-radius: 0px !important;
     }
     .single-form {
-        padding: 40px 40px 20px;
+        padding: 40px 0px 20px;
         position: relative;
         margin: 20px 0px 0px;
-        background: #fff;
+        background: #e6e7e8;
     }
     .pitch-sport {
         margin-bottom: 10px;
@@ -194,7 +204,7 @@ app-pitch {
         background: #666;
     }
     .mat-radio-checked .mat-radio-outer-circle {
-        border-color: #666;
+        border-color: #000;
     }
     .mat-radio-label-content {
         top: -1px;
@@ -227,7 +237,8 @@ app-pitch {
         margin: auto;
         font-weight: normal;
         text-transform: uppercase;
-        font-style: italic;
+        font-style: regular;
+        border-radius: 0px !important;
     }
     .md-block {
         display: block;

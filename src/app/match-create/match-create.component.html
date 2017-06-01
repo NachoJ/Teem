@@ -7,8 +7,8 @@
     </div>
 -->
     <div fxFlex="100" class="title-list-items clearfix">
-        <p class="title-list-items-text"> <i class="material-icons">thumb_up</i> {{'MATCH CREATION' | translate}}</p>
-        <button md-raised-button routerLink="/add-new-sportscenter">{{'CLICK TO ADD A NEW ONE' | translate}}.</button>
+        <p class="title-list-items-text"> <i class="fa fa-thumbs-o-up fa-2x title-icon" aria-hidden="true"></i> {{'MATCH CREATION' | translate}}</p>
+        <button class="md-btn-add-sportcenter" md-raised-button routerLink="/add-new-sportscenter">{{'CLICK TO ADD A NEW ONE' | translate}}.</button>
     </div>
     <!--<div fxLayoutAlign="center center" fxFlex="100" class="note">
         <p>Make Sure you have booked the field before continuing!</p>
@@ -54,18 +54,26 @@
                 <p class="note" [hidden]="pitches">{{'CLICK ON PITCH TO SELECT IT' | translate }}</p>
                 <div *ngIf="pitches" class="selectbadges">
                     <p class="pitch-selection-note" *ngIf="pitches.length>1">{{'SELECT THE PITCH WHERE TO WANT TO PLAY' | translate }}</p>
-                    <md-radio-group formControlName="pitchRadioGroupCtrl" [(ngModel)]="someradio">
-                        <div *ngFor="let pitch of pitches; let i = index" (click)="pitchSelected(pitch.id,pitch.sport)" fxLayout="row" class="pitch-display">
-                            <md-radio-button [value]="pitch.id">
-                                <div class="span-white">
-                                    <md-icon class="material-icons md-48" svgIcon={{pitch.sportname}}></md-icon>
+                    <div fxLayout="row">
+                        <div fxFlex="30"></div>
+                        <md-radio-group fxLFlex="70" fxLayoutAlign="center center" formControlName="pitchRadioGroupCtrl" [(ngModel)]="someradio">
+                            <div *ngFor="let pitch of pitches; let i = index" (click)="pitchSelected(pitch.id,pitch.sport)" fxLayout="row" class="pitch-display">
+                                <div fxFlex="50" fxLayoutAlign="end start">
+                                    <md-radio-button [value]="pitch.id">
+                                        <div class="span-white">
+                                            <md-icon class="material-icons md-48" svgIcon={{pitch.sportname}}></md-icon>
+                                        </div>
+                                        
+                                        <!--<p class="badge">{{pitch.sport}}</p>-->
+                                    </md-radio-button>
+                                    <div class="field-info" fxLayout="column" fxLayoutAlign="center center">
+                                        <p class="badged"> {{pitch.name}}</p>
+                                        <p class="badged"> {{pitch.covering}}</p>
+                                    </div>
                                 </div>
-                                <h4 class="badged">{{pitch.name}}</h4>
-                                <p class="badged">{{pitch.covering}}</p>
-                                <!--<p class="badge">{{pitch.sport}}</p>-->
-                            </md-radio-button>
-                        </div>
-                    </md-radio-group>
+                            </div>
+                        </md-radio-group>
+                    </div>
                 </div>
             </div>
         </div>

@@ -2,7 +2,7 @@
     <div *ngIf="error" class="error"> {{error}} </div>
     <div *ngIf="success" class="success"> {{success}} </div>
     <div class="title-block">
-        <p class="title-list-items-text"> <i class="material-icons">center_focus_strong</i> {{'MY-SPORTSCENTER' | translate}} </p>
+        <p class="title-list-items-text"> <i class="fa fa-list-alt fa-2x title-icon" aria-hidden="true"></i> {{'MY-SPORTSCENTER' | translate}} </p>
         <button md-raised-button routerLink="/add-new-sportscenter">{{'ADD SPORTS CENTER' | translate}}</button>
     </div>
 </div>
@@ -10,8 +10,8 @@
     <ul fxLayout="column">
         <li *ngFor="let sportCenter of sportCenters" fxLayout="row" class="width-max">
             <div fxLayoutAlign="start center" fxFlex="74" fxFlex.xs="60"> <span>{{sportCenter.name}}</span> </div>
-            <div fxLayoutAlign="center center" fxFlex="12" fxFlex.xs="20"> <a md-raised-button [routerLink]="['/pitch',sportCenter.id]">{{'FIELDS' | translate }}</a> </div>
-            <div fxLayoutAlign="center center" fxFlex="12" fxFlex.xs="10"> <a md-raised-button [routerLink]="['/add-new-sportscenter',sportCenter.id]"><i class="material-icons">mode_edit</i></a> </div>
+            <div fxLayoutAlign="center center" fxFlex="12" fxFlex.xs="20"> <a md-raised-button class="md-btn-edit" [routerLink]="['/pitch',sportCenter.id]">{{'FIELDS' | translate }}</a> </div>
+            <div fxLayoutAlign="center center" fxFlex="12" fxFlex.xs="10"> <a md-raised-button class="md-btn-edit" [routerLink]="['/add-new-sportscenter',sportCenter.id]"><i class="material-icons">mode_edit</i></a> </div>
             <!--<div fxLayoutAlign="center center" fxFlex="9" fxFlex.xs="10"> <a md-raised-button (click)="openDialog(sportCenter.id)"><i class="material-icons">delete</i></a> </div>-->
             <!--
              <div fxLayoutAlign="center center" fxFlex="30">
