@@ -109,3 +109,9 @@ em {
 h3 {
     font-size: 16px;
 }
+
+@media screen and (max-width:599px) {
+    .md-button-register-form {
+        padding: 0 !important;
+    }
+}

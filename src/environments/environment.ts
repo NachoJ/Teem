@@ -9,8 +9,15 @@ export const environment = {
 	production: false,
 	loginUser: <User>{},
 
-	BASEAPI: 'http://127.0.0.1:1337',
-	PROFILE_IMAGE_PATH: "http://127.0.0.1:1337/upload/profiles/",
+	socket: <any>{},
+	isSocketConnected: false,
+
+	BASEAPI: 'http://192.168.0.35:1337/sailsapi',
+	PROFILE_IMAGE_PATH: "http://192.168.0.35:1337/upload/profiles/",
+	
+	FACEBOOK_API_KEY: "785727668257883",
+
+	LOCAL_ADDRESS: "http://192.168.0.30:4200",
 
 	REGISTER_USER: '/auth/register',
 	LOGIN_USER: '/auth/login',
@@ -63,7 +70,13 @@ export const environment = {
 	FOLLOW_SPORTCENTER:'/sportcenter/followers',
 	GET_FOLLOWERS: '/followers/',
 	GET_FOLLOWING: '/following/',
-	
+	GET_PLAYED_MATCHES: '/played/match/',
+	GET_ORGANIZED_MATCHES: '/organised/match/',
+	USER_SOCKET: '/user/socket/',
+	GET_UNREAD_CHAT: '/user/unread/',
+	GET_MESSAGES : '/user/message/',
+	SEND_PRIVATE_MESSAGE: '/user/message',
+
 	GOOGLE_URL_SHORTER: 'https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyBR5otEj6lFr96V9V9eqLeD8FmUiOTJBNg',
 
 	GoogleKey: "&key=AIzaSyDD7oo0yCjyp2pIBLbRr_h3b0_NiMXXu3g"

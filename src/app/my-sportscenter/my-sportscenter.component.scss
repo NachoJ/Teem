@@ -18,7 +18,7 @@
 
 .title-block {
     width: 100%;
-    overflow: auto;
+    // overflow: auto;
     position: relative;
     text-align: left;
 }
@@ -59,9 +59,10 @@
     box-shadow: none;
     font-weight: normal;
     position: absolute;
-    bottom: -2px;
+    bottom: 2px;
     right: 0;
 }
+
 .title-icon {
     font-size: 22px;
 }
@@ -151,7 +152,7 @@ a:focus {
 
 .md-btn-edit:hover {
     //border-radius: 0px !important;
-   //color: #fff !important;
+    //color: #fff !important;
     background: #d2232a !important;
     //font-weight: bold !important;
 }

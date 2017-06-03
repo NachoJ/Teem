@@ -1,5 +1,5 @@
 app-find-match {
-     .detail-box {
+    .detail-box {
         margin-bottom: 0px;
         background-color: #e6e7e8;
         padding: 20px 0px 0px;
@@ -44,7 +44,7 @@ app-find-match {
         vertical-align: middle;
     }
     .title-icon {
-    font-size: 22px;
+        font-size: 22px;
     }
     /****  Form CSS  *****/
     form {
@@ -60,7 +60,7 @@ app-find-match {
         margin: 0px !important;
         padding: 0px !important;
     }
-    .mat-list-item-content mat-ripple{
+    .mat-list-item-content mat-ripple {
         height: 200px !important;
         background: red !important;
     }
@@ -139,65 +139,53 @@ app-find-match {
         padding: 10px 20px 8px;
         //border-top: 1px solid grey;
     }
-
-    .md-list-item{
+    .md-list-item {
         height: 70px;
         min-height: 70px;
         background-color: white;
     }
-
     .mat-list-item.odd {
         background: white;
     }
     .mat-list-item.even {
         background: #efefef;
     }
-
     .mat-list-item:hover {
         background: #dcdbdb;
     }
-
     .mat-list {
         padding-top: 0px;
     }
-
     .match-time button {
-    background: #939598 !important;
-    color: #fff !important;
-    font-style: regular;
-    font-weight: bold !important;
-    text-transform: uppercase;
-    border-radius: 0px !important;
-}
-
+        background: #939598 !important;
+        color: #fff !important;
+        font-style: regular;
+        font-weight: bold !important;
+        text-transform: uppercase;
+        border-radius: 0px !important;
+    }
     .match-time button:hover {
         background: #d2232a !important;
     }
-
     .detail-listing .mat-list:first-child .md-list-header p {
         border: none;
     }
-
-    .md-list-item{
-    height: 70px;
-    min-height: 70px;
-    background-color: white;
+    .md-list-item {
+        height: 70px;
+        min-height: 70px;
+        background-color: white;
     }
-
     .mat-list-item.odd {
         background: white;
         margin: 5px 20px 5px 20px;
     }
-
     .mat-list-item.even {
         background: white;
         margin: 5px 20px 5px 20px;
     }
-
     .mat-list-item:hover {
         background: #dcdbdb;
     }
-
     .md-list-item-text {
         width: 100%;
     }
@@ -288,15 +276,13 @@ app-find-match {
         font-style: regular;
         color: #848484;
     }
-
     .morebtn button {
-    margin-top: 10px;
-    margin-right: 22px;
-    background: #d2232a !important;
-    font-style: bold;
-    color: #fff;
+        margin-top: 10px;
+        margin-right: 22px;
+        background: #d2232a !important;
+        font-style: bold;
+        color: #fff;
     }
-
     .morebtn button:hover {
         background: #d2232a !important;
     }
@@ -341,19 +327,19 @@ app-find-match {
         .find-match-main {
             padding: 0 15px;
         }
-        .md-3-line  {
-        margin-right: 13px !important;
-        margin-left: 13px !important;
+        .md-3-line {
+            margin-right: 13px !important;
+            margin-left: 13px !important;
         }
         .md-list-event-date {
             padding-left: 13px;
         }
         .material-icons.md-48 {
-        display: inline-block;
-        height: 65px;
-        width: 65px;
-        vertical-align: middle;
-        // margin: 0 auto;
+            display: inline-block;
+            height: 65px;
+            width: 65px;
+            vertical-align: middle;
+            // margin: 0 auto;
         }
     }
     /* limiting text to two line addreess */
@@ -368,5 +354,26 @@ app-find-match {
         /* fallback */
         max-height: 40px;
         /* fallback */
+    }
+    @media only screen and(max-width: 320px) {
+        .remove-display-flex {
+            display: block !important;
+        }
+    }
+    /* Medium Devices, Desktops */
+    @media only screen and (min-width: 992px) {
+        .md-3-line {
+            // new height
+            height: 80px;
+            padding-top: 15px;
+        }
+    }
+    /* Large Devices, Wide Screens */
+    @media only screen and (min-width: 1200px) {
+        .md-3-line {
+            // new height
+            height: 80px;
+            padding-top: 15px;
+        }
     }
 }

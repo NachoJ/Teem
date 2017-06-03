@@ -80,7 +80,7 @@ app-match-create {
         right: 0;
     }
     .title-icon {
-    font-size: 22px;
+        font-size: 22px;
     }
     /****  Title CSS  *****/
     .title-list-items-text {
@@ -213,7 +213,7 @@ app-match-create {
     .selectbadges .pitch-display {
         //background: rgba(0, 0, 0, 0.05);
         cursor: pointer;
-        display: inline-block !important;
+        // display: inline-block !important;
         position: relative;
         margin: 0 2px 5px 3px;
     }
@@ -242,7 +242,7 @@ app-match-create {
         //padding: 10px 15px;
         background: #848484;
     }
-    .field-info{
+    .field-info {
         margin-left: 5px;
         margin-bottom: 10px;
         margin-right: 20px;
@@ -311,11 +311,11 @@ app-match-create {
     .mat-radio-checked .mat-radio-outer-circle {
         border-color: #000;
     }
-    .span-white{
+    .span-white {
         width: 72px;
         height: 72px;
     }
-    .mat-icon{
+    .mat-icon {
         width: 80px !important;
         height: 80px !important;
     }
@@ -392,12 +392,10 @@ app-match-create {
     .form-group.costCtrl .mat-input-container {
         padding-left: 45px;
     }
-
     .mobile-date {
         margin-top: 10px;
         margin-bottom: 10px;
     }
-
     .note {
         height: 100px;
         vertical-align: middle;

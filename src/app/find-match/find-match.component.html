@@ -16,14 +16,14 @@
                 </div>
             </div>
             <div fxLayout="column" fxFlex="100" class="form-group date">
-                <div fxLayout="row" fxLayout.xs="column">
+                <div fxLayout="row" fxLayout.xs="column" class="remove-display-flex">
                     <label fxLayoutAlign="left center" fxFlex="15">{{'SPORT' | translate}}</label>
                     <md-radio-group fxFlex="85" fxLayoutAlign="center center" fxLayout="row" [(ngModel)]="sport" (change)="onSportChange()">
-                            <md-radio-button  *ngFor="let sp of sportOptions" [value]="sp.id" fxFlex="25">
-                                <div class="span-white" fxLayoutAlign="center center">
-                                    <md-icon class="material-icons md-48" svgIcon={{sp.title}}></md-icon>
-                                </div>
-                            </md-radio-button>
+                        <md-radio-button *ngFor="let sp of sportOptions" [value]="sp.id" fxFlex="25">
+                            <div class="span-white" fxLayoutAlign="center center">
+                                <md-icon class="material-icons md-48" svgIcon={{sp.title}}></md-icon>
+                            </div>
+                        </md-radio-button>
                     </md-radio-group>
                 </div>
             </div>

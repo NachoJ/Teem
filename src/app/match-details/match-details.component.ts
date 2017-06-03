@@ -47,8 +47,8 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 	sanitizedEmailUrl: any;
 
 	clickDisabled = false;
-	socket: any;
-	isSocketConnected: boolean = false;
+	// socket: any;
+	// isSocketConnected: boolean = false;
 	chatString = "";
 	chat: any[] = [];
 
@@ -77,21 +77,21 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 		this.sub = this.route.snapshot.params.matchId;
 		if (this.sub) {
 			var self = this;
-			this.socket = io.sails.connect();
+			// this.socket = io.sails.connect();
 
-			this.socket.on('connect', function () {
-				self.ngZone.run(() => {
-					self.isSocketConnected = true;
-				});
-			});
+			// this.socket.on('connect', function () {
+			// 	self.ngZone.run(() => {
+			// 		self.isSocketConnected = true;
+			// 	});
+			// });
 
-			this.socket.on('match', function messageReceived(message) {
+			environment.socket.on('match', function messageReceived(message) {
 				self.ngZone.run(() => {
 					self.updateOnMatchModel(message);
 				});
 			});
 
-			self.socket.get(environment.BASEAPI + environment.GET_MATCH + self.sub,
+			environment.socket.get(environment.BASEAPI + environment.GET_MATCH + self.sub,
 				function matchReceived(response) {
 					self.ngZone.run(() => {
 						console.log("response match = ", response);
@@ -99,13 +99,13 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 					});
 				});
 
-			self.socket.get(environment.BASEAPI + environment.GET_MATCH_CHAT + self.sub,
+			environment.socket.get(environment.BASEAPI + environment.GET_MATCH_CHAT + self.sub,
 				function chatReceived(response) {
 					self.ngZone.run(() => {
 						console.log("response chat= ", response);
 						if (!response.error)
 							self.chat = response.data;
-							setTimeout(function () {
+						setTimeout(function () {
 							if ($('#main-chat-box')[0])
 								$("#main-chat-box").animate({ scrollTop: $('#main-chat-box')[0].scrollHeight }, 0);
 						}, 1500);
@@ -143,7 +143,7 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 				self.ngZone.run(() => {
 					console.log("messaged");
 					if (message.data.type == 'jointeam') {
-						self.socket.get(environment.BASEAPI + environment.GET_TEAM_MATCH + self.sub,
+						environment.socket.get(environment.BASEAPI + environment.GET_TEAM_MATCH + self.sub,
 							function matchReceived(response) {
 								self.ngZone.run(() => {
 									console.log("matchReceived", response);
@@ -152,7 +152,7 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 							});
 					}
 					if (message.data.type == 'leaveteam') {
-						self.socket.get(environment.BASEAPI + environment.GET_TEAM_MATCH + self.sub,
+						environment.socket.get(environment.BASEAPI + environment.GET_TEAM_MATCH + self.sub,
 							function matchReceived(response) {
 								self.ngZone.run(() => {
 									console.log("matchReceived", response);
@@ -433,7 +433,7 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 	ngOnInit() {
 		window.fbAsyncInit = function () {
 			FB.init({
-				appId: '785727668257883',
+				appId: environment.FACEBOOK_API_KEY,
 				//appId: '1762042520748053',
 				//appId:'1089718477787001',
 				cookie: true,
@@ -473,7 +473,7 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 						.subscribe((response) => {
 							var $items = [];
 							// $.each(response.data, function (k, v) {
-								for (let v of response ){
+							for (let v of response) {
 								// console.log(k + " = ", v)
 								// console.log("v = ", v.email);
 								var imgpath = environment.PROFILE_IMAGE_PATH + v.profileimage;
@@ -489,12 +489,12 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 						});
 				}
 			});
-			$('.tokenize-demo').on('tokenize:tokens:add', function(e, value){
+			$('.tokenize-demo').on('tokenize:tokens:add', function (e, value) {
 				self.ngZone.run(() => {
 					self.tokenLenght = $('.tokenize-demo').data('tokenize2').toArray().length;
 				});
 			});
-			$('.tokenize-demo').on('tokenize:tokens:remove', function(e, value){
+			$('.tokenize-demo').on('tokenize:tokens:remove', function (e, value) {
 				self.ngZone.run(() => {
 					self.tokenLenght = $('.tokenize-demo').data('tokenize2').toArray().length;
 				});
@@ -653,7 +653,7 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 		delete tempuser.profileimg;
 		delete tempuser.clickDisabled;
 		console.log("team = ", tempuser);
-		self.socket.post(environment.BASEAPI + environment.JOIN_MATCH, tempuser,
+		environment.socket.post(environment.BASEAPI + environment.JOIN_MATCH, tempuser,
 			function joinReceived(response) {
 				self.ngZone.run(() => {
 					// if(response.message == 'You are join the match')
@@ -697,7 +697,7 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 		}
 
 		if (team1Lenght < this.match.subsportid['value']) {
-			self.socket.post(environment.BASEAPI + environment.JOIN_MATCH, data,
+			environment.socket.post(environment.BASEAPI + environment.JOIN_MATCH, data,
 				function joinReceived(response) {
 					self.ngZone.run(() => {
 						console.log("response join button Received team1 = ", response);
@@ -710,7 +710,7 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 		}
 		if (team2Lenght < this.match.subsportid['value']) {
 			data.teamid = 2;
-			self.socket.post(environment.BASEAPI + environment.JOIN_MATCH, data,
+			environment.socket.post(environment.BASEAPI + environment.JOIN_MATCH, data,
 				function joinReceived(response) {
 					self.ngZone.run(() => {
 						console.log("response join button Received team2 = ", response);
@@ -724,7 +724,7 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 
 		if (bplayer1Insert) {
 			data.isbenchplayer = true;
-			self.socket.post(environment.BASEAPI + environment.JOIN_MATCH, data,
+			environment.socket.post(environment.BASEAPI + environment.JOIN_MATCH, data,
 				function joinReceived(response) {
 					self.ngZone.run(() => {
 						console.log("response join button Received bt1 = ", response);
@@ -739,7 +739,7 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 		if (bplayer2Insert) {
 			data.teamid = 2;
 			data.isbenchplayer = true;
-			self.socket.post(environment.BASEAPI + environment.JOIN_MATCH, data,
+			environment.socket.post(environment.BASEAPI + environment.JOIN_MATCH, data,
 				function joinReceived(response) {
 					self.ngZone.run(() => {
 						console.log("response join button Received bt2 = ", response);
@@ -755,7 +755,7 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 
 	leaveMatch() {
 		var self = this;
-		self.socket.delete(environment.BASEAPI + environment.DELETE_MATCH + self.user.id + '/' + self.sub,
+		environment.socket.delete(environment.BASEAPI + environment.DELETE_MATCH + self.user.id + '/' + self.sub,
 			function usersReceived(response) {
 				console.log("delete = ", response);
 			});
@@ -795,7 +795,7 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 	ngOnDestroy() {
 		console.log("ngOnDestroy");
 		var self = this;
-		self.socket.get(environment.BASEAPI + environment.UNSUBCRIBE_MATCH + self.sub,
+		environment.socket.get(environment.BASEAPI + environment.UNSUBCRIBE_MATCH + self.sub,
 			function usersReceived(response) {
 				self.ngZone.run(() => {
 					console.log("unsunscribe = ", response);
@@ -810,7 +810,7 @@ export class MatchDetailsComponent implements OnInit, OnDestroy {
 			fromuserid: self.user.id,
 			message: self.chatString
 		};
-		self.socket.post(environment.BASEAPI + environment.SEND_CHAT_MESSAGE, data,
+		environment.socket.post(environment.BASEAPI + environment.SEND_CHAT_MESSAGE, data,
 			function chatReceived(response) {
 				self.ngZone.run(() => {
 					console.log("response chat= ", response);

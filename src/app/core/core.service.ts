@@ -434,6 +434,22 @@ export class CoreService {
 			}).catch(this.handleError);
 	}
 
+	getPlayedMatches(id, date) {
+		return this.http.get(environment.BASEAPI + environment.GET_PLAYED_MATCHES + id, this.options)
+			.map((res: Response) => {
+				return res.json().data;
+
+			}).catch(this.handleError);
+	}
+
+	getOrganizedMatches(id, date) {
+		return this.http.get(environment.BASEAPI + environment.GET_ORGANIZED_MATCHES + id, this.options)
+			.map((res: Response) => {
+				return res.json().data;
+
+			}).catch(this.handleError);
+	}
+
 	handleError(error: any) {
 		console.log("res", error);
 		return Observable.throw(error.json().error || 'Server error');

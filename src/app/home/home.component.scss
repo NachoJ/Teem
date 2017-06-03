@@ -1,8 +1,7 @@
 .detail-box {
     margin-bottom: 0px;
     background-color: #e6e7e8;
-    padding:20px 5px 20px 5px
-    //border-radius: 10px;
+    padding: 20px 5px 20px 5px //border-radius: 10px;
     //-webkit-border-radius: 10px;
     //-moz-border-radius: 10px;
 }
@@ -75,7 +74,7 @@
     //border-top: 1px solid grey;
 }
 
-.md-list-item{
+.md-list-item {
     height: 70px;
     min-height: 70px;
     background-color: white;
@@ -128,7 +127,7 @@
 }
 
 .match-time button:hover {
-     background: #d2232a;
+    background: #d2232a;
 }
 
 .datetime i {
@@ -170,8 +169,7 @@
     .detail-box .title-list-items {
         padding: 0px 10px;
     }
-
-    .md-3-line  {
+    .md-3-line {
         margin-right: 13px !important;
         margin-left: 13px !important;
     }
@@ -194,4 +192,26 @@
     /* fallback */
     max-height: 40px;
     /* fallback */
+}
+
+
+/* Medium Devices, Desktops */
+
+@media only screen and (min-width: 992px) {
+    .md-3-line {
+        // new height
+        height: 80px;
+        padding-top: 15px;
+    }
+}
+
+
+/* Large Devices, Wide Screens */
+
+@media only screen and (min-width: 1200px) {
+    .md-3-line {
+        // new height
+        height: 80px;
+        padding-top: 15px;
+    }
 }

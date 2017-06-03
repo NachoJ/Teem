@@ -1,11 +1,13 @@
 import { environment } from './../../environments/environment';
 import { CoreService } from './core.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthService } from 'app/auth/auth.service';
 
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { TranslateService } from "@ngx-translate/core";
+
+declare var io: any;
 
 @Component({
 	selector: 'te-core',
@@ -28,7 +30,7 @@ export class CoreComponent implements OnInit {
 	erroShow: boolean = false;
 	successShow: boolean = false;
 	
-	constructor(private router: Router, private authService: AuthService, private coreservice: CoreService, private translate: TranslateService) {
+	constructor(private router: Router, private authService: AuthService, private coreservice: CoreService, private translate: TranslateService, private ngZone: NgZone) {
 		this.loadLanguage();
 		if (!authService.isLoggedIn()) {
 			console.log("not looged in");
@@ -66,6 +68,20 @@ export class CoreComponent implements OnInit {
 			}
 
 			let self = this;
+			environment.socket = io.sails.connect();
+
+			environment.socket.on('connect', function () {
+				self.ngZone.run(() => {
+					environment.isSocketConnected = true;
+				});
+			});
+
+			environment.socket.get(environment.BASEAPI + environment.USER_SOCKET + this.user.id,
+				function matchReceived(response) {
+					self.ngZone.run(() => {
+						console.log("connected to socket");
+					});
+				});
 			sportkey.forEach(function (index) {
 
 				if (index == "basketball")

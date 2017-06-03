@@ -38,6 +38,7 @@ import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { SportcenterViewComponent } from './sportcenter-view/sportcenter-view.component';
 import { FollowersComponent } from './settings/followers/followers.component';
 import { FollowingComponent } from './settings/following/following.component';
+import { ChatComponent } from './chat/chat.component';
 
 export function createTranslateLoader(http: Http) {
 	return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
@@ -68,7 +69,8 @@ export function createTranslateLoader(http: Http) {
 		ProfileViewComponent,
 		SportcenterViewComponent,
 		FollowersComponent,
-		FollowingComponent
+		FollowingComponent,
+		ChatComponent
 	],
 	entryComponents: [
 		UserProfileImageComponent,

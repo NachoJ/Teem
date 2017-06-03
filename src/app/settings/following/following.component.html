@@ -2,8 +2,8 @@
     <div *ngIf="!isMobile" class="followers-grid">
         <md-grid-list gutterSize="10px" cols="3" rowHeight="16:5">
             <div *ngFor="let follow of following">
-                <md-grid-tile>
-                    <img src="{{profileImageBaseUrl+follow.followinguserid.profileimage}}" class="followers-img" />
+                <md-grid-tile (click)="navigateToUserProfile(follow.followinguserid)">
+                    <img onError="this.onerror=null;this.src='assets/img/sidebar_photo.png';" src="{{profileImageBaseUrl+follow.followinguserid.profileimage}}" class="followers-img" />
                     <div class="follower-info">
                         <label>{{follow.followinguserid.username}}</label>
                         <label class="giveMeEllipsis">{{follow.followinguserid.city}}</label>
@@ -15,8 +15,8 @@
     <div *ngIf="isMobile" class="followers-grid">
         <md-grid-list gutterSize="10px" cols="1" rowHeight="16:5">
             <div *ngFor="let follow of following">
-                <md-grid-tile>
-                    <img src="{{profileImageBaseUrl+follow.followinguserid.profileimage}}" class="followers-img" />
+                <md-grid-tile (click)="navigateToUserProfile(follow.followinguserid)">
+                    <img onError="this.onerror=null;this.src='assets/img/sidebar_photo.png';" src="{{profileImageBaseUrl+follow.followinguserid.profileimage}}" class="followers-img" />
                     <div class="follower-info">
                         <label>{{follow.followinguserid.username}}</label>
                         <label class="giveMeEllipsis">{{follow.followinguserid.city}}</label>

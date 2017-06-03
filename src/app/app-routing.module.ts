@@ -1,3 +1,4 @@
+import { ChatComponent } from './chat/chat.component';
 import { FollowingComponent } from './settings/following/following.component';
 import { FollowersComponent } from './settings/followers/followers.component';
 import { SportcenterViewComponent } from './sportcenter-view/sportcenter-view.component';
@@ -71,6 +72,7 @@ import { ProfileGuard } from "app/core/profileguard.service";
 					{ path: 'search/:searchValue', component: SearchComponent, canActivate: [ProfileGuard] },
 					{ path: 'profileview/:userId', component: ProfileViewComponent, canActivate: [ProfileGuard] },
 					{ path: 'sportcenterview/:scId', component: SportcenterViewComponent, canActivate: [ProfileGuard] },
+					{ path: 'chat', component: ChatComponent, canActivate: [ProfileGuard] },
 					{
 						path: 'settings',
 						component: SettingsComponent,

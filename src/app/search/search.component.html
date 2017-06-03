@@ -10,8 +10,8 @@
                     <img md-list-avatar onError="this.onerror=null;this.src='assets/img/sidebar_photo.png';" src="{{profileImageBaseUrl + user.profileimage}}" alt="... " (click)="navigateToUserProfile(user)">
                     <h3 md-line class="ellipse" (click)="navigateToUserProfile(user)"> {{user.username}} </h3>
                     <p md-line><span class="demo-2 ellipse" (click)="navigateToUserProfile(user)"> {{user.city}} </span></p>
-                    <label md-button md-line md-button color="primary" class="bordered-btn following-btn" *ngIf="followers.indexOf(user.id)!= -1" (click)="unFollow(user.id)">{{ 'FOLLOWING' | translate }}</label>
-                    <label md-button md-line md-button color="primary" class="bordered-btn following-btn" *ngIf="followers.indexOf(user.id) == -1" (click)="followUser(user.id)">{{ 'FOLLOW' | translate }}</label>
+                    <label md-button md-line md-button color="primary" class="bordered-btn following-btn" *ngIf="followers.indexOf(user.id)!= -1 && user.id!=userid" (click)="unFollow(user.id)">{{ 'FOLLOWING' | translate }}</label>
+                    <label md-button md-line md-button color="primary" class="bordered-btn following-btn" *ngIf="followers.indexOf(user.id) == -1 && user.id!=userid" (click)="followUser(user.id)">{{ 'FOLLOW' | translate }}</label>
                 </md-list-item>
             </md-list>
         </div>

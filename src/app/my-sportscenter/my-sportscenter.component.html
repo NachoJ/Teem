@@ -1,7 +1,7 @@
 <div fxLayout.xs="column" fxLayout="row" class="sportcenterblock">
     <div *ngIf="error" class="error"> {{error}} </div>
     <div *ngIf="success" class="success"> {{success}} </div>
-    <div class="title-block">
+    <div class="title-block" fxFlex="100">
         <p class="title-list-items-text"> <i class="fa fa-list-alt fa-2x title-icon" aria-hidden="true"></i> {{'MY-SPORTSCENTER' | translate}} </p>
         <button md-raised-button routerLink="/add-new-sportscenter">{{'ADD SPORTS CENTER' | translate}}</button>
     </div>

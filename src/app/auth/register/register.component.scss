@@ -141,6 +141,15 @@ label {
 
 @media screen and (max-width:599px) {
     .register-formbox {
-        padding: 10px 0px;
+        // padding: 10px 0px;
+    }
+    .md-button-register-form {
+        padding: 0 !important;
+    }
+    .form-group {
+        margin: 5px 0 5px 0 !important;
+    }
+    .md-button-register-form {
+        margin: 0 !important;
     }
 }

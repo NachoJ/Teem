@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { CoreService } from 'app/core/core.service';
 import { environment } from './../../../environments/environment';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
@@ -15,7 +16,7 @@ export class FollowersComponent implements OnInit {
 	isMobile = false;
 	profileImageBaseUrl: string;
 
-	constructor(private coreService: CoreService) {
+	constructor(private coreService: CoreService, private router: Router) {
 		this.userId = JSON.parse(window.localStorage['teem_user']).id;
 		this.profileImageBaseUrl = environment.PROFILE_IMAGE_PATH;
 		this.coreService.getFollowers(this.userId)
@@ -41,6 +42,11 @@ export class FollowersComponent implements OnInit {
 		) {
 			this.isMobile = true;
 		}
+	}
+
+	navigateToUserProfile(user) {
+		// console.log(user.id);
+		this.router.navigate(['profileview', user.id]);
 	}
 
 }

@@ -18,7 +18,7 @@ export class ProfileGuard implements CanActivate {
 			// alert('test');
 			this.router.navigate(['settings'], { queryParams: { new: "profile" }} );
 			this.coreService.emitSuccessMessage("Please Fill Full Profile");
-			console.log("profile guard = ", "else");
+			// console.log("profile guard = ", "else");
 			return false;
 		}
 	}

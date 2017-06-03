@@ -1,0 +1,51 @@
+<div fxLayout="column" class="detail-box">
+    <div fxLayout="row" fxLayoutAlign="start center" class="title-list-items">
+        <p fxFlex="100" class="title-list-items-text"> <i class="material-icons">chat</i> {{'CHAT' | translate}}</p>
+    </div>
+    <div fxLayout="row" class="chat-container">
+        <div fxLayout="column" fxHide.xs="true" fxFlex="35" class="chat-user-list" id="style-2">
+            <md-list>
+                <md-list-item *ngFor="let cuser of userList" (click)="loadConversation(cuser);cuser.count=0">
+                    <img md-list-avatar src="{{profileImageBaseUrl+cuser.profileimage}}" alt="..." /><span *ngIf="cuser.count" class="m-badge">{{cuser.count}}</span>
+                    <h3 md-line fxHide.xs="true"> {{cuser.firstname + " " +cuser.lastname}} </h3>
+                </md-list-item>
+            </md-list>
+        </div>
+        <div fxLayout="column" fxFlex="65" fxFlex.xs="100" class="chat-history">
+            <div fxLayout="row" fxLayoutAlign="start center" class="chat-history-profile">
+                <img *ngIf="activeChatUser.id" class="profile-avatar" src="{{profileImageBaseUrl+activeChatUser.profileimage}}" />
+                <div *ngIf="activeChatUser.id" class="profile-avatar-username">{{activeChatUser.firstname + " " + activeChatUser.lastname}}</div>
+            </div>
+            <div fxLayout="column" fxFlex="grow" class="chat-history-list" style="overflow-y:scroll;">
+                <div *ngFor="let message of activeChat">
+                    <div *ngIf="message.senderuserid == user.id" class="message-send">
+                        <div class="wrapper">
+                            <img class="chat-user-image" src="{{profileImageBaseUrl+user.profileimage}}" />
+                            <div class="tri-right right-top">
+                                <p>{{message.message}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="message.senderuserid != user.id" class="message-receive">
+                        <div class="wrapper">
+                            <img class="chat-user-image" src="{{profileImageBaseUrl+activeChatUser.profileimage}}" />
+                            <div class="tri-left left-top">
+                                <p>{{message.message}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="row" class="chat-input-box">
+                <div fxFlex="90">
+                    <md-input-container class="full-width">
+                        <input mdInput placeholder="Enter Message" [(ngModel)]="chatString" (keyup.enter)="sendMessage()">
+                    </md-input-container>
+                </div>
+                <div fxFlex="10">
+                    <button md-mini-fab (click)="sendMessage()"><md-icon>send</md-icon></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

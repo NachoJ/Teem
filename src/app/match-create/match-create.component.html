@@ -55,16 +55,14 @@
                 <div *ngIf="pitches" class="selectbadges">
                     <p class="pitch-selection-note" *ngIf="pitches.length>1">{{'SELECT THE PITCH WHERE TO WANT TO PLAY' | translate }}</p>
                     <div fxLayout="row">
-                        <div fxFlex="30"></div>
-                        <md-radio-group fxLFlex="70" fxLayoutAlign="center center" formControlName="pitchRadioGroupCtrl" [(ngModel)]="someradio">
-                            <div *ngFor="let pitch of pitches; let i = index" (click)="pitchSelected(pitch.id,pitch.sport)" fxLayout="row" class="pitch-display">
-                                <div fxFlex="50" fxLayoutAlign="end start">
+                        <div fxFlex="30" fxHide.sm="100" fxHide.xs="100"></div>
+                        <md-radio-group fxFlex="70" fxLayoutWrap fxLayoutAlign="start center" fxLayoutAlign.xs="center center" fxLayoutAlign.sm="center center" formControlName="pitchRadioGroupCtrl" [(ngModel)]="someradio">
+                            <div fxFlex="48" *ngFor="let pitch of pitches; let i = index" (click)="pitchSelected(pitch.id,pitch.sport)" fxLayout="row" class="pitch-display">
+                                <div fxLayoutAlign="start center">
                                     <md-radio-button [value]="pitch.id">
                                         <div class="span-white">
                                             <md-icon class="material-icons md-48" svgIcon={{pitch.sportname}}></md-icon>
                                         </div>
-                                        
-                                        <!--<p class="badge">{{pitch.sport}}</p>-->
                                     </md-radio-button>
                                     <div class="field-info" fxLayout="column" fxLayoutAlign="center center">
                                         <p class="badged"> {{pitch.name}}</p>

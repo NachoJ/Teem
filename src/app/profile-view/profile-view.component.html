@@ -8,7 +8,7 @@
     </div>
     <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlexOffset.gt-sm="5" fxFlexLayout="start start" class="main-container">
         <div fxFlex="20" fxFlex.sm="10" fxFLex.xs="10" fxLayout="column">
-            <img class="user-img" src="{{profileImageBaseUrl+userDetails.profileimage}}">
+            <img class="user-img" src="{{profileImageBaseUrl+userDetails.profileimage}}" onError="this.onerror=null;this.src='assets/img/sidebar_photo.png';">
             <div fxFlexAlign="center" class="sports">
                 <img *ngIf="isSoccer" class="sport-img" src="assets/img/b01.png" />
                 <img *ngIf="isBasketball" class="sport-img" src="assets/img/b02.png" />
@@ -49,34 +49,262 @@
         </div>
     </div>
 </div>
-<div fxLayout="column" class="detail-box" *ngIf="followers.length>0 && followers[0].userdetail[0] != undefined">
+<div fxLayout="column" class="detail-box">
     <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100" class="title-list-items">
-        <p fxFlex="grow" class="title-list-items-text"> <i class="material-icons">insert_emoticon</i> {{'FOLLOWERS' | translate}}</p>
+        <p fxFlex="100" class="title-list-items-text"> <i class="material-icons">insert_emoticon</i> {{'FOLLOWING & FOLLOWERS'| translate}}</p>
     </div>
-    <div *ngIf="!isMobile" class="followers-grid">
-        <md-grid-list gutterSize="10px" cols="3" rowHeight="16:5">
-            <div *ngFor="let follower of followers">
-                <md-grid-tile>
-                    <img src="{{profileImageBaseUrl+follower.userdetail[0].profileimage}}" class="followers-img" />
-                    <div class="follower-info">
-                        <label>{{follower.userdetail[0].username}}</label>
-                        <label class="giveMeEllipsis">{{follower.userdetail[0].city}}</label>
-                    </div>
-                </md-grid-tile>
+    <md-tab-group>
+        <md-tab label="{{'FOLLOWING_T' | translate}}" *ngIf="following != undefined">
+            <div *ngIf="!isMobile">
+                <md-grid-list gutterSize="10px" cols="3" rowHeight="16:5">
+                    <md-grid-tile *ngFor="let follow of following" (click)="navigateToUserProfile(follow.followinguserid.id)">
+                        <img src="{{profileImageBaseUrl+follow.followinguserid.profileimage}}" onError="this.onerror=null;this.src='assets/img/sidebar_photo.png';" class="followers-img" />
+                        <div class="follower-info">
+                            <label>{{follow.followinguserid.username}}</label>
+                            <label class="giveMeEllipsis">{{follow.followinguserid.city}}</label>
+                        </div>
+                    </md-grid-tile>
+                </md-grid-list>
             </div>
-        </md-grid-list>
-    </div>
-    <div *ngIf="isMobile" class="followers-grid">
-        <md-grid-list gutterSize="10px" cols="1" rowHeight="16:5">
-            <div *ngFor="let follower of followers">
-                <md-grid-tile>
-                    <img src="{{profileImageBaseUrl+follower.userdetail[0].profileimage}}" class="followers-img" />
-                    <div class="follower-info">
-                        <label>{{follower.userdetail[0].username}}</label>
-                        <label class="giveMeEllipsis">{{follower.userdetail[0].city}}</label>
-                    </div>
-                </md-grid-tile>
+            <div *ngIf="isMobile">
+                <md-grid-list gutterSize="10px" cols="1" rowHeight="16:5">
+                    <md-grid-tile *ngFor="let follow of following" (click)="navigateToUserProfile(follow.followinguserid.id)">
+                        <img src="{{profileImageBaseUrl+follow.followinguserid.profileimage}}" onError="this.onerror=null;this.src='assets/img/sidebar_photo.png';" class="followers-img" />
+                        <div class="follower-info">
+                            <label>{{follow.followinguserid.username}}</label>
+                            <label class="giveMeEllipsis">{{follow.followinguserid.city}}</label>
+                        </div>
+                    </md-grid-tile>
+                </md-grid-list>
             </div>
-        </md-grid-list>
+        </md-tab>
+        <!--FOLLOWERS-->
+        <md-tab label="{{'FOLLOWERS' | translate}}" *ngIf="followers.length>0 && followers[0].userdetail[0] != undefined">
+            <div *ngIf="!isMobile">
+                <md-grid-list gutterSize="10px" cols="3" rowHeight="16:5">
+                    <md-grid-tile *ngFor="let follower of followers" (click)="navigateToUserProfile(follower.userdetail[0]._id)">
+                        <img src="{{profileImageBaseUrl+follower.userdetail[0].profileimage}}" onError="this.onerror=null;this.src='assets/img/sidebar_photo.png';" class="followers-img" />
+                        <div class="follower-info">
+                            <label>{{follower.userdetail[0].username}}</label>
+                            <label class="giveMeEllipsis">{{follower.userdetail[0].city}}</label>
+                        </div>
+                    </md-grid-tile>
+                </md-grid-list>
+            </div>
+            <div *ngIf="isMobile">
+                <md-grid-list gutterSize="10px" cols="1" rowHeight="16:5">
+                    <md-grid-tile *ngFor="let follower of followers" (click)="navigateToUserProfile(follower.userdetail[0]._id)">
+                        <img src="{{profileImageBaseUrl+follower.userdetail[0].profileimage}}" class="followers-img" />
+                        <div class="follower-info">
+                            <label>{{follower.userdetail[0].username}}</label>
+                            <label class="giveMeEllipsis">{{follower.userdetail[0].city}}</label>
+                        </div>
+                    </md-grid-tile>
+                </md-grid-list>
+            </div>
+        </md-tab>
+    </md-tab-group>
+</div>
+
+<div fxLayout="column" class="detail-box">
+    <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100" class="title-list-items">
+        <p fxFlex="100" class="title-list-items-text"> <i class="material-icons">history</i> {{'MATCH HISTORY'| translate}}</p>
     </div>
+    <md-tab-group>
+        <md-tab label="{{'SCHEDULED' | translate}}">
+            <div class="detail-listing">
+                <md-list class="nopadding" *ngFor=" let match of scheduleMatch | slice:0:displayScheduleMatch; let i = index;">
+                    <div *ngIf="match.displayDate" class="md-toolbar-tools" layout-align="start start" class="md-list-header">
+                        <p class="md-list-event-date"> <em> <span>{{match.filteredMatchDate}}</span> </em> </p>
+                    </div>
+                    <md-list-item class="md-3-line" [class.even]="(i % 2)==0" [class.odd]="(i % 2)!=0">
+                        <div class="md-list-item-text" ng-class-odd="'odd'" ng-class-even="'odd'">
+                            <div fxHide.gt-xs fxLayout="row" fxFlex="100">
+                                <div fxLayoutAlign="center center" fxFlex="20" class="match-time center">
+                                    <a [mdMenuTriggerFor]="profilePopupMenu"><img src="{{match.matchdetail[0].userdetail[0].profileimage}}" alt="" class="user-img-icon"></a>
+                                </div>
+                                <div fxLayout="column" fxFlexOffset="4" fxLayoutAlign="center start" fxFlex="58" [routerLink]="['/match-details',match.matchdetail[0]._id]">
+                                    <p class="md-list-event-hour datetime"><b>{{match.filteredMatchTime}}</b> </p>
+                                    <p class="md-list-event-hour"><b>{{match.matchdetail[0].sportdetail[0].title}}</b> </p>
+                                    <p><b style="margin:2px 0px;">{{match.matchdetail[0].sportcenterdetail[0].address}} </b></p>
+                                </div>
+                                <div fxLayoutAlign="center center" fxFlex="20" class="match-time left">
+                                    <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{match.matchdetail[0].subsport[0].value + match.matchdetail[0].benchplayers}} </b> <b style="margin:2px 0px; display: block;">{{ match.payment }} {{match.matchdetail[0].price}} </b>                                        </p>
+                                </div>
+                            </div>
+                            <div fxHide.xs fxLayout="row" fxFlex="100">
+                                <div fxLayout="row" fxFlex="20" fxLayoutAlign="center center" class="datetime"> <i class="material-icons play-arrow-icon">play_arrow</i>
+                                    <p class="md-list-event-hour"><b>{{match.filteredMatchTime}}</b> </p>
+                                </div>
+                                <!--<p fxFlex="20" class="md-list-event-hour"><b>{{match.matchdetail[0].sportdetail[0].title}}</b> </p>-->
+                                <div fxLayout="column" fxFlex="15">
+                                    <p class="md-list-event-hour"><b>{{match.matchdetail[0].sportdetail[0].title}}</b> </p>
+                                    <p style="font-size:10px !important; margin:2px 0px;"><b>Created by</b> </p>
+                                    <p style="font-size:10px !important"><b>{{match.matchdetail[0].userdetail[0].username}}</b> </p>
+                                </div>
+                                <div fxFlex="15" class="match-time center">
+                                    <a [mdMenuTriggerFor]="profilePopupMenu"><img src="{{match.matchdetail[0].userdetail[0].profileimage}}" alt="" class="user-img-icon"></a>
+                                </div>
+                                <div fxFlex="25" class="match-time left">
+                                    <p class="giveMeEllipsis2Line"><b style="margin:2px 0px; display: block;">{{match.matchdetail[0].sportcenterdetail[0].address}} </b> <b style="margin:2px 0px; display: block;"><!--BERNABÉU --> </b> </p>
+                                </div>
+                                <div fxFlex="10" class="match-time left">
+                                    <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{ match.matchdetail[0].subsport[0].value + match.matchdetail[0].benchplayers }} </b> <b style="margin:2px 0px; display: block;">{{ match.payment }} {{match.matchdetail[0].price}} </b>                                        </p>
+                                </div>
+                                <div fxLayoutAlign="center center" fxFlex="15" class="match-time center">
+                                    <button md-raised-button [routerLink]="['/match-details',match.matchdetail[0]._id]">Info</button>
+                                </div>
+                                <md-menu #profilePopupMenu="mdMenu">
+                                    <h4>{{match.matchdetail[0].userdetail[0].username}}</h4>
+                                    <p><i class="material-icons">location_on</i>{{match.matchdetail[0].userdetail[0].city}} </p>
+                                    <a *ngIf="checkSport(1,match.matchdetail[0].userdetail[0].sports)"><img src="/assets/img/b01.png"></a>
+                                    <a *ngIf="checkSport(2,match.matchdetail[0].userdetail[0].sports)"><img src="/assets/img/b02.png"></a>
+                                    <a *ngIf="checkSport(3,match.matchdetail[0].userdetail[0].sports)"><img src="/assets/img/b03.png"></a>
+                                </md-menu>
+                            </div>
+
+                        </div>
+                    </md-list-item>
+                </md-list>
+                <div fxFlex='10' fxLayoutAlign="end" class="morebtn">
+                    <button md-raised-button (click)="scheduleMoreMatch()" *ngIf="scheduleMatch.length>3" color="primary">
+					<span *ngIf="isScheduleMore">More</span>
+					<span *ngIf="!isScheduleMore">Less</span>
+				</button>
+                </div>
+            </div>
+        </md-tab>
+        <md-tab label="{{'PLAYED' | translate}}">
+            <div class="detail-listing">
+                <md-list class="nopadding" *ngFor=" let match of playedMatch | slice:0:displayPlayedMatch; let i = index;">
+                    <div *ngIf="match.displayDate" class="md-toolbar-tools" layout-align="start start" class="md-list-header">
+                        <p class="md-list-event-date"> <em> <span>{{match.filteredMatchDate}}</span> </em> </p>
+                    </div>
+                    <md-list-item class="md-3-line" [class.even]="(i % 2)==0" [class.odd]="(i % 2)!=0">
+                        <div class="md-list-item-text" ng-class-odd="'odd'" ng-class-even="'odd'">
+                            <div fxHide.gt-xs fxLayout="row" fxFlex="100">
+                                <div fxLayoutAlign="center center" fxFlex="20" class="match-time center">
+                                    <a [mdMenuTriggerFor]="profilePopupMenu"><img src="{{match.matchdetail[0].userdetail[0].profileimage}}" alt="" class="user-img-icon"></a>
+                                </div>
+                                <div fxLayout="column" fxFlexOffset="4" fxLayoutAlign="center start" fxFlex="58" [routerLink]="['/match-details',match.matchdetail[0]._id]">
+                                    <p class="md-list-event-hour datetime"><b>{{match.filteredMatchTime}}</b> </p>
+                                    <p class="md-list-event-hour"><b>{{match.matchdetail[0].sportdetail[0].title}}</b> </p>
+                                    <p><b style="margin:2px 0px;">{{match.matchdetail[0].sportcenterdetail[0].address}} </b></p>
+                                </div>
+                                <div fxLayoutAlign="center center" fxFlex="20" class="match-time left">
+                                    <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{match.matchdetail[0].subsport[0].value + match.matchdetail[0].benchplayers}} </b> <b style="margin:2px 0px; display: block;">{{ match.payment }} {{match.matchdetail[0].price}} </b>                                        </p>
+                                </div>
+                            </div>
+                            <div fxHide.xs fxLayout="row" fxFlex="100">
+                                <div fxLayout="row" fxFlex="20" fxLayoutAlign="center center" class="datetime"> <i class="material-icons play-arrow-icon">play_arrow</i>
+                                    <p class="md-list-event-hour"><b>{{match.filteredMatchTime}}</b> </p>
+                                </div>
+                                <!--<p fxFlex="20" class="md-list-event-hour"><b>{{match.matchdetail[0].sportdetail[0].title}}</b> </p>-->
+                                <div fxLayout="column" fxFlex="15">
+                                    <p class="md-list-event-hour"><b>{{match.matchdetail[0].sportdetail[0].title}}</b> </p>
+                                    <p style="font-size:10px !important; margin:2px 0px;"><b>Created by</b> </p>
+                                    <p style="font-size:10px !important"><b>{{match.matchdetail[0].userdetail[0].username}}</b> </p>
+                                </div>
+                                <div fxFlex="15" class="match-time center">
+                                    <a [mdMenuTriggerFor]="profilePopupMenu"><img src="{{match.matchdetail[0].userdetail[0].profileimage}}" alt="" class="user-img-icon"></a>
+                                </div>
+                                <div fxFlex="25" class="match-time left">
+                                    <p class="giveMeEllipsis2Line"><b style="margin:2px 0px; display: block;">{{match.matchdetail[0].sportcenterdetail[0].address}} </b> <b style="margin:2px 0px; display: block;"><!--BERNABÉU --> </b> </p>
+                                </div>
+                                <div fxFlex="10" class="match-time left">
+                                    <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{ match.matchdetail[0].subsport[0].value + match.matchdetail[0].benchplayers }} </b> <b style="margin:2px 0px; display: block;">{{ match.payment }} {{match.matchdetail[0].price}} </b>                                        </p>
+                                </div>
+                                <div fxLayoutAlign="center center" fxFlex="15" class="match-time center">
+                                    <button md-raised-button [routerLink]="['/match-details',match.matchdetail[0]._id]">Info</button>
+                                </div>
+                                <md-menu #profilePopupMenu="mdMenu">
+                                    <h4>{{match.matchdetail[0].userdetail[0].username}}</h4>
+                                    <p><i class="material-icons">location_on</i>{{match.matchdetail[0].userdetail[0].city}} </p>
+                                    <a *ngIf="checkSport(1,match.matchdetail[0].userdetail[0].sports)"><img src="/assets/img/b01.png"></a>
+                                    <a *ngIf="checkSport(2,match.matchdetail[0].userdetail[0].sports)"><img src="/assets/img/b02.png"></a>
+                                    <a *ngIf="checkSport(3,match.matchdetail[0].userdetail[0].sports)"><img src="/assets/img/b03.png"></a>
+                                </md-menu>
+                            </div>
+
+                        </div>
+                    </md-list-item>
+                </md-list>
+                <div fxFlex='10' fxLayoutAlign="end" class="morebtn">
+                    <button md-raised-button (click)="playedMoreMatch()" *ngIf="playedMatch.length>3" color="primary">
+					<span *ngIf="isPlayedMore">More</span>
+					<span *ngIf="!isPlayedMore">Less</span>
+				</button>
+                </div>
+            </div>
+        </md-tab>
+        <md-tab label="{{'ORGANIZED' | translate}}">
+            <div class="detail-listing">
+                <md-list class="nopadding" *ngFor=" let match of organizedMatch | slice:0:displayOrganizedMatch; let i = index;">
+                    <div *ngIf="match.displayDate" class="md-toolbar-tools" layout-align="start start" class="md-list-header">
+                        <p class="md-list-event-date"> <em> <span>{{match.filteredMatchDate}}</span> </em> </p>
+                    </div>
+                    <md-list-item class="md-3-line" [class.even]="(i % 2)==0" [class.odd]="(i % 2)!=0">
+                        <div class="md-list-item-text" ng-class-odd="'odd'" ng-class-even="'odd'">
+                            <div fxHide.gt-xs fxLayout="row" fxFlex="100">
+                                <div fxLayoutAlign="center center" fxFlex="20" class="match-time center">
+                                    <!--<a [mdMenuTriggerFor]="profilePopupMenu"><img src="{{match.matchdetail[0].userdetail[0].profileimage}}" alt="" class="user-img-icon"></a>-->
+                                    <a>
+                                        <md-icon class="material-icons md-36 force-center" svgIcon={{match.sportdetail[0].title}}></md-icon>
+                                    </a>
+                                </div>
+                                <div fxLayout="column" fxFlexOffset="4" fxLayoutAlign="center start" fxFlex="58" [routerLink]="['/match-details',match._id]">
+                                    <p class="md-list-event-hour datetime"><b>{{match.filteredMatchTime}}</b> </p>
+                                    <p class="md-list-event-hour"><b>{{match.sportdetail[0].title}}</b> </p>
+                                    <p><b style="margin:2px 0px;">{{match.sportcenterdetail[0].address}} </b></p>
+                                </div>
+                                <div fxLayoutAlign="center center" fxFlex="20" class="match-time left">
+                                    <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{match.subsport[0].value + match.benchplayers}} </b> <b style="margin:2px 0px; display: block;">{{ match.payment }} {{match.price}} </b> </p>
+                                </div>
+                            </div>
+                            <div fxHide.xs fxLayout="row" fxFlex="100">
+                                <div fxLayout="row" fxFlex="15" fxLayoutAlign="center center" class="datetime"> <i class="material-icons play-arrow-icon">play_arrow</i>
+                                    <p class="md-list-event-hour"><b>{{match.filteredMatchTime}}</b> </p>
+                                </div>
+                                <!--<p fxFlex="20" class="md-list-event-hour"><b>{{match.matchdetail[0].sportdetail[0].title}}</b> </p>-->
+                                <div fxLayout="column" fxLayoutAlign="center center" fxFlex="10">
+                                    <p class="md-list-event-hour"><b>{{match.sportdetail[0].title}}</b> </p>
+                                    <!--<p style="font-size:10px !important; margin:2px 0px;"><b>Created by</b> </p>-->
+                                    <!--<p style="font-size:10px !important"><b>{{match.userdetail[0].username}}</b> </p>-->
+                                </div>
+                                <div fxFlex="15" class="match-time center">
+                                    <a>
+                                        <md-icon class="material-icons md-36 force-center" svgIcon={{match.sportdetail[0].title}}></md-icon>
+                                    </a>
+                                    <!--<a [mdMenuTriggerFor]="profilePopupMenu"><img src="{{match.userdetail[0].profileimage}}" alt="" class="user-img-icon"></a>-->
+                                </div>
+                                <div fxFlex="30" class="match-time left">
+                                    <p class="giveMeEllipsis2Line"><b style="margin:2px 0px; display: block;">{{match.sportcenterdetail[0].address}} </b> <b style="margin:2px 0px; display: block;"><!--BERNABÉU --> </b> </p>
+                                </div>
+                                <div fxFlex="15" class="match-time left">
+                                    <p><b style="margin:2px 0px; display: block;">{{match.matchplayercount}} DE {{ match.subsport[0].value + match.benchplayers }} </b> <b style="margin:2px 0px; display: block;">{{ match.payment }} {{match.price}} </b> </p>
+                                </div>
+                                <div fxLayoutAlign="center center" fxFlex="15" class="match-time center">
+                                    <button md-raised-button [routerLink]="['/match-details',match._id]">Info</button>
+                                </div>
+                                <!--<md-menu #profilePopupMenu="mdMenu">
+                                    <h4>{{match.matchdetail[0].userdetail[0].username}}</h4>
+                                    <p><i class="material-icons">location_on</i>{{match.matchdetail[0].userdetail[0].city}} </p>
+                                    <a *ngIf="checkSport(1,match.matchdetail[0].userdetail[0].sports)"><img src="/assets/img/b01.png"></a>
+                                    <a *ngIf="checkSport(2,match.matchdetail[0].userdetail[0].sports)"><img src="/assets/img/b02.png"></a>
+                                    <a *ngIf="checkSport(3,match.matchdetail[0].userdetail[0].sports)"><img src="/assets/img/b03.png"></a>
+                                </md-menu>-->
+                            </div>
+
+                        </div>
+                    </md-list-item>
+                </md-list>
+                <div fxFlex='10' fxLayoutAlign="end" class="morebtn">
+                    <button md-raised-button (click)="organizedMoreMatch()" *ngIf="organizedMatch.length>3" color="primary">
+					<span *ngIf="isOrganizedMore">More</span>
+					<span *ngIf="!isOrganizedMore">Less</span>
+				</button>
+                </div>
+            </div>
+        </md-tab>
+    </md-tab-group>
 </div>

@@ -14,7 +14,7 @@ export class AppComponent {
 		this.loadLanguage();
 	}
 	loadLanguage() {
-		console.log("language loaded app component");
+		// console.log("language loaded app component");
 		var arrLang = navigator.language.split('-');
 		var languageN;
 		if (arrLang.length > 0) {
@@ -22,7 +22,7 @@ export class AppComponent {
 		} else {
 			languageN = navigator.language;
 		}
-		console.log("language = " + languageN);
+		// console.log("language = " + languageN);
 		this.translate.setDefaultLang('en');
 		if (window.localStorage.getItem('teem_user_language'))
 			this.translate.use(window.localStorage.getItem('teem_user_language'));

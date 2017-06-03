@@ -1,10 +1,13 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthService } from '../auth.service';
 import { TranslateService } from "@ngx-translate/core";
 
+import { environment } from './../../../environments/environment';
+
 declare const FB: any;
+declare const $: any;
 
 @Component({
 	selector: 'te-auth-home',
@@ -20,11 +23,19 @@ export class AuthHomeComponent implements OnInit {
 	fbUserEmail: string;
 	fbUserPermissionGranted: boolean = false;
 	fbToken: string;
+	fbOAuthUrl: string;
 
 	error: string;
-	constructor(private authService: AuthService, private router: Router, private ngZone: NgZone) {
+	constructor(private authService: AuthService, private router: Router, private ngZone: NgZone, private route: ActivatedRoute) {
+		this.fbOAuthUrl = 'https://www.facebook.com/v2.8/dialog/oauth?' +
+			'client_id=' + environment.FACEBOOK_API_KEY +
+			'&redirect_uri=' + environment.LOCAL_ADDRESS + '/auth' +
+			'&auth_type=rerequest' +
+			'&scope=email,public_profile,user_birthday,user_location' +
+			'&response_type=token';
+
 		FB.init({
-			appId: '122806058294007', //main id 785727668257883  test app id 793209790843004
+			appId: environment.FACEBOOK_API_KEY, //main id 785727668257883  test app id 793209790843004
 			cookie: true,  // enable cookies to allow the server to access the session
 			xfbml: true,  // parse social plugins on this page
 			version: 'v2.8' // use graph api version 2.8
@@ -32,14 +43,32 @@ export class AuthHomeComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		var self = this;
+		this.fbToken = self.route.snapshot.fragment;
+		$(document).ready(function () {
+			console.log("ready");
+			// tslint:disable-next-line:curly
+			if (self.fbToken)
+				if (self.fbToken.includes('access_token')) {
+					console.log('FbToken found');
+					setTimeout(function () {
+						self.callFbLogin();
+					}, 1000);
+				}
+		});
+	}
+
+	callFbLoginOAuth() {
+		window.location.href = this.fbOAuthUrl;
+
 	}
 
 	callFbLogin() {
 		let self = this;
 		console.log("callFbLogin called");
-		FB.login((result: any) => {
-			console.log('login request', result);
-			this.fbToken = result.authResponse.accessToken;
+		// FB.login((result: any) => {
+		// 	console.log('login request', result);
+		// 	this.fbToken = result.authResponse.accessToken;
 			FB.api('/me/permissions', (result: any) => {
 				console.log('permissions', result);
 				for (let i = 0; i < result.data.length; i++) {
@@ -76,9 +105,10 @@ export class AuthHomeComponent implements OnInit {
 						});
 					}
 				}
-			});
+			}, { scope: 'email,public_profile,user_birthday,user_location', return_scopes: true, auth_type: 'rerequest' });
+;
 			// return this.fbUserStatus;
-		}, { scope: 'email,public_profile,user_birthday,user_location', return_scopes: true, auth_type: 'rerequest' });
+		// }, { scope: 'email,public_profile,user_birthday,user_location', return_scopes: true, auth_type: 'rerequest' });
 	}
 
 	redirect(response) {
@@ -95,7 +125,7 @@ export class AuthHomeComponent implements OnInit {
 		});
 	}
 
-	checkLoginState(){
+	checkLoginState() {
 		console.log("user logged in");
 	}
 
