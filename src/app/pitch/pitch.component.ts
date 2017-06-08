@@ -247,20 +247,22 @@ export class PitchComponent implements OnInit {
 
 	addSportFeild(index) {
 
-		console.log("pitches = ", this.pitches);
-		console.log("sportOptions = ", this.sportOptions);
+		//console.log("pitches = ", this.pitches);
+		//console.log("sportOptions = ", this.sportOptions);
+		//console.log("index=>",this.pitches[index].sport);
+		//console.log("index=>",index);
 		if (this.pitches[index].sport) {
-
-			this.pitches[index].sport.push(this.sportOptions[1].sportid);
-			console.log("sport found 1", this.pitches[index].sport.length);
-			console.log("this.sportOptions[1].viewValue2", this.sportOptions[1].viewValue2);
-			console.log("this.sportOptions[1].sportid value = ", this.pitches[index].sport);
+		//	console.log("subsport=>",this.sportOptions[1].value);
+			this.pitches[index].sport.push(this.sportOptions[1].value);
+		//	console.log("sport found 1", this.pitches[index].sport);
+		//	console.log("this.sportOptions[1].viewValue2", this.sportOptions[1].viewValue2);
+		//	console.log("this.sportOptions[1].sportid value = ", this.pitches[index].sport);
 		}
-		if (!this.pitches[index].sport) {
-			console.log("sport not found 2");
-			this.pitches[index].sport = [];
-			this.pitches[index].sport.push(this.sportOptions[1].sportid);
-		}
+		// if (!this.pitches[index].sport) {
+		// 	console.log("sport not found 2");
+		// 	this.pitches[index].sport = [];
+		// 	this.pitches[index].sport.push(this.sportOptions[1].sportid);
+		// }
 	}
 
 	removeSelect(index) {

@@ -25,6 +25,8 @@ export class AuthHomeComponent implements OnInit {
 	fbToken: string;
 	fbOAuthUrl: string;
 
+	showSpinner = false;
+
 	error: string;
 	constructor(private authService: AuthService, private router: Router, private ngZone: NgZone, private route: ActivatedRoute) {
 		this.fbOAuthUrl = 'https://www.facebook.com/v2.8/dialog/oauth?' +
@@ -51,6 +53,7 @@ export class AuthHomeComponent implements OnInit {
 			if (self.fbToken)
 				if (self.fbToken.includes('access_token')) {
 					console.log('FbToken found');
+					self.showSpinner = true;
 					setTimeout(function () {
 						self.callFbLogin();
 					}, 1000);
@@ -65,49 +68,59 @@ export class AuthHomeComponent implements OnInit {
 
 	callFbLogin() {
 		let self = this;
+		var isPermissionGranted = false;
 		console.log("callFbLogin called");
 		// FB.login((result: any) => {
 		// 	console.log('login request', result);
 		// 	this.fbToken = result.authResponse.accessToken;
-			FB.api('/me/permissions', (result: any) => {
-				console.log('permissions', result);
-				for (let i = 0; i < result.data.length; i++) {
-					if (result.data[i].permission == 'email' && result.data[i].status == 'granted') {
-						console.log('permission found')
-						FB.api('/me', 'GET', { 'fields': 'id,name,first_name,last_name,email,picture.type(large),birthday,location' }, (result: any) => {
-							let data = {
-								fbid: result.id,
-								email: result.email,
-								username: (result.first_name + result.last_name).toLowerCase(),
-								profileimage: result.picture.data.url,
-								firstname: result.first_name,
-								lastname: result.last_name,
-								dob: (result.birthday || ""),
-								city: ""
-							};
-							console.log('get user data request', result);
-							if (result.location) {
-								data.city = result.location.name;
-							}
-							console.log("data sent = ", data);
-							this.authService.loginFbUser(data)
-								.subscribe((response) => {
-									console.log("dwl ", JSON.stringify(response))
-									self.redirect(response);
-									// this.error = response.message;
-									// window.localStorage['teem_user'] = JSON.stringify(response.data);
-									// this.router.navigate(['']);
-								},
-								(error: any) => {
-									console.log("fb error", error)
-									this.error = error;
+		FB.api('/me/permissions', (result: any) => {
+			console.log('permissions', result);
+			for (let i = 0; i < result.data.length; i++) {
+				if (result.data[i].permission == 'email' && result.data[i].status == 'granted') {
+					isPermissionGranted = true;
+					console.log('permission found')
+					FB.api('/me', 'GET', { 'fields': 'id,name,first_name,last_name,email,picture.type(large),birthday,location' }, (result: any) => {
+						let data = {
+							fbid: result.id,
+							email: result.email,
+							username: (result.first_name + result.last_name).toLowerCase(),
+							profileimage: result.picture.data.url,
+							firstname: result.first_name,
+							lastname: result.last_name,
+							dob: (result.birthday || ""),
+							city: (result.location || "")
+						};
+						console.log('get user data request', result);
+						if (result.location) {
+							data.city = result.location.name;
+						}
+						console.log("data sent = ", data);
+						this.authService.loginFbUser(data)
+							.subscribe((response) => {
+								self.redirect(response);
+								// this.error = response.message;
+								// window.localStorage['teem_user'] = JSON.stringify(response.data);
+								// this.router.navigate(['']);
+							},
+							(error: any) => {
+								console.log("fb error", error)
+								this.error = error;
+								self.ngZone.run(() => {
+									self.showSpinner = false;
 								});
-						});
-					}
+							});
+					});
 				}
-			}, { scope: 'email,public_profile,user_birthday,user_location', return_scopes: true, auth_type: 'rerequest' });
-;
-			// return this.fbUserStatus;
+			}
+			if (!isPermissionGranted) {
+				alert("Please login again and allow required permissions");
+				self.ngZone.run(() => {
+					self.showSpinner = false;
+				});
+			}
+			console.log("self.showSpinner = ", this.showSpinner);
+		}, { scope: 'email,public_profile,user_birthday,user_location', return_scopes: true, auth_type: 'rerequest' });
+		// return this.fbUserStatus;
 		// }, { scope: 'email,public_profile,user_birthday,user_location', return_scopes: true, auth_type: 'rerequest' });
 	}
 

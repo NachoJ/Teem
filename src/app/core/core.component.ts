@@ -8,6 +8,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { TranslateService } from "@ngx-translate/core";
 
 declare var io: any;
+declare var $: any;
 
 @Component({
 	selector: 'te-core',
@@ -29,7 +30,9 @@ export class CoreComponent implements OnInit {
 	errormsg: string;
 	erroShow: boolean = false;
 	successShow: boolean = false;
-	
+
+	documentReady = false;
+
 	constructor(private router: Router, private authService: AuthService, private coreservice: CoreService, private translate: TranslateService, private ngZone: NgZone) {
 		this.loadLanguage();
 		if (!authService.isLoggedIn()) {
@@ -210,6 +213,11 @@ export class CoreComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		let self = this;
+		$(document).ready(function(){
+			// console.log("core complete");
+			self.documentReady = true;
+		});
 	}
 
 	logout() {

@@ -9,10 +9,10 @@ export const environment = {
 
 	BASEAPI: 'https://teemplayersapp.com/sailsapi',
 	PROFILE_IMAGE_PATH: "https://teemplayersapp.com/upload/profiles/",
-
-	FACEBOOK_API_KEY: "1015244535234936",
 	// BASEAPI: 'http://174.138.82.155:1337',
 	// PROFILE_IMAGE_PATH: "http://174.138.82.155:1337/upload/profiles/",
+
+	FACEBOOK_API_KEY: "1015244535234936",
 
 	LOCAL_ADDRESS: "https://teemplayersapp.com",
 
@@ -53,27 +53,28 @@ export const environment = {
 	GET_MATCH_USER: '/match/user/',
 	INVITATION_ACCEPT: '/invitation/accept/',
 	INITATION_DELETE: '/invitation/',
-	JOIN_MATCH:'/match/join',
-	DELETE_MATCH:'/match/',
-	GET_LAST_MATCH:'/match/last/user/',
-	GET_MATCH_CHAT:'/chatmatch/',
+	JOIN_MATCH: '/match/join',
+	DELETE_MATCH: '/match/',
+	GET_LAST_MATCH: '/match/last/user/',
+	GET_MATCH_CHAT: '/chatmatch/',
 	SEND_CHAT_MESSAGE: '/chatmatch',
 	SEARCH: '/search/',
 	GET_SEARCH_USER: '/user/search/',
 	FOLLOW_USER: '/user/followers',
 	UNFOLLOW_USER: '/unfollow/user/',
 	UNFOLLOW_SPORTCENTER: '/unfollow/sportcenter/',
-	GET_SEARCH_SPORTCENTER:'/sportcenter/search/',
-	FOLLOW_SPORTCENTER:'/sportcenter/followers',
+	GET_SEARCH_SPORTCENTER: '/sportcenter/search/',
+	FOLLOW_SPORTCENTER: '/sportcenter/followers',
 	GET_FOLLOWERS: '/followers/',
 	GET_FOLLOWING: '/following/',
 	GET_PLAYED_MATCHES: '/played/match/',
 	GET_ORGANIZED_MATCHES: '/organised/match/',
 	USER_SOCKET: '/user/socket/',
 	GET_UNREAD_CHAT: '/user/unread/',
-	GET_MESSAGES : '/user/message/',
+	GET_MESSAGES: '/user/message/',
 	SEND_PRIVATE_MESSAGE: '/user/message',
-	
+	MARK_CHAT_AS_READ: '/user/read/',
+
 	GOOGLE_URL_SHORTER: 'https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyBR5otEj6lFr96V9V9eqLeD8FmUiOTJBNg',
 
 	GoogleKey: "&key=AIzaSyDD7oo0yCjyp2pIBLbRr_h3b0_NiMXXu3g"

@@ -208,6 +208,47 @@ te-chat {
         border: 22px solid;
         border-color: lightyellow transparent transparent transparent;
     }
+    .new-conversation-link label:hover {
+        cursor: pointer;
+    }
+    .new-conversation {
+        padding: 15px 0 15px 15px;
+        .mat-raised-button {
+            color: #fff;
+            background-color: #c61315;
+        }
+        .mat-input-underline {
+            display: none;
+        }
+        .mat-input-wrapper {
+            margin: 0px !important;
+            padding: 0px !important;
+        }
+        .mat-input-container,
+        .mat-select {
+            width: 100%;
+            border: 0px solid rgba(0, 0, 0, 0.3);
+            padding: 8px 15px;
+            border-radius: 0px;
+            background-color: #fff;
+            font-size: 14px;
+            color: #848484;
+            height: 35px;
+        }
+        .mat-select-trigger {
+            height: 34px;
+            font-size: 14px;
+            color: #333;
+            min-width: inherit;
+        }
+        .mat-input-container:focus {
+            outline: none;
+            border-color: #d2232a;
+        }
+        .select-box {
+            position: relative !important;
+        }
+    }
     /*scroll bar style*/
     #style-2::-webkit-scrollbar-track {
         // -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.3);

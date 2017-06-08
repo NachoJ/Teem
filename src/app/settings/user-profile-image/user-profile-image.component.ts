@@ -120,7 +120,7 @@ export class UserProfileImageComponent implements OnInit {
 				dragMode: 'move',
 				cropBoxMovable: false,
 				cropBoxResizable: false,
-				checkOrientation: false,
+				checkOrientation: true,
 				aspectRatio: 1 / 1,
 				viewMode: 1,
 				ready: function () {

@@ -1,4 +1,6 @@
-:host{ width: 100%; }
+:host {
+    width: 100%;
+}
 
 html {
     font-family: Montserrat, sans-serif !important;
@@ -12,7 +14,7 @@ html {
 .login-box {
     background-color: lightcyan;
 }
- 
+
 .fb-button:hover,
 .fb-button:active,
 .fb-button:focus {
@@ -20,7 +22,7 @@ html {
 }
 
 .register-div {
-    margin-top:50px;
+    margin-top: 50px;
 }
 
 .register-div .fb-button {
@@ -32,11 +34,16 @@ html {
     text-transform: capitalize;
     letter-spacing: 0.50px;
     margin-bottom: 20px;
-    width:250px;
+    width: 250px;
 }
 
-.li-full-width { width: 100%; }
+.register-div .fb-button span {
+    margin-left: 15px !important;
+}
 
+.li-full-width {
+    width: 100%;
+}
 
 .register-div .registerbtn {
     background-color: #ffffff;
@@ -47,7 +54,7 @@ html {
     text-transform: capitalize;
     letter-spacing: 0.50px;
     margin-bottom: 20px;
-    width:250px;
+    width: 250px;
 }
 
 .register-div .loginbtn {
@@ -59,23 +66,43 @@ html {
     text-transform: capitalize;
     letter-spacing: 0.50px;
     margin-bottom: 20px;
-    width:250px;
+    width: 250px;
 }
 
 .register-div .error {
-    color:#fff;
+    color: #fff;
     margin-bottom: 10px;
 }
 
+.center-right {
+    float: right;
+    margin-top: 10px;
+}
+
+.isVisible {
+    visibility: hidden;
+}
+
 @media screen and (max-width:991px) {
-    .register-div {margin-top:100px;}
-    .register-div .fb-button { font-size:14px; height:40px; width:250px;  }
-    
+    .register-div {
+        margin-top: 100px;
+    }
+    .register-div .fb-button {
+        font-size: 14px;
+        height: 40px;
+        width: 250px;
+    }
 }
 
 @media screen and (max-width:599px) {
-    .register-div { margin-top:100px; width:100%; }
-    .register-div .fb-button { width:250px; }
-    .li-full-width { width: 80%; }
- 
+    .register-div {
+        margin-top: 100px;
+        width: 100%;
+    }
+    .register-div .fb-button {
+        width: 250px;
+    }
+    .li-full-width {
+        width: 80%;
+    }
 }

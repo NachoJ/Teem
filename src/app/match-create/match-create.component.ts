@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, AfterViewInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MdIconRegistry } from '@angular/material';
 import { Router, ActivatedRoute } from "@angular/router";
-
+import { DatePickerDirective } from './../shared/directive/datepicker.directive';
 import { CoreService } from '../core/core.service';
 import { Pitch } from '../shared/interface/pitch';
 import { TranslateService, LangChangeEvent } from "@ngx-translate/core";
@@ -18,7 +18,7 @@ declare var $: any;
 	styleUrls: ['./match-create.component.scss'],
 	encapsulation: ViewEncapsulation.None
 })
-export class MatchCreateComponent implements OnInit {
+export class MatchCreateComponent implements OnInit, AfterViewInit {
 
 	matchFormGroup: FormGroup;
 
@@ -77,6 +77,8 @@ export class MatchCreateComponent implements OnInit {
 	hideBenchPlayerCtrl: boolean = false;
 
 	translate: any;
+	isMobile: any = false;
+
 	// filteredOptions: Observable<any[]>;
 
 	/* style variables */
@@ -84,6 +86,9 @@ export class MatchCreateComponent implements OnInit {
 	// displayFormDetails: string = 'none';
 
 	// tslint:disable-next-line:max-line-length
+
+	@ViewChild(DatePickerDirective) dtpicker: DatePickerDirective;
+
 	constructor(private coreService: CoreService, iconRegistry: MdIconRegistry, sanitizer: DomSanitizer, private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute, translate: TranslateService) {
 
 		this.translate = translate;
@@ -157,6 +162,29 @@ export class MatchCreateComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		if (navigator.userAgent.match(/Android/i)
+			|| navigator.userAgent.match(/webOS/i)
+			|| navigator.userAgent.match(/iPhone/i)
+			|| navigator.userAgent.match(/iPad/i)
+			|| navigator.userAgent.match(/iPod/i)
+			|| navigator.userAgent.match(/BlackBerry/i)
+			|| navigator.userAgent.match(/Windows Phone/i)
+		) {
+			this.isMobile = true;
+		}
+	}
+
+	ngAfterViewInit() {
+
+		if (!this.isMobile) {
+			let startDate: any = new Date();
+
+			startDate.setDate(startDate.getDate() + 1);
+
+			let startDateAdd = (startDate.getMonth() + 1) + '/' + startDate.getDate() + '/' + startDate.getFullYear();
+
+			this.dtpicker.changeDate(startDateAdd, 'fromDate');
+		}
 	}
 
 	loadAutoComplete() {
@@ -372,5 +400,9 @@ export class MatchCreateComponent implements OnInit {
 		// let rSubSportViewValue = rSubSport.viewValue;
 		// if (rSubSportViewValue.toLowerCase().includes('padel'))
 		// 	this.matchFormGroup.controls.benchCtrl.disable();
+	}
+
+	radioSelect(i) {
+		$('#' + i).click();
 	}
 }

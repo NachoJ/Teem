@@ -285,6 +285,9 @@ app-profile {
         float: left;
         width: 75%;
     }
+    .custom-height {
+        height: 20px !important;
+    }
     // media query start ------------------------------------------------------------
     @media screen and (max-width:599px) {
         form {
@@ -303,6 +306,9 @@ app-profile {
         }
         .form-fields1 {
             margin: 20px 0 0;
+        }
+        #fromDate {
+            height: 20px;
         }
         /**.div-sport-img {
         background: #d2232a;

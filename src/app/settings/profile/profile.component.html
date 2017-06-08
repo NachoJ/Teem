@@ -48,7 +48,9 @@
                         <label for="" fxLayoutAlign="left center" fxFlex="30">{{'DATE OF BIRTH' | translate }}</label>
                         <md-input-container class="md-block register-form-text-area" fxFlex="70" md-no-float>
                             <!--<input mdInput type="date"   id="fromDate" formControlName="dob" name="bod" class="user-text-label datepicker" > </md-input-container>-->
-                            <input mdInput type="date" id="fromDate" formControlName="dob" [ngModel]="birthdate" (ngModelChange)="birthdate = $event" class="user-text-label datepicker">
+                            <!--<input mdInput type="date" id="fromDate" formControlName="dob" [ngModel]="birthdate" (ngModelChange)="birthdate = $event" class="user-text-label datepicker" datepicker>-->
+                            <input mdInput type="text" *ngIf="!isMobile" id="fromDate" formControlName="dob" class="user-text-label datepicker" datepicker>
+                            <input mdInput type="date" *ngIf="isMobile" [ngModel]="birthdate" (ngModelChange)="birthdate = $event" formControlName="dob" class="user-text-label custom-height">
                             <!--<material-datepicker class="md-block register-form-text-area" fxFlex="70"  [(date)]="date">-->
                         </md-input-container>
                     </div>
@@ -81,12 +83,12 @@
                 </div>
             </div>
             <div class="example-section example-margin">
-                <div fxLayout="column" class="form-group" fxFlex="100">
+                <div fxLayout="column" class="form-group">
                     <div fxLayout="column" fxLayout.xs="column">
-                        <label for="" fxLayoutAlign="left start" fxFlex="30">{{'CHOOSE GAME' | translate}}</label>
-                        <div class="md-block register-form-text-area" fxFlex="70" md-no-float>
+                        <label for="" fxLayoutAlign="left start">{{'CHOOSE GAME' | translate}}</label>
+                        <div class="md-block register-form-text-area" md-no-float>
                             <div class="example-section" fxLayout.xs="column">
-                                <div fxLayout.xs="row"> 
+                                <div fxLayout.xs="row">
                                     <div fxLayout="column" class="sport-settings-column">
                                         <div class="span-white">
                                             <div class="div-sport-img">
@@ -101,7 +103,7 @@
                                                 <img class="material-icons md-48" src="assets/svg/basket-icon.svg">
                                             </div>
                                         </div>
-                                    <md-checkbox class="example-margin mat-checkbox-btn" formControlName="basketball" [(ngModel)]="basketballVal" (change)="sportSelect('basketball')">{{'Basketball' | translate}}</md-checkbox>
+                                        <md-checkbox class="example-margin mat-checkbox-btn" formControlName="basketball" [(ngModel)]="basketballVal" (change)="sportSelect('basketball')">{{'Basketball' | translate}}</md-checkbox>
                                     </div>
                                 </div>
                                 <div fxLayout.xs="row">
@@ -130,7 +132,7 @@
         </form>
     </div>
     <div class="example-section example-margin" fxLayoutAlign.xs="center center">
-            <button md-raised-button color="primary" class="creatematch mat-raised-button" [disabled]="!profile.valid" (click)="formSubmit()">{{'SAVE' | translate}}</button>
+        <button md-raised-button color="primary" class="creatematch mat-raised-button" [disabled]="!profile.valid" (click)="formSubmit()">{{'SAVE' | translate}}</button>
     </div>
     <!--</div>-->
 </div>

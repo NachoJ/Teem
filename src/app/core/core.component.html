@@ -61,7 +61,7 @@
                         </div>
                     </div>-->
                     <nav md-tab-nav-bar>
-                        <a md-tab-link *ngFor="let link of navLinks" [routerLink]="link.link" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
+                        <a md-tab-link *ngFor="let link of navLinks" [routerLink]="link.link" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive && documentReady">
                             <!--{{tabLink.label}}-->{{link.title | translate }} </a>
                         <!--<a md-tab-link class="email"><img src="/assets/img/email.png"></a>-->
                         <div class="dropdown" fxHide.xs fxHide.sm>

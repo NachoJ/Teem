@@ -22,7 +22,7 @@ export class DatePickerDirective implements ControlValueAccessor, AfterViewInit 
             // yearRange: '1:100',
             // changeYear: true
             viewMode: 'days',
-            format: 'MM-DD-YYYY'
+            format: 'MM/DD/YYYY'
         }).on('dp.change', e => {
             console.log('it is changed');
             this.onModelChange(e.target.value);
@@ -47,7 +47,13 @@ export class DatePickerDirective implements ControlValueAccessor, AfterViewInit 
     }
 
     changeDate(setDate: any, elementId: string) {
-        $('#' + elementId).data('DateTimePicker').date(new Date());
-        $('#' + elementId).data('DateTimePicker').date(new Date(setDate));
+		console.log("setDate",setDate);
+		console.log("setDate",elementId);
+		setDate=setDate+"";
+
+        $('#' + elementId).data('DateTimePicker').date(setDate);
+        //$('#' + elementId).data('DateTimePicker').date(new Date());
+		
+		//console.log("date ",$('#' + elementId).html());
     }
 }

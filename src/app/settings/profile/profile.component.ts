@@ -47,12 +47,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 	checked: any = false;
 
 	selectedCity = "";
+	isMobile: boolean = false;
 
 	sub: any;
 
+	@ViewChild(DatePickerDirective) dtpicker: DatePickerDirective;
+
 	constructor(private coreService: CoreService, private fb: FormBuilder,
 		private route: ActivatedRoute, private zone: NgZone, public dialog: MdDialog, private router: Router) {
-
 
 		this.user = JSON.parse(window.localStorage['teem_user']);
 		this.createForm();
@@ -95,7 +97,17 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 			console.log("jQuery is ready");
 			self.initAutoComplete();
 		});
-		//this.ngAfterViewInit();
+
+		if (navigator.userAgent.match(/Android/i)
+			|| navigator.userAgent.match(/webOS/i)
+			|| navigator.userAgent.match(/iPhone/i)
+			|| navigator.userAgent.match(/iPad/i)
+			|| navigator.userAgent.match(/iPod/i)
+			|| navigator.userAgent.match(/BlackBerry/i)
+			|| navigator.userAgent.match(/Windows Phone/i)
+		) {
+			this.isMobile = true;
+		}
 	}
 
 	ngAfterViewInit() {
@@ -113,11 +125,19 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 		}
 
 		if (!this.user.dob)
-			this.birthdate ='';
-			// this.birthdate = moment(new Date()).format("YYYY-MM-DD");
-		else
-			this.birthdate = moment(this.user.dob).format("YYYY-MM-DD");
+			this.birthdate = '';
+		// this.birthdate = moment(new Date()).format("YYYY-MM-DD");
+		else {
+			if (!this.isMobile) {
+				let startDate = new Date(this.user.dob);
+				let startDateAdd = (startDate.getMonth() + 1) + '/' + startDate.getDate() + '/' + startDate.getFullYear();
+				console.log("startDateAdd", startDateAdd);
 
+				this.dtpicker.changeDate(startDateAdd, 'fromDate');
+			} else {
+				this.birthdate = moment(this.user.dob).format("YYYY-MM-DD");
+			}
+		}
 
 		this.profile.patchValue({
 			firstname: this.user.firstname,
@@ -158,7 +178,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 	formSubmit() {
 		let self = this;
 		let formVal = this.profile.value;
-		//console.log("formVal", formVal);
+		console.log("formVal", formVal);
 
 		let user = JSON.parse(window.localStorage['teem_user']);
 		let sport = [];
@@ -177,9 +197,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
 		formVal.sports = sport.join(',');
 		formVal.userid = user.id;
-		formVal.dob = this.birthdate;
 
-		console.log("form val = ", formVal);
+		if (this.isMobile)
+			formVal.dob = this.birthdate;
+		else {
+			formVal.dob = moment(formVal.dob, "MM/DD/YYYY").format("YYYY-MM-DD");
+		}
+
+		//console.log("form val = ", formVal);
 		this.coreService.profileUpdate(JSON.stringify(formVal))
 			.subscribe((response) => {
 				//this.error = '';

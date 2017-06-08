@@ -55,18 +55,18 @@
                 <div *ngIf="pitches" class="selectbadges">
                     <p class="pitch-selection-note" *ngIf="pitches.length>1">{{'SELECT THE PITCH WHERE TO WANT TO PLAY' | translate }}</p>
                     <div fxLayout="row">
-                        <div fxFlex="30" fxHide.sm="100" fxHide.xs="100"></div>
-                        <md-radio-group fxFlex="70" fxLayoutWrap fxLayoutAlign="start center" fxLayoutAlign.xs="center center" fxLayoutAlign.sm="center center" formControlName="pitchRadioGroupCtrl" [(ngModel)]="someradio">
-                            <div fxFlex="48" *ngFor="let pitch of pitches; let i = index" (click)="pitchSelected(pitch.id,pitch.sport)" fxLayout="row" class="pitch-display">
+                        <div fxFlex="30" fxHide.xs="true"></div>
+                        <md-radio-group fxFlex="70" fxFlex.xs="100" fxLayoutWrap fxLayoutAlign="start center" fxLayoutAlign.xs="space-between center" formControlName="pitchRadioGroupCtrl" [(ngModel)]="someradio">
+                            <div fxFlex="48" fxFlex.xs="47" *ngFor="let pitch of pitches; let i = index" (click)="pitchSelected(pitch.id,pitch.sport)" fxLayout="row" class="pitch-display">
                                 <div fxLayoutAlign="start center">
                                     <md-radio-button [value]="pitch.id">
                                         <div class="span-white">
-                                            <md-icon class="material-icons md-48" svgIcon={{pitch.sportname}}></md-icon>
+                                            <md-icon class="material-icons md-48" id="{{i}}" svgIcon={{pitch.sportname}}></md-icon>
                                         </div>
                                     </md-radio-button>
-                                    <div class="field-info" fxLayout="column" fxLayoutAlign="center center">
+                                    <div class="field-info" fxLayout="column" fxLayoutAlign="center center" (click)="radioSelect(i)">
                                         <p class="badged"> {{pitch.name}}</p>
-                                        <p class="badged"> {{pitch.covering}}</p>
+                                        <p class="badged" class="hide-overflow" mdTooltip="{{pitch.covering}}"> {{pitch.covering}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -120,8 +120,8 @@
                 <div fxLayout="row" fxHide.xs="true">
                     <label fxLayoutAlign="left center" fxFlex="30">Start date</label>
                     <!--<material-datepicker class="md-block register-form-text-area" fxFlex="40" [(date)]="date"></material-datepicker>-->
-                    <md-input-container class="custom-height" fxFlex="40">
-                        <input type="date" mdInput class="user-text-label" formControlName="dateCtrl" [(ngModel)]="date" required> </md-input-container>
+                    <md-input-container class="custom-height" fxFlex="40" *ngIf="!isMobile">
+                        <input type="text" id="fromDate" mdInput class="user-text-label" formControlName="dateCtrl" [(ngModel)]="date" required datepicker> </md-input-container>
                     <md-select fxFlexOffset.xs="0" fxFlexOffset="2" fxFlex="13" [(ngModel)]="hour" formControlName="hourCtrl" ariaLabelledby="Hour" required>
                         <md-option *ngFor="let h of hourOptions" [value]="h.value"> {{ h.viewValue }} </md-option>
                     </md-select>
@@ -133,8 +133,9 @@
                 <div fxShow.xs="true" fxLayout.xs="column" fxHide="true" fxFlexLayout="start end">
                     <div fxLayout="column">
                         <label fxLayoutAlign="left center" fxFlex="30">when</label>
+
                         <div fxLayout="row">
-                            <md-input-container class="custom-height" fxFlex="100">
+                            <md-input-container class="custom-height" fxFlex="100" *ngIf="isMobile">
                                 <input type="date" mdInput class="user-text-label" formControlName="dateCtrl" [(ngModel)]="date" required> </md-input-container>
                         </div>
                         <!--<label fxLayoutAlign="left center">Hour</label>
